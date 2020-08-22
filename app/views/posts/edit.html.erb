@@ -1,0 +1,27 @@
+<h1>編輯<%= @post.title %></h1>
+
+<%= link_to '回到文章總覽', posts_path %>
+
+<% if @post.errors.any? %>
+  <ul>
+    <% @post.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_for @post do |form| %>
+
+  <div>
+    <%= form.label :title, '文章標題' %>
+    <%= form.text_field :title%>
+  </div>
+
+  <div>
+    <%= form.label :body, '文章內文' %>
+    <%= form.rich_text_area :body %>
+  </div>
+
+  <%= form.submit '更新文章' %>
+
+<% end %>
