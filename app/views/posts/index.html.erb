@@ -1,0 +1,22 @@
+<h1>文章總覽</h1>
+
+<%= link_to '新增文章', new_post_path %>
+
+<table>
+  <tr>
+    <th>文章標題</th>
+    <th>文章內文</th>
+    <th>編輯與刪除</th>
+  </tr>
+
+  <% @posts.each do |form| %>
+  <tr>
+    <td><%= link_to form.title, post_path(form) %></td>
+    <td><%= form.body %></td>
+    <td>
+      <%= link_to '編輯', edit_post_path(form) %>
+      <%= link_to '刪除', post_path(form), method: 'DELETE', data: { confirm: '你確定刪除嗎?' } %>
+    </td>
+  </tr>
+  <% end %>
+</table>
