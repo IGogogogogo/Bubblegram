@@ -1,4 +1,13 @@
+<%= link_to '回到文章總覽', posts_path %>
 <h1><%= @post.title %></h1>
 <p><%= @post.body %></p>
 
-<%= link_to '回到文章總覽', posts_path %>
+<%= form_with(model: @comment, url: post_comments_path(@post) ,local: true) do |form| %>
+  <div>
+    <%= form.text_field :content, placeholder: "輸入留言" %>
+    <%= form.submit "Create" %>
+  </div>
+<% end %>
+
+<%= render partial: "/comments/comment", collection: @comments %>  
+
