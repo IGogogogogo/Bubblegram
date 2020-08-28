@@ -1,0 +1,21 @@
+<h1>User Show</h1>
+
+<div>
+  <span>User avatar</span>
+  <%= link_to  "貼文", posts_path %>
+  <%= link_to  "粉絲", users_path %>
+  <%= link_to  "追蹤中", users_path %>
+</div>
+
+<div>
+  <%= @user.email %>
+</div>
+
+<div>
+  <% if @user == current_user %>
+    <%= link_to  "編輯個人檔案", "#" %>
+  <% else %>
+    <%= link_to  "追蹤", "#" %>
+    <%= link_to  "傳訊息", "#" %>
+  <% end %>
+</div>

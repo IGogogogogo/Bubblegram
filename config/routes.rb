@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root 'pages#index'
 
   devise_for :users
+  resources :users, only: [:show]
+
   resources :posts do 
     resources :comments, only: [:create]
   end
