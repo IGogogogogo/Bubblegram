@@ -13,7 +13,7 @@
 
 <div>
   <% if @user == current_user %>
-    <%= link_to  "編輯個人檔案", "#" %>
+    <%= link_to  "編輯個人檔案", edit_user_path(@user) %>
   <% else %>
     <% if already_followed(@user) %>
       <%= link_to  "取消追蹤", user_follows_path(@user), method: :delete %>

@@ -1,0 +1,25 @@
+<h1>Use edit</h1>
+  
+  <% if @user.errors.any? %>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li>
+          <%= msg %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+  
+<%= form_with(model: @user, local: true) do |f| %>
+  <div>
+    <%= f.label "nick_name" %>
+    <%= f.text_field "nick_name" %>
+  </div>
+
+  <div>
+    <%= f.label "email" %>
+    <%= f.text_field "email" %>
+  </div>
+
+  <%= f.submit %>
+<% end %>
