@@ -3,8 +3,8 @@
 <div>
   <span>User avatar</span>
   <%= link_to  "貼文", posts_path %>
-  <%= link_to  "粉絲", users_path %>
-  <%= link_to  "追蹤中", users_path %>
+  <%= link_to  "粉絲", fans_user_path(@user) %>
+  <%= link_to  "追蹤中", followings_user_path(@user) %>
 </div>
 
 <div>
@@ -15,7 +15,12 @@
   <% if @user == current_user %>
     <%= link_to  "編輯個人檔案", "#" %>
   <% else %>
-    <%= link_to  "追蹤", "#" %>
+    <% if already_followed(@user) %>
+      <%= link_to  "取消追蹤", user_follows_path(@user), method: :delete %>
+    <% else %>
+      <%= link_to  "追蹤", user_follows_path(@user), method: :post %>
+    <% end %>
+
     <%= link_to  "傳訊息", "#" %>
   <% end %>
 </div>
