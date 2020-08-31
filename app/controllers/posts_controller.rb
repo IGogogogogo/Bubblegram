@@ -1,36 +1,17 @@
 class PostsController < ApplicationController
+  before_action :find_post, only: [:show, :edit, :update, :destroy]
+
   def index
     @posts = Post.all.with_rich_text_body #with_rich_text_body 是避免N+1方法
   end
 
-  def new
-    @post = current_user.posts.new
-  end
-
   def show
-    @post = Post.find(params[:id])
     @comments = @post.comments
     @comment = Comment.new
   end
 
-  def edit
-    @post = Post.find(params[:id])
-  end
-
-  def update
-    @post = Post.find(params[:id])
-
-    if @post.update(post_params)
-      redirect_to posts_path, notice: '文章更新成功'
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
-    redirect_to posts_path, notice: '文章刪除成功'
+  def new
+    @post = current_user.posts.new
   end
 
   def create
@@ -43,7 +24,28 @@ class PostsController < ApplicationController
     end
   end
 
+  def edit
+  end
+
+  def update
+    if @post.update(post_params)
+      redirect_to posts_path, notice: '文章更新成功'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @post.destroy
+    redirect_to posts_path, notice: '文章刪除成功'
+  end
+
+
   private
+
+  def find_post
+    @post = Post.find(params[:id])
+  end
 
   def post_params
     params.require(:post).permit(:content, :body, :image)
