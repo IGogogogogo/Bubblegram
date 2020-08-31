@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   def show
   end
 
-  def fans 
+  def fans
     @users = @user.fans
   end
 
@@ -15,10 +15,10 @@ class UsersController < ApplicationController
     @users = @user.followings
   end
 
-  def edit 
+  def edit
   end
 
-  def update 
+  def update
     if @user.update(user_params)
       redirect_to user_path(@user), notice: "資料更新成功"
     else
@@ -26,14 +26,14 @@ class UsersController < ApplicationController
     end
   end
 
-  private 
+  private
 
   def find_user
     @user = User.find(params[:id])
   end
 
   def user_params
-    params.require(:user).permit(:nick_name, :email)  
+    params.require(:user).permit(:nick_name, :email, :description)
   end
 
   def already_followed(user)                  #檢查自己是否已經追蹤對方

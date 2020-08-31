@@ -1,14 +1,36 @@
 <h1>User Show</h1>
 
-<div>
-  <span>User avatar</span>
-  <%= link_to  "貼文", posts_path %>
-  <%= link_to  "粉絲", fans_user_path(@user) %>
-  <%= link_to  "追蹤中", followings_user_path(@user) %>
+<div style="display: flex; text-align: center">
+  <div>
+    <%= image_tag @user.avatar.variant(resize_to_limit: [50, 50]) if @user.avatar? %>
+  </div>
+
+  <div>
+    <%= link_to posts_path do %>
+      <p><%= @user.posts_count %></p>
+      <p>貼文</p>
+    <% end %>
+  </div>
+
+  <div>
+    <%= link_to fans_user_path(@user) do %>
+      <p><%= @user.fans_count %></p>
+      <p>粉絲</p>
+    <% end %>
+  </div>
+
+  <div>
+    <%= link_to followings_user_path(@user) do %>
+      <p><%= @user.followings_count %></p>
+      <p>追蹤中</p>
+    <% end %>
+  </div>
 </div>
 
 <div>
-  <%= @user.email %>
+  <p><%= @user.nick_name %></p>
+  <p><%= @user.email %></p>
+  <p><%= @user.description %></p>
 </div>
 
 <div>
@@ -23,4 +45,9 @@
 
     <%= link_to  "傳訊息", "#" %>
   <% end %>
+</div>
+
+<div>
+  <div>使用者貼文</div>
+  <div>使用者被標記貼文</div>
 </div>
