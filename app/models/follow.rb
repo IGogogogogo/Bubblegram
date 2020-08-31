@@ -2,8 +2,8 @@ class Follow < ApplicationRecord
   validate :do_not_follow_self
   validates :following_id, uniqueness: { scope: :fan_id, message: "Can't follow again" }
 
-  belongs_to :fan, foreign_key: "fan_id", class_name: "User"
-  belongs_to :following, foreign_key: "following_id", class_name: "User"
+  belongs_to :fan, foreign_key: "fan_id", class_name: "User", counter_cache: :followings_count
+  belongs_to :following, foreign_key: "following_id", class_name: "User", counter_cache: :fans_count
 
   private
 
