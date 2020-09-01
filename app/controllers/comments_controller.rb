@@ -4,6 +4,8 @@ class CommentsController < ApplicationController
     @comment = @post.comments.new(comment_params)
     if @comment.save 
       redirect_to post_path(@post), notice: "create comment success"
+    else
+      redirect_to post_path(@post), notice: "create comment false"
     end
   end
 

@@ -11,10 +11,9 @@
 <% end %>
 
 <%= form_for @post do |form| %>
-
   <div>
-    <%= form.label :title, '文章標題' %>
-    <%= form.text_field :title %>
+    <%= form.label :image, 'image' %>
+    <%= form.file_field :image %>
   </div>
 
   <div>

@@ -4,18 +4,16 @@
 
 <table>
   <tr>
-    <th>文章標題</th>
-    <th>文章內文</th>
+    <th>文章</th>
     <th>編輯與刪除</th>
   </tr>
 
-  <% @posts.each do |form| %>
+  <% @posts.each do |post| %>
   <tr>
-    <td><%= link_to form.title, post_path(form) %></td>
-    <td><%= form.body %></td>
+    <td><%= link_to post.body, post_path(post) %></>
     <td>
-      <%= link_to '編輯', edit_post_path(form) %>
-      <%= link_to '刪除', post_path(form), method: 'DELETE', data: { confirm: '你確定刪除嗎?' } %>
+      <%= link_to '編輯', edit_post_path(post) %>
+      <%= link_to '刪除', post_path(post), method: 'DELETE', data: { confirm: '你確定刪除嗎?' } %>
     </td>
   </tr>
   <% end %>

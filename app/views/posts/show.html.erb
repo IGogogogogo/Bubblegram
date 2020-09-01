@@ -1,6 +1,9 @@
 <%= link_to '回到文章總覽', posts_path %>
-<h1><%= @post.title %></h1>
+<div>
+  <img src="<%= @post.image %>" alt="">
+</div>
 <p><%= @post.body %></p>
+
 
 <%= form_with(model: @comment, url: post_comments_path(@post) ,local: true) do |form| %>
   <div>
@@ -9,5 +12,4 @@
   </div>
 <% end %>
 
-<%= render partial: "/comments/comment", collection: @comments %>  
-
+<%= render partial: "/comments/comment", collection: @comments %>

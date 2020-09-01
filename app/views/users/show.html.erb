@@ -1,0 +1,53 @@
+<h1>User Show</h1>
+
+<div style="display: flex; text-align: center">
+  <div>
+    <%= image_tag @user.avatar.variant(resize_to_limit: [50, 50]) if @user.avatar? %>
+  </div>
+
+  <div>
+    <%= link_to posts_path do %>
+      <p><%= @user.posts_count %></p>
+      <p>貼文</p>
+    <% end %>
+  </div>
+
+  <div>
+    <%= link_to fans_user_path(@user) do %>
+      <p><%= @user.fans_count %></p>
+      <p>粉絲</p>
+    <% end %>
+  </div>
+
+  <div>
+    <%= link_to followings_user_path(@user) do %>
+      <p><%= @user.followings_count %></p>
+      <p>追蹤中</p>
+    <% end %>
+  </div>
+</div>
+
+<div>
+  <p><%= @user.nick_name %></p>
+  <p><%= @user.email %></p>
+  <p><%= @user.description %></p>
+</div>
+
+<div>
+  <% if @user == current_user %>
+    <%= link_to  "編輯個人檔案", edit_user_path(@user) %>
+  <% else %>
+    <% if already_followed(@user) %>
+      <%= link_to  "取消追蹤", user_follows_path(@user), method: :delete %>
+    <% else %>
+      <%= link_to  "追蹤", user_follows_path(@user), method: :post %>
+    <% end %>
+
+    <%= link_to  "傳訊息", "#" %>
+  <% end %>
+</div>
+
+<div>
+  <div>使用者貼文</div>
+  <div>使用者被標記貼文</div>
+</div>
