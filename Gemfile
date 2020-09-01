@@ -26,14 +26,15 @@ gem 'carrierwave', '~> 2.1'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
-# Create Member system
+# Create Member system # 第三方登入套件
 gem 'devise', '~> 4.2'
 gem 'omniauth', '~> 1.9', '>= 1.9.1'
 gem 'omniauth-facebook', '~> 7.0'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
 
-# Reduces boot times through caching; required in config/boot.rb
+# Reduces boot times through caching; required in config/boot.rb #環境變數
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'figaro', '~> 1.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
