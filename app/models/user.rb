@@ -2,7 +2,9 @@ class User < ApplicationRecord
   validates :nick_name, presence: true
   validates :email, presence: true
 
-  devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :trackable
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable, :trackable,
+         :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
   has_many :posts
   has_many :comments
