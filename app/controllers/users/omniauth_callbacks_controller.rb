@@ -29,3 +29,4 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def failure
     redirect_to root_path, alert: "無法獲得驗證！"
   end
+end
