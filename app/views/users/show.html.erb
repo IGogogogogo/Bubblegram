@@ -2,7 +2,8 @@
 
 <div style="display: flex; text-align: center">
   <div>
-    <%= image_tag @user.avatar.variant(resize_to_limit: [50, 50]) if @user.avatar? %>
+    <%= image_tag @user.avatar.url, width: "50px", style: "border-radius: 50%" if @user.avatar %>
+    <%# <%= image_tag @user.avatar.variant(resize_to_limit: [50, 50]) if @user.avatar?  %>
   </div>
 
   <div>

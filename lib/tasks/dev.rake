@@ -1,16 +1,32 @@
+require "net/http"
+require "uri"
+
 namespace :dev do
   task fake_users: :environment do
     print "\n正在建立使用者資料"
     User.destroy_all
 
-    10.times do
-      image_url = Faker::Avatar.image(size: "50x50", format: "jpg")
+    count = 10
+    uri = URI("https://uifaces.co/api?limit=#{count}")
+    req = Net::HTTP::Get.new(uri)
+
+    req['X-API-KEY'] = ENV["UI_face_X_API_KEY"]
+    # puts req.headers
+    response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
+      http.request(req)
+    end
+    avatars = JSON.parse(response.body)
+    # puts avatars
+
+    avatars.each do |avatar|
+      # image_url = Faker::Avatar.image(size: "50x50", format: "jpg")
+      image_url = avatar["photo"]
       user = User.create!(
         nick_name: Faker::Name.first_name,
         email: Faker::Internet.email,
         password: "123456",
         description: Faker::Lorem.sentence,
-        # remote_avatar_url: image_url             #carrierwave
+        remote_avatar_url: image_url             #carrierwave
       )
 
       # user.avatar.attach(io: open(image_url)  , filename: "avatar_#{user.id}.jpg")   #active storage
