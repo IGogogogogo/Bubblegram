@@ -8,6 +8,12 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :api do
+    namespace :v1 do
+      resource :search, only: [:show]
+    end
+  end
+
   devise_for :users
   resources :users, only: [:show, :edit, :update] do
     resource :follows, only: [:create, :destroy]

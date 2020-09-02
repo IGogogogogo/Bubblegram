@@ -1,0 +1,15 @@
+<div>
+  <% if defined?(user) %>
+    <%= link_to user do %>
+      <%= image_tag user.avatar.url, width: "50px", style: "border-radius: 50%" if @user.avatar %>
+      <span><%= user.nick_name %></span>
+      <%= link_to  "BTN", "#" %>
+    <% end %>
+  <% else %>
+    <a src="#", class="user-link">
+      <img src="#" alt="", width="50px", class="user-avatar", style="border-radius: 50%">
+      <span class="user-name"></span>
+      <%= link_to  "BTN", "#" %>
+    </a>
+  <% end %>
+</div>

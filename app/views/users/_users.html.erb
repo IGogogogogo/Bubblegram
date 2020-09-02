@@ -1,7 +1,0 @@
-<% users.each do |user| %>
-  <div>
-    <%= image_tag user.avatar.url, width: "50px", style: "border-radius: 50%" if @user.avatar %>
-    <%= link_to  user.nick_name, user %>
-    <%= link_to  "BTN", "#" %>
-  </div>
-<% end %>
