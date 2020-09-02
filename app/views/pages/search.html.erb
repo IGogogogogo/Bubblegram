@@ -1,0 +1,17 @@
+<h1>搜尋</h1>
+
+<%= form_with(class: "search-form", local: true) do |f| %>
+  <%= f.text_field :keyword %>
+  <%= f.submit "Search" %>
+<% end %>
+<hr>
+<div class="search-result">
+
+</div>
+
+<template id="user-item">
+  <div>
+    <span><img class="user-avatar" src=""></span>
+    <span class="user-name"></span>
+  </div>
+</template>
