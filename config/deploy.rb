@@ -23,7 +23,7 @@ set :deploy_to, '/home/deploy/staging'
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, 'config/secrets.yml', 'config/application.yml', 'config/master.key'
+append :linked_files, 'config/application.yml', 'config/database.yml'
 
 # Default value for linked_dirs is []
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
