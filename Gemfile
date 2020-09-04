@@ -44,7 +44,9 @@ group :development, :test do
   gem 'capistrano-bundler', '2.0.1'
   gem 'capistrano-rails', '1.6.1'
   gem 'capistrano-passenger', '0.2.0'
-
+  gem 'net-ssh', '~> 6.1'
+  gem 'ed25519', '~> 1.2', '>= 1.2.4'
+  gem 'bcrypt_pbkdf', '~> 1.0', '>= 1.0.1'
 end
 
 group :development do

@@ -61,6 +61,7 @@ GEM
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
     bcrypt (3.1.15)
+    bcrypt_pbkdf (1.0.1)
     bindex (0.8.1)
     bootsnap (1.4.8)
       msgpack (~> 1.0)
@@ -102,6 +103,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    ed25519 (1.2.4)
     erubi (1.9.0)
     faker (2.13.0)
       i18n (>= 1.6, < 2)
@@ -274,6 +276,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt_pbkdf (~> 1.0, >= 1.0.1)
   bootsnap (>= 1.4.2)
   byebug
   capistrano (= 3.14.1)
@@ -283,11 +286,13 @@ DEPENDENCIES
   capybara (>= 2.15)
   carrierwave (~> 2.1)
   devise (~> 4.2)
+  ed25519 (~> 1.2, >= 1.2.4)
   faker (~> 2.13)
   figaro
   hirb (~> 0.7.3)
   jbuilder (~> 2.7)
   listen (~> 3.2)
+  net-ssh (~> 6.1)
   omniauth (~> 1.9, >= 1.9.1)
   omniauth-facebook (~> 7.0)
   omniauth-google-oauth2 (~> 0.8.0)
