@@ -14,7 +14,10 @@ class ChatsController < ApplicationController
 
   def show
     # @user = User.find(params[:id])
-    # @chat = Chat.get(current_user.id, @user.id)
+    @chat = Chat.find(params[:id])
+    @message = Message.new
+    @messages = @chat.messages
+
 
   end
 end

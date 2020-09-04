@@ -1,0 +1,34 @@
+.message_box{
+  .container{
+    .message_text_area{
+      height: calc(100vh - 100px);
+      .message + .message{
+        margin-top: 10px;
+      }
+      .message{
+        display: flex;
+
+        .content{
+          margin-left: 10px;
+          border: 1px solid black;
+          padding: 3px 5px;
+          border-radius: 5px;
+          background-color: rgb(226, 226, 226);
+        }
+      }
+    }
+    .searchbar{
+      form{
+        #message_content{
+          width: 80%;
+          padding: 3px 5px;
+          box-sizing: border-box;
+        }
+        input[type='submit']{
+          width: 15%;
+          box-sizing: border-box;
+        }
+      }
+    }
+  }
+}
