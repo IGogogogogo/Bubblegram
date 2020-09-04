@@ -2,8 +2,6 @@ class UsersController < ApplicationController
   before_action :find_user, only: [:show, :fans, :followings, :edit, :update]
   before_action :only_owner, only: [:edit, :update]
 
-  helper_method :already_followed
-
   def show
   end
 
@@ -36,13 +34,10 @@ class UsersController < ApplicationController
     params.require(:user).permit(:nick_name, :email, :description)
   end
 
-  def already_followed(user)                  #檢查自己是否已經追蹤對方
-    user.fans.include?(current_user)
-  end
-
   def only_owner
     if current_user != @user                   #只有本人可以編輯個人資料
       redirect_to user_path(@user.id), alert: "Not allow"
     end
   end
+
 end

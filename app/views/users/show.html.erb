@@ -38,7 +38,7 @@
   <% if @user == current_user %>
     <%= link_to  "編輯個人檔案", edit_user_path(@user) %>
   <% else %>
-    <% if already_followed(@user) %>
+    <% if @user.already_followed?(current_user) %>
       <%= link_to  "取消追蹤", user_follows_path(@user), method: :delete %>
     <% else %>
       <%= link_to  "追蹤", user_follows_path(@user), method: :post %>

@@ -1,7 +1,7 @@
 <% if user_signed_in? %>
   <div>
     <%= link_to  "home", posts_path %>
-    <%= link_to  "search", search_pages_path %>
+    <%= link_to  "search", searches_path %>
     <%= link_to  "add", "#" %>
     <%= link_to  "like", "#" %>
     <%= link_to  "user", user_path(current_user) %>

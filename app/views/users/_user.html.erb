@@ -1,15 +1,14 @@
 <div>
-  <% if defined?(user) %>
-    <%= link_to user do %>
-      <%= image_tag user.avatar.url, width: "50px", style: "border-radius: 50%" if @user.avatar %>
-      <span><%= user.nick_name %></span>
-      <%= link_to  "BTN", "#" %>
-    <% end %>
-  <% else %>
-    <a src="#", class="user-link">
-      <img src="#" alt="", width="50px", class="user-avatar", style="border-radius: 50%">
-      <span class="user-name"></span>
-      <%= link_to  "BTN", "#" %>
-    </a>
+  <%= link_to user_path(user), class: "user-link" do %>
+    <%= image_tag user.avatar.url, class: "user-avatar", width: "50px", style: "border-radius: 50%" if user.avatar %>
+    <span class="user-name"><%= user.nick_name %></span>
+    <span class="user-btn">
+      <% if user.already_followed?(current_user) %>
+        <%= link_to  "取消追蹤", user_follows_path(user), method: :delete %>
+      <% else %>
+        <%= link_to  "追蹤", user_follows_path(user), method: :post %>
+      <% end %>
+      <%= link_to  "傳訊息", "#" %>
+    </span>
   <% end %>
 </div>
