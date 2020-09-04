@@ -1,15 +1,19 @@
 class ChatsController < ApplicationController
-  def index
 
+  def index
+    @chat = Chat.all
   end
 
   def create
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
+    @chat = Chat.get(current_user.id, @user.id)
 
-    redirect_to chat_path(@chat)
+    redirect_to chat_path(@chat.id)
   end
 
   def show
+    # @user = User.find(params[:id])
+    # @chat = Chat.get(current_user.id, @user.id)
 
   end
 end

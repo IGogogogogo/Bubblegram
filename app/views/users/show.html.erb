@@ -43,7 +43,7 @@
       <%= link_to  "追蹤", user_follows_path(@user), method: :post %>
     <% end %>
 
-    <%= link_to  "傳訊息", chat_path(@user), method: :post %>
+    <%= link_to "傳訊息", chats_path(user_id: @user), method: :post %>
   <% end %>
 </div>
 
