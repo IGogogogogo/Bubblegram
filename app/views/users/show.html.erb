@@ -34,18 +34,8 @@
   <p><%= @user.description %></p>
 </div>
 
-<div>
-  <% if @user == current_user %>
-    <%= link_to  "編輯個人檔案", edit_user_path(@user) %>
-  <% else %>
-    <% if @user.already_followed?(current_user) %>
-      <%= link_to  "取消追蹤", user_follows_path(@user), method: :delete %>
-    <% else %>
-      <%= link_to  "追蹤", user_follows_path(@user), method: :post %>
-    <% end %>
-
-    <%= link_to  "傳訊息", "#" %>
-  <% end %>
+<div class="user-item-<%= @user.id %>">
+  <%= render  "user_btn", user: @user  %>
 </div>
 
 <div>
