@@ -11,12 +11,10 @@ namespace :dev do
     req = Net::HTTP::Get.new(uri)
 
     req['X-API-KEY'] = ENV["UI_face_X_API_KEY"]
-    # puts req.headers
     response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
       http.request(req)
     end
     avatars = JSON.parse(response.body)
-    # puts avatars
 
     avatars.each do |avatar|
       # image_url = Faker::Avatar.image(size: "50x50", format: "jpg")
@@ -62,9 +60,11 @@ namespace :dev do
 
     User.all.each do |user|
       rand(2..5).times do
+        num = rand(1000)
         user.posts.create!(
-          # title: Faker::Lorem.sentence,
-          # content: Faker::Lorem.sentence
+          remote_image_url: "https://picsum.photos/500/500/?random=#{num}",
+          content: Faker::Lorem.sentence,
+          body: Faker::Lorem.sentence
         )
         print "."
       end
@@ -76,6 +76,6 @@ namespace :dev do
   task fake_all: :environment do
     Rake::Task["dev:fake_users"].invoke
     Rake::Task["dev:fake_follows"].invoke
-    # Rake::Task["dev:fake_posts"].invoke
+    Rake::Task["dev:fake_posts"].invoke
   end
 end
