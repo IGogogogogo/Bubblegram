@@ -1,12 +1,30 @@
+<div class="container-fluid bubble-bg-color">
+  <nav class="py-4">
+    <a href="#" class="logo">
+      <h1>Navbar</h1>
+    </a>
+    <div class="icon">
+      <a href="#"><i class="fas fa-home"></i></a>
+      <a href="#"><i class="fas fa-search"></i></a>
+      <a href="#"><i class="far fa-plus-square"></i></a>
+      <a href="#"><i class="far fa-heart"></i></a>
+      <a href="#"><i class="fas fa-user"></i></a>
+      <a href="#"><i class="far fa-comments"></i></a>
+    </div>
+  </nav>
+</div>
+
+
+
 <div>
   <% if user_signed_in? %>
-    <span>
-      Hello, <%= current_user.email %>
-    </span>
-    
-    <%= link_to "登出", destroy_user_session_path, method: :delete %>
+  <span>
+    Hello, <%= current_user.email %>
+  </span>
+
+  <%= link_to "登出", destroy_user_session_path, method: :delete %>
   <% else %>
-    <%= link_to  "登入", new_user_session_path %>
-    <%= link_to  "註冊", new_user_registration_path %>
+  <%= link_to  "登入", new_user_session_path %>
+  <%= link_to  "註冊", new_user_registration_path %>
   <% end %>
 </div>

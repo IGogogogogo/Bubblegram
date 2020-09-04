@@ -262,6 +262,7 @@ DEPENDENCIES
   faker (~> 2.13)
   figaro
   hirb (~> 0.7.3)
+  image_processing (~> 1.2)
   jbuilder (~> 2.7)
   listen (~> 3.2)
   omniauth (~> 1.9, >= 1.9.1)

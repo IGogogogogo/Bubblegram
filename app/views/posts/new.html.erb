@@ -1,26 +1,27 @@
-<h1>文章新增</h1>
+'<h1>文章新增</h1>
 
 <%= link_to '回到文章總覽', posts_path %>
 
 <% if @post.errors.any? %>
-  <ul>
-    <% @post.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-    <% end %>
-  </ul>
+<ul>
+  <% @post.errors.full_messages.each do |msg| %>
+  <li><%= msg %></li>
+  <% end %>
+</ul>
 <% end %>
 
 <%= form_for @post do |form| %>
-  <div>
-    <%= form.label :image, 'image' %>
-    <%= form.file_field :image %>
-  </div>
 
-  <div>
-    <%= form.label :body, '文章內文' %>
-    <%= form.rich_text_area :body %>
-  </div>
+<div>
+  <%= form.file_field :image %>
+  <img id="output" alt="">
+</div>
 
-  <%= form.submit '新增文章' %>
+<div>
+  <%= form.label :body, '文章內文' %>
+  <%= form.rich_text_area :body %>
+</div>
+
+<%= form.submit '新增文章' %>
 
 <% end %>
