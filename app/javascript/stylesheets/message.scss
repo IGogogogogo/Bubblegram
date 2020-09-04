@@ -2,8 +2,11 @@
   .container{
     .message_text_area{
       height: calc(100vh - 100px);
+      overflow: auto;
+      padding:20px;
+
       .message + .message{
-        margin-top: 10px;
+        margin-top: 20px;
       }
       .message{
         display: flex;
@@ -14,6 +17,15 @@
           padding: 3px 5px;
           border-radius: 5px;
           background-color: rgb(226, 226, 226);
+        }
+      }
+      .me{
+        justify-content: flex-end;
+        .content{
+          order: -1;
+          margin-right: 10px;
+          background-color: rgb(56, 56, 136);
+          color: white;
         }
       }
     }

@@ -2,11 +2,8 @@ class MessagesController < ApplicationController
 def create
   chat_room = Chat.find(params[:chat_id])
   @message = chat_room.messages.create(params_message)
-  html = render(
-    partial: "messages/message"
-    locals: {message: @message}
-  )
-  ActionCable.server.broadcast "chat_channel_#{@message.chat_id}", html: html
+
+  SendMessageJob.perform_later(@message)
   # @message.save
   # redirect_to chat_path(chat_room)
 end

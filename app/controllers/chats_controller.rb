@@ -16,7 +16,7 @@ class ChatsController < ApplicationController
     # @user = User.find(params[:id])
     @chat = Chat.find(params[:id])
     @message = Message.new
-    @messages = @chat.messages
+    @messages = @chat.messages.includes(:user)
 
 
   end

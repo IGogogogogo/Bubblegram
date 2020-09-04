@@ -1,19 +1,12 @@
-<div class = "message_box section" data-chat= "<%= @chat.id %>">
+<div class = "message_box section" data-chat= "<%= @chat.id %>" data-user="<%= current_user.id%>">
   <div class="container">
     <div class="message_text_area">
       <% @messages.each do |message| %>
-        <div class= "message">
-          <div class= "pic_name">
-            <%= message.user.nick_name %>
-          </div>
-          <div class="content">
-            <%= message.content %>
-          </div>
-        </div>
+       <%= render "messages/message", message: message %>
       <% end %>
     </div>
     <div class="searchbar">
-      <%= form_with(model: @message, url: chat_messages_path(@chat), local: true) do |f| %>
+      <%= form_with(model: @message, url: chat_messages_path(@chat)) do |f| %>
         <%= f.text_field :content %>
         <%= f.submit "傳送" %>
       <% end %>
