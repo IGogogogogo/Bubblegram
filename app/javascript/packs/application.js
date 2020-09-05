@@ -18,4 +18,5 @@ require("channels")
 require("trix")
 require("@rails/actiontext")
 require("../stylesheets")
-import("@fortawesome/fontawesome-free/js/all")
+import "@fortawesome/fontawesome-free/js/all"
+import "../scripts/index"

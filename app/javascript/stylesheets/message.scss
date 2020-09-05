@@ -43,8 +43,10 @@
       box-sizing: border-box;
       align-items: center;
       padding: 0 15px;
+      height: 33px;
       form{
         flex-grow: 1;
+        display: flex;
         #message_content{
           width: 80%;
           padding: 3px 5px;
@@ -55,10 +57,19 @@
           }
         }
         input[type='submit']{
-          width: 15%;
+          margin-left: auto;
+          // width: 15%;
           box-sizing: border-box;
-          display: none
+          background-color: transparent;
+          border: none;
+          color: rgb(109, 48, 109);
+          &:focus{
+            outline: none;
+          }
         }
+      }
+      .none{
+        display: none;
       }
       .image_form{
         margin-left: auto;
