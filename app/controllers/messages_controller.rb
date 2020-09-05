@@ -10,7 +10,7 @@ end
 
 private
 def params_message
-  params.require(:message).permit(:content).merge(user: current_user)
+  params.require(:message).permit(:content, :image).merge(user: current_user)
 end
 
 end

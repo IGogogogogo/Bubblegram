@@ -15,16 +15,25 @@ document.addEventListener('turbolinks:load',()=>{
     received(data) {
       const user_id = Number(document.querySelector('.message_box').dataset.user)
       const message_text_area = document.querySelector('.message_text_area')
+      const form = document.forms[0]
       const input = document.getElementById('message_content')
       console.log(data)
-
+      console.log(data.message.content)
       if(data.message.user_id === user_id){
-        message_text_area.innerHTML += data.me
+        if(data.message.content == null){
+          message_text_area.innerHTML += data.me_image
+        }else{
+          message_text_area.innerHTML += data.me
+        }
       }else{
-        message_text_area.innerHTML += data.other
+        if(data.message.content == null){
+          message_text_area.innerHTML += other
+        }else{
+          message_text_area.innerHTML += data.other
+        }
       }
-
-      input.value=''
+      form.reset()
+      // input.value=''
       message_text_area.scrollTop = message_text_area.scrollHeight
         // Called when there's incoming data on the websocket for this channel
     }

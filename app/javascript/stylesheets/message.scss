@@ -15,7 +15,13 @@
           padding: 5px 8px;
           // border: 1px solid black;
           border-radius: 5px;
-
+        }
+        .pic{
+          img{
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+          }
         }
       }
       .other{
@@ -23,6 +29,9 @@
         .content{
           margin-left: 10px;
           background-color: rgb(226, 226, 226);
+        }
+        .pic{
+          margin-left: 10px;
         }
       }
       .me{
@@ -33,6 +42,12 @@
           margin-right: 10px;
           background-color: rgb(56, 56, 136);
           color: white;
+        }
+        .pic{
+          order: -1;
+          margin-right: 10px;
+          border: 1px solid black;
+          border-radius: 10px;
         }
       }
     }
