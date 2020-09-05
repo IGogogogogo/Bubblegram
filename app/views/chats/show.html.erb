@@ -10,6 +10,9 @@
         <%= f.text_field :content %>
         <%= f.submit "傳送" %>
       <% end %>
+      <%= form_with(model: @message, url: chat_messages_path(@chat)) do |f| %>
+        <%= f.file_field :image %>
+      <% end %>
     </div>
   </div>
 </div>
