@@ -37,15 +37,39 @@
       }
     }
     .searchbar{
+      display: flex;
+      border: 2px solid black;
+      border-radius: 20px;
+      box-sizing: border-box;
+      align-items: center;
+      padding: 0 15px;
       form{
+        flex-grow: 1;
         #message_content{
           width: 80%;
           padding: 3px 5px;
           box-sizing: border-box;
+          border: none;
+          &:focus{
+            outline: none;
+          }
         }
         input[type='submit']{
           width: 15%;
           box-sizing: border-box;
+          display: none
+        }
+      }
+      .image_form{
+        margin-left: auto;
+        flex-grow: 0;
+        label[for='message_image']{
+          cursor: pointer;
+          font-size: 25px;
+          vertical-align: center;
+        }
+        input{
+          display: none;
         }
       }
     }
