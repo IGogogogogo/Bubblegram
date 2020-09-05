@@ -1,4 +1,4 @@
-<div class= "message <%= 'me' if message.user_id == current_user.id %>">
+<div class= "message <%= message.user_id == current_user.id ? 'me' : 'other'%>">
   <div class= "pic_name">
     <%= message.user.nick_name %>
   </div>
