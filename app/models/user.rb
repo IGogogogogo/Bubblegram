@@ -16,6 +16,8 @@ class User < ApplicationRecord
   has_many :fanships, foreign_key: :fan_id, class_name: "Follow", dependent: :destroy
   has_many :followings, through: :fanships, source: :following
 
+  scope :not_self, -> (current_user){ where.not(id: current_user.id) }
+  scope :find_by_keyword, -> (keyword){ where(["nick_name LIKE ? OR email LIKE ?", "%#{keyword}%", "%#{keyword}%"]) }
 
   def already_followed?(current_user)                  #檢查自己是否已經追蹤對方
     self.fans.include?(current_user)
