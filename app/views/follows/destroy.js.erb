@@ -1,0 +1,1 @@
+document.querySelector(".user-item-<%= @user.id %> .btn-follow").innerHTML = '<%= j render(partial: "/users/user_follow", locals: {user: @user}) %>'
