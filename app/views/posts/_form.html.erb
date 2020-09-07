@@ -1,0 +1,13 @@
+<%= form_for @post do |form| %>
+  <div>
+    <%= form.label :image, 'image' %>
+    <%= form.file_field :image %>
+  </div>
+
+  <div>
+    <%= form.label :body, '文章內文' %>
+    <%= form.rich_text_area :body %>
+  </div>
+
+  <%= form.submit '確認' %>
+<% end %>
