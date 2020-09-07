@@ -20,7 +20,6 @@ require("trix")
 require("@rails/actiontext")
 import "bootstrap";
 import "../stylesheets/application"
-import $ from "jquery"
 import "@fortawesome/fontawesome-free/js/all";
 import "./preview_photo"
 
