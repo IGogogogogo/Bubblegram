@@ -5,6 +5,9 @@ class Post < ApplicationRecord
 
   belongs_to :user, counter_cache: true
   has_many :comments, dependent: :destroy
+  #貼文標籤
+  has_many :user_tags, foreign_key: :post_id, dependent: :destroy
+  has_many :taged_users, through: :user_tags, source: :user
 
   scope :my_following_users, -> (followings) { where user_id: followings}  #找出所有追蹤中的使用者
 end

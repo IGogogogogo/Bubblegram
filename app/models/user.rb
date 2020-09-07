@@ -11,10 +11,14 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :identities, dependent: :destroy
+  #追蹤關聯
   has_many :followingships, foreign_key: :following_id, class_name: "Follow", dependent: :destroy
   has_many :fans, through: :followingships, source: :fan
   has_many :fanships, foreign_key: :fan_id, class_name: "Follow", dependent: :destroy
   has_many :followings, through: :fanships, source: :following
+  #貼文標籤
+  has_many :user_tags, foreign_key: :user_id, dependent: :destroy
+  has_many :taged_posts, through: :user_tags, source: :post
 
   scope :not_self, -> (current_user){ where.not(id: current_user.id) }
   scope :find_by_keyword, -> (keyword){ where(["nick_name LIKE ? OR email LIKE ?", "%#{keyword}%", "%#{keyword}%"]) }
@@ -38,7 +42,7 @@ class User < ApplicationRecord
       user = User.new(
         nick_name: auth.info.email.split('@')[0].capitalize,
         email: auth.info.email,
-        avatar: auth.info.image,
+        remote_avatar_url: auth.info.image,
         password: Devise.friendly_token[0,20]
       )
       user.save!

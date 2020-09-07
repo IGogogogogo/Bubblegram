@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_02_074046) do
+ActiveRecord::Schema.define(version: 2020_09_07_081956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -83,6 +83,15 @@ ActiveRecord::Schema.define(version: 2020_09_02_074046) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "user_tags", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_user_tags_on_post_id"
+    t.index ["user_id"], name: "index_user_tags_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "nick_name", default: "", null: false
     t.string "email", default: "", null: false
@@ -111,4 +120,6 @@ ActiveRecord::Schema.define(version: 2020_09_02_074046) do
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "identities", "users"
+  add_foreign_key "user_tags", "posts"
+  add_foreign_key "user_tags", "users"
 end
