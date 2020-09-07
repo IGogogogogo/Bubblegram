@@ -12,6 +12,7 @@
     "jquery": "^3.5.1",
     "popper.js": "^1.16.1",
     "source-code-pro": "git://github.com/adobe-fonts/source-code-pro.git#release",
+    "axios": "^0.20.0",
     "trix": "^1.2.0",
     "turbolinks": "^5.2.0"
   },
