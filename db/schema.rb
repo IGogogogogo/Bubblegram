@@ -75,6 +75,15 @@ ActiveRecord::Schema.define(version: 2020_09_02_123032) do
     t.index ["following_id"], name: "index_follows_on_following_id"
   end
 
+  create_table "identities", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "provider"
+    t.string "uid"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_identities_on_user_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.text "content"
     t.string "image"
@@ -122,6 +131,7 @@ ActiveRecord::Schema.define(version: 2020_09_02_123032) do
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "identities", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
 end

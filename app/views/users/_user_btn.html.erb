@@ -1,0 +1,11 @@
+<% if user == current_user %>
+  <%= link_to  "編輯個人檔案", edit_user_path(user) %>
+<% else %>
+  <span class="btn-follow">
+    <%= render "/users/user_follow", user: user %>
+  </span>
+
+  <span>
+    <%= link_to "傳訊息", chats_path(user_id: @user), method: :post %>
+  </span>
+<% end %>

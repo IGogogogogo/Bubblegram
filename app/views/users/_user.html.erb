@@ -1,0 +1,10 @@
+<div class="user-item-<%= user.id %>">
+  <%= link_to user_path(user), style: "display: inline-block" do %>
+    <%= image_tag user.avatar.url, class: "user-avatar", width: "50px", style: "border-radius: 50%" if user.avatar %>
+    <span class="user-name"><%= user.nick_name %></span>
+  <% end %>
+
+  <div class="user-btn", style="display: inline-block">
+    <%= render "/users/user_btn", user: user %>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 .message_box{
   .container{
     .message_text_area{
-      height: calc(100vh - 100px);
+      height: calc(100vh - 252px);
       overflow: auto;
       padding:20px;
       box-sizing: border-box;
@@ -57,7 +57,7 @@
       border-radius: 20px;
       box-sizing: border-box;
       align-items: center;
-      padding: 0 15px;
+      padding: 15px;
       height: 33px;
       form{
         flex-grow: 1;
@@ -92,7 +92,7 @@
         label[for='message_image']{
           cursor: pointer;
           font-size: 25px;
-          vertical-align: center;
+          margin: 0;
         }
         input{
           display: none;
