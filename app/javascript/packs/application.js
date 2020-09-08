@@ -17,6 +17,6 @@ require("channels")
 // const imagePath = (name) => images(name, true)
 require("trix")
 require("@rails/actiontext")
-require("../stylesheets")
+import "../stylesheets"
 import "@fortawesome/fontawesome-free/js/all"
 import "../scripts/index"

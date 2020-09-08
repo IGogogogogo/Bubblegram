@@ -1,10 +1,12 @@
 import consumer from "./consumer"
 
 document.addEventListener('turbolinks:load',()=>{
-  const chat_id = document.querySelector('.message_box').dataset.chat
+  const chat_room = document.querySelector('.message_box')
+  if(!chat_room)return
+  const chat_id = chat_room.dataset.chat
   consumer.subscriptions.create({channel:"ChatChannel", chat_id: chat_id}, {
     connected() {
-      console.log('connecting'+ chat_id)
+      // console.log('connecting'+ chat_id)
       // Called when the subscription is ready for use on the server
     },
 
@@ -16,9 +18,7 @@ document.addEventListener('turbolinks:load',()=>{
       const user_id = Number(document.querySelector('.message_box').dataset.user)
       const message_text_area = document.querySelector('.message_text_area')
       const form = document.forms[0]
-      const input = document.getElementById('message_content')
-      console.log(data)
-      console.log(data.message.content)
+
       if(data.message.user_id === user_id){
         if(data.message.content == null){
           message_text_area.innerHTML += data.me_image
@@ -32,10 +32,11 @@ document.addEventListener('turbolinks:load',()=>{
           message_text_area.innerHTML += data.other
         }
       }
+
       form.reset()
-      // input.value=''
+
       message_text_area.scrollTop = message_text_area.scrollHeight
-        // Called when there's incoming data on the websocket for this channel
+
     }
   });
 })
