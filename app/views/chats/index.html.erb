@@ -1,8 +1,10 @@
-<div>
+<div class = "chat_user_list section" data-user="<%= current_user.id%>">
   <% @users.each do |user| %>
     <% @chat.between(current_user, user).each do |chat| %>
       <div>
+        <%= image_tag user.avatar.url, class: "user-avatar", width: "50px", style: "border-radius: 50%" if user.avatar.present? %>
         <%= link_to user.nick_name, chat_path(chat) %>
+        <div class="notice_dot"></div>
       </div>
     <% end %>
   <% end %>

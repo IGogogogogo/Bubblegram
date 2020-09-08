@@ -11,10 +11,17 @@
       }
       .message{
         display: flex;
+        align-items: flex-start;
+        .pic_name{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
         .content{
           padding: 5px 8px;
           word-break: break-word;
           border-radius: 5px;
+          align-self: center;
         }
         .pic{
           img{
