@@ -27,7 +27,7 @@ document.addEventListener('turbolinks:load',()=>{
         }
       }else{
         if(data.message.content == null){
-          message_text_area.innerHTML += other
+          message_text_area.innerHTML += data.other_image
         }else{
           message_text_area.innerHTML += data.other
         }

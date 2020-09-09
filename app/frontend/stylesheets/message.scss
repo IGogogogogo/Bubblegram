@@ -9,13 +9,16 @@
       .message + .message{
         margin-top: 20px;
       }
+
       .message{
         display: flex;
+
         .content{
           padding: 5px 8px;
           word-break: break-word;
           border-radius: 5px;
         }
+
         .pic{
           img{
             width: 100%;
@@ -24,25 +27,31 @@
           }
         }
       }
+
       .other{
         padding-right: 50%;
+
         .content{
           margin-left: 10px;
           background-color: rgb(226, 226, 226);
         }
+
         .pic{
           margin-left: 10px;
         }
       }
+
       .me{
         justify-content: flex-end;
         padding-left: 50%;
+
         .content{
           order: -1;
           margin-right: 10px;
           background-color: rgb(56, 56, 136);
           color: white;
         }
+
         .pic{
           order: -1;
           margin-right: 10px;
@@ -51,6 +60,7 @@
         }
       }
     }
+
     .searchbar{
       display: flex;
       border: 2px solid black;
@@ -58,10 +68,11 @@
       box-sizing: border-box;
       align-items: center;
       padding: 15px;
-      height: 33px;
+
       form{
         flex-grow: 1;
         display: flex;
+
         #message_content{
           width: 80%;
           padding: 3px 5px;
@@ -71,6 +82,7 @@
             outline: none;
           }
         }
+
         input[type='submit']{
           margin-left: auto;
           // width: 15%;
@@ -83,17 +95,21 @@
           }
         }
       }
+
       .none{
         display: none;
       }
+
       .image_form{
         margin-left: auto;
         flex-grow: 0;
+
         label[for='message_image']{
           cursor: pointer;
           font-size: 25px;
           margin: 0;
         }
+
         input{
           display: none;
         }
