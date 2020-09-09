@@ -1,12 +1,19 @@
-<%= form_for @post do |form| %>
-  <div>
+<%= form_for @post, class: "form" do |form| %>
+  <div class="form-group">
     <%= form.label :image, 'image' %>
-    <%= form.file_field :image %>
+    <%= form.file_field :image, class: "form-control" %>
   </div>
 
-  <div>
+  <div class="form-group">
     <%= form.label :body, '文章內文' %>
-    <%= form.rich_text_area :body %>
+    <%= form.rich_text_area :body, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :taged_users, 'Tag' %>
+    <select name="post[taged_users][]" multiple="multiple" class="form-control taged_users">
+      <%= options_for_select(@taged_users, @taged_id) %>
+    </select>
   </div>
 
   <%= form.submit '確認' %>

@@ -26,13 +26,18 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @taged_users = @post.taged_users.map{ |u| ["##{u.nick_name}", u.id] }
+    @taged_id = @post.taged_users.map{ |u| u.id }
   end
 
   def update
-    if @post.update(post_params)
+    @post.assign_attributes(post_params)
+    @post.taged_users = User.where(id: params[:post][:taged_users])
+
+    if @post.save
       redirect_to posts_path, notice: '文章更新成功'
     else
-      render :edit
+      redirect_to edit_post_path(@post), notice: '文章更新失敗'
     end
   end
 
