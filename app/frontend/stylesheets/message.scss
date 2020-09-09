@@ -68,7 +68,7 @@
       box-sizing: border-box;
       align-items: center;
       padding: 15px;
-
+      height: 33px;
       form{
         flex-grow: 1;
         display: flex;
@@ -78,8 +78,10 @@
           padding: 3px 5px;
           box-sizing: border-box;
           border: none;
+          background-color: transparent;
           &:focus{
             outline: none;
+            background: transparent;
           }
         }
 

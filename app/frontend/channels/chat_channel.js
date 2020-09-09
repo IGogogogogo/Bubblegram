@@ -21,15 +21,15 @@ document.addEventListener('turbolinks:load',()=>{
 
       if(data.message.user_id === user_id){
         if(data.message.content == null){
-          message_text_area.innerHTML += data.me_image
+          message_text_area.innerHTML += data.my_image
         }else{
-          message_text_area.innerHTML += data.me
+          message_text_area.innerHTML += data.my_message
         }
       }else{
         if(data.message.content == null){
           message_text_area.innerHTML += data.other_image
         }else{
-          message_text_area.innerHTML += data.other
+          message_text_area.innerHTML += data.other_message
         }
       }
 
