@@ -26,7 +26,8 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @taged_users = @post.taged_users.map{ |u| ["##{u.nick_name}", u.id] }
+    @users = User.all.map{ |u| ["@#{u.nick_name}", u.id] }
+    @taged_users = @post.taged_users.map{ |u| ["@#{u.nick_name}", u.id] }
     @taged_id = @post.taged_users.map{ |u| u.id }
   end
 
