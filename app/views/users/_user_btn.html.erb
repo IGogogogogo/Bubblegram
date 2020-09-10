@@ -1,5 +1,7 @@
 <% if user == current_user %>
-  <%= link_to  "編輯個人檔案", edit_user_path(user) %>
+  <div class="edit-profile py-3">
+    <%= link_to '編輯個人檔案', edit_user_path(@user), class: "d-block w-100 btn border" %>
+  </div>
 <% else %>
   <span class="btn-follow">
     <%= render "/users/user_follow", user: user %>

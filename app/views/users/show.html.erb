@@ -1,42 +1,229 @@
-<h1>User Show</h1>
+ <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <div class="profile-info d-flex align-items-center flex-wrap">
 
-<div style="display: flex; text-align: center">
-  <div>
-    <%= image_tag @user.avatar.url, width: "50px", style: "border-radius: 50%" if @user.avatar %>
-    <%# <%= image_tag @user.avatar.variant(resize_to_limit: [50, 50]) if @user.avatar?  %>
+          <div class="profile-photo w-25">
+          <%= image_tag @user.avatar.url, class: 'rounded-circle w-100' if @user.avatar.present? %>
+          </div>
+
+          <div class="posts-count text-center flex-grow-1">
+            <div class="num font-weight-bold">
+              <%= link_to posts_path do %>
+                <div><%= @user.posts_count %></div>
+                <div class="post">Posts</div>
+              <% end %>
+            </div>
+          </div>
+          <div class="followers-count text-center flex-grow-1">
+            <div class="num font-weight-bold">
+              <%= link_to posts_path do %>
+                <div><%= @user.fans_count %></div>
+                <div class="follower">Followers</div>
+              <% end %>
+            </div>
+          </div>
+          <div class="following-count text-center flex-grow-1">
+            <div class="num font-weight-bold">
+              <%= link_to followings_user_path(@user) do %>
+                <div><%= @user.followings_count %></div>
+                <div class="following">Following</div>
+              <% end %>
+            </div>
+          </div>
+          <div class="profile-intro py-2">
+            <div class="profile-user-name"><strong><%= @user.nick_name %></strong></div>
+            <div class="profile-user-infro">
+              <%= @user.description %>
+            </div>
+          </div>
+        </div>
+
+        <div class="user-item-<%= @user.id %>">
+          <%= render  "user_btn", user: @user  %>
+        </div>
+
+        <div class="collection d-flex justify-content-around text-center">
+          <div class="add-collection-video">
+            <img src="download.png" alt="" style="width: 61px;height: 61px;"
+              class="img-fluid rounded-circle border p-1">
+            <small class="d-block">Add</small>
+          </div>
+          <div class="collection-video1">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle border p-1">
+            <small class="d-block">Highlights</small>
+          </div>
+          <div class="collection-video2">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle border p-1">
+            <small class="d-block">Highlights</small>
+          </div>
+          <div class="collection-video3">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle border p-1">
+            <small class="d-block">Highlights</small>
+          </div>
+          <div class="collection-video4">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle border p-1">
+            <small class="d-block">Highlights</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="border-bottom py-2"></div>
+
+
+<div class="overflow-hidden">
+    <nav class="py-3">
+      <div class="nav nav-tabs d-flex w-100" id="nav-tab" role="tablist">
+        <a class="nav-link flex-grow-1 text-center active" id="nav-home-tab" data-toggle="tab" href="#nav-home"
+          role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-border-all"></i></a>
+        <a class="nav-link flex-grow-1 text-center" id="nav-profile-tab" data-toggle="tab" href="#nav-profile"
+          role="tab" aria-controls="nav-profile" aria-selected="false"><i class="far fa-id-badge"></i></a>
+      </div>
+    </nav>
+    <div class="tab-content" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="form-row">
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=1" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=2" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=3" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=4" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=5" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=6" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=7" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=8" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=15" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=9" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=13" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=12" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=11" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=10" alt="" class="w-100">
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+        <div class="form-row">
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=20" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=21" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=22" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=23" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=24" alt="" class="w-100">
+            </div>
+          </div>
+          <div class="col-4 pr-0 pb-1">
+            <div class="photo">
+              <img src="https://picsum.photos/150/150?random=25" alt="" class="w-100">
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= link_to posts_path do %>
-      <p><%= @user.posts_count %></p>
-      <p>貼文</p>
-    <% end %>
-  </div>
 
-  <div>
-    <%= link_to fans_user_path(@user) do %>
-      <p><%= @user.fans_count %></p>
-      <p>粉絲</p>
-    <% end %>
-  </div>
 
-  <div>
-    <%= link_to followings_user_path(@user) do %>
-      <p><%= @user.followings_count %></p>
-      <p>追蹤中</p>
-    <% end %>
-  </div>
-</div>
 
-<div>
-  <p><%= @user.nick_name %></p>
-  <p><%= @user.email %></p>
-  <p><%= @user.description %></p>
-</div>
 
-<div class="user-item-<%= @user.id %>">
-  <%= render  "user_btn", user: @user  %>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <div>
   <div>使用者貼文</div>

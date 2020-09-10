@@ -1,0 +1,33 @@
+.border-gray{
+  border-color: #ccc !important;
+}
+.g-btn{
+  padding: 0;
+  cursor: pointer;
+}
+.user-info .option i,
+.user-post-content i {
+  font-size: 20px;
+}
+@media (max-width: 999px){
+  .user-story:nth-child(6) ~ .user-story{
+      display: none;
+    }
+}
+@media (max-width: 375px) {
+  .container{
+    padding: 0px;
+    overflow: hidden;
+  }
+  .limit-video{
+    padding: 10px 0;
+    margin-bottom: 10px;
+    .user-story:nth-child(5) ~ .user-story{
+      display: none;
+    }
+  }
+  .main-post .col-12{
+    padding: 0;
+    border: none !important;
+  }
+}
