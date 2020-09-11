@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :find_post, only: [:show, :edit, :update, :destroy]
+  before_action :find_post, only: [:show, :edit, :update, :destroy, :favourite]
 
   def index
     @posts = Post.all.with_rich_text_body #with_rich_text_body 是避免N+1方法
@@ -40,11 +40,11 @@ class PostsController < ApplicationController
     redirect_to posts_path, notice: '文章刪除成功'
   end
 
-  def favorite
+  def favourite
     current_user.toggle_favorite_post(@post)
 
     respond_to do |format|
-      format.html { redirect_to favourite_path, notice: 'OK!' }
+      format.html { redirect_to favourite_post_path, notice: 'OK!' }
       format.json { render json: {status: @post.favorited_by?(current_user) } }
     end
   end

@@ -27,7 +27,7 @@ class User < ApplicationRecord
   end
 
   def toggle_favorite_post(post)
-    if favourites_posts.exists?(post.id)
+    if favourites_posts.include?(post)
       favourites_posts.destroy(post)
     else
       favourites_posts << post

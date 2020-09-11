@@ -13,22 +13,23 @@ import Rails from "@rails/ujs";
 export default class extends Controller {
   static targets = ["like"]
 
-  favorite() {
+  favourite() {
     // console.log(this.heartTarget)
-    let post_id = this.data.get("id")
+    let post_id = this.data.get('id')
+    console.log(post_id)
 
     Rails.ajax({
-      url: `/posts/${post_id}/favorite.json`,
-      type: "post",
+      url: `/posts/${post_id}/favourite.json`,
+      type: "POST",
       data: "",
       success: (result) => {
         console.log(result)
         if (result["status"] == true) {
-          this.heartTarget.classList.remove("far")
-          this.heartTarget.classList.add("fas")
+          this.likeTarget.classList.remove("far")
+          this.likeTarget.classList.add("fas")
         } else {
-          this.heartTarget.classList.remove("far")
-          this.heartTarget.classList.add("fas")
+          this.likeTarget.classList.remove("fas")
+          this.likeTarget.classList.add("far")
         }
       },
       error: (err) => {

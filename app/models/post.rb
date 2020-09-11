@@ -16,5 +16,5 @@ class Post < ApplicationRecord
     thumbs_up_users.include?(user)
   end
   # 不會把自己算進去
-  
+
 end
