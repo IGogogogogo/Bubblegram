@@ -13,6 +13,7 @@ class PostsController < ApplicationController
 
   def new
     @post = current_user.posts.new
+    find_tag_users
   end
 
   def create
@@ -21,14 +22,14 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to posts_path, notice: '文章新增成功'
     else
+
+      find_tag_users
       render :new
     end
   end
 
   def edit
-    @users = User.all.map{ |u| ["@#{u.nick_name}", u.id] }
-    @taged_users = @post.taged_users.map{ |u| ["@#{u.nick_name}", u.id] }
-    @taged_id = @post.taged_users.map{ |u| u.id }
+    find_tag_users
   end
 
   def update
@@ -38,7 +39,8 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to posts_path, notice: '文章更新成功'
     else
-      redirect_to edit_post_path(@post), notice: '文章更新失敗'
+      find_tag_users
+      render :edit
     end
   end
 
@@ -52,6 +54,11 @@ class PostsController < ApplicationController
 
   def find_post
     @post = Post.find(params[:id])
+  end
+
+  def find_tag_users
+    @users = User.all.map{ |u| ["@#{u.nick_name}", u.id] }
+    @taged_id = @post.taged_users.map{ |u| u.id }
   end
 
   def post_params

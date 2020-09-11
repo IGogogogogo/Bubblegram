@@ -1,9 +1,14 @@
-<div class="search-item" style="display: none;">
-  <%= render "./searches/form" %>
-</div>
+<% if @post.errors.any? %>
+  <ul>
+    <% @post.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
 
-<%= form_with(model: @post, class: "form") do |form| %>
-  <div class="post-form-img" style="position: relative; width: 400px; margin: auto; border: solid 5px #faf;">
+
+<%= form_with(model: @post, class: "form", local: true) do |form| %>
+  <div class="post-form-img" style="position: relative; width: 400px;">
     <%= image_tag @post.image.url, width: "100%", draggable: false if @post.image.present? %>
   </div>
 

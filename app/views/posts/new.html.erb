@@ -2,12 +2,4 @@
 
 <%= link_to '回到文章總覽', posts_path %>
 
-<% if @post.errors.any? %>
-  <ul>
-    <% @post.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-    <% end %>
-  </ul>
-<% end %>
-
 <%= render "form" %>
