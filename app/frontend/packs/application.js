@@ -22,3 +22,5 @@ require("@rails/actiontext")
 
 
 
+
+import "controllers"

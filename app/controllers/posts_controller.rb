@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = Post.my_following_users(current_user.followings).all.with_rich_text_body #with_rich_text_body 是避免N+1方法
+    @posts = Post.all.with_rich_text_body #with_rich_text_body 是避免N+1方法
   end
 
   def show

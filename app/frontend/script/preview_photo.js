@@ -14,4 +14,3 @@ window.addEventListener('turbolinks:load', function () {
   })
 
 })
-
