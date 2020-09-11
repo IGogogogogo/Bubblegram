@@ -13,44 +13,28 @@ import Rails from "@rails/ujs";
 export default class extends Controller {
   static targets = ["like"]
 
-  switch() {
-    var postId = this.data.get("postId")
-    //console.log(postId)
-    var like = this.likeTarget.dataset.like
-    //console.log(like);
+  favorite() {
+    // console.log(this.heartTarget)
+    let post_id = this.data.get("id")
 
+    Rails.ajax({
+      url: `/posts/${post_id}/favorite.json`,
+      type: "post",
+      data: "",
+      success: (result) => {
+        console.log(result)
+        if (result["status"] == true) {
+          this.heartTarget.classList.remove("far")
+          this.heartTarget.classList.add("fas")
+        } else {
+          this.heartTarget.classList.remove("far")
+          this.heartTarget.classList.add("fas")
+        }
+      },
+      error: (err) => {
+        console.log(err)
+      },
+    })
 
-
-
-    if (like) {
-      Rails.ajax({
-        url: `/posts/${postId}/favourites`,
-        type: "POST",
-        data: "",
-        success: (result) => {
-          console.log(result)
-          this.likeTarget.classList.remove('fas');
-          this.likeTarget.classList.add('far');
-        },
-        error: (err) => {
-          console.log(err)
-        },
-      })
-    } else {
-      Rails.ajax({
-        url: `/posts/${postId}/favourites`,
-        type: "DELETE",
-        data: "",
-        success: (result) => {
-          console.log(result)
-          this.likeTarget.classList.remove('far');
-          this.likeTarget.classList.add('fas');
-
-        },
-        error: (err) => {
-          console.log(err)
-        },
-      })
-    }
   }
 }

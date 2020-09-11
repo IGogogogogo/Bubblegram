@@ -26,8 +26,12 @@ class User < ApplicationRecord
     self.fans.include?(current_user)
   end
 
-  def already_thumbed_up?(post)
-    self.favourites_posts.include?(post)
+  def toggle_favorite_post(post)
+    if favourites_posts.exists?(post.id)
+      favourites_posts.destroy(post)
+    else
+      favourites_posts << post
+    end
   end
 
   def self.from_omniauth(auth, signed_in_resource = nil)

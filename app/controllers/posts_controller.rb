@@ -40,6 +40,15 @@ class PostsController < ApplicationController
     redirect_to posts_path, notice: '文章刪除成功'
   end
 
+  def favorite
+    current_user.toggle_favorite_post(@post)
+
+    respond_to do |format|
+      format.html { redirect_to favourite_path, notice: 'OK!' }
+      format.json { render json: {status: @post.favorited_by?(current_user) } }
+    end
+  end
+
 
   private
 
