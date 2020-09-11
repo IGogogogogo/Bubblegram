@@ -19,5 +19,3 @@ require("stylesheets")
 
 require("trix")
 require("@rails/actiontext")
-
-import "controllers"

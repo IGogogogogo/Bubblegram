@@ -6,8 +6,6 @@
   <div class="post-form-img" style="position: relative; width: 400px; margin: auto; border: solid 5px #faf;">
     <%= image_tag @post.image.url, width: "100%", draggable: false if @post.image.present? %>
   </div>
-  <div class="btn btn-primary tag-btn">標記人名</div>
-
 
   <div class="form-group">
     <%= form.label :image, 'image' %>
