@@ -1,7 +1,6 @@
 import Rails from '@rails/ujs'
 
 document.addEventListener("turbolinks:load", () => {
-  console.log("start")
   const searchForm = document.querySelector(".search-form")
 
   if(searchForm){

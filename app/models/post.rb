@@ -9,5 +9,5 @@ class Post < ApplicationRecord
   has_many :user_tags, foreign_key: :post_id, dependent: :destroy
   has_many :taged_users, through: :user_tags, source: :user
 
-  scope :viewable_posts, -> (users) { where(user_id: users) }
+  scope :viewable_posts, -> (users) { where(user_id: users) }    #自己可以看到誰的貼文
 end
