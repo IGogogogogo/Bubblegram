@@ -4,6 +4,7 @@ import "bootstrap";
 import "../stylesheets/application"
 import "@fortawesome/fontawesome-free/js/all";
 import "./preview_photo"
+import "./chat_message_view"
 
 window.$ = $
 

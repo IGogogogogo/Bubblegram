@@ -2,8 +2,8 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = Post.all.with_rich_text_body #with_rich_text_body 是避免N+1方法
-    # .my_following_users(current_user.followings) 之後要補回去
+    users = [current_user].concat(current_user.followings)
+    @posts = Post.viewable_posts(users).order("created_at DESC").with_rich_text_body
   end
 
   def show

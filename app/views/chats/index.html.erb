@@ -1,0 +1,9 @@
+<div>
+  <% @users.each do |user| %>
+    <% @chat.between(current_user, user).each do |chat| %>
+      <div>
+        <%= link_to user.nick_name, chat_path(chat) %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
