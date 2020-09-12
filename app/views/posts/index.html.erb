@@ -121,21 +121,16 @@
               </div>
             </div>
 
-            <div class="comments-area" data-controller="comment" data-comment-id="<%= post.id %>">
-
-              <h5>
-                <span data-target="comment.email"></span>
-                <small data-target="comment.time">
-                  -
-
-                  ago
+            <div class="comments">
+              <div>
+                <% post.comments.each do |com| %>
+                <small class="d-block">
+                  <%= com.user.nick_name %>
+                  <%= com.content %>
+                  <%= time_ago_in_words com.created_at %>
                 </small>
-              </h5>
-
-              <div data-target="comment.content">
-
+                <% end %>
               </div>
-
               <%= form_with(model: @comment, url: post_comments_path(post) ,local: true) do |form| %>
               <div>
                 <%= form.text_field :content, placeholder: "輸入留言" %>
