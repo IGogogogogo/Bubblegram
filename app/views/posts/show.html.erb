@@ -5,11 +5,4 @@
 <p><%= @post.body %></p>
 
 
-<%= form_with(model: @comment, url: post_comments_path(@post) ,local: true) do |form| %>
-  <div>
-    <%= form.text_field :content, placeholder: "輸入留言" %>
-    <%= form.submit "Create" %>
-  </div>
-<% end %>
-
 <%= render partial: "/comments/comment", collection: @comments %>

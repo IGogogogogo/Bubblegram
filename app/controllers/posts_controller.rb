@@ -3,11 +3,12 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all.with_rich_text_body #with_rich_text_body 是避免N+1方法
+    @comment = Comment.new
+    #@comments = @post.comments
   end
 
   def show
     @comments = @post.comments
-    @comment = Comment.new
   end
 
   def new

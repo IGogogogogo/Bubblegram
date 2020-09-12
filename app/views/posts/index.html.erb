@@ -120,6 +120,29 @@
                 <small class="text-secondary">5 mins ago</small>
               </div>
             </div>
+
+            <div class="comments-area" data-controller="comment" data-comment-id="<% post.id %>">
+
+              <h5>
+                <span data-target="comment.email"></span>
+                <small data-target="comment.time">
+                  -
+
+                  ago
+                </small>
+              </h5>
+
+              <div data-target="comment.content">
+
+              </div>
+
+              <%= form_with(model: @comment, url: post_comments_path(post) ,local: true) do |form| %>
+              <div>
+                <%= form.text_field :content, placeholder: "輸入留言" %>
+                <%= form.submit "留言", data: { action: "click->comment#show" }%>
+              </div>
+              <% end %>
+            </div>
           </div>
         </div>
         <% end %>
