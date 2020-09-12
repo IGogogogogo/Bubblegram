@@ -1,1 +1,19 @@
-<h1>~這是首頁~</h1>
+<h1>posts index</h1>
+
+<table>
+  <tr>
+    <th>文章</th>
+    <th>編輯與刪除</th>
+  </tr>
+
+  <% @posts.each do |post| %>
+  <tr>
+    <td><%= image_tag post.image.url, width: "200px" %></td>
+    <td><%= link_to post.content, post_path(post) %>
+    <td>
+      <%= link_to '編輯', edit_post_path(post) %>
+      <%= link_to '刪除', post_path(post), method: 'DELETE', data: { confirm: '你確定刪除嗎?' } %>
+    </td>
+  </tr>
+  <% end %>
+</table>

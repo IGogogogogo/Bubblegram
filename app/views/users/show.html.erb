@@ -7,7 +7,7 @@
   </div>
 
   <div>
-    <%= link_to posts_path do %>
+    <%= link_to user_posts_path(@user) do %>
       <p><%= @user.posts_count %></p>
       <p>貼文</p>
     <% end %>
@@ -35,7 +35,7 @@
 </div>
 
 <div class="user-item-<%= @user.id %>">
-  <%= render  "user_btn", user: @user  %>
+  <%= render "user_btn", user: @user  %>
 </div>
 
 <div>

@@ -7,7 +7,7 @@
 <% end %>
 
 
-<%= form_with(model: @post, class: "form", local: true) do |form| %>
+<%= form_with(model: @post, url: new_user_post_path(current_user), class: "form", local: true) do |form| %>
   <div class="post-form-img" style="position: relative; width: 400px;">
     <%= image_tag @post.image.url, width: "100%", draggable: false if @post.image.present? %>
   </div>
@@ -18,8 +18,8 @@
   </div>
 
   <div class="form-group">
-    <%= form.label :body, '文章內文' %>
-    <%= form.rich_text_area :body, class: "form-control" %>
+    <%= form.label :conetent, '文章內文' %>
+    <%= form.text_field :conetent, class: "form-control" %>
   </div>
 
   <div class="form-group">
