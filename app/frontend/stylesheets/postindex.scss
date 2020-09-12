@@ -9,6 +9,14 @@
 .user-post-content i {
   font-size: 20px;
 }
+.index-nav{
+  border-top: 2px solid #ccc;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  background: #fff;
+  z-index: 10;
+}
 @media (max-width: 999px){
   .user-story:nth-child(6) ~ .user-story{
       display: none;
