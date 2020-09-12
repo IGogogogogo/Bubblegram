@@ -38,6 +38,8 @@
 
         .pic{
           margin-left: 10px;
+          border: 1px solid black;
+          border-radius: 10px;
         }
       }
 
@@ -55,8 +57,6 @@
         .pic{
           order: -1;
           margin-right: 10px;
-          border: 1px solid black;
-          border-radius: 10px;
         }
       }
     }
