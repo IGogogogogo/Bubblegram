@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update] do
     resource :follows, only: [:create, :destroy]
+    resources :stories, only: [:index, :show, :new, :create, :destroy ]
 
     member do
       get :fans
