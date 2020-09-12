@@ -1,7 +1,8 @@
 class Post < ApplicationRecord
   mount_uploader :image, ImageUploader
   has_rich_text :body
-  validates :body, :image, presence: true
+  validates :content, presence: true
+  validates :image, presence: true
 
   belongs_to :user, counter_cache: true
   has_many :comments, dependent: :destroy
@@ -10,4 +11,5 @@ class Post < ApplicationRecord
   has_many :taged_users, through: :user_tags, source: :user
 
   scope :viewable_posts, -> (users) { where(user_id: users) }    #自己可以看到誰的貼文
+  scope :my_posts, -> (current_user) { where(user_id: current_user) } #自己的貼文
 end
