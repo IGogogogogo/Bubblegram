@@ -39,21 +39,21 @@
 </div>
 
 <div>
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs posts-nav">
     <li class="nav-item">
-      <a class="nav-link post-btn active" href="#">使用者貼文</a>
+      <a class="nav-link my-posts-btn active" href="#">使用者貼文</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link tag-btn" href="#">使用者被標記貼文</a>
+      <a class="nav-link tag-posts-btn" href="#">使用者被標記貼文</a>
     </li>
   </ul>
   <br>
 
   <div class="my-posts row">
-    <%= render partial: "/posts/post", collection: @my_posts, as: :post %>
+    <%= render partial: "/posts/post_img", collection: @my_posts, as: :post %>
   </div>
 
   <div class="taged-posts row" style="display: none;">
-    <%= render partial: "/posts/post", collection: @taged_posts, as: :post %>
+    <%= render partial: "/posts/post_img", collection: @taged_posts, as: :post %>
   </div>
 </div>

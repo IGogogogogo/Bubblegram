@@ -61,13 +61,15 @@ namespace :dev do
     User.all.each do |user|
       rand(2..5).times do
         num = rand(1000)
-        user.posts.create!(
+        post = user.posts.create!(
           remote_image_url: "https://picsum.photos/500/500/?random=#{num}",
           content: Faker::Lorem.sentence,
-          body: Faker::Lorem.sentence
+          # body: Faker::Lorem.sentence
         )
         print "."
+        post.taged_users = User.all.sample(rand(3..7))
       end
+
     end
 
     puts "\n成功建立 #{Post.count} 筆 使用者post資料！"
