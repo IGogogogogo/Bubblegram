@@ -4,8 +4,4 @@
   <%= render partial: "/posts/post", collection: @posts, as: :post %>
 </div>
 
-<%= form_with(url: load_posts_user_posts_path(@user), method: :get, class: "load-posts") do |f| %>
-  <%= f.text_field :page %>
-  <%= f.text_field :type %>
-  <%= f.submit %>
-<% end %>
+<%= render partial: "/posts/load_form", locals: {user: @user} %>

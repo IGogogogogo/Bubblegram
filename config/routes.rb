@@ -15,7 +15,6 @@ Rails.application.routes.draw do
     resources :posts, shallow: true do
       resources :comments, only: [:create]
       collection do
-        get :load
         get :load_posts
       end
     end

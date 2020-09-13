@@ -3,8 +3,8 @@ class UsersController < ApplicationController
   before_action :only_owner, only: [:edit, :update]
 
   def show
-    @my_posts = @user.posts.order("created_at DESC").limit(18)
-    @taged_posts = @user.taged_posts.order("created_at DESC").limit(18)
+    @my_posts = @user.posts.order("created_at DESC").limit(36)
+    @taged_posts = @user.taged_posts.order("created_at DESC").limit(36)
   end
 
   def fans

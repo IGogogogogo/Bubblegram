@@ -49,11 +49,13 @@
   </ul>
   <br>
 
-  <div class="my-posts row">
+  <div class="post-img row no-gutters w-100" style="display: flex">
     <%= render partial: "/posts/post_img", collection: @my_posts, as: :post %>
+    <%= render partial: "/posts/load_form", locals: {user: @user} %>
   </div>
 
-  <div class="taged-posts row" style="display: none;">
+  <div class="tag-img row no-gutters w-100" style="display: none;">
     <%= render partial: "/posts/post_img", collection: @taged_posts, as: :post %>
+    <%= render partial: "/posts/load_form", locals: {user: @user} %>
   </div>
 </div>

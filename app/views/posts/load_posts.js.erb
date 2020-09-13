@@ -1,6 +1,10 @@
-<%# console.log("load_posts") %>
-document.querySelector(".main-posts").innerHTML += '<%= j render(partial: "/posts/post", collection: @posts, as: :post) %>'
+console.log("~~~~~~~~~~~~~~~~~~~~load_posts.js.erb")
+console.log(document.querySelector(".result-posts"))
+console.log("partial: <%= @partial %>")
+console.log("posts count: <%= @posts.count %>")
+console.log("target: <%= @target %>")
+document.querySelector("<%= @target %>").innerHTML += '<%= j render(partial: @partial, collection: @posts, as: :post) %>'
 
 if (<%= @posts.count %> < 20) {
-  document.querySelector(".main-posts").dataset.isEnd = "end"
+  document.querySelector(".load-posts").dataset.isEnd = "end"
 }
