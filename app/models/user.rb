@@ -16,6 +16,10 @@ class User < ApplicationRecord
   has_many :fanships, foreign_key: :fan_id, class_name: "Follow", dependent: :destroy
   has_many :followings, through: :fanships, source: :following
   has_many :stories, dependent: :destroy # 假刪除
+  #建立使用者與對話關聯
+  has_many :sender_chats, foreign_key: :sender_id, class_name: 'Chat'
+  has_many :recipient_chats, foreign_key: :recipient_id, class_name: 'Chat'
+  has_many :messages
 
   scope :not_self, -> (current_user){ where.not(id: current_user.id) }
   scope :find_by_keyword, -> (keyword){ where(["nick_name LIKE ? OR email LIKE ?", "%#{keyword}%", "%#{keyword}%"]) }

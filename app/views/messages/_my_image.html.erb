@@ -1,0 +1,8 @@
+<div class= "message me">
+  <div class= "pic_name">
+    <%= message.user.nick_name %>
+  </div>
+  <div class="pic">
+    <%= image_tag message.image_url if message.image_url.present?%>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class = "message_box section" data-chat= "<%= @chat.id %>" data-user="<%= current_user.id%>">
+  <div class="container">
+    <div class="message_text_area">
+      <% @messages.each do |message| %>
+       <%= render "messages/message", message: message %>
+      <% end %>
+    </div>
+    <div class="searchbar">
+      <%= form_with(model: @message, url: chat_messages_path(@chat)) do |f| %>
+        <%= f.text_field :content %>
+        <%= f.submit "傳送" , class:"none" , disabled: true%>
+      <% end %>
+      <%= form_with(model: @message, url: chat_messages_path(@chat), class: "image_form" ) do |f| %>
+        <label for="message_image"><i class="far fa-image"></i></label>
+        <%= f.file_field :image %>
+      <% end %>
+    </div>
+  </div>
+</div>
