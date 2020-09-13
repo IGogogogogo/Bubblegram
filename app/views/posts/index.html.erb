@@ -1,171 +1,157 @@
-<h1>文章總覽</h1>
-
-<%= link_to '新增文章', new_post_path %>
-
-
 <div class="container">
-  <nav class="index-nav w-100">
-    <div class="nav nav-tabs w-100 text-center" id="nav-tab" role="tablist">
-      <a class="nav-link active flex-grow-1" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-        aria-controls="nav-home" aria-selected="true"><i class="fas fa-home"></i></a>
-      <a class="nav-link flex-grow-1" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-        aria-controls="nav-profile" aria-selected="false"><i class="fas fa-search"></i></a>
-      <a class="nav-link flex-grow-1" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
-        aria-controls="nav-contact" aria-selected="false"><i class="far fa-plus-square"></i></a>
-      <a class="nav-link flex-grow-1" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
-        aria-controls="nav-contact" aria-selected="false"><i class="far fa-heart"></i></a>
-      <a class="nav-link flex-grow-1" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
-        aria-controls="nav-contact" aria-selected="false"><i class="fas fa-user"></i></a>
-    </div>
-  </nav>
-  <div class="tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-      <div class="row">
-        <!-- limit video -->
-        <div class="col-12 col-md-8">
-          <div class="limit-video d-flex justify-content-around align-items-center text-center border border-gray mb-3">
-            <div class="user-story">
-              <div class="user-video">
-                <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
-              </div>
-              <div class="user-name">
-                <small>Jerry</small>
-              </div>
-            </div>
-            <div class="user-story">
-              <div class="user-video">
-                <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
-              </div>
-              <div class="user-name">
-                <small>Jerry</small>
-              </div>
-            </div>
-            <div class="user-story">
-              <div class="user-video">
-                <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
-              </div>
-              <div class="user-name">
-                <small>Jerry</small>
-              </div>
-            </div>
-            <div class="user-story">
-              <div class="user-video">
-                <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
-              </div>
-              <div class="user-name">
-                <small>Jerry</small>
-              </div>
-            </div>
-            <div class="user-story">
-              <div class="user-video">
-                <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
-              </div>
-              <div class="user-name">
-                <small>Jerry</small>
-              </div>
-            </div>
-            <div class="user-story">
-              <div class="user-video">
-                <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
-              </div>
-              <div class="user-name">
-                <small>Jerry</small>
-              </div>
-            </div>
-            <div class="user-story">
-              <div class="user-video">
-                <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
-              </div>
-              <div class="user-name">
-                <small>Jerry</small>
-              </div>
-            </div>
-            <div class="user-story">
-              <div class="user-video">
-                <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
-              </div>
-              <div class="user-name">
-                <small>Jerry</small>
-              </div>
-            </div>
-            <div class="user-story">
-              <div class="user-video">
-                <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
-              </div>
-              <div class="user-name">
-                <small>Jerry</small>
-              </div>
-            </div>
-            <div class="user-story">
-              <div class="user-video">
-                <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
-              </div>
-              <div class="user-name">
-                <small>Jerry</small>
-              </div>
-            </div>
+
+  <div class="row">
+    <!-- limit video -->
+    <div class="col-12 col-md-8">
+      <div class="limit-video d-flex justify-content-around align-items-center text-center border border-gray mb-3">
+        <div class="user-story">
+          <div class="user-video">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
           </div>
-
-          <!-- Main post  -->
-          <div class="main-post">
-            <% @posts.each do |post| %>
-            <div class="col-12 border border-gray p-0 mb-4">
-              <div class="user-post">
-                <div class="user-info d-flex align-items-center p-2">
-                  <div class="user-photo"><img src="https://picsum.photos/40/40" alt=""
-                      class="rounded-circle img-fluid">
-                  </div>
-                  <div class="user-name ml-2"><strong><%= post.user.nick_name %></strong></div>
-                  <div class="option ml-auto g-btn px-2"><i class="fas fa-ellipsis-h"></i></div>
-                </div>
-                <div class="user-post-photo">
-                  <%= image_tag (post.image.url), class: 'img-fluid w-100 h-100' %>
-                </div>
-                <div class="user-post-content">
-                  <div class="button-group d-flex">
-                    <div class="like g-btn p-2"><i class="far fa-heart"></i></div>
-                    <div class="comment g-btn p-2"><i class="far fa-comment"></i></div>
-                    <div class="share g-btn p-2"><i class="far fa-share-square"></i></div>
-                    <div class="collect g-btn p-2 ml-auto"><i class="far fa-flag"></i></div>
-                  </div>
-                  <div class="thumb-up px-2"><strong>654個讚</strong></div>
-                  <div class="px-2">
-                    <strong class="user-name"><%= post.user.nick_name %></strong>
-                    <span class="user-word"><%= link_to post.body, post_path(post) %></></span>
-                  </div>
-                  <div class="post-time px-2">
-                    <small class="text-secondary">5 mins ago</small>
-                  </div>
-                </div>
-
-                <div class="comments">
-                  <div>
-                    <% post.comments.each do |com| %>
-                    <small class="d-block">
-                      <%= com.user.nick_name %>
-                      <%= com.content %>
-                      <%= time_ago_in_words com.created_at %>
-                    </small>
-                    <% end %>
-                  </div>
-                  <%= form_with(model: @comment, url: post_comments_path(post) ,local: true) do |form| %>
-                  <div>
-                    <%= form.text_field :content, placeholder: "輸入留言" %>
-                    <%= form.submit "留言", data: { action: "click->comment#show" }%>
-                  </div>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-            <% end %>
+          <div class="user-name">
+            <small>Jerry</small>
+          </div>
+        </div>
+        <div class="user-story">
+          <div class="user-video">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+          </div>
+          <div class="user-name">
+            <small>Jerry</small>
+          </div>
+        </div>
+        <div class="user-story">
+          <div class="user-video">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+          </div>
+          <div class="user-name">
+            <small>Jerry</small>
+          </div>
+        </div>
+        <div class="user-story">
+          <div class="user-video">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+          </div>
+          <div class="user-name">
+            <small>Jerry</small>
+          </div>
+        </div>
+        <div class="user-story">
+          <div class="user-video">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+          </div>
+          <div class="user-name">
+            <small>Jerry</small>
+          </div>
+        </div>
+        <div class="user-story">
+          <div class="user-video">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+          </div>
+          <div class="user-name">
+            <small>Jerry</small>
+          </div>
+        </div>
+        <div class="user-story">
+          <div class="user-video">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+          </div>
+          <div class="user-name">
+            <small>Jerry</small>
+          </div>
+        </div>
+        <div class="user-story">
+          <div class="user-video">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+          </div>
+          <div class="user-name">
+            <small>Jerry</small>
+          </div>
+        </div>
+        <div class="user-story">
+          <div class="user-video">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+          </div>
+          <div class="user-name">
+            <small>Jerry</small>
+          </div>
+        </div>
+        <div class="user-story">
+          <div class="user-video">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+          </div>
+          <div class="user-name">
+            <small>Jerry</small>
           </div>
         </div>
       </div>
+
+      <!-- Main post  -->
+      <div class="main-post">
+        <% @posts.each do |post| %>
+        <div class="col-12 border border-gray p-0 mb-4">
+          <div class="user-post">
+            <div class="user-info d-flex align-items-center p-2">
+              <div class="user-photo"><img src="https://picsum.photos/40/40" alt="" class="rounded-circle img-fluid">
+              </div>
+              <div class="user-name ml-2"><strong><%= post.user.nick_name %></strong></div>
+
+              <div class="option ml-auto g-btn px-2"></div>
+
+              <div class="dropdown">
+                <button class="btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                  <i class="fas fa-ellipsis-h"></i>
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                  <%= link_to '編輯', edit_post_path(post), class: 'dropdown-item' %>
+                  <%= link_to '刪除', post_path(post), method: 'DELETE', data: { confirm: '你確定刪除嗎?' }, class: 'dropdown-item text-danger' %>
+                </div>
+              </div>
+
+            </div>
+            <div class="user-post-photo">
+              <%= image_tag (post.image.url), class: 'img-fluid w-100 h-100' %>
+            </div>
+            <div class="user-post-content">
+              <div class="button-group d-flex">
+                <div class="like g-btn p-2"><i class="far fa-heart"></i></div>
+                <div class="comment g-btn p-2"><i class="far fa-comment"></i></div>
+                <div class="share g-btn p-2"><i class="far fa-share-square"></i></div>
+                <div class="collect g-btn p-2 ml-auto"><i class="far fa-flag"></i></div>
+              </div>
+              <div class="thumb-up px-2"><strong>654個讚</strong></div>
+              <div class="px-2">
+                <strong class="user-name"><%= post.user.nick_name %></strong>
+                <span class="user-word"><%= link_to post.body, post_path(post) %></></span>
+              </div>
+              <div class="post-time px-2">
+                <small class="text-secondary">5 mins ago</small>
+              </div>
+            </div>
+
+            <div class="comments">
+              <div>
+                <% post.comments.each do |com| %>
+                <small class="d-block">
+                  <%= com.user.nick_name %>
+                  <%= com.content %>
+                  <%= time_ago_in_words com.created_at %>
+                </small>
+                <% end %>
+              </div>
+              <%= form_with(model: @comment, url: post_comments_path(post) ,local: true) do |form| %>
+              <div>
+                <%= form.text_field :content, placeholder: "輸入留言" %>
+                <%= form.submit "留言", data: { action: "click->comment#show" }%>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
     </div>
-    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
-    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
-    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
-    <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
   </div>
 
 </div>
