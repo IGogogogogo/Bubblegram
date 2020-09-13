@@ -1,0 +1,6 @@
+<%# console.log("load_posts") %>
+document.querySelector(".main-posts").innerHTML += '<%= j render(partial: "/posts/post", collection: @posts, as: :post) %>'
+
+if (<%= @posts.count %> < 20) {
+  document.querySelector(".main-posts").dataset.isEnd = "end"
+}

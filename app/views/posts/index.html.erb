@@ -1,21 +1,11 @@
-<h1>文章總覽</h1>
+<h1>posts index</h1>
 
-<%= link_to '新增文章', new_post_path %>
+<div class="main-posts" data-is-end="not yet">
+  <%= render partial: "/posts/post", collection: @posts, as: :post %>
+</div>
 
-<table>
-  <tr>
-    <th>文章</th>
-    <th>編輯與刪除</th>
-  </tr>
-
-  <% @posts.each do |post| %>
-  <tr>
-    <td><%= image_tag post.image.url, width: "200px" %></td>
-    <td><%= link_to post.content, post_path(post) %>
-    <td>
-      <%= link_to '編輯', edit_post_path(post) %>
-      <%= link_to '刪除', post_path(post), method: 'DELETE', data: { confirm: '你確定刪除嗎?' } %>
-    </td>
-  </tr>
-  <% end %>
-</table>
+<%= form_with(url: load_posts_user_posts_path(@user), method: :get, class: "load-posts") do |f| %>
+  <%= f.text_field :page %>
+  <%= f.text_field :type %>
+  <%= f.submit %>
+<% end %>

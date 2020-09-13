@@ -1,9 +1,13 @@
 <div class="col-4">
-  <%= image_tag post.image.url, class: "w-100" %>
+  <%= link_to user_posts_path(@user) do %>
+    <%= image_tag post.image.url, class: "w-100" %>
+  <% end %>
 </div>
 
 <template id="post-template">
   <div class="col-4">
-    <img src="" class="w-100">
+    <%= link_to user_posts_path(@user) do %>
+      <img src="" class="w-100">
+    <% end %>
   </div>
 </template>

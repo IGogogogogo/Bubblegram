@@ -49,16 +49,20 @@ document.addEventListener("turbolinks:load", () => {
           document.body.removeEventListener("scroll", loadPosts)
         }
         posts.forEach((post) => {                                //使用post_img template 加入新元素
-          const t = document.querySelector("#post-template")
-          const clone = document.importNode(t.content, true)
-          clone.querySelector("img").src = post.image.url
-          if (type == "my_posts") {
-            document.querySelector(".my-posts").appendChild(clone)
-          } else if (type == "tag_posts") {
-            document.querySelector(".taged-posts").appendChild(clone)
-          }
+          createPostImg(post)
         })
       })
+    }
+  }
+
+  const createPostImg = (post) => {
+    const t = document.querySelector("#post-template")
+    const clone = document.importNode(t.content, true)
+    clone.querySelector("img").src = post.image.url
+    if (type == "my_posts") {
+      document.querySelector(".my-posts").appendChild(clone)
+    } else if (type == "tag_posts") {
+      document.querySelector(".taged-posts").appendChild(clone)
     }
   }
 })

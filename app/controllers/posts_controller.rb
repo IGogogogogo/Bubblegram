@@ -2,8 +2,8 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    users = [current_user].concat(current_user.followings)
-    @posts = Post.viewable_posts(users).order("created_at DESC")
+    @user = User.find(params[:user_id])
+    @posts = @user.posts.includes(:comments).order("created_at DESC").limit(20)
   end
 
   def show
@@ -19,6 +19,13 @@ class PostsController < ApplicationController
       @posts = @user.taged_posts.order("created_at DESC").page(params[:page]).per(21)
     end
     render json: @posts
+  end
+
+  def load_posts
+    @user = User.find(params[:user_id])
+    if params[:type] == "my_posts"
+      @posts = @user.posts.order("created_at DESC").page(params[:page]).per(20)
+    end
   end
 
   def new
