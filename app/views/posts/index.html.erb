@@ -3,7 +3,8 @@
   <div class="row">
     <!-- limit video -->
     <div class="col-12 col-md-8">
-      <div class="limit-video d-flex justify-content-around align-items-center text-center border border-gray mb-3">
+      <div
+        class="limit-video d-flex justify-content-around align-items-center text-center border-bottom border-gray mb-3">
         <div class="user-story">
           <div class="user-video">
             <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
@@ -105,9 +106,51 @@
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                   <%= link_to '編輯', edit_post_path(post), class: 'dropdown-item' %>
-                  <%= link_to '刪除', post_path(post), method: 'DELETE', data: { confirm: '你確定刪除嗎?' }, class: 'dropdown-item text-danger' %>
+                  <!-- Button trigger modal -->
+                  <a class="dropdown-item text-danger" data-toggle="modal" data-target="#staticBackdrop"
+                    style="cursor: pointer;">
+                    刪除
+                  </a>
                 </div>
               </div>
+
+              <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title text-danger" id="staticBackdropLabel">你確定要刪除嗎？</h5>
+                    </div>
+                    <div class="modal-body">
+                      請注意！<br>
+                      貼文一經刪除過後，就沒辦法再找回來了哦！
+                    </div>
+                    <div class="modal-footer">
+                      <a type="button" class="btn btn-secondary" data-dismiss="modal">取消</a>
+                      <%= link_to '刪除', post_path(post), method: 'DELETE', class: 'btn btn-outline-danger' %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             </div>
             <div class="user-post-photo">
@@ -130,7 +173,7 @@
               </div>
             </div>
 
-            <div class="comments">
+            <div class="comments px-2">
               <div>
                 <% post.comments.each do |com| %>
                 <small class="d-block">
@@ -155,14 +198,3 @@
   </div>
 
 </div>
-
-<!-- <table>
-
-  <% @posts.each do |post| %>
-  <tr>
-      <%= link_to '編輯', edit_post_path(post) %>
-      <%= link_to '刪除', post_path(post), method: 'DELETE', data: { confirm: '你確定刪除嗎?' } %>
-    </td>
-  </tr>
-  <% end %>
-</table> -->
