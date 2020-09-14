@@ -83,116 +83,15 @@
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
       <div class="form-row">
+        <% @user.posts.each do |user| %>
         <div class="col-4 pr-0 pb-1">
-          <a href="#">
+          <a href="<%= post_path(user.id) %>">
             <div class="photo">
-              <img src="https://picsum.photos/150/150?random=1" alt="" class="w-100">
+              <img src="<%= user.image %>" alt="" class="w-100">
             </div>
           </a>
         </div>
-
-        <div class=" col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=2" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=3" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=4" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=5" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=6" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=7" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=8" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=15" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=9" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=13" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=12" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=11" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=10" alt="" class="w-100">
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-      <div class="form-row">
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=20" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=21" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=22" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=23" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=24" alt="" class="w-100">
-          </div>
-        </div>
-        <div class="col-4 pr-0 pb-1">
-          <div class="photo">
-            <img src="https://picsum.photos/150/150?random=25" alt="" class="w-100">
-          </div>
-        </div>
-
-
+        <% end %>
       </div>
     </div>
   </div>

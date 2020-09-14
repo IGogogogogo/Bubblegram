@@ -95,10 +95,8 @@
             <div class="user-info d-flex align-items-center p-2">
               <div class="user-photo"><img src="https://picsum.photos/40/40" alt="" class="rounded-circle img-fluid">
               </div>
-              <div class="user-name ml-2"><strong><%= post.user.nick_name %></strong></div>
-
+              <div class="user-name ml-2"><strong><%= link_to post.user.nick_name, user_path(post.user) %></strong></div>
               <div class="option ml-auto g-btn px-2"></div>
-
               <div class="dropdown">
                 <button class="btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
                   aria-expanded="false">
