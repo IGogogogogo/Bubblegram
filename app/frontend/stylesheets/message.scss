@@ -9,6 +9,7 @@
       .message + .message{
         margin-top: 20px;
       }
+
       .message{
         display: flex;
         align-items: flex-start;
@@ -17,12 +18,14 @@
           flex-direction: column;
           align-items: center;
         }
+
         .content{
           padding: 5px 8px;
           word-break: break-word;
           border-radius: 5px;
           align-self: center;
         }
+
         .pic{
           img{
             width: 100%;
@@ -31,33 +34,40 @@
           }
         }
       }
+
       .other{
         padding-right: 50%;
+
         .content{
           margin-left: 10px;
           background-color: rgb(226, 226, 226);
         }
+
         .pic{
           margin-left: 10px;
+          border: 1px solid black;
+          border-radius: 10px;
         }
       }
+
       .me{
         justify-content: flex-end;
         padding-left: 50%;
+
         .content{
           order: -1;
           margin-right: 10px;
           background-color: rgb(56, 56, 136);
           color: white;
         }
+
         .pic{
           order: -1;
           margin-right: 10px;
-          border: 1px solid black;
-          border-radius: 10px;
         }
       }
     }
+
     .searchbar{
       display: flex;
       border: 2px solid black;
@@ -69,15 +79,19 @@
       form{
         flex-grow: 1;
         display: flex;
+
         #message_content{
           width: 80%;
           padding: 3px 5px;
           box-sizing: border-box;
           border: none;
+          background-color: transparent;
           &:focus{
             outline: none;
+            background: transparent;
           }
         }
+
         input[type='submit']{
           margin-left: auto;
           // width: 15%;
@@ -90,17 +104,21 @@
           }
         }
       }
+
       .none{
         display: none;
       }
+
       .image_form{
         margin-left: auto;
         flex-grow: 0;
+
         label[for='message_image']{
           cursor: pointer;
           font-size: 25px;
           margin: 0;
         }
+
         input{
           display: none;
         }
