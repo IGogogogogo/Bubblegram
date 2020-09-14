@@ -3,7 +3,6 @@
 <div style="display: flex; text-align: center">
   <div>
     <%= image_tag @user.avatar.url, width: "50px", style: "border-radius: 50%" if @user.avatar %>
-    <%# <%= image_tag @user.avatar.variant(resize_to_limit: [50, 50]) if @user.avatar?  %>
   </div>
 
   <div>
@@ -49,13 +48,13 @@
   </ul>
   <br>
 
-  <div class="post-img row no-gutters w-100" style="display: flex">
-    <%= render partial: "/posts/post_img", collection: @my_posts, as: :post %>
-    <%= render partial: "/posts/load_form", locals: {user: @user} %>
-  </div>
+  <div class="post-load-target">
+    <div class="post-img row no-gutters w-100" style="display: flex">
+      <%= render partial: "/posts/post_img", collection: @my_posts, as: :post %>
+    </div>
 
-  <div class="tag-img row no-gutters w-100" style="display: none;">
-    <%= render partial: "/posts/post_img", collection: @taged_posts, as: :post %>
-    <%= render partial: "/posts/load_form", locals: {user: @user} %>
+    <div class="tag-img row no-gutters w-100" style="display: none;">
+      <%= render partial: "/posts/post_img", collection: @taged_posts, as: :post %>
+    </div>
   </div>
 </div>

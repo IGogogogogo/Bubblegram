@@ -1,6 +1,6 @@
 import Rails from '@rails/ujs'
 document.addEventListener("turbolinks:load", () => {
-  const postsForm = document.querySelector(".load-posts")
+  const postsForm = document.querySelector(".post-load-target")
   const postNav = document.querySelector(".posts-nav")
   let page = 1
   let tagPage = 1
@@ -9,15 +9,15 @@ document.addEventListener("turbolinks:load", () => {
 
   if (postsForm) {
     checkLoadType()
-    document.body.addEventListener("scroll", loadPosts)
+    document.body.addEventListener("scroll", loadPosts)      //加入捲軸滾動事件
   }
 
   if (postNav) {
-    postNav.addEventListener("click", (e) => switchPosts(e))
+    postNav.addEventListener("click", (e) => switchPosts(e))  //user show 個人/tag貼文切換
   }
 
-  function checkLoadType() {
-    console.log("checkLoadType")
+  function checkLoadType() {                  //依照目前位置改變請求目標
+    // console.log("checkLoadType")
     const mainPosts = document.querySelector(".main-posts")
     const myBtn = document.querySelector(".my-posts-btn")
     const tagBtn = document.querySelector(".tag-posts-btn")
@@ -30,26 +30,39 @@ document.addEventListener("turbolinks:load", () => {
     }
   }
 
+  function loadPosts() {                           //滑動到畫面底部會請求載入更多post
+    if (document.body.scrollHeight - window.innerHeight - 2 <= document.body.scrollTop ) {
 
-  function loadPosts(e) {                                        //滑動到畫面70%位置會載入更多post
-    if (e.target.scrollTop * 2 >= e.target.scrollHeight * 7 / 10) {
-      console.log("loadPosts...")
+      // console.log("loadPosts.........................")
       page += 1
-      postsForm.page.value = page
-      postsForm.type.value = type
-      console.log(postsForm)
-      console.log(postsForm.page.value)
-      console.log(postsForm.type.value)
-      Rails.fire(postsForm, "submit")
-      setTimeout(() => {
-        console.log("rails ajax send")
-        Rails.fire(postsForm, "submit")  //rails ajax 請求 posts#load_posts
-        document.body.addEventListener("scroll", loadPosts)
-      }, 100)
-
-      if (document.querySelector(".load-posts").dataset.isEnd == "end") {
-        document.body.removeEventListener("scroll", loadPosts)
+      const user_id = document.location.href.split("users/")[1]  //從目前網址取得params user id
+      let url = `/users/${user_id}/posts/load_posts?page=${page}&type=${type}`
+      if (type == "my_posts") {
+        url = `/users/${user_id}/load_posts?page=${page}&type=${type}`
       }
+
+      Rails.ajax({
+        url: url,
+        type: "get",
+        success: function(data) {
+          const postsEl = data.querySelector("body").innerHTML
+          if (type == "my_posts") {
+            document.querySelector(".main-posts").innerHTML += postsEl
+          } else if (type == "post_img") {
+            document.querySelector(".post-img").innerHTML += postsEl
+          } else if (type == "tag_img") {
+            document.querySelector(".tag-img").innerHTML += postsEl
+          }
+
+          if (postsEl == "") {
+            document.body.removeEventListener("scroll", loadPosts)
+          }
+        },
+        error: function(errors) {
+          console.log(errors)
+        }
+      })
+      // console.log("send rails ajax resquest!!!!!!!!!!")
     }
   }
 
@@ -61,7 +74,7 @@ document.addEventListener("turbolinks:load", () => {
     e.target.classList.add("active")           //active: bootstrap的使用中項目
 
     checkLoadType()
-    console.log("type: " + type)
+    // console.log("type: " + type)
     if (type == "post_img") {
       document.querySelector(".tag-img").style.display = "none"
       document.querySelector(".post-img").style.display = "flex"

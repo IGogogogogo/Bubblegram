@@ -1,7 +1,5 @@
 <h1>posts index</h1>
 
-<div class="main-posts" data-is-end="not yet">
+<div class="main-posts post-load-target" data-is-end="not yet">
   <%= render partial: "/posts/post", collection: @posts, as: :post %>
 </div>
-
-<%= render partial: "/posts/load_form", locals: {user: @user} %>

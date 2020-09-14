@@ -11,29 +11,22 @@ class PostsController < ApplicationController
     @comment = Comment.new
   end
 
-  def load_posts     #讀取新貼文
-    puts "---------------------------------------------------------"
-    puts "-----------action load posts----------------------------------------------"
-    p params
-    puts "---------------------------------------------------------"
+  def load_posts     #依照kaminari page & type 讀取新貼文
     @user = User.find(params[:user_id])
     if params[:type] == "my_posts"
       @posts = @user.posts.order("created_at DESC").page(params[:page]).per(20)
       @partial = "/posts/post"
-      @target = ".main-posts"
     elsif params[:type] == "post_img"
-      # @posts = Post.my_posts(@user).order("created_at DESC").page(params[:page]).per(36)
       @posts = @user.posts.order("created_at DESC").page(params[:page]).per(36)
       @partial = "/posts/post_img"
-      @target = ".post-img"
     elsif params[:type] == "tag_img"
-      # @posts = Post.includes(:taged_users).where(user_tags: {user: @user}).order("created_at DESC").page(params[:page]).per(36)
       @posts = @user.taged_posts.order("created_at DESC").page(params[:page]).per(36)
       @partial = "/posts/post_img"
-      @target = ".tag-img"
     end
-    # LoadPostsJob.set(wait: 0.second).perform_later(params[:user_id], params[:type], params[:page])
-    # puts "---------load posts Job and await------------------------"
+
+    respond_to do |format|
+      format.html  { render partial: @partial, collection: @posts, as: :post}
+    end
   end
 
   def new
