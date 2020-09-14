@@ -1,1 +1,2 @@
-import "./actiontext.scss";
+import "./message.scss"
+import "./actiontext.scss"

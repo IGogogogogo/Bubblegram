@@ -10,11 +10,13 @@ class Post < ApplicationRecord
   has_many :thumbs_up_users, through: :favourites, source: :user
 
   scope :my_following_users, -> (followings) { where user_id: followings}  #找出所有追蹤中的使用者
+  scope :viewable_posts, -> (users) { where(user_id: users) }
 
 
   def favorited_by?(user)
     thumbs_up_users.include?(user)
   end
   # 不會把自己算進去
+
 
 end

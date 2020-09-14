@@ -15,6 +15,10 @@ class User < ApplicationRecord
   has_many :fans, through: :followingships, source: :fan
   has_many :fanships, foreign_key: :fan_id, class_name: "Follow", dependent: :destroy
   has_many :followings, through: :fanships, source: :following
+  #建立使用者與對話關聯
+  has_many :sender_chats, foreign_key: :sender_id, class_name: 'Chat'
+  has_many :recipient_chats, foreign_key: :recipient_id, class_name: 'Chat'
+  has_many :messages
 
   has_many :favourites
   has_many :favourites_posts, through: :favourites, source: :post

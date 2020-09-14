@@ -1,0 +1,121 @@
+.message_box{
+  .container{
+    .message_text_area{
+      height: calc(100vh - 252px);
+      overflow: auto;
+      padding:20px;
+      box-sizing: border-box;
+
+      .message + .message{
+        margin-top: 20px;
+      }
+
+      .message{
+        display: flex;
+
+        .content{
+          padding: 5px 8px;
+          word-break: break-word;
+          border-radius: 5px;
+        }
+
+        .pic{
+          img{
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+          }
+        }
+      }
+
+      .other{
+        padding-right: 50%;
+
+        .content{
+          margin-left: 10px;
+          background-color: rgb(226, 226, 226);
+        }
+
+        .pic{
+          margin-left: 10px;
+          border: 1px solid black;
+          border-radius: 10px;
+        }
+      }
+
+      .me{
+        justify-content: flex-end;
+        padding-left: 50%;
+
+        .content{
+          order: -1;
+          margin-right: 10px;
+          background-color: rgb(56, 56, 136);
+          color: white;
+        }
+
+        .pic{
+          order: -1;
+          margin-right: 10px;
+        }
+      }
+    }
+
+    .searchbar{
+      display: flex;
+      border: 2px solid black;
+      border-radius: 20px;
+      box-sizing: border-box;
+      align-items: center;
+      padding: 15px;
+      height: 33px;
+      form{
+        flex-grow: 1;
+        display: flex;
+
+        #message_content{
+          width: 80%;
+          padding: 3px 5px;
+          box-sizing: border-box;
+          border: none;
+          background-color: transparent;
+          &:focus{
+            outline: none;
+            background: transparent;
+          }
+        }
+
+        input[type='submit']{
+          margin-left: auto;
+          // width: 15%;
+          box-sizing: border-box;
+          background-color: transparent;
+          border: none;
+          color: rgb(109, 48, 109);
+          &:focus{
+            outline: none;
+          }
+        }
+      }
+
+      .none{
+        display: none;
+      }
+
+      .image_form{
+        margin-left: auto;
+        flex-grow: 0;
+
+        label[for='message_image']{
+          cursor: pointer;
+          font-size: 25px;
+          margin: 0;
+        }
+
+        input{
+          display: none;
+        }
+      }
+    }
+  }
+}
