@@ -10,12 +10,11 @@ Rails.application.routes.draw do
       get :fans
       get :followings
     end
-  end
-
-  # 產生show create destory 與 play 路徑
-  resources :rooms, only: %i[show create destroy] do
-    member do
-      get :play
+    # 產生show create destory 與 play 路徑
+    resources :rooms, only: %i[show create destroy] do
+      member do
+        get :play
+      end
     end
   end
 

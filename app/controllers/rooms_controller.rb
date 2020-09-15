@@ -7,7 +7,7 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = Room.create
+    @room = current_user.rooms.create(name: current_user.nick_name)
     redirect to play_room_path(@room)
   end
 
@@ -25,6 +25,4 @@ class RoomsController < ApplicationController
   def find_room
     @room = Room.find(params[:id])
   end
-
-  
 end
