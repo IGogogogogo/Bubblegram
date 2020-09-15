@@ -7,4 +7,9 @@ class Post < ApplicationRecord
   has_many :comments, dependent: :destroy
 
   scope :my_following_users, -> (followings) { where user_id: followings}  #找出所有追蹤中的使用者
+
+
+  def comments_more_than_zero
+    self.comments.count > 0
+  end
 end

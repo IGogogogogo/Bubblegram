@@ -1,6 +1,6 @@
-<div class="container">
+<div class="container mb-5">
 
-  <div class="row">
+  <div class=" row">
     <!-- limit video -->
     <div class="col-12 col-md-8">
       <div
@@ -90,12 +90,13 @@
       <!-- Main post  -->
       <div class="main-post">
         <% @posts.each do |post| %>
-        <div class="col-12 border border-gray p-0 mb-4">
+        <div class="col-12 border border-gray mb-4">
           <div class="user-post">
             <div class="user-info d-flex align-items-center p-2">
               <div class="user-photo"><img src="https://picsum.photos/40/40" alt="" class="rounded-circle img-fluid">
               </div>
-              <div class="user-name ml-2"><strong><%= link_to post.user.nick_name, user_path(post.user) %></strong></div>
+              <div class="user-name ml-2"><strong><%= link_to post.user.nick_name, user_path(post.user) %></strong>
+              </div>
               <div class="option ml-auto g-btn px-2"></div>
               <div class="dropdown">
                 <button class="btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
@@ -130,26 +131,6 @@
                   </div>
                 </div>
               </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
             <div class="user-post-photo">
               <%= image_tag (post.image.url), class: 'img-fluid w-100 h-100' %>
@@ -157,14 +138,15 @@
             <div class="user-post-content">
               <div class="button-group d-flex">
                 <div class="like g-btn p-2"><i class="far fa-heart"></i></div>
-                <div class="comment g-btn p-2"><i class="far fa-comment"></i></div>
+                <div class="comment g-btn p-2"><a href="<%= post_path(post) %>" style="color: #000;"><i
+                      class="far fa-comment"></i></a></div>
                 <div class="share g-btn p-2"><i class="far fa-share-square"></i></div>
                 <div class="collect g-btn p-2 ml-auto"><i class="far fa-flag"></i></div>
               </div>
               <div class="thumb-up px-2"><strong>654個讚</strong></div>
               <div class="px-2">
                 <strong class="user-name"><%= post.user.nick_name %></strong>
-                <span class="user-word"><%= link_to post.body, post_path(post) %></></span>
+                <span class="user-word"><%= post.body %></></span>
               </div>
               <div class="post-time px-2">
                 <small class="text-secondary">5 mins ago</small>
@@ -173,20 +155,11 @@
 
             <div class="comments px-2">
               <div>
-                <% post.comments.each do |com| %>
-                <small class="d-block">
-                  <%= com.user.nick_name %>
-                  <%= com.content %>
-                  <%= time_ago_in_words com.created_at %>
-                </small>
+                <% if post.comments_more_than_zero %>
+                <%= link_to "View all #{post.comments_count} comments", post_path(post) %>
                 <% end %>
               </div>
-              <%= form_with(model: @comment, url: post_comments_path(post) ,local: true) do |form| %>
-              <div>
-                <%= form.text_field :content, placeholder: "輸入留言" %>
-                <%= form.submit "留言", data: { action: "click->comment#show" }%>
-              </div>
-              <% end %>
+
             </div>
           </div>
         </div>
