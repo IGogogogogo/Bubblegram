@@ -1,0 +1,15 @@
+<h1>subscriber</h1>
+<p>
+  <strong><%= @room.name %> 正在直播！</strong>
+  
+</p>
+
+<div id="videos"
+     action="show"
+     data-controller = "vonageSub"
+     data-vonageSub-key = "<%= ENV['vonage_api_key']%>"
+     data-vonageSub-session-id = "<%= @room.vonage_session_ID %>"
+     data-vonageSub-token = "<%= @token %>"
+     data-vonageSub-name = "subscriber">
+</div>
+<%= link_to 'Back', rooms_path, data: {turbolinks: false} %>
