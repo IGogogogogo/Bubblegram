@@ -1,17 +1,36 @@
-<div class="post-item">
-  <div>
-    <%= link_to user_path(@user), style: "display: inline-block" do %>
-      <%= image_tag @user.avatar.url, class: "user-avatar", width: "50px", style: "border-radius: 50%" if @user.avatar.present? %>
-      <span class="user-name"><%= @user.nick_name %></span>
-    <% end %>
-  </div>
-  <div>
-    <%= image_tag post.image.url, class: "w-100" %>
-    <div>btn</div>
-    <div>
-      <%= post.content %>
+<div class="user-post px-md-3">
+  <div class="user-info pb-2 pl-1 d-flex align-items-center">
+    <div class="user-photo">
+      <%= image_tag post.user.avatar.url, class: "w-100 h-100 rounded-circle" if post.user.avatar.present? %>
     </div>
-    <div>全部？則留言</div>
-    <%#= render partial: "/comments/comment", collection: post.comments, as: :comment %>
+    <div class="id-postion pl-2">
+      <div class="user-id"><strong><%= post.user.nick_name %></strong></div>
+      <!--- <div class="post-position">YSL Beauty</div> -------->
+    </div>
+  </div>
+
+  <div class="post-pic w-100">
+    <%= image_tag post.image.url, class: 'w-100 h-100 align-middle img-fluid' %>
+  </div>
+
+  <div class="post-content px-2">
+    <div class="icon-group">
+      <button class="like btn"><i class="far fa-heart"></i></button>
+      <button class="comment btn pl-2"><i class="far fa-comment"></i></button>
+      <button class="share btn pl-2"><i class="fas fa-external-link-alt"></i></button>
+      <button class="collect float-right btn">
+        <i class="far fa-flag"></i>
+      </button>
+    </div>
+
+    <p class="likes-conut mb-1">Liked by <strong>laiiiiii.68 </strong>and <strong>82others</strong></p>
+
+    <div class="user-post-content">
+      <strong class="user-id"><%= post.user.nick_name %></strong>
+      <span class="post-content">
+        <%= link_to post.content, post_path(post) %>
+      </span>
+      <div class="post-time">1 min ago</div>
+    </div>
   </div>
 </div>

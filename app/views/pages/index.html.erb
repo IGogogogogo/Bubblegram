@@ -1,19 +1,54 @@
-<h1>posts index</h1>
+<div class="container-fluid container-md">
+  <h1>posts index</h1>
 
-<table>
-  <tr>
-    <th>文章</th>
-    <th>編輯與刪除</th>
-  </tr>
+  <h1>文章總覽</h1>
 
-  <% @posts.each do |post| %>
-  <tr>
-    <td><%= image_tag post.image.url, width: "200px" %></td>
-    <td><%= link_to post.content, post_path(post) %>
-    <td>
-      <%= link_to '編輯', edit_post_path(post) %>
-      <%= link_to '刪除', post_path(post), method: 'DELETE', data: { confirm: '你確定刪除嗎?' } %>
-    </td>
-  </tr>
-  <% end %>
-</table>
+  <div class="limit-video d-flex justify-content-around text-center">
+    <div class="users">
+      <div class="pic">
+        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
+      </div>
+      <div class="users-account">
+        <small>jerry</small>
+      </div>
+    </div>
+    <div class="users">
+      <div class="pic">
+        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
+      </div>
+      <div class="users-account">
+        <small>jerry</small>
+      </div>
+    </div>
+    <div class="users">
+      <div class="pic">
+        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
+      </div>
+      <div class="users-account">
+        <small>jerry</small>
+      </div>
+    </div>
+    <div class="users">
+      <div class="pic">
+        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
+      </div>
+      <div class="users-account">
+        <small>jerry</small>
+      </div>
+    </div>
+    <div class="users">
+      <div class="pic">
+        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
+      </div>
+      <div class="users-account">
+        <small>jerry</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-md-7 px-0 pb-3">
+      <%= render partial: "/posts/post", collection: @posts, as: :post %>
+    </div>
+  </div>
+</div>

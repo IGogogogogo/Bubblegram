@@ -275,6 +275,7 @@ DEPENDENCIES
   figaro (~> 1.0)
   foreman (~> 0.87.2)
   hirb (~> 0.7.3)
+  image_processing (~> 1.2)
   jbuilder (~> 2.7)
   kaminari (~> 1.2, >= 1.2.1)
   listen (~> 3.2)

@@ -32,6 +32,7 @@ class PostsController < ApplicationController
   def new
     @post = current_user.posts.new
     find_tag_users
+    @url = user_posts_path(current_user)
   end
 
   def create
@@ -41,12 +42,14 @@ class PostsController < ApplicationController
       redirect_to post_path(@post), notice: '文章新增成功'
     else
       find_tag_users
+      @url = user_posts_path(current_user)
       render :new
     end
   end
 
   def edit
     find_tag_users
+    @url = post_path
   end
 
   def update
@@ -56,6 +59,7 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to post_path(@post), notice: '文章更新成功'
     else
+      @url = post_path
       find_tag_users
       render :edit
     end

@@ -1,5 +1,8 @@
-<h1>posts index</h1>
-
-<div class="main-posts post-load-target" data-is-end="not yet">
-  <%= render partial: "/posts/post", collection: @posts, as: :post %>
+<div class="container-fluid container-md">
+  <!------貼文列表--------------------------------------------->
+  <div class="row">
+    <div class="col-12 col-md-7 px-0 pb-3">
+      <%= render partial: "/posts/post", collection: @posts, as: :post %>
+    </div>
+  </div>
 </div>

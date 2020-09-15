@@ -19,6 +19,10 @@ class User < ApplicationRecord
   #貼文標籤
   has_many :user_tags, foreign_key: :user_id, dependent: :destroy
   has_many :taged_posts, through: :user_tags, source: :post
+  #建立使用者與對話關聯
+  has_many :sender_chats, foreign_key: :sender_id, class_name: 'Chat'
+  has_many :recipient_chats, foreign_key: :recipient_id, class_name: 'Chat'
+  has_many :messages
 
   scope :not_self, -> (current_user){ where.not(id: current_user.id) }
   scope :find_by_keyword, -> (keyword){ where(["nick_name LIKE ? OR email LIKE ?", "%#{keyword}%", "%#{keyword}%"]) }
