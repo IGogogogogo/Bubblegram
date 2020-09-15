@@ -2,7 +2,8 @@ class RoomsController < ApplicationController
   # 直播間的rooms
   before_action :find_room, only: %i[show play destroy]
   def show
-  
+    opentok = OpenTok::OpenTok.new(ENV['vonage_api_key'], ENV['vonage_secret'])
+    @token ||= opentok.generate_token(@room.session_id)
   end
 
   def create
@@ -11,11 +12,12 @@ class RoomsController < ApplicationController
   end
 
   def play
-   
+    opentok = OpenTok::OpenTok.new(ENV['vonage_api_key'], ENV['vonage_secret'])
+    @token ||= opentok.generate_token(@room.session_id)
   end
 
   def destory
-  
+    # do something
   end
 
   private
@@ -24,7 +26,5 @@ class RoomsController < ApplicationController
     @room = Room.find(params[:id])
   end
 
-  def room_params
-    params.require(:room).permit
-  end
+  
 end
