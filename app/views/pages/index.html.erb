@@ -1,5 +1,4 @@
 <div class="container-fluid container-md">
-  <h1>posts index</h1>
 
   <h1>文章總覽</h1>
 
@@ -47,7 +46,7 @@
   </div>
 
   <div class="row">
-    <div class="col-12 col-md-7 px-0 pb-3">
+    <div class="col-12 col-md-7 px-0 pb-3 following-posts post-load-target" data-is-end="not yet">
       <%= render partial: "/posts/post", collection: @posts, as: :post %>
     </div>
   </div>

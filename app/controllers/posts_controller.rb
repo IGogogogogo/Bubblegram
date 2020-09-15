@@ -12,8 +12,12 @@ class PostsController < ApplicationController
   end
 
   def load_posts     #依照kaminari page & type 讀取新貼文
-    @user = User.find(params[:user_id])
-    if params[:type] == "my_posts"
+    @user = User.find(params[:user_id]) if params[:user_id]
+    if params[:type] == "following_posts"
+      users = [current_user].concat(current_user.followings)
+      @posts = Post.includes(:user).viewable_posts(users).order("created_at DESC").limit(20)
+      @partial = "/posts/post"
+    elsif params[:type] == "my_posts"
       @posts = @user.posts.order("created_at DESC").page(params[:page]).per(20)
       @partial = "/posts/post"
     elsif params[:type] == "post_img"

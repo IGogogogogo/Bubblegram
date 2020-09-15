@@ -18,10 +18,13 @@ document.addEventListener("turbolinks:load", () => {
 
   function checkLoadType() {                  //依照目前位置改變請求目標
     // console.log("checkLoadType")
+    const followingPosts = document.querySelector(".following-posts")
     const mainPosts = document.querySelector(".main-posts")
     const myBtn = document.querySelector(".my-posts-btn")
     const tagBtn = document.querySelector(".tag-posts-btn")
-    if (mainPosts) {
+    if (followingPosts) {
+      type = "following_posts"
+    } else if (mainPosts) {
       type = "my_posts"
     } else if (myBtn.classList.contains("active")) {
       type = "post_img"
@@ -30,15 +33,20 @@ document.addEventListener("turbolinks:load", () => {
     }
   }
 
-  function loadPosts() {                           //滑動到畫面底部會請求載入更多post
-    if (document.body.scrollHeight - window.innerHeight - 2 <= document.body.scrollTop ) {
+  const scrollToBottom = () => { document.body.scrollHeight - window.innerHeight - 2 <= document.body.scrollTop }
 
+  function loadPosts() {                           //滑動到畫面底部會請求載入更多post
+    if (scrollToBottom) {
       // console.log("loadPosts.........................")
       page += 1
       const user_id = document.location.href.split("users/")[1]  //從目前網址取得params user id
-      let url = `/users/${user_id}/posts/load_posts?page=${page}&type=${type}`
-      if (type == "my_posts") {
+      let url = ""
+      if (type == "following_posts") {
+        url = `/users/load_posts?page=${page}&type=${type}`
+      } else if (type == "my_posts") {
         url = `/users/${user_id}/load_posts?page=${page}&type=${type}`
+      } else {
+        url = `/users/${user_id}/posts/load_posts?page=${page}&type=${type}`
       }
 
       Rails.ajax({
@@ -46,8 +54,21 @@ document.addEventListener("turbolinks:load", () => {
         type: "get",
         success: function(data) {
           const postsEl = data.querySelector("body").innerHTML
-          if (type == "my_posts") {
-            document.querySelector(".main-posts").innerHTML += postsEl
+          // switch (type) {
+          //   case "my_posts":
+          //   case "following_posts":
+          //     document.querySelector(".post-load-target").innerHTML += postsEl
+          //     break
+          //   case "post_img":
+          //     document.querySelector(".post-img").innerHTML += postsEl
+          //     break
+          //   case "tag_img":
+          //     document.querySelector(".tag-img").innerHTML += postsEl
+          //     break
+          // }
+
+          if (type == "following_posts" || type == "my_posts") {
+            document.querySelector(".post-load-target").innerHTML += postsEl
           } else if (type == "post_img") {
             document.querySelector(".post-img").innerHTML += postsEl
           } else if (type == "tag_img") {
