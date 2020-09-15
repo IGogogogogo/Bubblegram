@@ -25,7 +25,10 @@ class User < ApplicationRecord
   has_many :messages
 
   scope :not_self, -> (current_user){ where.not(id: current_user.id) }
+  #搜尋有關鍵字的user
   scope :find_by_keyword, -> (keyword){ where(["nick_name LIKE ? OR email LIKE ?", "%#{keyword}%", "%#{keyword}%"]) }
+  #自己和自己追蹤的人
+  scope :viewable_users, -> (current_user){ where(id: current_user.followings).or(User.where(id: current_user)) }
 
   def already_followed?(current_user)                  #檢查自己是否已經追蹤對方
     self.fans.include?(current_user)

@@ -1,14 +1,16 @@
 import Rails from '@rails/ujs'
 document.addEventListener("turbolinks:load", () => {
-  const postsForm = document.querySelector(".post-load-target")
+  const userPosts = document.querySelector(".user-posts")
+  const followingPosts = document.querySelector(".following-posts")
   const postNav = document.querySelector(".posts-nav")
+  const postImg = document.querySelector(".post-img")
+  const tagImg = document.querySelector(".tag-img")
   let page = 1
   let tagPage = 1
   let myPage = 1
-  let type = ""
+  // let type = ""
 
-  if (postsForm) {
-    checkLoadType()
+  if (userPosts || followingPosts || postNav) {
     document.body.addEventListener("scroll", loadPosts)      //加入捲軸滾動事件
   }
 
@@ -16,20 +18,19 @@ document.addEventListener("turbolinks:load", () => {
     postNav.addEventListener("click", (e) => switchPosts(e))  //user show 個人/tag貼文切換
   }
 
-  function checkLoadType() {                  //依照目前位置改變請求目標
+  function getType() {                  //依照目前位置改變請求目標
     // console.log("checkLoadType")
-    const followingPosts = document.querySelector(".following-posts")
-    const mainPosts = document.querySelector(".main-posts")
     const myBtn = document.querySelector(".my-posts-btn")
     const tagBtn = document.querySelector(".tag-posts-btn")
+
     if (followingPosts) {
-      type = "following_posts"
-    } else if (mainPosts) {
-      type = "my_posts"
+      return "following_posts"
+    } else if (userPosts) {
+      return "my_posts"
     } else if (myBtn.classList.contains("active")) {
-      type = "post_img"
+      return "post_img"
     } else if (tagBtn.classList.contains("active")) {
-      type = "tag_img"
+      return "tag_img"
     }
   }
 
@@ -40,7 +41,9 @@ document.addEventListener("turbolinks:load", () => {
       // console.log("loadPosts.........................")
       page += 1
       const user_id = document.location.href.split("users/")[1]  //從目前網址取得params user id
+      const type = getType()
       let url = ""
+
       if (type == "following_posts") {
         url = `/users/load_posts?page=${page}&type=${type}`
       } else if (type == "my_posts") {
@@ -54,30 +57,16 @@ document.addEventListener("turbolinks:load", () => {
         type: "get",
         success: function(data) {
           const postsEl = data.querySelector("body").innerHTML
-          // switch (type) {
-          //   case "my_posts":
-          //   case "following_posts":
-          //     document.querySelector(".post-load-target").innerHTML += postsEl
-          //     break
-          //   case "post_img":
-          //     document.querySelector(".post-img").innerHTML += postsEl
-          //     break
-          //   case "tag_img":
-          //     document.querySelector(".tag-img").innerHTML += postsEl
-          //     break
-          // }
 
           if (type == "following_posts" || type == "my_posts") {
             document.querySelector(".post-load-target").innerHTML += postsEl
           } else if (type == "post_img") {
-            document.querySelector(".post-img").innerHTML += postsEl
+            postImg.innerHTML += postsEl
           } else if (type == "tag_img") {
-            document.querySelector(".tag-img").innerHTML += postsEl
+            tagImg.innerHTML += postsEl
           }
 
-          if (postsEl == "") {
-            document.body.removeEventListener("scroll", loadPosts)
-          }
+          if (postsEl == "") { document.body.removeEventListener("scroll", loadPosts) } //沒有新資料時移除事件監聽
         },
         error: function(errors) {
           console.log(errors)
@@ -94,16 +83,16 @@ document.addEventListener("turbolinks:load", () => {
     })
     e.target.classList.add("active")           //active: bootstrap的使用中項目
 
-    checkLoadType()
+    const type = getType()
     // console.log("type: " + type)
     if (type == "post_img") {
-      document.querySelector(".tag-img").style.display = "none"
-      document.querySelector(".post-img").style.display = "flex"
+      tagImg.style.display = "none"
+      postImg.style.display = "flex"
       tagPage = page
       page = myPage
     } else if (type == "tag_img") {
-      document.querySelector(".post-img").style.display = "none"
-      document.querySelector(".tag-img").style.display = "flex"
+      postImg.style.display = "none"
+      tagImg.style.display = "flex"
       myPage = page
       page = tagPage
     }
