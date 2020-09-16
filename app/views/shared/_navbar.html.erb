@@ -6,21 +6,8 @@
     <a href="<%= posts_path %>" class="logo">
       <h1 class="h4 mb-0">BubbleGram</h1>
     </a>
-    <a href="#" class="chat p-1" style="font-size: 20px; color: #000;">
+    <%= link_to chats_path, class: 'chat p-1' do %>
       <i class="far fa-comment-alt"></i>
-    </a>
+    <% end %>
   </nav>
 </div>
-
-
-
-<!-- <div>
-  <% if user_signed_in? %>
-  <span>
-    Hello, <%= current_user.email %>
-  </span>
-
-  <%= link_to "登出", destroy_user_session_path, method: :delete %>
-  <% else %>
-  <% end %>
-</div> -->

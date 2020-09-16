@@ -5,6 +5,7 @@ import "../stylesheets/application"
 import "@fortawesome/fontawesome-free/js/all";
 import "./preview_photo"
 import "./bubble"
+import "./chat_message_view"
 
 window.$ = $
 

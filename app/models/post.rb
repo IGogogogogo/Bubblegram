@@ -12,4 +12,5 @@ class Post < ApplicationRecord
   def comments_more_than_zero
     self.comments.count > 0
   end
+  scope :viewable_posts, -> (users) { where(user_id: users) }
 end

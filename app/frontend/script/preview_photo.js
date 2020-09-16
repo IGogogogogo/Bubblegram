@@ -1,5 +1,6 @@
 window.addEventListener('turbolinks:load', function () {
   var imageInput = document.querySelector("#post_image")
+  if (!imageInput) return
   imageInput.addEventListener("change", function (event) {
     imageInput.style.display = 'none';
     var reader = new FileReader();
@@ -12,6 +13,5 @@ window.addEventListener('turbolinks:load', function () {
     };
     reader.readAsDataURL(event.target.files[0]); // 類似addEventListener 監聽input裡面的屬性，當input有東西進來之後就會跑去執行onload方法
   })
-
 })
 

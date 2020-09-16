@@ -11,17 +11,62 @@ nav{
   .logo{
     text-decoration: none;
     color: #6a4c9c;
+    .h6{
+      margin: 0;
+    }
   }
   .icon{
     margin-left: auto;
     a{
       color: #000000;
-      font-size: 24px;
-      padding: 0 18px;
+      font-size: 14px;
+      padding: 0 5px;
       transition: .3s ease;
       &:hover{
         color: #fff2cc;
       }
     }
   }
+  .chat{
+    font-size: 20px;
+    color: #000;
+  }
 }
+.limit-video{
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  .pic{
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-image: linear-gradient(to right, rgb(113, 78, 176) 0%, rgb(249, 145, 189) 100%);
+    border-image-slice: 1;
+    padding: 2px;
+  }
+}
+
+.col-12{
+  .user-photo{
+    width: 35px;
+    height: 35px;
+  }
+  .btn{
+    padding: 0;
+  }
+  .post-pic{
+    height: 300px;
+  }
+  .user-post-content{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 300px;
+  }
+    .post-position{
+      font-weight: 300;
+      font-size: 12px;
+    }
+  }

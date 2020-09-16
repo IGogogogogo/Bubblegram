@@ -9,6 +9,6 @@
   </span>
 
   <span>
-    <%= link_to "傳訊息", "#" %>
+    <%= link_to "傳訊息", chats_path(user_id: @user), method: :post %>
   </span>
 <% end %>
