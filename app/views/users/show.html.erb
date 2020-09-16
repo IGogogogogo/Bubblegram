@@ -1,4 +1,4 @@
-<div class="container-fluid" style="padding-top:70px;">
+<div class="container-fluid">
   <div class="row">
     <div class="col-12">
       <div class="profile-info d-flex align-items-center flex-wrap">
@@ -9,7 +9,7 @@
 
         <div class="posts-count text-center flex-grow-1">
           <div class="num font-weight-bold">
-            <%= link_to posts_path do %>
+            <%= link_to posts_path, class: 'text-black' do %>
             <div><%= @user.posts_count %></div>
             <div class="post">Posts</div>
             <% end %>
@@ -17,7 +17,7 @@
         </div>
         <div class="followers-count text-center flex-grow-1">
           <div class="num font-weight-bold">
-            <%= link_to posts_path do %>
+            <%= link_to posts_path, class: 'text-black' do %>
             <div><%= @user.fans_count %></div>
             <div class="follower">Followers</div>
             <% end %>
@@ -25,13 +25,13 @@
         </div>
         <div class="following-count text-center flex-grow-1">
           <div class="num font-weight-bold">
-            <%= link_to followings_user_path(@user) do %>
+            <%= link_to followings_user_path(@user), class: 'text-black' do %>
             <div><%= @user.followings_count %></div>
             <div class="following">Following</div>
             <% end %>
           </div>
         </div>
-        <div class="profile-intro py-2">
+        <div class="profile-intro py-2 w-100 ml-3">
           <div class="profile-user-name"><strong><%= @user.nick_name %></strong></div>
           <div class="profile-user-infro">
             <%= @user.description %>
@@ -43,12 +43,13 @@
         <%= render  "user_btn", user: @user  %>
       </div>
 
-      <div class="collection d-flex justify-content-around text-center">
+      <div class="collection d-flex justify-content-around text-center align-items-center">
         <div class="add-collection-video">
-          <img src="download.png" alt="" style="width: 61px;height: 61px;" class="img-fluid rounded-circle border p-1">
+          <i class="fas fa-plus rounded-circle border p-2" style="width: 60px;height: 60px;"></i>
           <small class="d-block">Add</small>
         </div>
         <div class="collection-video1">
+
           <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle border p-1">
           <small class="d-block">Highlights</small>
         </div>
@@ -95,38 +96,4 @@
       </div>
     </div>
   </div>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div>
-  <div>使用者貼文</div>
-  <div>使用者被標記貼文</div>
 </div>

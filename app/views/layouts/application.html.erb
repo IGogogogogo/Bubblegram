@@ -13,7 +13,11 @@
 </head>
 
 <body>
-  <%= yield %>
+
+  <div class="container pb-5" style="padding-top: 70px;">
+    <%= yield %>
+  </div>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
   <%= render "shared/footer" %>
 </body>
