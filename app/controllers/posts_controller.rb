@@ -45,7 +45,7 @@ class PostsController < ApplicationController
     current_user.toggle_favorite_post(@post)
 
     respond_to do |format|
-      format.html { redirect_to favourite_post_path, notice: 'OK!' }
+#       format.html { redirect_to favourite_post_path, notice: 'OK!' }
       format.json { render json: {status: @post.favorited_by?(current_user) } }
     end
   end
