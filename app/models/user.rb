@@ -15,16 +15,28 @@ class User < ApplicationRecord
   has_many :fans, through: :followingships, source: :fan
   has_many :fanships, foreign_key: :fan_id, class_name: "Follow", dependent: :destroy
   has_many :followings, through: :fanships, source: :following
+  has_many :stories, dependent: :destroy # 假刪除
   #建立使用者與對話關聯
   has_many :sender_chats, foreign_key: :sender_id, class_name: 'Chat'
   has_many :recipient_chats, foreign_key: :recipient_id, class_name: 'Chat'
   has_many :messages
+
+  has_many :favourites
+  has_many :favourites_posts, through: :favourites, source: :post
 
   scope :not_self, -> (current_user){ where.not(id: current_user.id) }
   scope :find_by_keyword, -> (keyword){ where(["nick_name LIKE ? OR email LIKE ?", "%#{keyword}%", "%#{keyword}%"]) }
 
   def already_followed?(current_user)                  #檢查自己是否已經追蹤對方
     self.fans.include?(current_user)
+  end
+
+  def toggle_favorite_post(post)
+    if favourites_posts.include?(post)
+      favourites_posts.destroy(post)
+    else
+      favourites_posts << post
+    end
   end
 
   def self.from_omniauth(auth, signed_in_resource = nil)
