@@ -31,6 +31,15 @@ class SendMessageJob < ApplicationJob
         message: message
       }
     )
+    ActionCable.server.broadcast(
+      "unread_message_notification_channel",
+      { my_message: my_message,
+        other_message: other_message,
+        my_image: my_image,
+        other_image: other_image,
+        message: message
+      }
+    )
 
   end
 end
