@@ -1,8 +1,10 @@
 <div>
-  <img src="<%= @post.image %>" alt="">
+  <%= image_tag @post.image.url, class:"w-100" %>
 </div>
-<p><%= @post.content %></p>
 
+<p><%= @taged_users.join(", ") %></p>
+
+<p><%= @post.content %></p>
 
 <%= form_with(model: @comment, url: post_comments_path(@post) ,local: true) do |form| %>
   <div>

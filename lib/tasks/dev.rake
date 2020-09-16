@@ -76,9 +76,27 @@ namespace :dev do
     puts "\n成功建立 #{Post.count} 筆 使用者post資料！"
   end
 
+  task fake_stories: :environment do
+    print "\n正在建立使用者 story 資料"
+    Story.destroy_all
+
+    User.all.each do |user|
+      rand(2..5).times do
+        num = rand(1000)
+        user.stories.create!(
+          remote_picture_url: "https://picsum.photos/500/500/?random=#{num}",
+        )
+        print "."
+      end
+    end
+
+    puts "\n成功建立 #{Story.count} 筆 使用者story資料！"
+  end
+
   task fake_all: :environment do
     Rake::Task["dev:fake_users"].invoke
     Rake::Task["dev:fake_follows"].invoke
     Rake::Task["dev:fake_posts"].invoke
+    Rake::Task["dev:fake_stories"].invoke
   end
 end

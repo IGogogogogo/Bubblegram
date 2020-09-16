@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :find_post, only: [:show, :edit, :update, :destroy]
+  before_action :find_post, only: [:show, :edit, :update, :destroy, :favourite]
 
   def index
     @user = User.find(params[:user_id])
@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @taged_users = @post.taged_users.map{ |user| "@#{user.nick_name}" }
     @comments = @post.comments
     @comment = Comment.new
   end
@@ -73,6 +74,16 @@ class PostsController < ApplicationController
     @post.destroy
     redirect_to root_path, notice: '文章刪除成功'
   end
+
+  def favourite
+    current_user.toggle_favorite_post(@post)
+
+    respond_to do |format|
+      #format.html { redirect_to favourite_post_path, notice: 'OK!' }
+      format.json { render json: {status: @post.favorited_by?(current_user) } }
+    end
+  end
+
 
   private
 

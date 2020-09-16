@@ -19,10 +19,15 @@ class User < ApplicationRecord
   #貼文標籤
   has_many :user_tags, foreign_key: :user_id, dependent: :destroy
   has_many :taged_posts, through: :user_tags, source: :post
+  #限時動態
+  has_many :stories, dependent: :destroy
   #建立使用者與對話關聯
   has_many :sender_chats, foreign_key: :sender_id, class_name: 'Chat'
   has_many :recipient_chats, foreign_key: :recipient_id, class_name: 'Chat'
   has_many :messages, dependent: :destroy
+
+  has_many :favourites
+  has_many :favourites_posts, through: :favourites, source: :post
 
   scope :not_self, -> (current_user){ where.not(id: current_user.id) }
   #搜尋有關鍵字的user
@@ -32,6 +37,14 @@ class User < ApplicationRecord
 
   def already_followed?(current_user)                  #檢查自己是否已經追蹤對方
     self.fans.include?(current_user)
+  end
+
+  def toggle_favorite_post(post)
+    if favourites_posts.include?(post)
+      favourites_posts.destroy(post)
+    else
+      favourites_posts << post
+    end
   end
 
   def self.from_omniauth(auth, signed_in_resource = nil)

@@ -1,6 +1,17 @@
 <div class="container-fluid container-md">
+  <%# 之後要做if使用者有限時動態，要出現限時動態。else新增限時動態end %>
 
-  <h1>文章總覽</h1>
+  <div class="story">
+    <%= link_to '新增限時動態', new_user_story_path(current_user) %>
+
+    <% @users.each do |user| %>
+      <span>
+        <%= link_to user_stories_path(user) do %>
+          <%= user.nick_name %>
+        <% end %>
+      </span>
+    <% end %>
+  </div>
 
   <div class="limit-video d-flex justify-content-around text-center">
     <div class="users">
