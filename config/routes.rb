@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   end
 
   resources :posts do
+    member do
+      post :favourite
+    end
     resources :comments, only: [:create]
   end
 
