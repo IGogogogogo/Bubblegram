@@ -1,5 +1,7 @@
-<div class="container-fluid">
-  <h2 class="mb-4 text-center">Log in</h2>
+<div id="home">
+  <p id="index-logo">BubbleGram!</p>
+</div>
+<div class="container-fluid position-absolute login-form">
 
   <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true) do |f| %>
 
@@ -37,7 +39,3 @@
 
   <% end %>
 </div>
-
-<!-- <div class="bg-image position-absolute"
-    style="clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%); width: 100%; height: 100%; background: #000; top: 0; left: 0; z-index: -1;">
-  </div> -->

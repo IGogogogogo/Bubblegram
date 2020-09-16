@@ -1,4 +1,5 @@
-<div class="container mb-5">
+ <%= render "shared/navbar" %>
+<div class="container mb-5" style="padding-top:70px;">
 
   <div class=" row">
     <!-- limit video -->
@@ -95,7 +96,7 @@
             <div class="user-info d-flex align-items-center p-2">
               <div class="user-photo"><img src="https://picsum.photos/40/40" alt="" class="rounded-circle img-fluid">
               </div>
-              <div class="user-name ml-2"><strong><%= link_to post.user.nick_name, user_path(post.user) %></strong>
+              <div class="user-name ml-2"><strong><%= link_to post.user.nick_name, user_path(post.user), class: 'text-black' %></strong>
               </div>
               <div class="option ml-auto g-btn px-2"></div>
               <div class="dropdown">
@@ -149,14 +150,14 @@
                 <span class="user-word"><%= post.body %></></span>
               </div>
               <div class="post-time px-2">
-                <small class="text-secondary">5 mins ago</small>
+                <small class="text-secondary"><%= time_ago_in_words post.created_at %> ago</small>
               </div>
             </div>
 
             <div class="comments px-2">
               <div>
                 <% if post.comments_more_than_zero %>
-                <%= link_to "View all #{post.comments_count} comments", post_path(post) %>
+                <%= link_to "View all #{post.comments_count} comments", post_path(post), class: 'text-gray' %>
                 <% end %>
               </div>
 

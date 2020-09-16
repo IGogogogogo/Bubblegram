@@ -17,6 +17,12 @@
   background: #fff;
   z-index: 10;
 }
+.text-black{
+  color: #000;
+}
+.text-gray{
+  color: #aaa;
+}
 @media (max-width: 999px){
   .user-story:nth-child(6) ~ .user-story{
       display: none;
