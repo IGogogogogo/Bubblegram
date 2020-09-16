@@ -29,11 +29,17 @@
   color: #aaa;
 }
 @media (max-width: 999px){
+  .col-12{
+    padding: 0;
+  }
   .user-story:nth-child(6) ~ .user-story{
       display: none;
     }
+  .post-pic{
+      height: 500px;
+  }
 }
-@media (max-width: 375px) {
+@media (max-width: 413px) {
   .container{
     padding: 0px;
     overflow: hidden;
@@ -45,8 +51,9 @@
       display: none;
     }
   }
-  .main-post .col-12{
-    padding: 0;
+  .col-12{
+    padding-left: 7px;
+    padding-right: 7px;
     border: none !important;
   }
 }

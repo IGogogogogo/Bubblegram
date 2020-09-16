@@ -87,8 +87,8 @@
         <% @user.posts.each do |user| %>
         <div class="col-4 pr-0 pb-1">
           <a href="<%= post_path(user.id) %>">
-            <div class="photo">
-              <img src="<%= user.image %>" alt="" class="w-100">
+            <div class="photo h-100">
+              <img src="<%= user.image %>" alt="" class="w-100 h-100">
             </div>
           </a>
         </div>

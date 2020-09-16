@@ -6,23 +6,18 @@
   <%= link_to '新增限時動態', new_user_story_path(current_user) %>
 
   <% @users.each do |user| %>
-    <span>
-      <%= link_to user_stories_path(user) do %>
-        <%= user.nick_name %>
-      <% end %>
-    </span>
+  <span>
+    <%= link_to user_stories_path(user) do %>
+    <%= user.nick_name %>
+    <% end %>
+  </span>
   <% end %>
 </div>
-
-<%= link_to '新增文章', new_post_path %>
-<div class="container-fluid container-md">
-  <h1>文章總覽</h1>
-
 <div class=" row">
   <!-- limit video -->
   <div class="col-12 col-md-8">
     <div
-      class="limit-video d-flex justify-content-around align-items-center text-center border-bottom border-gray mb-3">
+      class="limit-video d-flex justify-content-around align-items-center text-center border-bottom border-gray mb-3 px-3">
       <div class="user-story">
         <div class="user-video">
           <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
@@ -151,18 +146,17 @@
               </div>
             </div>
           </div>
-<<<<<<< HEAD
-          <div class="user-post-photo">
-            <%= image_tag (post.image.url), class: 'img-fluid w-100 h-100' %>
-=======
         </div>
-        <div class="post-pic w-100">
+
+
+
+        <div class="post-pic w-100 h-100">
           <%= image_tag (post.image.url), class: 'w-100 h-100 align-middle img-fluid' %>
         </div>
-        <div class="post-content px-2">
-          <div class="icon-group">
+        <div class="post-content">
+          <div class="icon-group d-flex align-items-center">
             <span data-controller="heart" data-heart-id="<%= post.id %>">
-              <button class="like btn" data-action="click->heart#favourite">
+              <button class="like btn p-2" data-action="click->heart#favourite">
                 <% if post.favorited_by?(current_user) %>
                 <i class="fas fa-heart" data-target="heart.like"></i>
                 <% else %>
@@ -170,21 +164,13 @@
                 <% end %>
               </button>
             </span>
-            <button class="comment btn pl-2"><i class="far fa-comment"></i></button>
-            <button class="share btn pl-2"><i class="fas fa-external-link-alt"></i></button>
-            <button class="collect float-right btn">
-              <i class="far fa-flag"></i>
-            </button>
->>>>>>> develop
+            <div class="comment g-btn p-2"><a href="<%= post_path(post) %>" style="color: #000;"><i
+                  class="far fa-comment"></i></a>
+            </div>
+            <div class="share g-btn p-2"><i class="far fa-share-square"></i></div>
+            <div class="collect g-btn p-2 ml-auto"><i class="far fa-flag"></i></div>
           </div>
           <div class="user-post-content">
-            <div class="button-group d-flex">
-              <div class="like g-btn p-2"><i class="far fa-heart"></i></div>
-              <div class="comment g-btn p-2"><a href="<%= post_path(post) %>" style="color: #000;"><i
-                    class="far fa-comment"></i></a></div>
-              <div class="share g-btn p-2"><i class="far fa-share-square"></i></div>
-              <div class="collect g-btn p-2 ml-auto"><i class="far fa-flag"></i></div>
-            </div>
             <div class="thumb-up px-2"><strong>654個讚</strong></div>
             <div class="px-2">
               <strong class="user-name"><%= post.user.nick_name %></strong>
@@ -209,9 +195,3 @@
     </div>
   </div>
 </div>
-<<<<<<< HEAD
-
-<!-- </div> -->
-=======
-</div>
->>>>>>> develop
