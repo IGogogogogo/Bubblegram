@@ -1,9 +1,19 @@
 class UserOnlineChannel < ApplicationCable::Channel
   def subscribed
-    # stream_from "some_channel"
+    stream_from "user_online_channel"
+    ActionCable.server.broadcast "user_online_channel", {user_id: current_user.id, online: true}
+    redis.set("user_#{current_user.id}_online", "1")
   end
 
   def unsubscribed
+    redis.del("user_#{current_user.id}_online")
+    ActionCable.server.broadcast "user_online_channel", {user_id: current_user.id, online: false}
     # Any cleanup needed when channel is unsubscribed
+  end
+
+  private
+
+  def redis
+    Redis.new
   end
 end

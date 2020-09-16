@@ -1,7 +1,10 @@
 import consumer from "./consumer"
 
-consumer.subscriptions.create("UserOnlineChannel", {
+
+
+consumer.subscriptions.create({channel: "UserOnlineChannel"}, {
   connected() {
+    console.log('user_online is connecting...')
     // Called when the subscription is ready for use on the server
   },
 
@@ -10,6 +13,7 @@ consumer.subscriptions.create("UserOnlineChannel", {
   },
 
   received(data) {
+    console.log(data)
     // Called when there's incoming data on the websocket for this channel
   }
 });
