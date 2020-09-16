@@ -55,4 +55,9 @@ class User < ApplicationRecord
 
     return user
   end
+
+  #判斷使用者是否上線
+  def is_online?
+    Redis.new.get("user_#{self.id}_online").present?
+  end
 end

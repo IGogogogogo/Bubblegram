@@ -1,0 +1,25 @@
+.chat-user{
+  display: flex;
+
+  .chat-user-pic{
+    position: relative;
+
+    .online-dot{
+      width: 10px;
+      height: 10px;
+      background-color: rgb(97, 228, 10);
+      position: absolute;
+      border-radius: 50%;
+      right: 2px;
+      bottom: 2px;
+    }
+  }
+
+  .chat-user-info{
+    padding-top:5px;
+    margin-left: 10px;
+  }
+}
+.chat-user + .chat-user{
+  margin-top:10px;
+}
