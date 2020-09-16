@@ -4,13 +4,16 @@ document.addEventListener('turbolinks:load',()=>{
   const chat_room = document.querySelector('.message_box')
   if(!chat_room)return
   const chat_id = chat_room.dataset.chat
+  console.log(consumer.subscriptions)
+
   consumer.subscriptions.create({channel:"ChatChannel", chat_id: chat_id}, {
     connected() {
-      // console.log('connecting'+ chat_id)
+      console.log('connecting'+ chat_id)
       // Called when the subscription is ready for use on the server
     },
 
     disconnected() {
+      console.log("disconneted....")
       // Called when the subscription has been terminated by the server
     },
 

@@ -6,7 +6,9 @@ document.addEventListener("turbolinks:load",()=>{
   const text_area = document.getElementById("message_content")
   const image_value= image_form.elements["message[image]"]
   const text_submit = document.querySelector("input[type='submit']")
+  const message_text_area = document.querySelector(".message_text_area")
 
+  message_text_area.scrollTop += message_text_area.scrollHeight
   text_area.addEventListener("keyup",()=>{
     if(text_area.value !== ""){
       text_submit.classList.remove("none")
