@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="h-100" style="overflow: auto;">
+<html>
   <head>
     <title>Bubblegram</title>
     <%= csrf_meta_tags %>
@@ -8,7 +8,7 @@
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-  <body class="h-100" style="overflow: auto;">
+  <body>
     <%= render "shared/navbar" %>
     <% if notice %>
       <p class="notice"><%= notice %></p>
