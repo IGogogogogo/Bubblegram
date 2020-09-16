@@ -2,7 +2,7 @@ class ChatsController < ApplicationController
 
   def index
     @users = User.where.not(id: current_user)
-    @chat = Chat.all
+    @chats = Chat.between(current_user, @users)
   end
 
   def create

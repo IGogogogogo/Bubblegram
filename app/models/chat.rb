@@ -17,4 +17,11 @@ class Chat < ApplicationRecord
     create(sender_id: sender_id, recipient_id: recipient_id)
   end
 
+  def opposed_user(user)
+    if user == recipient
+      sender
+    else
+      recipient
+    end
+  end
 end

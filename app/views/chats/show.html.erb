@@ -1,9 +1,7 @@
 <div class = "message_box section" data-chat= "<%= @chat.id %>" data-user="<%= current_user.id%>">
   <div class="container">
     <div class="message_text_area">
-      <% @messages.each do |message| %>
-       <%= render "messages/message", message: message %>
-      <% end %>
+       <%= render partial: "messages/message", collection: @messages, as: :message %>
     </div>
     <div class="searchbar">
       <%= form_with(model: @message, url: chat_messages_path(@chat)) do |f| %>
