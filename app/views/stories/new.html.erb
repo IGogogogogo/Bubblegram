@@ -1,0 +1,27 @@
+<h1>新增限時動態</h1>
+
+<%= link_to '回到首頁', posts_path %>
+
+
+<% if @story.errors.any? %>
+  <ul>
+    <% @story.errors.full_messages.each do |msg| %>
+    <li>
+      <%= msg %>
+    </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%# form_with表單預設為Ajax，若要更改設定則需輸入local: true %>
+<%= form_with(model: @story, url: user_stories_path, local: true) do |form| %>
+  <div>
+    <%= form.label :picture,
+    'picture' %>
+    <%= form.file_field :picture %>
+  </div>
+
+  <div>
+    <%= form.submit '新增限時動態' %>
+  </div>
+<% end %>
