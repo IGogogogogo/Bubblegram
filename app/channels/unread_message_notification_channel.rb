@@ -6,7 +6,8 @@ class UnreadMessageNotificationChannel < ApplicationCable::Channel
   def unsubscribed
     # Any cleanup needed when channel is unsubscribed
   end
-  def new_message
+
+  def new_message(data)
 
   end
 

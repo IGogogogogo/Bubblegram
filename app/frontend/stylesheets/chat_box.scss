@@ -19,6 +19,15 @@
     padding-top:5px;
     margin-left: 10px;
   }
+  .message-notice-dot{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgb(71, 125, 241);
+    align-self: center;
+    margin-left: auto;
+    margin-right: 30px;
+  }
 }
 .chat-user + .chat-user{
   margin-top:10px;
