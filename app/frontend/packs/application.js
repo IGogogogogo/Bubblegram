@@ -19,3 +19,4 @@ require("stylesheets")
 require("trix")
 require("@rails/actiontext")
 require("@fortawesome/fontawesome-free/js/all")
+import "controllers"

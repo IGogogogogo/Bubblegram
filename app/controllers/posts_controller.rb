@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :find_post, only: [:show, :edit, :update, :destroy]
+  before_action :find_post, only: [:show, :edit, :update, :destroy, :favourite]
 
   def index
     users = [current_user].concat(current_user.followings)
@@ -39,6 +39,15 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     redirect_to posts_path, notice: '文章刪除成功'
+  end
+
+  def favourite
+    current_user.toggle_favorite_post(@post)
+
+    respond_to do |format|
+#       format.html { redirect_to favourite_post_path, notice: 'OK!' }
+      format.json { render json: {status: @post.favorited_by?(current_user) } }
+    end
   end
 
 

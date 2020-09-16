@@ -62,7 +62,15 @@
         </div>
         <div class="post-content px-2">
           <div class="icon-group">
-            <button class="like btn"><i class="far fa-heart"></i></button>
+            <span data-controller="heart" data-heart-id="<%= post.id %>">
+              <button class="like btn" data-action="click->heart#favourite">
+                <% if post.favorited_by?(current_user) %>
+                <i class="fas fa-heart" data-target="heart.like"></i>
+                <% else %>
+                <i class="far fa-heart" data-target="heart.like"></i>
+                <% end %>
+              </button>
+            </span>
             <button class="comment btn pl-2"><i class="far fa-comment"></i></button>
             <button class="share btn pl-2"><i class="fas fa-external-link-alt"></i></button>
             <button class="collect float-right btn">
@@ -84,22 +92,3 @@
   </div>
 </div>
 </div>
-<!-- <%= link_to '新增文章', new_post_path %>
-<table>
-  <tr>
-    <th>文章</th>
-    <th>編輯與刪除</th>
-  </tr>
-
-  <% @posts.each do |post| %>
-  <tr>
-    <td>
-      <%= image_tag (post.image.url) %>
-      <%= link_to post.body, post_path(post) %></>
-    <td>
-      <%= link_to '編輯', edit_post_path(post) %>
-      <%= link_to '刪除', post_path(post), method: 'DELETE', data: { confirm: '你確定刪除嗎?' } %>
-    </td>
-  </tr>
-  <% end %>
-</table> -->
