@@ -14,13 +14,10 @@ Rails.application.routes.draw do
 
     resources :posts, shallow: true do
       resources :comments, only: [:create]
-      collection do
-        get :load_posts                               #載入新貼文
-      end
     end
 
     collection do
-      get :load_posts, to: 'posts#load_posts'         #用在pages index 載入新貼文
+      get :load_posts, to: 'posts#load_posts'         #用在載入新貼文
     end
 
     member do

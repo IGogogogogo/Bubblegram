@@ -42,15 +42,9 @@ document.addEventListener("turbolinks:load", () => {
       page += 1
       const user_id = document.location.href.split("users/")[1]  //從目前網址取得params user id
       const type = getType()
-      let url = ""
+      let url = `/users/load_posts?page=${page}&type=${type}`
 
-      if (type == "following_posts") {
-        url = `/users/load_posts?page=${page}&type=${type}`
-      } else if (type == "my_posts") {
-        url = `/users/${user_id}/load_posts?page=${page}&type=${type}`
-      } else {
-        url = `/users/${user_id}/posts/load_posts?page=${page}&type=${type}`
-      }
+      if (user_id) { url += `&user_id=${user_id}` }
 
       Rails.ajax({
         url: url,

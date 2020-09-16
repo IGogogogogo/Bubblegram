@@ -22,7 +22,7 @@ class User < ApplicationRecord
   #建立使用者與對話關聯
   has_many :sender_chats, foreign_key: :sender_id, class_name: 'Chat'
   has_many :recipient_chats, foreign_key: :recipient_id, class_name: 'Chat'
-  has_many :messages
+  has_many :messages, dependent: :destroy
 
   scope :not_self, -> (current_user){ where.not(id: current_user.id) }
   #搜尋有關鍵字的user

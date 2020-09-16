@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     @user = User.find(params[:user_id]) if params[:user_id]
     if params[:type] == "following_posts"
       users = User.viewable_users(current_user)
-      @posts = Post.includes(:user).viewable_posts(users).order("created_at DESC").page(params[:page]).per(20)
+      @posts = Post.viewable_posts(users).includes(:user).order("created_at DESC").page(params[:page]).per(20)
       @partial = "/posts/post"
     elsif params[:type] == "my_posts"
       @posts = @user.posts.order("created_at DESC").page(params[:page]).per(20)
