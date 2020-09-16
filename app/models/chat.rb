@@ -24,4 +24,8 @@ class Chat < ApplicationRecord
       recipient
     end
   end
+
+  def any_unread_messages?(user)
+    Redis.new.lrange("#{self.id}_#{self.opposed_user(user).id}_new_message",0,-1).present?
+  end
 end

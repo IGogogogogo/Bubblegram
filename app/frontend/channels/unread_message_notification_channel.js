@@ -11,16 +11,22 @@ consumer.subscriptions.create("UnreadMessageNotificationChannel", {
   },
 
   newMessage(data){
-    this.perform("new_message",{unread_message: data})
+    console.log(data)
+    this.perform("new_message",data)
   },
 
   received(data) {
     let chatUsers = Array.from(document.querySelectorAll(".chat-user"))
-    console.log(data.message.user_id)
+    console.log(data)
     let chatUser = chatUsers.filter((user)=>{
       return Number(user.dataset.chatUser) == data.message.user_id
     })
-    chatUser[0].querySelector(".notice-dot").classList.add("message-notice-dot")
+    if(!data.read_message){
+      chatUser[0].querySelector(".notice-dot").classList.add("message-notice-dot")
+    }else{
+      chatUser[0].querySelector(".notice-dot").classList.remove("message-notice-dot")
+    }
+    console.log(data.message)
     this.newMessage(data.message)
     // Called when there's incoming data on the websocket for this channel
   }
