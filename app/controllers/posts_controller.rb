@@ -2,8 +2,8 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy, :favourite]
 
   def index
-    users = [current_user].concat(current_user.followings)
-    @posts = Post.viewable_posts(users).order("created_at DESC").with_rich_text_body
+    @users = [current_user].concat(current_user.followings)
+    @posts = Post.viewable_posts(@users).order("created_at DESC").with_rich_text_body
   end
 
   def show

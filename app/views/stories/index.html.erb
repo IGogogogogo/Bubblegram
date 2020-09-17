@@ -18,8 +18,8 @@
   <% @stories.each do |story| %>
   <tr>
     <td>
-      <%= link_to user_story_path(story.user, story) do %>
-        <%= image_tag story.picture.url %>
+      <%= link_to(user_story_path(story.user, story)) do %>
+        <%= image_tag(story.picture.url) %>
       <% end %>
       <%# 把圖片做成超連結 %>
     </td>

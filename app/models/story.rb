@@ -6,4 +6,5 @@ class Story < ApplicationRecord
 
   belongs_to :user
   # socpe viewable_stories -> (users){ where(user_id: users) }
+  scope :one_day_stories, -> { where('created_at >= ?', Time.zone.now - 1.day) }
 end

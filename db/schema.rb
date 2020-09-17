@@ -151,10 +151,7 @@ ActiveRecord::Schema.define(version: 2020_09_12_024947) do
   add_foreign_key "favourites", "posts"
   add_foreign_key "favourites", "users"
   add_foreign_key "identities", "users"
-<<<<<<< HEAD
-  add_foreign_key "stories", "users"
-=======
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
->>>>>>> develop
+  add_foreign_key "stories", "users"
 end
