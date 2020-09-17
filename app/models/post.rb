@@ -12,8 +12,8 @@ class Post < ApplicationRecord
 
   scope :viewable_posts, -> (users) { where(user_id: users) }
 
-  def comments_more_than_zero
-    self.comments.count > 0
+  def has_comment?
+    comments_count > 0
   end
 
   def favorited_by?(user)

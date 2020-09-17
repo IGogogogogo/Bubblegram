@@ -183,7 +183,7 @@
 
           <div class="comments px-2">
             <div>
-              <% if post.comments_more_than_zero %>
+              <% if post.has_comment? %>
               <%= link_to "View all #{post.comments_count} comments", post_path(post), class: 'text-gray' %>
               <% end %>
             </div>
