@@ -9,7 +9,10 @@
 }
 #index-logo{
   font-size: 50px;
-  color: #000;
+  // color: rgb(78, 77, 77);
+  background: linear-gradient(to left,  rgb(12, 242, 250) 0%, #003d3d 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
   font-family:'Great Vibes',cursive;
   margin:auto;
   position:absolute;
