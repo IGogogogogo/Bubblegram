@@ -1,62 +1,22 @@
 <%# 之後要做if使用者有限時動態，要出現限時動態。else新增限時動態end %>
 
-<div class="story">
-  <%= link_to '新增限時動態', new_user_story_path(current_user) %>
-
-  <% @users.each do |user| %>
-    <span>
-      <%= link_to user_stories_path(user) do %>
-        <%= user.nick_name %>
-      <% end %>
-    </span>
-  <% end %>
-</div>
-
+<%= link_to '新增限時動態', new_user_story_path(current_user) %>
 <%= link_to '新增文章', new_post_path %>
-<div class="container-fluid container-md">
-  <h1>文章總覽</h1>
 
-  <%= link_to '新增文章', new_post_path %>
-  <div class="limit-video d-flex justify-content-around text-center">
-    <div class="users">
-      <div class="pic">
-        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
+  <div class="container-fluid container-md">
+    <div class="limit-video d-flex justify-content-around text-center">
+      <% @users.each do |user| %>
+      <div class="users">
+        <%= link_to user_stories_path(user) do %>
+        <div class="pic">
+          <%= image_tag user.avatar.url, class: 'w-100 h-100 rounded-circle align-middle img-fluid' %>
+        </div>
+        <div class="users-account">
+          <small><%= user.nick_name %></small>
+        </div>
+        <% end %>
       </div>
-      <div class="users-account">
-        <small>jerry</small>
-      </div>
-    </div>
-    <div class="users">
-      <div class="pic">
-        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-      </div>
-      <div class="users-account">
-        <small>jerry</small>
-      </div>
-    </div>
-    <div class="users">
-      <div class="pic">
-        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-      </div>
-      <div class="users-account">
-        <small>jerry</small>
-      </div>
-    </div>
-    <div class="users">
-      <div class="pic">
-        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-      </div>
-      <div class="users-account">
-        <small>jerry</small>
-      </div>
-    </div>
-    <div class="users">
-      <div class="pic">
-        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-      </div>
-      <div class="users-account">
-        <small>jerry</small>
-      </div>
+      <% end %>
     </div>
   </div>
   <div class="row">
