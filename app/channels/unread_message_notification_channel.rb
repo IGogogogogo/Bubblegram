@@ -10,7 +10,8 @@ class UnreadMessageNotificationChannel < ApplicationCable::Channel
   def new_message(data)
     # chat = Chat.find(data["chat_id"])
     # recipient = chat.opposed_user(data["user_id"])
-    redis.rpush("#{data["chat_id"]}_#{data["user_id"]}_new_message",data["content"])
+
+    redis.rpush("#{data["chat_id"]}_#{data["user_id"]}_new_message",data.to_json)
   end
 
   private

@@ -16,6 +16,11 @@ consumer.subscriptions.create("UnreadMessageNotificationChannel", {
   },
 
   received(data) {
+    let chatChannle = this.consumer.subscriptions.subscriptions.filter(sub=> JSON.parse(sub.identifier).channel === "ChatChannel")
+    console.log(chatChannle.length)
+    if(chatChannle.length === 1){
+      return
+    }
     let chatUsers = Array.from(document.querySelectorAll(".chat-user"))
     console.log(data)
     let chatUser = chatUsers.filter((user)=>{

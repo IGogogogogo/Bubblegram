@@ -4,11 +4,12 @@ document.addEventListener('turbolinks:load',()=>{
   const chat_room = document.querySelector('.message_box')
   if(!chat_room)return
   const chat_id = chat_room.dataset.chat
-  console.log(consumer.subscriptions)
 
+  // const unreadChannel = consumer.subscriptions.subscriptions.filter(sub=> JSON.parse(sub.identifier).channel === "UnreadMessageNotificationChannel")
   consumer.subscriptions.create({channel:"ChatChannel", chat_id: chat_id}, {
     connected() {
       console.log('connecting'+ chat_id)
+
       // Called when the subscription is ready for use on the server
     },
 
