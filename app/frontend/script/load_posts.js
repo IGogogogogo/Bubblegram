@@ -51,17 +51,23 @@ document.addEventListener("turbolinks:load", () => {
           const postsEl = data.querySelector("body").innerHTML
           const postLoadTarget = document.querySelector(".post-load-target")
 
+          const loadingDiv = document.querySelector(".loading")
+          loadingDiv.remove()
           if (type == "following_posts" || type == "my_posts") {
             postLoadTarget.innerHTML += postsEl
+            postLoadTarget.appendChild(loadingDiv)
           } else if (type == "post_img") {
             postImg.innerHTML += postsEl
+            postImg.appendChild(loadingDiv)
           } else if (type == "tag_img") {
             tagImg.innerHTML += postsEl
+            tagImg.appendChild(loadingDiv)
           }
 
 
           if (postsEl == "") {   //沒有新資料時移除事件監聽
             postLoadPage.removeEventListener("scroll", loadPosts)
+            loadingDiv.remove()
           }
         },
         error: function(errors) {
