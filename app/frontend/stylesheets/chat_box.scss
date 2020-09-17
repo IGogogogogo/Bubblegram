@@ -18,6 +18,10 @@
   .chat-user-info{
     padding-top:5px;
     margin-left: 10px;
+    .unread-messages,
+    .online-text{
+      font-size:12px;
+    }
   }
   .message-notice-dot{
     width: 10px;

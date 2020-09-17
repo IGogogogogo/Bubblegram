@@ -8,9 +8,15 @@
           </div>
           <div class = "chat-user-info">
             <%= link_to chat.opposed_user(current_user).nick_name, chat_path(chat) %>
-            <div class = "online-text">
-              <%= "目前在線上" if chat.opposed_user(current_user).is_online? %>
-            </div>
+            <% if chat.any_unread_messages?(current_user) %>
+              <div class="unread-messages">
+                您有<%= chat.unread_messages(current_user) %>則新訊息
+              </div>
+            <% elsif chat.opposed_user(current_user).is_online? %>
+              <div class = "online-text">
+                目前在線上
+              </div>
+            <% end %>
           </div>
           <div class="notice-dot <%= "message-notice-dot" if chat.any_unread_messages?(current_user)%>"></div>
         </div>
