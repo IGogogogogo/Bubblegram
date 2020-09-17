@@ -1,9 +1,9 @@
-<div class="post-load-target" style="overflow: auto; height: 100vh;">
+<div class="post-load-page" style="overflow: auto; height: 100vh;">
   <div class="container-fluid container-md">
     <%# 之後要做if使用者有限時動態，要出現限時動態。else新增限時動態end %>
 
     <div class="story">
-      <%= link_to '新增限時動態', new_user_story_path(current_user) %>
+      <%= link_to '新增限時動態', new_user_story_path(current_user) if current_user %>
 
       <% @users.each do |user| %>
         <span>
@@ -58,7 +58,7 @@
     </div>
 
     <div class="row">
-      <div class="col-12 col-md-7 px-0 pb-3 following-posts" data-is-end="not yet">
+      <div class="col-12 col-md-7 px-0 pb-3 following-posts post-load-target" data-is-end="not yet">
         <%= render partial: "/posts/post", collection: @posts, as: :post %>
       </div>
     </div>

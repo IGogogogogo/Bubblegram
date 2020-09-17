@@ -1,8 +1,8 @@
-<div class="post-load-target" style="overflow: auto; height: 100vh;">
+<div class="post-load-page" style="overflow: auto; height: 100vh;">
   <div class="container-fluid container-md">
     <!------貼文列表--------------------------------------------->
     <div class="row">
-      <div class="col-12 col-md-7 px-0 pb-3 user-posts" data-is-end="not yet">
+      <div class="col-12 col-md-7 px-0 pb-3 user-posts post-load-target" data-is-end="not yet">
         <%= render partial: "/posts/post", collection: @posts, as: :post %>
       </div>
     </div>

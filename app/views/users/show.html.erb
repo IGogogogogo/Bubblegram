@@ -1,4 +1,4 @@
-<div class="post-load-target" style="overflow: auto; height: 100vh;">
+<div class="post-load-page" style="overflow: auto; height: 100vh;">
   <h1>User Show</h1>
 
   <div style="display: flex; text-align: center">
@@ -49,7 +49,7 @@
     </ul>
     <br>
 
-    <div>
+    <div class="post-load-target">
       <div class="post-img row no-gutters w-100" style="display: flex;">
         <%= render partial: "/posts/post_img", collection: @my_posts, as: :post %>
       </div>
