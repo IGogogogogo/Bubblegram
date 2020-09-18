@@ -155,8 +155,10 @@
         </div>
         <div class="post-content">
           <div class="icon-group d-flex align-items-center">
+
+
             <span data-controller="heart" data-heart-id="<%= post.id %>">
-              <button class="like btn p-2" data-action="click->heart#favourite">
+              <button id="thumb" class="like btn p-2" data-action="click->heart#favourite" data-turbolinks="false">
                 <% if post.favorited_by?(current_user) %>
                 <i class="fas fa-heart" data-target="heart.like"></i>
                 <% else %>
@@ -164,6 +166,9 @@
                 <% end %>
               </button>
             </span>
+
+
+
             <div class="comment g-btn p-2"><a href="<%= post_path(post) %>" style="color: #000;"><i
                   class="far fa-comment"></i></a>
             </div>

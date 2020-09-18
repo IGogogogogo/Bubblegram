@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @users = [current_user].concat(current_user.followings)
-    @posts = Post.viewable_posts(@users).order("created_at DESC").with_rich_text_body
+    @posts = Post.viewable_posts(@users).includes(:user, :thumbs_up_users).order("created_at DESC").with_rich_text_body
   end
 
   def show
@@ -45,7 +45,7 @@ class PostsController < ApplicationController
     current_user.toggle_favorite_post(@post)
 
     respond_to do |format|
-#       format.html { redirect_to favourite_post_path, notice: 'OK!' }
+      format.html { redirect_to favourite_post_path, notice: 'OK!' }
       format.json { render json: {status: @post.favorited_by?(current_user) } }
     end
   end
