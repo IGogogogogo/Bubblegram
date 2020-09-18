@@ -95,5 +95,19 @@
         <% end %>
       </div>
     </div>
+
+    <div class="tab-pane fade show" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+      <div class="form-row">
+        <% @user.posts.each do |user| %>
+        <div class="col-4 pr-0 pb-1">
+          <a href="<%= post_path(user.id) %>">
+            <div class="photo h-100">
+              <img src="<%= user.image %>" alt="" class="w-100 h-100">
+            </div>
+          </a>
+        </div>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>
