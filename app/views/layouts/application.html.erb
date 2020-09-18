@@ -6,17 +6,21 @@
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
     <%= render "shared/navbar" %>
+    <!------------
     <% if notice %>
       <p class="notice"><%= notice %></p>
     <% elsif alert %>
       <p class="alert"><%= alert %></p>
     <% end %>
-
-    <%= yield %>
+    ------->
+    <div class="container pb-5" style="padding-top: 70px;">
+      <%= yield %>
+    </div>
 
     <%= render "shared/footer" %>
   </body>

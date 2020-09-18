@@ -1,64 +1,30 @@
+<%= render "shared/navbar" %>
+
 <div class="post-load-page" style="overflow: auto; height: 100vh;">
   <div class="container-fluid container-md">
     <%# 之後要做if使用者有限時動態，要出現限時動態。else新增限時動態end %>
 
     <div class="story">
-      <%= link_to '新增限時動態', new_user_story_path(current_user) if current_user %>
+      <%= link_to '新增限時動態', new_user_story_path(current_user) %>
 
       <% @users.each do |user| %>
-        <span>
-          <%= link_to user_stories_path(user) do %>
-            <%= user.nick_name %>
-          <% end %>
-        </span>
+      <span>
+        <%= link_to user_stories_path(user) do %>
+        <%= user.nick_name %>
+        <% end %>
+      </span>
+      <% end %>
+    </div>
+<!-- limit video -->
+    <div class="limit-video d-flex justify-content-around align-items-center text-center border-bottom border-gray mb-3">
+      <% 9.times do %>
+        <%= render "/stories/story" %>
       <% end %>
     </div>
 
-    <div class="limit-video d-flex justify-content-around text-center">
-      <div class="users">
-        <div class="pic">
-          <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-        </div>
-        <div class="users-account">
-          <small>jerry</small>
-        </div>
-      </div>
-      <div class="users">
-        <div class="pic">
-          <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-        </div>
-        <div class="users-account">
-          <small>jerry</small>
-        </div>
-      </div>
-      <div class="users">
-        <div class="pic">
-          <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-        </div>
-        <div class="users-account">
-          <small>jerry</small>
-        </div>
-      </div>
-      <div class="users">
-        <div class="pic">
-          <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-        </div>
-        <div class="users-account">
-          <small>jerry</small>
-        </div>
-      </div>
-      <div class="users">
-        <div class="pic">
-          <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-        </div>
-        <div class="users-account">
-          <small>jerry</small>
-        </div>
-      </div>
-    </div>
-
+<!-- Main post  -->
     <div class="row">
-      <div class="col-12 col-md-7 px-0 pb-3 following-posts post-load-target" data-is-end="not yet">
+      <div class="col-12 col-md-8 px-0 pb-3 following-posts post-load-target">
         <%= render partial: "/posts/post", collection: @posts, as: :post %>
         <%= render "/shared/loading" %>
       </div>

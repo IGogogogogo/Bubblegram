@@ -8,6 +8,17 @@ import "@fortawesome/fontawesome-free/js/all";
 
 import "./search.js"
 import "./preview_photo"
+import "./bubble"
 import "./chat_message_view"
 import "./post_form.js"
 import "./load_posts.js"
+import gsap from "gsap";
+
+
+window.$ = $
+window.gsap = gsap
+
+document.addEventListener("turbolinks:load", () => {
+  $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="popover"]').popover()
+})

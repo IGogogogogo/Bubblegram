@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   def index
     @user = User.find(params[:user_id])
-    @posts = @user.posts.order("created_at DESC").limit(20)
+    @posts = @user.posts.includes(:thumbs_up_users).order("created_at DESC").limit(20)
   end
 
   def show
@@ -79,7 +79,7 @@ class PostsController < ApplicationController
     current_user.toggle_favorite_post(@post)
 
     respond_to do |format|
-      #format.html { redirect_to favourite_post_path, notice: 'OK!' }
+      # format.html { redirect_to favourite_post_path, notice: 'OK!' }
       format.json { render json: {status: @post.favorited_by?(current_user) } }
     end
   end

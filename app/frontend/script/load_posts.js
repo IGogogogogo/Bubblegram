@@ -72,7 +72,7 @@ document.addEventListener("turbolinks:load", () => {
         },
         error: function(errors) {
           console.log(errors)
-          window.location.href = "/users/sign_in"
+          // window.location.href = "/users/sign_in"
         }
       })
       // console.log("send rails ajax resquest!!!!!!!!!!")
@@ -82,20 +82,20 @@ document.addEventListener("turbolinks:load", () => {
   const switchPosts = (e) => {                               //showPosts: 切換我的貼文/我被標記的貼文
     e.preventDefault()
     postNav.querySelectorAll("li a").forEach((btn) => {
-      btn.classList.remove("active")
+      // btn.classList.remove("active")
     })
-    e.target.classList.add("active")           //active: bootstrap的使用中項目
+    // e.target.classList.add("active")           //active: bootstrap的使用中項目
 
     const type = getType()
     // console.log("type: " + type)
     if (type == "post_img") {
-      tagImg.style.display = "none"
-      postImg.style.display = "flex"
+      // tagImg.style.display = "none"
+      // postImg.style.display = "flex"
       tagPage = page
       page = myPage
     } else if (type == "tag_img") {
-      postImg.style.display = "none"
-      tagImg.style.display = "flex"
+      // postImg.style.display = "none"
+      // tagImg.style.display = "flex"
       myPage = page
       page = tagPage
     }

@@ -1,11 +1,16 @@
-<div class="post-load-page" style="overflow: auto; height: 100vh;">
-  <div class="container-fluid container-md">
-    <!------貼文列表--------------------------------------------->
-    <div class="row">
-      <div class="col-12 col-md-7 px-0 pb-3 user-posts post-load-target" data-is-end="not yet">
+<div class="post-load-page" style="overflow-y: auto; overflow-x: hidden; height: 100vh;">
+<div class="container-fluid" style="padding: 8px;">
+  <div class=" row">
+    <div class="col-12 col-md-8">
+
+<div class="user-posts post-load-target">
         <%= render partial: "/posts/post", collection: @posts, as: :post %>
         <%= render "/shared/loading" %>
       </div>
+</div>
+      <!------------------------------- Main post  -->
+
+
     </div>
   </div>
 </div>

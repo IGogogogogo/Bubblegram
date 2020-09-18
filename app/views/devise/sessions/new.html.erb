@@ -1,26 +1,41 @@
-<h2>Log in</h2>
+<div id="home">
+  <p id="index-logo">Bubblegram!</p>
+</div>
+<div class="container-fluid position-absolute login-form">
 
-<%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true) do |f| %>
+
+  <div class="form-group position-relative mb-4">
+    <label for="user_email" class="position-absolute email-label">
+      <i class="fas fa-envelope"></i></label>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control rounded-pill pl-5' %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+  <div class="form-group position-relative">
+    <label for="user_password" class="position-absolute password-label"><i class="fas fa-unlock-alt"></i></label>
+    <%= f.password_field :password, autocomplete: "current-password", class: 'form-control rounded-pill pl-5' %>
   </div>
-
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
+  <a href="<%= new_user_password_path %>" class="float-right pb-3"><small>忘記密碼？</small></a>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+    <%= f.submit "登入", class: 'btn btn-primary w-100 btn-login' %>
+    <p class="text-center m-0 py-2">-Or-</p>
 
-<%= render "devise/shared/links" %>
+    <div class="d-flex">
+      <a href="<%= user_facebook_omniauth_authorize_path %>" type="submit" class="btn btn-primary w-100 fb-btn"><i
+          class="fab fa-facebook-f mr-3"></i>Facebook</a>
+
+
+
+      <a href="<%= user_google_oauth2_omniauth_authorize_path %>" type="submit" class="btn w-100 go-btn ml-2"><span
+          class="font-weight-bold mr-2" style="font-size: 20px;">G</span>
+        Google</a>
+    </div>
+    <p class="text-center pt-2">還沒有帳號?
+      <%= link_to "註冊", new_user_registration_path %>
+    </p>
+  </div>
+
+
+  <% end %>
+</div>
