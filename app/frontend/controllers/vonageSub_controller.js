@@ -37,10 +37,10 @@ export default class extends Controller {
 
   streamCreated(event) {
     this.session.subscribe(event.stream, this.handleError.bind(this))
-    // let subscribers = this.session.getSubscribersForStream(event.stream.streamId)
-    // console.log(event.stream);
+    let subscribers = this.session.getSubscribersForStream(event.stream)
+    console.log('stream', event.stream);
     // counts 是一個array
-    // console.log(subscribers)
+    console.log('subscribers', subscribers)
   }
 
   streamConnect(error) {
