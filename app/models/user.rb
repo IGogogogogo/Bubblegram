@@ -54,7 +54,7 @@ class User < ApplicationRecord
       user = User.new(
         nick_name: auth.info.email.split('@')[0].capitalize,
         email: auth.info.email,
-        avatar: auth.info.image,
+        remote_avatar_url: auth.info.image,
         password: Devise.friendly_token[0,20]
       )
       user.save!

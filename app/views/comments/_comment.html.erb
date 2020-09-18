@@ -1,12 +1,11 @@
-<h5>
-  <%= comment.user.email %>
-  <small>
+
+
+<div>
+<%= comment.user.nick_name %>
+<%= comment.content %>
+</div>
+<small style="font-size: 12px;">
     -
     <%= time_ago_in_words comment.created_at %>
     ago
-  </small>
-</h5>
-
-<div>
-  <%= comment.content %>
-</div>
+</small>

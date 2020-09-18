@@ -1,0 +1,48 @@
+.bubble{
+  // background: #f3f3df;
+  background-image: url(istockphoto-534721193-612x612.jpg);
+  background-size: cover;
+  background-position: center;
+  opacity:.3;
+  position:fixed;
+  border-radius:100%;
+}
+#index-logo{
+  font-size: 50px;
+  // color: rgb(78, 77, 77);
+  background: linear-gradient(to left,  rgb(12, 242, 250) 0%, #003d3d 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+  font-family:'Great Vibes',cursive;
+  margin:auto;
+  position:absolute;
+  top:0;
+  bottom:0;
+  text-align:center;
+  width:100%;
+  height:100px;
+  opacity:0.8;
+}
+.color{
+  width:30px;
+  height:30px;
+  display:inline-block;
+  border-radius:50%;
+  margin:12px -6px 0 12px;
+  border:2px solid #fff;
+  cursor:pointer;
+}
+#home{
+  width:100%;
+  height:100vh;
+  padding:0;
+  margin:0;
+  overflow:hidden;
+}
+.login-form{
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 100;
+  padding: 0 50px;
+}

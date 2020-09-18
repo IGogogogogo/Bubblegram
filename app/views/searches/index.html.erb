@@ -1,10 +1,12 @@
-<h1>搜尋</h1>
-
-<%= form_with(url: search_searches_path, method: :get, class: "search-form") do |f| %>
+<div class="wrap px-3">
+  <h1>搜尋</h1>
+  <%= form_with(url: search_searches_path, method: :get, class: "search-form") do |f| %>
   <%= f.text_field :keyword %>
   <%= f.submit "Search" %>
-<% end %>
-<hr>
-<div class="search-result">
+  <% end %>
+  <hr>
+  <div class="search-result">
+
+  </div>
 
 </div>

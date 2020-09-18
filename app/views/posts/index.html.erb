@@ -1,84 +1,164 @@
+<%= render "shared/navbar" %>
+<!-- <div class="container mb-5" style="padding-top:70px;"> -->
 <%# 之後要做if使用者有限時動態，要出現限時動態。else新增限時動態end %>
 
 <div class="story">
   <%= link_to '新增限時動態', new_user_story_path(current_user) %>
 
   <% @users.each do |user| %>
-    <span>
-      <%= link_to user_stories_path(user) do %>
-        <%= user.nick_name %>
-      <% end %>
-    </span>
+  <span>
+    <%= link_to user_stories_path(user) do %>
+    <%= user.nick_name %>
+    <% end %>
+  </span>
   <% end %>
 </div>
+<div class=" row">
+  <!-- limit video -->
+  <div class="col-12 col-md-8">
+    <div
+      class="limit-video d-flex justify-content-around align-items-center text-center border-bottom border-gray mb-3 px-3">
+      <div class="user-story">
+        <div class="user-video">
+          <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+        </div>
+        <div class="user-name">
+          <small>Jerry</small>
+        </div>
+      </div>
+      <div class="user-story">
+        <div class="user-video">
+          <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+        </div>
+        <div class="user-name">
+          <small>Jerry</small>
+        </div>
+      </div>
+      <div class="user-story">
+        <div class="user-video">
+          <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+        </div>
+        <div class="user-name">
+          <small>Jerry</small>
+        </div>
+      </div>
+      <div class="user-story">
+        <div class="user-video">
+          <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+        </div>
+        <div class="user-name">
+          <small>Jerry</small>
+        </div>
+      </div>
+      <div class="user-story">
+        <div class="user-video">
+          <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+        </div>
+        <div class="user-name">
+          <small>Jerry</small>
+        </div>
+      </div>
+      <div class="user-story">
+        <div class="user-video">
+          <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+        </div>
+        <div class="user-name">
+          <small>Jerry</small>
+        </div>
+      </div>
+      <div class="user-story">
+        <div class="user-video">
+          <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+        </div>
+        <div class="user-name">
+          <small>Jerry</small>
+        </div>
+      </div>
+      <div class="user-story">
+        <div class="user-video">
+          <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+        </div>
+        <div class="user-name">
+          <small>Jerry</small>
+        </div>
+      </div>
+      <div class="user-story">
+        <div class="user-video">
+          <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+        </div>
+        <div class="user-name">
+          <small>Jerry</small>
+        </div>
+      </div>
+      <div class="user-story">
+        <div class="user-video">
+          <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle">
+        </div>
+        <div class="user-name">
+          <small>Jerry</small>
+        </div>
+      </div>
+    </div>
 
-<%= link_to '新增文章', new_post_path %>
-<div class="container-fluid container-md">
-  <h1>文章總覽</h1>
-
-  <%= link_to '新增文章', new_post_path %>
-  <div class="limit-video d-flex justify-content-around text-center">
-    <div class="users">
-      <div class="pic">
-        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-      </div>
-      <div class="users-account">
-        <small>jerry</small>
-      </div>
-    </div>
-    <div class="users">
-      <div class="pic">
-        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-      </div>
-      <div class="users-account">
-        <small>jerry</small>
-      </div>
-    </div>
-    <div class="users">
-      <div class="pic">
-        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-      </div>
-      <div class="users-account">
-        <small>jerry</small>
-      </div>
-    </div>
-    <div class="users">
-      <div class="pic">
-        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-      </div>
-      <div class="users-account">
-        <small>jerry</small>
-      </div>
-    </div>
-    <div class="users">
-      <div class="pic">
-        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-      </div>
-      <div class="users-account">
-        <small>jerry</small>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12 col-md-7 px-0 pb-3">
+    <!-- Main post  -->
+    <div class="main-post">
       <% @posts.each do |post| %>
-      <div class="user-post px-md-3">
-        <div class="user-info pb-2 pl-1 d-flex align-items-center">
-          <div class="user-photo">
-            <img src="https://picsum.photos/200/300" alt="" class="w-100 h-100 rounded-circle">
-          </div>
-          <div class="id-postion pl-2">
-            <div class="user-id"><strong><%= post.user.nick_name %></strong></div>
-            <div class="post-position">YSL Beauty</div>
+      <div class="col-12 border border-gray mb-4">
+        <div class="user-post">
+          <div class="user-info d-flex align-items-center p-2">
+            <div class="user-photo"><img src="https://picsum.photos/40/40" alt="" class="rounded-circle img-fluid">
+            </div>
+            <div class="user-name ml-2">
+              <strong><%= link_to post.user.nick_name, user_path(post.user), class: 'text-black' %></strong>
+            </div>
+            <div class="option ml-auto g-btn px-2"></div>
+            <div class="dropdown">
+              <button class="btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                <i class="fas fa-ellipsis-h"></i>
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <%= link_to '編輯', edit_post_path(post), class: 'dropdown-item' %>
+                <!-- Button trigger modal -->
+                <a class="dropdown-item text-danger" data-toggle="modal" data-target="#staticBackdrop"
+                  style="cursor: pointer;">
+                  刪除
+                </a>
+              </div>
+            </div>
+
+            <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+              aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-danger" id="staticBackdropLabel">你確定要刪除嗎？</h5>
+                  </div>
+                  <div class="modal-body">
+                    請注意！<br>
+                    貼文一經刪除過後，就沒辦法再找回來了哦！
+                  </div>
+                  <div class="modal-footer">
+                    <a type="button" class="btn btn-secondary" data-dismiss="modal">取消</a>
+                    <%= link_to '刪除', post_path(post), method: 'DELETE', class: 'btn btn-outline-danger' %>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="post-pic w-100">
+
+
+
+        <div class="post-pic w-100 h-100">
           <%= image_tag (post.image.url), class: 'w-100 h-100 align-middle img-fluid' %>
         </div>
-        <div class="post-content px-2">
-          <div class="icon-group">
+        <div class="post-content">
+          <div class="icon-group d-flex align-items-center">
+
+
             <span data-controller="heart" data-heart-id="<%= post.id %>">
-              <button class="like btn" data-action="click->heart#favourite">
+              <button id="thumb" class="like btn p-2" data-action="click->heart#favourite" data-turbolinks="false">
                 <% if post.favorited_by?(current_user) %>
                 <i class="fas fa-heart" data-target="heart.like"></i>
                 <% else %>
@@ -86,24 +166,37 @@
                 <% end %>
               </button>
             </span>
-            <button class="comment btn pl-2"><i class="far fa-comment"></i></button>
-            <button class="share btn pl-2"><i class="fas fa-external-link-alt"></i></button>
-            <button class="collect float-right btn">
-              <i class="far fa-flag"></i>
-            </button>
+
+
+
+            <div class="comment g-btn p-2"><a href="<%= post_path(post) %>" style="color: #000;"><i
+                  class="far fa-comment"></i></a>
+            </div>
+            <div class="share g-btn p-2"><i class="far fa-share-square"></i></div>
+            <div class="collect g-btn p-2 ml-auto"><i class="far fa-flag"></i></div>
           </div>
-          <p class="likes-conut mb-1">Liked by <strong>laiiiiii.68 </strong>and <strong>82others</strong></p>
           <div class="user-post-content">
-            <strong class="user-id"><%= post.user.nick_name %></strong>
-            <span class="post-content">
-              <%= link_to post.body, post_path(post) %>
-            </span>
-            <div class="post-time">1 min ago</div>
+            <div class="thumb-up px-2"><strong>654個讚</strong></div>
+            <div class="px-2">
+              <strong class="user-name"><%= post.user.nick_name %></strong>
+              <span class="user-word"><%= post.body %></></span>
+            </div>
+            <div class="post-time px-2">
+              <small class="text-secondary"><%= time_ago_in_words post.created_at %> ago</small>
+            </div>
+          </div>
+
+          <div class="comments px-2">
+            <div>
+              <% if post.has_comment? %>
+              <%= link_to "View all #{post.comments_count} comments", post_path(post), class: 'text-gray' %>
+              <% end %>
+            </div>
+
           </div>
         </div>
       </div>
       <% end %>
     </div>
   </div>
-</div>
 </div>
