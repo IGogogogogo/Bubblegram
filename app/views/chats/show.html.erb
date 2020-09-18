@@ -6,7 +6,7 @@
     <div class="searchbar">
       <%= form_with(model: @message, url: chat_messages_path(@chat)) do |f| %>
         <%= f.text_field :content %>
-        <%= f.submit "傳送" , class:"none" , disabled: true%>
+        <%= f.submit "傳送" , class:"none"%>
       <% end %>
       <%= form_with(model: @message, url: chat_messages_path(@chat), class: "image_form" ) do |f| %>
         <label for="message_image"><i class="far fa-image"></i></label>

@@ -1,11 +1,22 @@
 import consumer from "./consumer"
 
 document.addEventListener('turbolinks:load',()=>{
+  let chatchannel = consumer.subscriptions.subscriptions.filter(sub=> JSON.parse(sub.identifier).channel === "ChatChannel") //找有沒有chatchannel
+
   const chat_room = document.querySelector('.message_box')
-  if(!chat_room)return
+  if(!chat_room){
+    if(chatchannel.length === 1){
+      consumer.subscriptions.remove(chatchannel[0])
+    }
+    return
+  }
+
   const chat_id = chat_room.dataset.chat
 
   // const unreadChannel = consumer.subscriptions.subscriptions.filter(sub=> JSON.parse(sub.identifier).channel === "UnreadMessageNotificationChannel")
+
+ if(chatchannel.length === 1)return;
+
   consumer.subscriptions.create({channel:"ChatChannel", chat_id: chat_id}, {
     connected() {
       console.log('connecting'+ chat_id)
@@ -23,7 +34,10 @@ document.addEventListener('turbolinks:load',()=>{
       const message_text_area = document.querySelector('.message_text_area')
       const form = document.forms[0]
 
+
+
       if(data.message.user_id === user_id){
+        form.reset()
         if(data.message.content == null){
           message_text_area.innerHTML += data.my_image
         }else{
@@ -37,7 +51,6 @@ document.addEventListener('turbolinks:load',()=>{
         }
       }
 
-      form.reset()
 
       message_text_area.scrollTop = message_text_area.scrollHeight
 

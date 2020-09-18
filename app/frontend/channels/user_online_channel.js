@@ -14,15 +14,17 @@ consumer.subscriptions.create({channel: "UserOnlineChannel"}, {
 
   received(data) {
     let chatUsers = Array.from(document.querySelectorAll(".chat-user"))
-    console.log(chatUsers)
+    // console.log(chatUsers)
     let chatUser = chatUsers.filter((user)=>{
       return Number(user.dataset.chatUser) == data.user_id
     })
 
     if (data.is_online){
+      if(chatUser.length === 0)return
       chatUser[0].querySelector(".chat-user-pic .dot").classList.add("online-dot")
       chatUser[0].querySelector(".chat-user-info .online-text").textContent = data.online
     }else{
+      if(chatUser.length === 0)return
       chatUser[0].querySelector(".chat-user-pic .dot").classList.remove("online-dot")
       chatUser[0].querySelector(".chat-user-info .online-text").textContent = ""
     }
