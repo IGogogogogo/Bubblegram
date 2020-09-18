@@ -1,16 +1,13 @@
 <div class="post-load-page" style="overflow-y: auto; overflow-x: hidden; height: 100vh;">
-<div class="container-fluid" style="padding: 8px;">
-  <div class=" row">
-    <div class="col-12 col-md-8">
+  <div class="container-fluid" style="padding: 8px;">
+    <div class=" row">
+      <div class="col-12 col-md-8">
 
-<div class="user-posts post-load-target">
-        <%= render partial: "/posts/post", collection: @posts, as: :post %>
-        <%= render "/shared/loading" %>
+        <div class="user-posts post-load-target">
+          <%= render partial: "/posts/post", collection: @posts, as: :post %>
+          <%= render "/shared/loading" %>
+        </div>
       </div>
-</div>
-      <!------------------------------- Main post  -->
-
-
     </div>
   </div>
 </div>

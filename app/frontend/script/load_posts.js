@@ -7,7 +7,6 @@ document.addEventListener("turbolinks:load", () => {
   let page = 1
   let tagPage = 1
   let myPage = 1
-  // let type = ""
 
   if (postLoadPage) { postLoadPage.addEventListener("scroll", loadPosts) }  //加入捲軸滾動事件
 
@@ -64,7 +63,6 @@ document.addEventListener("turbolinks:load", () => {
             tagImg.appendChild(loadingDiv)
           }
 
-
           if (postsEl == "") {   //沒有新資料時移除事件監聽
             postLoadPage.removeEventListener("scroll", loadPosts)
             loadingDiv.remove()
@@ -75,27 +73,17 @@ document.addEventListener("turbolinks:load", () => {
           // window.location.href = "/users/sign_in"
         }
       })
-      // console.log("send rails ajax resquest!!!!!!!!!!")
     }
   }
 
-  const switchPosts = (e) => {                               //showPosts: 切換我的貼文/我被標記的貼文
+  const switchPosts = (e) => {                  //showPosts: 切換我的貼文/我被標記的貼文
     e.preventDefault()
-    postNav.querySelectorAll("li a").forEach((btn) => {
-      // btn.classList.remove("active")
-    })
-    // e.target.classList.add("active")           //active: bootstrap的使用中項目
 
     const type = getType()
-    // console.log("type: " + type)
     if (type == "post_img") {
-      // tagImg.style.display = "none"
-      // postImg.style.display = "flex"
       tagPage = page
       page = myPage
     } else if (type == "tag_img") {
-      // postImg.style.display = "none"
-      // tagImg.style.display = "flex"
       myPage = page
       page = tagPage
     }
