@@ -13,7 +13,7 @@ import Rails from "@rails/ujs";
 export default class extends Controller {
   static targets = ["like"]
 
-  favourite = () => {
+  favourite() {
     // console.log(this.heartTarget)
     let post_id = this.data.get('id')
     console.log(post_id)
