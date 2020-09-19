@@ -51,7 +51,7 @@ document.addEventListener("turbolinks:load", () => {
           const postLoadTarget = document.querySelector(".post-load-target")
 
           const loadingDiv = document.querySelector(".loading")
-          loadingDiv.remove()
+          if (loadingDiv) { loadingDiv.remove() }
           if (type == "following_posts" || type == "my_posts") {
             postLoadTarget.innerHTML += postsEl
             postLoadTarget.appendChild(loadingDiv)
@@ -65,7 +65,7 @@ document.addEventListener("turbolinks:load", () => {
 
           if (postsEl == "") {   //沒有新資料時移除事件監聽
             postLoadPage.removeEventListener("scroll", loadPosts)
-            loadingDiv.remove()
+            if (loadingDiv) { loadingDiv.remove() }
           }
         },
         error: function(errors) {
