@@ -37,8 +37,12 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
-    redirect_to posts_path, notice: '文章刪除成功'
+    if @post.delete_post(current_user)
+      redirect_to posts_path, notice: '你不是文章所有者'
+    else
+      @post.destroy
+      redirect_to posts_path, notice: '文章成功刪除'
+    end
   end
 
   def favourite
