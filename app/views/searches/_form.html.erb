@@ -1,0 +1,9 @@
+<%= form_with(url: search_searches_path, method: :get, class: "search-form") do |f| %>
+  <%= f.text_field :keyword %>
+  <%= f.submit "Search" %>
+<% end %>
+
+<hr>
+<div class="search-result w-100 bg-light" style="position: absolute; z-index: 2;">
+
+</div>

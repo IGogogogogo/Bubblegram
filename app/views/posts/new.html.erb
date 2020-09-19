@@ -1,28 +1,4 @@
 <div class="wrap px-3">
   <h1>文章新增</h1>
 
-  <% if @post.errors.any? %>
-  <ul>
-    <% @post.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-    <% end %>
-  </ul>
-  <% end %>
-
-  <%= form_for @post do |form| %>
-
-  <div>
-    <%= form.file_field :image %>
-    <img id="output" alt="">
-
-  </div>
-
-  <div>
-    <%= form.label :body, '文章內文' %>
-    <%= form.rich_text_area :body %>
-  </div>
-
-  <%= form.submit '新增文章', class: 'btn btn-outline-secondary mt-2' %>
-
-  <% end %>
-</div>
+<%= render "form", post: @post, url: @url, users: @users, taged_id: @taged_id %>

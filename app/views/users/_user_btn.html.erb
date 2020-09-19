@@ -1,6 +1,6 @@
 <% if user == current_user %>
   <div class="edit-profile d-flex py-3">
-    <%= link_to '編輯個人檔案', edit_user_path(@user), class: "d-block w-100 btn border" %>
+    <%= link_to '編輯個人檔案', edit_user_path(user), class: "d-block w-100 btn border" %>
     <%= link_to '登出', destroy_user_session_path, method: 'delete', class: "d-block w-100 btn border ml-2" %>
   </div>
 <% else %>
