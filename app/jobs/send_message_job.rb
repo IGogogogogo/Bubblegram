@@ -22,7 +22,7 @@ class SendMessageJob < ApplicationJob
     )
 
 
-    ActionCable.server.broadcast(
+    ActionCable.server.broadcast(         #aciton cable 提供的方法 可以第二個參數的資料 廣播到第一個參數特定的頻道
       "chat_channel_#{message.chat_id}",
       { my_message: my_message,
         other_message: other_message,
@@ -38,7 +38,7 @@ class SendMessageJob < ApplicationJob
         my_image: my_image,
         other_image: other_image,
         message: message,
-        new_messages: Redis.new.lrange("#{message.chat_id}_#{message.user_id}_new_message",0,-1).length
+        new_message_counts: Redis.new.lrange("#{message.chat_id}_#{message.user_id}_new_message",0,-1).length
       }
     )
 

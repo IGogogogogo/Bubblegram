@@ -4,10 +4,8 @@ document.addEventListener("turbolinks:load",()=>{
   // console.log(consumer.subscriptions)
 
   let unreadChannel = consumer.subscriptions.subscriptions.filter(sub=> JSON.parse(sub.identifier).channel === "UnreadMessageNotificationChannel") //找有沒有在unreadchannel
-  if(unreadChannel.length === 1){
-    // consumer.subscriptions.remove(unreadChannel[0])
-    return
-  }
+  if(unreadChannel.length === 1)return //如果有直接return 避免在訂閱一次
+
 
   let unreadMessagesDiv= document.createElement("div")
   unreadMessagesDiv.classList.add("unread-messages")
@@ -26,7 +24,7 @@ document.addEventListener("turbolinks:load",()=>{
 
     newMessage(data){
       console.log(data)
-      this.perform("new_message",data)
+      this.perform("new_message",data) //將訊息傳送到unread＿message_channel.rb
     },
 
     received(data) {
@@ -34,38 +32,34 @@ document.addEventListener("turbolinks:load",()=>{
 
       // // console.log(chatChannle.length)
 
-      if(chatChannle.length === 1){
-        return
-      }
+      if(chatChannle.length === 1)return //有的話代表正在聊天室中，不發通知
 
-      this.newMessage(data.message)
+      this.newMessage(data.message) //執行newMessage方法
 
-      let chatUsers = Array.from(document.querySelectorAll(".chat-user"))
-      console.log(data)
+      let chatUsers = Array.from(document.querySelectorAll(".chat-user")) //選取訊息盒的所有聊天的人
+      // console.log(data)
       let chatUser = chatUsers.filter((user)=>{
         return Number(user.dataset.chatUser) == data.message.user_id
-      })
+      }) // 比對這則訊息是誰傳的
 
 
-      if (!!chatUser[0]){ // 有傳新訊息的user 給他
+      if (!!chatUser[0]){ // 如果有人傳新訊息把目前上線的div換成新訊息的div
          let onlineText = chatUser[0].querySelector(".chat-user-info .online-text")
-         if(onlineText){
+         if(onlineText){ //有無目前上線樣式
            chatUser[0].querySelector(".chat-user-info").append(unreadMessagesDiv)
            onlineText.remove()
           }
         }
 
-        if(!data.read_message){
+        if(!data.read_message){// 判斷有無讀取訊息
           if(!!chatUser[0]){
             let newMessages = chatUser[0].querySelector(".chat-user-info .unread-messages")
-
-            if(!!newMessages){
-              chatUser[0].querySelector(".notice-dot").classList.add("message-notice-dot")
-              newMessages.textContent = `您有${data.new_messages += 1}則新訊息`
-            }
+            // 找有沒有新訊息的字
+            chatUser[0].querySelector(".notice-dot").classList.add("message-notice-dot")
+            newMessages.textContent = `您有${data.new_message_counts += 1}則新訊息`
           }
         }else{
-          if(chatUser.length === 0)return
+          if(chatUser.length === 0)return //避免其他頁面出現錯誤訊息
 
           chatUser[0].querySelector(".notice-dot").classList.remove("message-notice-dot")
           chatUser[0].querySelector(".chat-user-info .unread-messages").remove()

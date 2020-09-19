@@ -18,9 +18,9 @@ class ChatsController < ApplicationController
     @message = Message.new
     @messages = @chat.messages.includes(:user)
     sender = @chat.opposed_user(current_user).id
-    redis.del("#{@chat.id}_#{sender}_new_message")
+    redis.del("#{@chat.id}_#{sender}_new_message")    #一進入到聊天室，把未讀訊息刪除
 
-    if !redis.lrange("#{@chat.id}_#{sender}_new_message",0,-1).present?
+    if !redis.lrange("#{@chat.id}_#{sender}_new_message",0,-1).present?  #如果沒有任何新訊息了，廣播到unreand_message_channel.js 去更新狀態
       ActionCable.server.broadcast "unread_message_notification_channel", {read_message: true, message: {user_id: sender}}
     end
   end
