@@ -37,7 +37,8 @@ class SendMessageJob < ApplicationJob
         other_message: other_message,
         my_image: my_image,
         other_image: other_image,
-        message: message
+        message: message,
+        new_messages: Redis.new.lrange("#{message.chat_id}_#{message.user_id}_new_message",0,-1).length
       }
     )
 
