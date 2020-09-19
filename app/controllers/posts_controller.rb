@@ -2,8 +2,10 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy, :favourite]
 
   def index
+    per_count = 20
     @user = User.find(params[:user_id])
-    @posts = @user.posts.includes(:thumbs_up_users).order("created_at DESC").limit(20)
+    @posts = @user.posts.includes(:thumbs_up_users).order("created_at DESC").limit(per_count)
+    @has_more_posts = (@posts.count >= per_count)
   end
 
   def show

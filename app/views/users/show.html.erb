@@ -100,14 +100,18 @@
       <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="form-row post-img">
           <%= render partial: "/posts/post_img", collection: @my_posts, as: :post %>
-          <%= render "/shared/loading" %>
+          <% if @has_more_my_posts %>
+            <%= render "/shared/loading" %>
+          <% end %>
         </div>
       </div>
 
       <div class="tab-pane fade show" id="nav-tag" role="tabpanel" aria-labelledby="nav-tag-tab">
         <div class="form-row tag-img">
           <%= render partial: "/posts/post_img", collection: @taged_posts, as: :post %>
-          <%= render "/shared/loading" %>
+          <% if @has_more_tag_posts %>
+            <%= render "/shared/loading" %>
+          <% end %>
         </div>
       </div>
     </div>
