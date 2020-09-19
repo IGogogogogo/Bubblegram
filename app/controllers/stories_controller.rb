@@ -24,7 +24,7 @@ class StoriesController < ApplicationController
     @story = current_user.stories.new(story_params)
 
     if @story.save
-      redirect_to posts_path, notice: "限時動態新增成功"
+      redirect_to root_path, notice: "限時動態新增成功"
     else
       render :new
     end
@@ -32,7 +32,7 @@ class StoriesController < ApplicationController
 
   def destroy
     @story.destroy
-    redirect_to posts_path, notice: "限時動態刪除成功"
+    redirect_to user_stories_path, notice: "限時動態刪除成功"
   end
 
   private
