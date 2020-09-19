@@ -1,5 +1,5 @@
 <% if user.already_followed?(current_user) %>
-  <%= link_to  "取消追蹤", user_follows_path(user), method: :delete, remote: true %>
+  <%= link_to  "取消追蹤", user_follows_path(user), method: :delete, remote: true, class: "d-block w-100 btn" %>
 <% else %>
-  <%= link_to  "追蹤", user_follows_path(user), method: :post, remote: true %>
+  <%= link_to  "追蹤", user_follows_path(user), method: :post, remote: true, class: "d-block w-100 btn" %>
 <% end %>

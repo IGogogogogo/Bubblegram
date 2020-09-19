@@ -1,31 +1,14 @@
-<div class="container-fluid bubble-bg-color">
-  <nav class="py-4">
-    <a href="#" class="logo">
-      <h1 class="h6">Bubble! Gram!</h1>
+<div class="container-fluid bubble-bg-color fixed-top">
+  <nav class="py-2 d-flex justify-content-between align-items-center">
+    <a href="#" class="camera p-1" style="font-size: 20px; color: #000;">
+      <i class="fas fa-camera-retro"></i>
     </a>
-    <div class="icon">
-      <a href="#"><i class="fas fa-home"></i></a>
-      <a href="#"><i class="fas fa-search"></i></a>
-      <a href="#"><i class="far fa-plus-square"></i></a>
-      <a href="#"><i class="far fa-heart"></i></a>
-      <a href="#"><i class="fas fa-user"></i></a>
-      <a href="#"><i class="far fa-comments"></i></a>
-    </div>
+    <%= link_to root_path, class: "logo" do %>
+      <h1 class="h4 mb-0">BubbleGram</h1>
+    <% end %>
+
+    <%= link_to chats_path, class: 'chat p-1' do %>
+      <i class="far fa-comment-alt"></i>
+    <% end %>
   </nav>
-</div>
-
-
-
-<div>
-  <% if user_signed_in? %>
-  <span>
-    Hello, <%= current_user.email %>
-  </span>
-
-  <%= link_to "登出", destroy_user_session_path, method: :delete %>
-  <% else %>
-  <%= link_to  "登入", new_user_session_path %>
-  <%= link_to  "註冊", new_user_registration_path %>
-  <% end %>
-  <%= link_to "訊息盒", chats_path %>
 </div>

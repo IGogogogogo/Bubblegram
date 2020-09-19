@@ -6,25 +6,25 @@ namespace :dev do
     print "\n正在建立使用者資料"
     User.destroy_all
 
-    count = 10
-    uri = URI("https://uifaces.co/api?limit=#{count}")
+    COUNT = 10
+    uri = URI("https://uifaces.co/api?limit=#{COUNT}")
     req = Net::HTTP::Get.new(uri)
 
     req['X-API-KEY'] = ENV["UI_face_X_API_KEY"]
     response = Net::HTTP.start(uri.hostname, uri.port, use_ssl: true) do |http|
       http.request(req)
     end
-    avatars = JSON.parse(response.body)
+    users = JSON.parse(response.body)
 
-    avatars.each do |avatar|
+    users.each do |user|
       # image_url = Faker::Avatar.image(size: "50x50", format: "jpg")
-      image_url = avatar["photo"]
-      user = User.create!(
-        nick_name: Faker::Name.first_name,
-        email: Faker::Internet.email,
+      # image_url = user["photo"]
+      User.create!(
+        nick_name: user["name"].split(" ").join.downcase ,
+        email: user["email"],
         password: "123456",
         description: Faker::Lorem.sentence,
-        remote_avatar_url: image_url             #carrierwave
+        remote_avatar_url: user["photo"]             #carrierwave
       )
 
       # user.avatar.attach(io: open(image_url)  , filename: "avatar_#{user.id}.jpg")   #active storage
@@ -57,25 +57,46 @@ namespace :dev do
   task fake_posts: :environment do
     print "\n正在建立使用者 posts 資料"
     Post.destroy_all
+    COUNT = 100
+    # User.all.each do |user|
+    COUNT.times do
+      num = rand(1000)
+      post = Post.create!(
+        user: User.all.sample(1).first,
+        remote_image_url: "https://picsum.photos/500/500/?random=#{num}",
+        content: Faker::Lorem.sentence,
+        # body: Faker::Lorem.sentence
+      )
+      print "."
+      post.taged_users = User.all.sample(rand(3..7))
+    end
+
+    # end
+
+    puts "\n成功建立 #{Post.count} 筆 使用者post資料！"
+  end
+
+  task fake_stories: :environment do
+    print "\n正在建立使用者 story 資料"
+    Story.destroy_all
 
     User.all.each do |user|
       rand(2..5).times do
         num = rand(1000)
-        user.posts.create!(
-          remote_image_url: "https://picsum.photos/500/500/?random=#{num}",
-          content: Faker::Lorem.sentence,
-          body: Faker::Lorem.sentence
+        user.stories.create!(
+          remote_picture_url: "https://picsum.photos/500/500/?random=#{num}",
         )
         print "."
       end
     end
 
-    puts "\n成功建立 #{Post.count} 筆 使用者post資料！"
+    puts "\n成功建立 #{Story.count} 筆 使用者story資料！"
   end
 
   task fake_all: :environment do
     Rake::Task["dev:fake_users"].invoke
     Rake::Task["dev:fake_follows"].invoke
     Rake::Task["dev:fake_posts"].invoke
+    Rake::Task["dev:fake_stories"].invoke
   end
 end
