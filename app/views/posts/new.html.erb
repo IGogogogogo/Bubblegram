@@ -1,6 +1,7 @@
 <div class="wrap px-3">
   <h1>文章新增</h1>
 
+<<<<<<< HEAD
   <% if @post.errors.any? %>
   <ul>
     <% @post.errors.full_messages.each do |msg| %>
@@ -25,3 +26,6 @@
 
   <% end %>
 </div>
+=======
+<%= render "form", post: @post, url: @url, users: @users, taged_id: @taged_id %>
+>>>>>>> develop

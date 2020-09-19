@@ -8,6 +8,17 @@ Rails.application.routes.draw do
     resource :follows, only: [:create, :destroy]
     resources :stories, only: [:index, :show, :new, :create, :destroy ]
 
+    resources :posts, shallow: true do
+      member do
+        post :favourite
+      end
+      resources :comments, only: [:create]
+    end
+
+    collection do
+      get :load_posts, to: 'posts#load_posts'         #用在載入新貼文
+    end
+
     member do
       get :fans
       get :followings
@@ -18,13 +29,6 @@ Rails.application.routes.draw do
     collection do
       get :search
     end
-  end
-
-  resources :posts do
-    member do
-      post :favourite
-    end
-    resources :comments, only: [:create]
   end
 
   resources :chats, only: [:index, :show, :create, :destroy] do

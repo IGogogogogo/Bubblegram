@@ -3,6 +3,8 @@ class UsersController < ApplicationController
   before_action :only_owner, only: [:edit, :update]
 
   def show
+    @my_posts = @user.posts.order("created_at DESC").limit(36)
+    @taged_posts = @user.taged_posts.order("created_at DESC").limit(36)
   end
 
   def fans
@@ -31,7 +33,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:nick_name, :email, :description)
+    params.require(:user).permit(:nick_name, :email, :description, :avatar)
   end
 
   def only_owner

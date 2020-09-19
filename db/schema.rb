@@ -122,6 +122,15 @@ ActiveRecord::Schema.define(version: 2020_09_15_090116) do
     t.index ["user_id"], name: "index_stories_on_user_id"
   end
 
+  create_table "user_tags", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_user_tags_on_post_id"
+    t.index ["user_id"], name: "index_user_tags_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "nick_name", default: "", null: false
     t.string "email", default: "", null: false
@@ -155,4 +164,6 @@ ActiveRecord::Schema.define(version: 2020_09_15_090116) do
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
   add_foreign_key "stories", "users"
+  add_foreign_key "user_tags", "posts"
+  add_foreign_key "user_tags", "users"
 end
