@@ -4,11 +4,10 @@
     <%= link_to '登出', destroy_user_session_path, method: 'delete', class: "d-block w-100 btn border ml-2" %>
   </div>
 <% else %>
-  <span class="btn-follow">
-    <%= render "/users/user_follow", user: user %>
-  </span>
-
-  <span>
-    <%= link_to "傳訊息", chats_path(user_id: @user), method: :post %>
-  </span>
+  <div class="d-flex py-3">
+    <span class="btn-follow d-block w-100 btn border">
+      <%= render "/users/user_follow", user: user %>
+    </span>
+    <%= link_to "傳訊息", chats_path(user_id: @user), method: :post, class: "d-block w-100 btn border ml-2" %>
+  </div>
 <% end %>
