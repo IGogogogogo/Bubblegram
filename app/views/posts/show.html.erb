@@ -1,14 +1,12 @@
-<%= link_to '回到文章總覽', posts_path %>
 <div>
-  <img src="<%= @post.image %>" alt="">
+  <%= image_tag @post.image.url, class: 'w-100 img-fluid' %>
 </div>
 <p><%= @post.body %></p>
 
+<%= render partial: "/comments/comment", collection: @comments %>
 <%= form_with(model: @comment, url: post_comments_path(@post) ,local: true) do |form| %>
 <div>
   <%= form.text_field :content, placeholder: "輸入留言" %>
   <%= form.submit "留言" %>
 </div>
 <% end %>
-
-<%= render partial: "/comments/comment", collection: @comments %>

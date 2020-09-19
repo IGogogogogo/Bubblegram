@@ -1,6 +1,4 @@
 <div class="wrap px-3">
-
-
   <h1>文章更新</h1>
 
   <% if @post.errors.any? %>
@@ -15,13 +13,12 @@
 
   <div>
     <%= form.file_field :image %>
-    <img id="output" alt="">
+    <img id="output" alt="" class="w-100 img-fluid">
 
   </div>
 
   <div>
-    <%= form.label :body, '文章內文' %>
-    <%= form.rich_text_area :body %>
+    <%= form.rich_text_area :body, placeholder: '輸入相片解說 ...' %>
   </div>
 
   <%= form.submit '更新文章', class: 'btn btn-outline-secondary mt-2' %>
