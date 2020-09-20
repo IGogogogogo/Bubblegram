@@ -11,6 +11,8 @@ class RoomsController < ApplicationController
   end
 
   def create
+    current_user.room.destroy if current_user.room.present?
+
     @room = current_user.create_room(name: current_user.nick_name)
     redirect_to play_room_path(@room)
   end

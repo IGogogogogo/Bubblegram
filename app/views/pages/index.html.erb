@@ -10,18 +10,10 @@
     <div class="stream">
       <%= link_to '直播', rooms_path ,data: {turbolinks: false}, method: 'post'  %>
     </div>
-<!-- stream -->
-  <!-- 如果追蹤的user有直播 -->
-    
-
-
 <!-- limit video -->
     <div class="limit-video d-flex justify-content-around align-items-center text-center border-bottom border-gray mb-3">
       <%= render partial: "/stories/story", collection: @results, as: :user %>
     </div>
-
-
-
 
 <!-- Main post  -->
     <div class="row">

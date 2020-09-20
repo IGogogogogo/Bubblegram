@@ -25,9 +25,9 @@ export default class extends Controller {
 
     // 建立 publisher
     this.publisher = OT.initPublisher('publisher', {
-      insertMode: 'prepend',
+      insertMode: 'replace',
       width: '100%',
-      height: '500px',
+      height: '300px',
       name: this.data.get("name"),
     }, this.handleError.bind(this))
 
