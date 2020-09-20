@@ -13,9 +13,9 @@
       border-bottom: 1px solid #ccc;
     }
     .message_text_area{
-      height: calc(100% - 104px);
+      height: calc(100% - 130px);
       overflow: auto;
-      padding:20px;
+      padding: 0 20px;
       box-sizing: border-box;
 
       .message + .message{

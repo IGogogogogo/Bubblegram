@@ -33,6 +33,9 @@ document.addEventListener('turbolinks:load',()=>{
       const user_id = Number(document.querySelector('.message_box').dataset.user)
       const message_text_area = document.querySelector('.message_text_area')
       const form = document.forms[0]
+      const image_form =document.forms[1]
+      const text_submit = document.querySelector("input[type='submit']")
+
 
 
 
@@ -52,7 +55,11 @@ document.addEventListener('turbolinks:load',()=>{
       }
 
 
-      message_text_area.scrollTop = message_text_area.scrollHeight
+      text_submit.setAttribute("disabled", true)
+      text_submit.classList.add("disappear")
+      image_form.classList.remove("disappear")
+      message_text_area.scrollTop += message_text_area.scrollHeight
+
 
     }
   });
