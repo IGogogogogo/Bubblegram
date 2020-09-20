@@ -1,6 +1,8 @@
-<div>
-  <%= image_tag @post.image.url, class:"w-100" %>
-</div>
+<% @post.images.each do |image| %>
+  <div>
+    <%= image_tag image.url, class:"w-100" %>
+  </div>
+<% end %>
 
 <p><%= @taged_users.join(", ") %></p>
 

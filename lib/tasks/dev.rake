@@ -61,14 +61,16 @@ namespace :dev do
     # User.all.each do |user|
     COUNT.times do
       num = rand(1000)
-      post = Post.create!(
+      post = Post.new(
         user: User.all.sample(1).first,
-        remote_image_url: "https://picsum.photos/500/500/?random=#{num}",
         content: Faker::Lorem.sentence,
+        remote_images_urls: ["https://picsum.photos/500/500/?random=#{num}"]
         # body: Faker::Lorem.sentence
       )
-      print "."
+      post.save!
       post.taged_users = User.all.sample(rand(3..7))
+
+      print "."
     end
 
     # end
