@@ -1,11 +1,25 @@
 <div class = "message_box section" data-chat= "<%= @chat.id %>" data-user="<%= current_user.id%>">
-  <div class="container">
+  <div class="message_container">
+    <div class = "message_text_header chat-user">
+      <div class = "chat-user-pic">
+        <%= image_tag @chat.opposed_user(current_user).avatar.url, class: "user-avatar", width: "50px", style: "border-radius: 50%" if @chat.opposed_user(current_user).avatar.present? %>
+        <div class = "dot <%= "online-dot" if @chat.opposed_user(current_user).is_online? %>"></div>
+      </div>
+      <div class = "chat-user-info">
+        <%= @chat.opposed_user(current_user).nick_name %>
+          <% if @chat.opposed_user(current_user).is_online? %>
+            <div class = "online-text">
+              目前在線上
+            </div>
+          <% end %>
+      </div>
+    </div>
     <div class="message_text_area">
        <%= render partial: "messages/message", collection: @messages, as: :message %>
     </div>
     <div class="searchbar">
       <%= form_with(model: @message, url: chat_messages_path(@chat)) do |f| %>
-        <%= f.text_field :content %>
+        <%= f.text_field :content, placeholder: "發送訊息........", autocomplete: "off"%>
         <%= f.submit "傳送" , class:"none"%>
       <% end %>
       <%= form_with(model: @message, url: chat_messages_path(@chat), class: "image_form" ) do |f| %>
