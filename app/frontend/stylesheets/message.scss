@@ -52,7 +52,7 @@
 
         .content{
           margin-left: 10px;
-          background-color: rgb(226, 226, 226);
+          background-color: rgb(238, 235, 235);
         }
 
         .pic{
@@ -69,8 +69,8 @@
         .content{
           order: -1;
           margin-right: 10px;
-          background-color: rgb(56, 56, 136);
-          color: white;
+          background-color: rgb(219, 238, 250);
+          color: rgb(49, 49, 49);
         }
 
         .pic{
@@ -123,14 +123,14 @@
           box-sizing: border-box;
           background-color: transparent;
           border: none;
-          color: rgb(109, 48, 109);
+          color: rgb(3, 116, 190);
           &:focus{
             outline: none;
           }
         }
       }
 
-      .none{
+      .disappear{
         display: none;
       }
 
