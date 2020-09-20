@@ -1,10 +1,10 @@
 <div class="user-story">
-  <%= link_to user_stories_path(user) do %>
+  <%= link_to user[:path] do %>
   <div class="user-video">
-    <%= image_tag user.avatar.url, class: 'img-fluid rounded-circle' %>
+    <%= image_tag user[:user].avatar.url, class: 'img-fluid rounded-circle' %>
   </div>
   <div class="user-name text-black">
-    <small><%= user.nick_name %></small>
+    <small><%= user[:user].nick_name %></small>
   </div>
   <% end %>
 </div>

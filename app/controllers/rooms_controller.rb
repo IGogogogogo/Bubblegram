@@ -11,17 +11,23 @@ class RoomsController < ApplicationController
   end
 
   def create
-    @room = current_user.rooms.create(name: current_user.nick_name)
+    @room = current_user.create_room(name: current_user.nick_name)
     redirect_to play_room_path(@room)
   end
 
   def play
-    opentok = OpenTok::OpenTok.new(ENV['vonage_api_key'], ENV['vonage_secret'])
-    @token ||= opentok.generate_token(@room.vonage_session_ID)
+    # 先判斷目前使用者是否為直播房間創建者
+    if current_user = @room.user
+      opentok = OpenTok::OpenTok.new(ENV['vonage_api_key'], ENV['vonage_secret'])
+      @token ||= opentok.generate_token(@room.vonage_session_ID)
+    else
+      redirect_to root_path
+    end
   end
 
-  def destory
-    # do something
+  def destroy
+    @room.destroy
+    redirect_to root_path
   end
 
   private

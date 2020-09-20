@@ -23,11 +23,10 @@ Rails.application.routes.draw do
       get :fans
       get :followings
     end
-    # 產生show create destory 與 play 路徑
-    resources :rooms, only: [:create]
   end
-
-  resources :rooms, only: [:show, :destory] do
+  
+  # 產生show create destory 與 play 路徑
+  resources :rooms, only: [:show, :destory, :create, :destroy] do
     member do
       get :play
     end 
