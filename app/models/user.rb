@@ -50,6 +50,14 @@ class User < ApplicationRecord
     end
   end
 
+  def toggle_favorite_post(post)
+    if favourites_posts.include?(post)
+      favourites_posts.destroy(post)
+    else
+      favourites_posts << post
+    end
+  end
+
   def self.from_omniauth(auth, signed_in_resource = nil)
     # 1. 搜尋用 google, fb 登入過的 user (identity 紀錄的 user)
     identity = Identity.find_for_oauth(auth)
