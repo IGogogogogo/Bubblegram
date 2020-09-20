@@ -2,8 +2,8 @@
 
 one:
   name: MyString
-  vonage_session_ID: MyString
+  vonage_session_id: MyString
 
 two:
   name: MyString
-  vonage_session_ID: MyString
+  vonage_session_id: MyString

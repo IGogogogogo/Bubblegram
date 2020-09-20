@@ -7,7 +7,7 @@ class RoomsController < ApplicationController
 
   def show
     opentok = OpenTok::OpenTok.new(ENV['vonage_api_key'], ENV['vonage_secret'])
-    @token ||= opentok.generate_token(@room.vonage_session_ID)
+    @token ||= opentok.generate_token(@room.vonage_session_id)
   end
 
   def create
@@ -19,7 +19,7 @@ class RoomsController < ApplicationController
     # 先判斷目前使用者是否為直播房間創建者
     if current_user = @room.user
       opentok = OpenTok::OpenTok.new(ENV['vonage_api_key'], ENV['vonage_secret'])
-      @token ||= opentok.generate_token(@room.vonage_session_ID)
+      @token ||= opentok.generate_token(@room.vonage_session_id)
     else
       redirect_to root_path
     end
