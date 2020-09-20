@@ -27,6 +27,10 @@ nav{
       }
     }
   }
+  .chat{
+    font-size: 20px;
+    color: #000;
+  }
 }
 .limit-video{
   border-bottom: 1px solid #ccc;
@@ -54,12 +58,6 @@ nav{
   }
   .post-pic{
     height: 300px;
-  }
-  .user-post-content{
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 300px;
   }
     .post-position{
       font-weight: 300;

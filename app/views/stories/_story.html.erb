@@ -1,0 +1,10 @@
+<div class="user-story">
+  <%= link_to user_stories_path(user) do %>
+  <div class="user-video">
+    <%= image_tag user.avatar.url, class: 'img-fluid rounded-circle' %>
+  </div>
+  <div class="user-name text-black">
+    <small><%= user.nick_name %></small>
+  </div>
+  <% end %>
+</div>

@@ -1,44 +1,116 @@
-<h1>User Show</h1>
+<div class="post-load-page" style="overflow: auto; height: 100vh;">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <!-----user 資訊------------------>
+        <div class="profile-info d-flex align-items-center flex-wrap">
+          <div class="profile-photo w-25">
+            <%= image_tag @user.avatar.url, class: 'rounded-circle w-100' if @user.avatar.present? %>
+          </div>
 
-<div style="display: flex; text-align: center">
-  <div>
-    <%= image_tag @user.avatar.url, width: "50px", style: "border-radius: 50%" if @user.avatar.present? %>
-    <%# <%= image_tag @user.avatar.variant(resize_to_limit: [50, 50]) if @user.avatar?  %>
+          <!--貼文數------>
+          <div class="posts-count text-center flex-grow-1">
+            <div class="num font-weight-bold">
+              <%= link_to user_posts_path(@user), class: 'text-black' do %>
+                <div><%= @user.posts_count %></div>
+                <div class="post">Posts</div>
+              <% end %>
+            </div>
+          </div>
+
+          <!---粉絲數---->
+          <div class="followers-count text-center flex-grow-1">
+            <div class="num font-weight-bold">
+              <%= link_to fans_user_path(@user), class: 'text-black' do %>
+                <div><%= @user.fans_count %></div>
+                <div class="follower">Followers</div>
+              <% end %>
+            </div>
+          </div>
+
+          <!---追蹤數---------->
+          <div class="following-count text-center flex-grow-1">
+            <div class="num font-weight-bold">
+              <%= link_to followings_user_path(@user), class: 'text-black' do %>
+              <div><%= @user.followings_count %></div>
+              <div class="following">Following</div>
+              <% end %>
+            </div>
+          </div>
+
+          <!----介紹資訊----------->
+          <div class="profile-intro py-2 w-100 ml-3">
+            <div class="profile-user-name"><strong><%= @user.nick_name %></strong></div>
+            <div class="profile-user-infro">
+              <%= @user.description %>
+            </div>
+          </div>
+        </div>
+
+        <!----追蹤/傳訊息/編輯----------->
+        <div class="user-item-<%= @user.id %>">
+          <%= render "user_btn", user: @user  %>
+        </div>
+
+        <!-----限時動態------->
+        <div class="collection d-flex justify-content-around text-center align-items-center">
+          <div class="add-collection-video">
+            <i class="fas fa-plus rounded-circle border p-2" style="width: 60px;height: 60px;"></i>
+            <small class="d-block">Add</small>
+          </div>
+          <div class="collection-video1">
+
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle border p-1">
+            <small class="d-block">Highlights</small>
+          </div>
+          <div class="collection-video2">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle border p-1">
+            <small class="d-block">Highlights</small>
+          </div>
+          <div class="collection-video3">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle border p-1">
+            <small class="d-block">Highlights</small>
+          </div>
+          <div class="collection-video4">
+            <img src="https://picsum.photos/50/50" alt="" class="img-fluid rounded-circle border p-1">
+            <small class="d-block">Highlights</small>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <div>
-    <%= link_to posts_path do %>
-      <p><%= @user.posts_count %></p>
-      <p>貼文</p>
-    <% end %>
+  <div class="border-bottom py-2"></div>
+
+  <div class="overflow-hidden">
+    <nav class="py-3">
+      <div class="nav nav-tabs d-flex w-100 posts-nav" id="nav-tab" role="tablist">
+        <a class="nav-link flex-grow-1 text-center my-posts-btn active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+          aria-controls="nav-home" aria-selected="true">
+          <i class="fas fa-border-all"></i>
+        </a>
+        <a class="nav-link flex-grow-1 text-center tag-posts-btn" id="nav-tag-tab" data-toggle="tab" href="#nav-tag" role="tab"
+          aria-controls="nav-tag" aria-selected="false">
+          <i class="far fa-id-badge"></i>
+        </a>
+      </div>
+    </nav>
+
+    <div class="tab-content post-load-target" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <div class="form-row post-img">
+          <%= render partial: "/posts/post_img", collection: @my_posts, as: :post %>
+          <%= render "/shared/loading" %>
+        </div>
+      </div>
+
+      <div class="tab-pane fade show" id="nav-tag" role="tabpanel" aria-labelledby="nav-tag-tab">
+        <div class="form-row tag-img">
+          <%= render partial: "/posts/post_img", collection: @taged_posts, as: :post %>
+          <%= render "/shared/loading" %>
+        </div>
+      </div>
+    </div>
+
   </div>
-
-  <div>
-    <%= link_to fans_user_path(@user) do %>
-      <p><%= @user.fans_count %></p>
-      <p>粉絲</p>
-    <% end %>
-  </div>
-
-  <div>
-    <%= link_to followings_user_path(@user) do %>
-      <p><%= @user.followings_count %></p>
-      <p>追蹤中</p>
-    <% end %>
-  </div>
-</div>
-
-<div>
-  <p><%= @user.nick_name %></p>
-  <p><%= @user.email %></p>
-  <p><%= @user.description %></p>
-</div>
-
-<div class="user-item-<%= @user.id %>">
-  <%= render  "user_btn", user: @user  %>
-</div>
-
-<div>
-  <div>使用者貼文</div>
-  <div>使用者被標記貼文</div>
 </div>

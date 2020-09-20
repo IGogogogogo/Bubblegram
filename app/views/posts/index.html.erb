@@ -1,105 +1,13 @@
-<div class="container-fluid container-md">
-  <h1>文章總覽</h1>
+<div class="post-load-page" style="overflow-y: auto; overflow-x: hidden; height: 100vh;">
+  <div class="container-fluid" style="padding: 8px;">
+    <div class=" row">
+      <div class="col-12 col-md-8">
 
-  <%= link_to '新增文章', new_post_path %>
-  <div class="limit-video d-flex justify-content-around text-center">
-    <div class="users">
-      <div class="pic">
-        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-      </div>
-      <div class="users-account">
-        <small>jerry</small>
-      </div>
-    </div>
-    <div class="users">
-      <div class="pic">
-        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-      </div>
-      <div class="users-account">
-        <small>jerry</small>
-      </div>
-    </div>
-    <div class="users">
-      <div class="pic">
-        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-      </div>
-      <div class="users-account">
-        <small>jerry</small>
-      </div>
-    </div>
-    <div class="users">
-      <div class="pic">
-        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-      </div>
-      <div class="users-account">
-        <small>jerry</small>
-      </div>
-    </div>
-    <div class="users">
-      <div class="pic">
-        <img src="https://picsum.photos/50/50" alt="" class="w-100 h-100 rounded-circle align-middle img-fluid">
-      </div>
-      <div class="users-account">
-        <small>jerry</small>
+        <div class="user-posts post-load-target">
+          <%= render partial: "/posts/post", collection: @posts, as: :post %>
+          <%= render "/shared/loading" %>
+        </div>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-12 col-md-7 px-0 pb-3">
-      <% @posts.each do |post| %>
-      <div class="user-post px-md-3">
-        <div class="user-info pb-2 pl-1 d-flex align-items-center">
-          <div class="user-photo">
-            <img src="https://picsum.photos/200/300" alt="" class="w-100 h-100 rounded-circle">
-          </div>
-          <div class="id-postion pl-2">
-            <div class="user-id"><strong><%= post.user.nick_name %></strong></div>
-            <div class="post-position">YSL Beauty</div>
-          </div>
-        </div>
-        <div class="post-pic w-100">
-          <%= image_tag (post.image.url), class: 'w-100 h-100 align-middle img-fluid' %>
-        </div>
-        <div class="post-content px-2">
-          <div class="icon-group">
-            <button class="like btn"><i class="far fa-heart"></i></button>
-            <button class="comment btn pl-2"><i class="far fa-comment"></i></button>
-            <button class="share btn pl-2"><i class="fas fa-external-link-alt"></i></button>
-            <button class="collect float-right btn">
-              <i class="far fa-flag"></i>
-            </button>
-          </div>
-          <p class="likes-conut mb-1">Liked by <strong>laiiiiii.68 </strong>and <strong>82others</strong></p>
-          <div class="user-post-content">
-            <strong class="user-id"><%= post.user.nick_name %></strong>
-            <span class="post-content">
-              <%= link_to post.body, post_path(post) %>
-            </span>
-            <div class="post-time">1 min ago</div>
-          </div>
-        </div>
-      </div>
-      <% end %>
-    </div>
-  </div>
 </div>
-</div>
-<!-- <%= link_to '新增文章', new_post_path %>
-<table>
-  <tr>
-    <th>文章</th>
-    <th>編輯與刪除</th>
-  </tr>
-
-  <% @posts.each do |post| %>
-  <tr>
-    <td>
-      <%= image_tag (post.image.url) %>
-      <%= link_to post.body, post_path(post) %></>
-    <td>
-      <%= link_to '編輯', edit_post_path(post) %>
-      <%= link_to '刪除', post_path(post), method: 'DELETE', data: { confirm: '你確定刪除嗎?' } %>
-    </td>
-  </tr>
-  <% end %>
-</table> -->
