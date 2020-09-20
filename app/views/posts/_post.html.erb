@@ -48,7 +48,9 @@
   </div>
 
   <div class="post-pic w-100 h-100">
-    <%= image_tag post.images[0].url, class: "w-100 h-100 align-middle img-fluid" %>
+    <div class="owl-carousel owl-theme">
+      <%= render partial: "/posts/carousel_img", collection: post.images, as: :image, locals: {images: post.images} %>
+    </div>
   </div>
 
   <div class="post-content px-2">

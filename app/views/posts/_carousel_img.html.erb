@@ -1,0 +1,7 @@
+<div>
+  <span class="px-2" style="position: absolute; top: 0; right: 0; background-color: #777">
+    <%= "#{images.index(image) + 1}/#{images.count}" if images.count > 1 %>
+  </span>
+
+  <%= image_tag image.url, class: "w-100 h-100 align-middle img-fluid" %>
+</div>
