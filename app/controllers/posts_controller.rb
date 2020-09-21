@@ -74,10 +74,10 @@ class PostsController < ApplicationController
 
   def destroy
     if @post.delete_post(current_user)
-      redirect_to posts_path, notice: '你不是文章所有者'
+      redirect_to root_path, notice: '你不是文章所有者'
     else
       @post.destroy
-      redirect_to posts_path, notice: '文章成功刪除'
+      redirect_to root_path, notice: '文章成功刪除'
     end
   end
 
