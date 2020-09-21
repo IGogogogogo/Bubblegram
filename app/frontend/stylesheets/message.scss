@@ -1,10 +1,26 @@
 .message_box{
-  .container{
-    .message_text_area{
-      height: calc(100vh - 252px);
-      overflow: auto;
-      padding:20px;
+  height: calc(100vh - 120px);
+  .message_container{
+    height: 100%;
+    position: relative;
+    border-top: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+
+    .message_text_header{
       box-sizing: border-box;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    .message_text_area{
+      height: calc(100% - 130px);
+      overflow: auto;
+      padding: 0 20px;
+      box-sizing: border-box;
+
+      #unread-line{
+        text-align: center;
+      }
 
       .message + .message{
         margin-top: 20px;
@@ -12,11 +28,18 @@
 
       .message{
         display: flex;
+        align-items: flex-start;
+        .pic_name{
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
 
         .content{
-          padding: 5px 8px;
+          padding: 5px 15px;
           word-break: break-word;
-          border-radius: 5px;
+          border-radius: 20px;
+          align-self: center;
         }
 
         .pic{
@@ -29,11 +52,11 @@
       }
 
       .other{
-        padding-right: 50%;
+        padding-right: 10%;
 
         .content{
           margin-left: 10px;
-          background-color: rgb(226, 226, 226);
+          background-color: rgb(238, 235, 235);
         }
 
         .pic{
@@ -45,36 +68,49 @@
 
       .me{
         justify-content: flex-end;
-        padding-left: 50%;
+        padding-left: 10%;
 
         .content{
           order: -1;
           margin-right: 10px;
-          background-color: rgb(56, 56, 136);
-          color: white;
+          background-color: rgb(219, 238, 250);
+          color: rgb(49, 49, 49);
         }
 
         .pic{
           order: -1;
           margin-right: 10px;
+          border: 1px solid black;
+          border-radius: 10px;
         }
       }
     }
 
     .searchbar{
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      right: 0;
+
+      width: 95%;
+      height: 33px;
+
       display: flex;
-      border: 2px solid black;
+      border: 1px solid #ccc;
       border-radius: 20px;
       box-sizing: border-box;
-      align-items: center;
       padding: 15px;
-      height: 33px;
+      margin: auto;
+      align-items: center;
+
+      background-color: #fff;
+
       form{
         flex-grow: 1;
         display: flex;
 
         #message_content{
-          width: 80%;
+          width: 100%;
           padding: 3px 5px;
           box-sizing: border-box;
           border: none;
@@ -91,14 +127,14 @@
           box-sizing: border-box;
           background-color: transparent;
           border: none;
-          color: rgb(109, 48, 109);
+          color: rgb(3, 116, 190);
           &:focus{
             outline: none;
           }
         }
       }
 
-      .none{
+      .disappear{
         display: none;
       }
 
@@ -117,5 +153,11 @@
         }
       }
     }
+  }
+}
+
+@media screen and (min-width: 768px){
+  .message_container{
+    border-bottom: 1px solid #ccc;
   }
 }
