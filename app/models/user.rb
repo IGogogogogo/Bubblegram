@@ -7,6 +7,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
 
   mount_uploader :avatar, AvatarUploader      #carrierwave
+  after_create :add_blank_avatar
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -79,5 +80,13 @@ class User < ApplicationRecord
   #判斷使用者是否上線
   def is_online?
     Redis.new.get("user_#{self.id}_online").present?
+  end
+
+  private
+
+  def add_blank_avatar
+    image_path = "./public/blank_avatar.png"
+    self.avatar = File.open(image_path)
+    self.save!
   end
 end

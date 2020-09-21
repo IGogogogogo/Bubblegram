@@ -18,7 +18,9 @@
     <div class="row">
       <div class="col-12 col-md-8 px-0 pb-3 following-posts post-load-target">
         <%= render partial: "/posts/post", collection: @posts, as: :post %>
-        <%= render "/shared/loading" %>
+        <% if @has_more_posts %>
+          <%= render "/shared/loading" %>
+        <% end %>
       </div>
     </div>
   </div>
