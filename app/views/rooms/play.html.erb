@@ -1,12 +1,8 @@
-<h1>publisher</h1>
-<p>
-  <strong>Hi! <%= @room.name %> 你正在直播！</strong>
-  
 <div id="videos" 
      data-controller = "vonagePub"
      data-vonagePub-key="<%= ENV['vonage_api_key']%>"
      data-vonagePub-session-id = "<%= @room.vonage_session_id %>"
      data-vonagePub-token = "<%= @token %>"
-     data-vonagePub-name = "publisher" >
+     data-vonagePub-name = "<%= current_user.nick_name%>正在直播！" >
 </div>
-<%= link_to 'Back', room_path, method: 'delete',data: {turbolinks: false}  %>
+<%= link_to 'Back', room_path, method: 'delete',data: {turbolinks: false}, class: 'back-link'  %>

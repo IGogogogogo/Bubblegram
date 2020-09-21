@@ -6,3 +6,4 @@ import "./bubble.scss";
 import "./message.scss"
 import "./actiontext.scss"
 import "./loading.scss"
+import "./rooms.scss"

@@ -1,0 +1,17 @@
+// publisher scss
+.OT_publisher{
+  position: absolute;
+  top: 50 px ;
+}
+.back-link{
+  position: absolute;
+  right: 10px;
+  z-index: 3;
+  top: 60px;
+}
+// subscriber scss
+.OT_subscriber{
+  width: 100% !important;
+  height: 100vh !important;
+  position: absolute;
+}
