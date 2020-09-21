@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy, :favourite]
+  before_action :check_owner, only: [:edit, :update, :destroy]
 
   def index
     per_count = 20
@@ -73,12 +74,8 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    if @post.delete_post(current_user)
-      redirect_to root_path, notice: '你不是文章所有者'
-    else
-      @post.destroy
-      redirect_to root_path, notice: '文章成功刪除'
-    end
+    @post.destroy
+    redirect_to root_path, notice: '文章成功刪除'
   end
 
   def favourite
@@ -104,5 +101,11 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:content, :body, {images: []} )
+  end
+
+  def check_owner
+    if !@post.post_owner?(current_user)
+      redirect_to root_path, notice: '你不是文章所有者'
+    end
   end
 end
