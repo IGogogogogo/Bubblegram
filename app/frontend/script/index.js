@@ -6,6 +6,7 @@ import "select2/dist/css/select2.css"
 import "../stylesheets/application"
 import "@fortawesome/fontawesome-free/js/all";
 
+import "./stories.js"
 import "./search.js"
 import "./preview_photo"
 import "./bubble"
