@@ -47,7 +47,6 @@ group :development, :test do
   gem 'faker', '~> 2.13'
   gem 'thor', '~> 0.19.1'
   gem 'foreman', '~> 0.87.2'
-  gem 'figaro'
   gem 'capistrano', '3.14.1', require: false
   gem 'capistrano-bundler', '2.0.1'
   gem 'capistrano-rails', '1.6.1'
