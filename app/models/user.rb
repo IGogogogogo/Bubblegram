@@ -5,8 +5,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable,
          :omniauthable, omniauth_providers: %i[facebook google_oauth2]
-
-  mount_uploader :avatar, AvatarUploader      # carrierwave
+  
+  mount_uploader :avatar, AvatarUploader      #carrierwave
+  after_create :add_blank_avatar
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -83,5 +84,13 @@ class User < ApplicationRecord
 
   def exist_room?
     self.room.present?
+  end
+
+  private
+
+  def add_blank_avatar
+    image_path = "./public/blank_avatar.png"
+    self.avatar = File.open(image_path)
+    self.save!
   end
 end

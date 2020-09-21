@@ -4,6 +4,5 @@ import "./login.scss";
 import "./postindex.scss";
 import "./bubble.scss";
 import "./message.scss"
-import "./actiontext.scss"
 import "./loading.scss"
 import "./rooms.scss"

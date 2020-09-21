@@ -24,4 +24,10 @@ class Post < ApplicationRecord
   def favorited_by?(user)
     thumbs_up_users.include?(user)
   end
+  # 不會把自己算進去
+
+  def delete_post(user)
+    self.user != user
+  end
+
 end

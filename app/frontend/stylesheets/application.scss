@@ -1,7 +1,9 @@
 @import "~bootstrap/scss/bootstrap";
 
 .bubble-bg-color{
-  background: linear-gradient(180deg, #9b90c2, #f5f5f5);
+  background-color: #fff;
+  border-bottom: .5px solid rgb(219, 218, 218);
+  //background: linear-gradient(180deg, #9b90c2, #f5f5f5);
 }
 
 nav{
@@ -10,10 +12,19 @@ nav{
   text-decoration: none;
   .logo{
     text-decoration: none;
-    color: #6a4c9c;
+    //color: #6a4c9c;
+    .h4{
+      background: linear-gradient(to left,  rgb(3, 159, 165) 0%, #012929 100%);
+	    -webkit-background-clip: text;
+	    -webkit-text-fill-color: transparent;
+      font-family:'Great Vibes',cursive;
+    }
     .h6{
       margin: 0;
     }
+  }
+  .camera{
+    color:rgb(139, 139, 139);
   }
   .icon{
     margin-left: auto;
@@ -29,7 +40,7 @@ nav{
   }
   .chat{
     font-size: 20px;
-    color: #000;
+    color:rgb(139, 139, 139);
   }
 }
 .limit-video{
@@ -64,3 +75,8 @@ nav{
       font-size: 12px;
     }
   }
+.index-nav{
+  .nav-link{
+    color:rgb(139, 139, 139)
+  }
+}

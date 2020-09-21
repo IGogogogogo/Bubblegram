@@ -5,7 +5,9 @@
 
         <div class="user-posts post-load-target">
           <%= render partial: "/posts/post", collection: @posts, as: :post %>
-          <%= render "/shared/loading" %>
+          <% if @has_more_posts %>
+            <%= render "/shared/loading" %>
+          <% end %>
         </div>
       </div>
     </div>

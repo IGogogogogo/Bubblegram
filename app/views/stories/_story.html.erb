@@ -1,7 +1,7 @@
 <div class="user-story">
   <%= link_to user[:path], data: {turbolinks: false} do %>
   <div class="user-video">
-    <%= image_tag user[:user].avatar.url, class: 'img-fluid rounded-circle' %>
+    <%= image_tag user[:user].avatar.url, class: 'img-fluid rounded-circle' if user.avatar.present? %>
   </div>
   <div class="user-name text-black">
     <small><%= user[:user].nick_name %></small>

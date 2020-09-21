@@ -38,3 +38,12 @@
 trix-toolbar{
   display: none;
 }
+trix-editor {
+    border: none;
+    border-bottom: 1px solid #bbb;
+    border-radius: 3px;
+    margin: 0;
+    padding: 0;
+    min-height: 0;
+    outline: none;
+}

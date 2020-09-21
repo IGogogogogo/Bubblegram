@@ -2,8 +2,10 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy, :favourite]
 
   def index
+    per_count = 20
     @user = User.find(params[:user_id])
-    @posts = @user.posts.includes(:thumbs_up_users).order("created_at DESC").limit(20)
+    @posts = @user.posts.includes(:thumbs_up_users).order("created_at DESC").limit(per_count)
+    @has_more_posts = (@posts.count >= per_count)
   end
 
   def show
@@ -71,8 +73,12 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post.destroy
-    redirect_to root_path, notice: '文章刪除成功'
+    if @post.delete_post(current_user)
+      redirect_to posts_path, notice: '你不是文章所有者'
+    else
+      @post.destroy
+      redirect_to posts_path, notice: '文章成功刪除'
+    end
   end
 
   def favourite
