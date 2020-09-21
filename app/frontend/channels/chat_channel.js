@@ -58,15 +58,8 @@ document.addEventListener('turbolinks:load',()=>{
       text_submit.setAttribute("disabled", true)
       text_submit.classList.add("disappear")
       image_form.classList.remove("disappear")
+      message_text_area.scrollTop += message_text_area.scrollHeight
 
-
-      console.log(data.unread_message)
-      if(data.unread_message){
-        firstUnreadMessage = document.querySelector(`div[data-message-id]=${data.unread_message.id}`)
-        firstUnreadMessage.scrollIntoView();
-      }else{
-        message_text_area.scrollTop += message_text_area.scrollHeight
-      }
 
 
     }

@@ -18,6 +18,10 @@
       padding: 0 20px;
       box-sizing: border-box;
 
+      #unread-line{
+        text-align: center;
+      }
+
       .message + .message{
         margin-top: 20px;
       }
