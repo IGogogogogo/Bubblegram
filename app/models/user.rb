@@ -4,8 +4,8 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable,
-         :omniauthable, omniauth_providers: [:facebook, :google_oauth2]
-
+         :omniauthable, omniauth_providers: %i[facebook google_oauth2]
+  
   mount_uploader :avatar, AvatarUploader      #carrierwave
   after_create :add_blank_avatar              #預設使用者大頭照
   after_create :add_defult_following          #預設追蹤官方帳號
@@ -16,7 +16,7 @@ class User < ApplicationRecord
   #追蹤關聯
   has_many :followingships, foreign_key: :following_id, class_name: "Follow", dependent: :destroy
   has_many :fans, through: :followingships, source: :fan
-  has_many :fanships, foreign_key: :fan_id, class_name: "Follow", dependent: :destroy
+  has_many :fanships, foreign_key: :fan_id, class_name: 'Follow', dependent: :destroy
   has_many :followings, through: :fanships, source: :following
   #貼文標籤
   has_many :user_tags, foreign_key: :user_id, dependent: :destroy
@@ -37,8 +37,11 @@ class User < ApplicationRecord
   #自己和自己追蹤的人
   scope :viewable_users, -> (current_user){ where(id: current_user.followings).or(User.where(id: current_user)) }
 
-  def already_followed?(current_user)                  #檢查自己是否已經追蹤對方
-    self.fans.include?(current_user)
+  # 建立user與直播房的關聯
+  has_one :room
+
+  def already_followed?(current_user) # 檢查自己是否已經追蹤對方
+    fans.include?(current_user)
   end
 
   def toggle_favorite_post(post)
@@ -52,12 +55,10 @@ class User < ApplicationRecord
   def self.from_omniauth(auth, signed_in_resource = nil)
     # 1. 搜尋用 google, fb 登入過的 user (identity 紀錄的 user)
     identity = Identity.find_for_oauth(auth)
-    user = signed_in_resource ? signed_in_resource : identity.user
+    user = signed_in_resource || identity.user
 
     # 2. 搜尋 google, fb 的信箱是否註冊過
-    if user.nil?
-      user = User.where(email: auth.info.email).first
-    end
+    user = User.where(email: auth.info.email).first if user.nil?
 
     # 3. 建立新 user
     if user.nil?
@@ -75,7 +76,15 @@ class User < ApplicationRecord
       identity.save!
     end
 
-    return user
+    user
+  end
+
+  def exist_story?
+    self.stories.present?
+  end
+
+  def exist_room?
+    self.room.present?
   end
 
   private

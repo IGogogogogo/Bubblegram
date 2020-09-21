@@ -13,4 +13,13 @@ class ApplicationController < ActionController::Base
   # def already_followed(user)                  #檢查自己是否已經追蹤對方
   #   user.fans.include?(current_user)
   # end
+
+  # def default_url_options(options = {})
+  #   host_options = if Rails.env.development?
+  #     { host: request.headers["HTTP_X_ORIGINAL_HOST"] }
+  #   else
+  #     {}
+  #   end
+  #   options.merge(host_options)
+  # end
 end

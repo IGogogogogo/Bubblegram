@@ -1,5 +1,4 @@
 <%= render "shared/navbar" %>
-
 <div class="post-load-page" style="overflow: auto; height: 100vh;">
   <div class="container-fluid container-md">
 
@@ -7,11 +6,12 @@
     <div class="story">
       <%= link_to '新增限時動態', new_user_story_path(current_user) %>
     </div>
-
+    <div class="stream">
+      <%= link_to '直播', rooms_path ,data: {turbolinks: false}, method: 'post'  %>
+    </div>
 <!-- limit video -->
     <div class="limit-video d-flex justify-content-around align-items-center text-center border-bottom border-gray mb-3">
-      <%= render "/stories/story", user: current_user %>
-      <%= render partial: "/stories/story", collection: @following_users, as: :user %>
+      <%= render partial: "/stories/story", collection: @results, as: :user %>
     </div>
 
 <!-- Main post  -->

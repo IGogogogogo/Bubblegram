@@ -1,0 +1,8 @@
+<div id="videos"
+     action="show"
+     data-controller = "vonageSub"
+     data-vonageSub-key = "<%= ENV['vonage_api_key']%>"
+     data-vonageSub-session-id = "<%= @room.vonage_session_id %>"
+     data-vonageSub-token = "<%= @token %>">
+</div>
+<%= link_to 'Back', root_path, data: {turbolinks: false}, class: 'back-link' %>
