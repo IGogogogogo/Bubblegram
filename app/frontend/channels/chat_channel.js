@@ -36,7 +36,8 @@ document.addEventListener('turbolinks:load',()=>{
       const image_form =document.forms[1]
       const text_submit = document.querySelector("input[type='submit']")
 
-
+      console.log(message_text_area.scrollHeight)
+      message_text_area.scrollTo(0, message_text_area.scrollHeight)
 
 
       if(data.message.user_id === user_id){
@@ -58,7 +59,15 @@ document.addEventListener('turbolinks:load',()=>{
       text_submit.setAttribute("disabled", true)
       text_submit.classList.add("disappear")
       image_form.classList.remove("disappear")
-      message_text_area.scrollTop += message_text_area.scrollHeight
+
+      // console.log(message_text_area.scrollHeight)
+
+      // debugger
+      // setTimeout(() => {
+        console.log(message_text_area.scrollHeight)
+        message_text_area.scrollTo(0, message_text_area.scrollHeight)
+      // }, 200)
+      // message_text_area.scrollTop += message_text_area.scrollHeight
 
 
 

@@ -9,7 +9,6 @@ document.addEventListener("turbolinks:load",()=>{
   const message_text_area = document.querySelector(".message_text_area")
   const unreadLine = document.getElementById("unread-line")
 
-  message_text_area.scrollTop += message_text_area.scrollHeight
   text_area.addEventListener("keyup",()=>{
     // console.log(text_area.value.split(" ").join(""))
     if(text_area.value.split(" ").join("") !== ""){
@@ -28,10 +27,11 @@ document.addEventListener("turbolinks:load",()=>{
     image_value.value = ""
 
   })
-    if(unreadLine){
-      unreadLine.scrollIntoView();
-    }
-    // text_form.addEventListener("submit",(e)=>{
+  if(unreadLine){
+    unreadLine.scrollIntoView();
+  }
+  message_text_area.scrollTop += message_text_area.scrollHeight
+  // text_form.addEventListener("submit",(e)=>{
     //   text_submit.setAttribute("disabled", true)
     //   console.log(text_area.value)
     //   text_submit.classList.add("disappear")
