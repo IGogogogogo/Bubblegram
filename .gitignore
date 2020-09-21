@@ -40,3 +40,5 @@ yarn-debug.log*
 public/uploads
 config/application.yml
 ngrok.sh
+config/environments/development.rb.bak
+

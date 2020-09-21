@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root 'pages#index'
-
-  devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
 
   resources :users, only: [:show, :edit, :update] do
     resource :follows, only: [:create, :destroy]
@@ -24,7 +23,13 @@ Rails.application.routes.draw do
       get :followings
     end
   end
-
+  
+  # 產生show create destory 與 play 路徑
+  resources :rooms, only: [:show, :destory, :create, :destroy] do
+    member do
+      get :play
+    end 
+  end
   resources :searches, only: [:index] do
     collection do
       get :search
