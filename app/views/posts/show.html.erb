@@ -1,6 +1,7 @@
+
 <div class="wrap">
-  <div>
-    <%= image_tag @post.image.url, class: 'w-100 img-fluid' %>
+  <div class="owl-carousel owl-theme">
+    <%= render partial: "/posts/carousel_img", collection: @post.images, as: :image, locals: {images: @post.images} %>
   </div>
 
   <p><%= @taged_users.join(", ") %></p>

@@ -1,4 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css"
+import "owl.carousel/dist/assets/owl.carousel.css"
+import "owl.carousel/dist/assets/owl.theme.default.min.css"
 import "./actiontext.scss"
 import "./login.scss"
 import "./postindex.scss"

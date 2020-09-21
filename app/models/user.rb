@@ -7,7 +7,8 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[facebook google_oauth2]
   
   mount_uploader :avatar, AvatarUploader      #carrierwave
-  after_create :add_blank_avatar
+  after_create :add_blank_avatar              #預設使用者大頭照
+  after_create :add_defult_following          #預設追蹤官方帳號
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -93,9 +94,15 @@ class User < ApplicationRecord
 
   private
 
-  def add_blank_avatar
+  def add_blank_avatar              #預設使用者大頭照
     image_path = "./public/blank_avatar.png"
     self.avatar = File.open(image_path)
     self.save!
+  end
+
+  def add_defult_following          #預設追蹤官方帳號
+    if self != User.first
+      self.followings << User.first
+    end
   end
 end
