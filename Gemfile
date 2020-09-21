@@ -32,6 +32,7 @@ gem 'devise', '~> 4.2'
 gem 'omniauth', '~> 1.9', '>= 1.9.1'
 gem 'omniauth-facebook', '~> 7.0'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
+gem 'redis'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
@@ -47,7 +48,6 @@ group :development, :test do
   gem 'faker', '~> 2.13'
   gem 'thor', '~> 0.19.1'
   gem 'foreman', '~> 0.87.2'
-  gem 'figaro'
   gem 'capistrano', '3.14.1', require: false
   gem 'capistrano-bundler', '2.0.1'
   gem 'capistrano-rails', '1.6.1'

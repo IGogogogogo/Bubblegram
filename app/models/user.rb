@@ -87,6 +87,11 @@ class User < ApplicationRecord
     self.room.present?
   end
 
+  #判斷使用者是否上線
+  def is_online?
+    Redis.new.get("user_#{self.id}_online").present?
+  end
+
   private
 
   def add_blank_avatar              #預設使用者大頭照
