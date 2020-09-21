@@ -38,12 +38,23 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'figaro', '~> 1.0'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
 
+# Vonage api openTook gem
+gem "opentok", "~> 4.0.0"
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'faker', '~> 2.13'
   gem 'thor', '~> 0.19.1'
   gem 'foreman', '~> 0.87.2'
+  gem 'figaro'
+  gem 'capistrano', '3.14.1', require: false
+  gem 'capistrano-bundler', '2.0.1'
+  gem 'capistrano-rails', '1.6.1'
+  gem 'capistrano-passenger', '0.2.0'
+  gem 'net-ssh', '~> 6.1'
+  gem 'ed25519', '~> 1.2', '>= 1.2.4'
+  gem 'bcrypt_pbkdf', '~> 1.0', '>= 1.0.1'
 end
 
 group :development do
