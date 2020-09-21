@@ -51,7 +51,7 @@ export default class extends Controller {
     }
   }
 }
-
+// 之後要實作 觀看人數
 // let subCounts = (stream) => new Promise((resolve, reject) => {
 //   // counts 是一個array
 //   // setInterval(() => {

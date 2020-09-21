@@ -1,9 +1,6 @@
 class RoomsController < ApplicationController
   # 直播間的rooms
   before_action :find_room, only: %i[show play destroy]
-  def index
-    @rooms = Room.all
-  end
 
   def show
     opentok = OpenTok::OpenTok.new(ENV['vonage_api_key'], ENV['vonage_secret'])
