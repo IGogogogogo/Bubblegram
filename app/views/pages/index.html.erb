@@ -8,15 +8,16 @@
       <%= link_to '新增限時動態', new_user_story_path(current_user) %>
     </div>
 
-<!-- limit video -->
+
+
+<!-- Main post  -->
+    <div class="row justify-content-center">
+      <div class="col-12 px-0 pb-3 following-posts post-load-target">
+      <!-- limit video -->
     <div class="limit-video d-flex justify-content-around align-items-center text-center border-bottom border-gray mb-3">
       <%= render "/stories/story", user: current_user %>
       <%= render partial: "/stories/story", collection: @following_users, as: :user %>
     </div>
-
-<!-- Main post  -->
-    <div class="row">
-      <div class="col-12 col-md-8 px-0 pb-3 following-posts post-load-target">
         <%= render partial: "/posts/post", collection: @posts, as: :post %>
         <% if @has_more_posts %>
           <%= render "/shared/loading" %>

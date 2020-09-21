@@ -1,7 +1,7 @@
 <div id="home">
   <p id="index-logo">Bubblegram!</p>
 </div>
-<div class="container-fluid position-absolute login-form">
+<div class="container position-absolute login-form wrap">
 
   <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true) do |f| %>
 

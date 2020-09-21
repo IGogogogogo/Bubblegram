@@ -5,3 +5,5 @@ import "./postindex.scss";
 import "./bubble.scss";
 import "./message.scss"
 import "./loading.scss"
+import "./usershow.scss"
+import "./wrap.scss"
