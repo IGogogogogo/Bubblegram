@@ -1,15 +1,17 @@
-<div>
-  <%= image_tag @post.image.url, class: 'w-100 img-fluid' %>
-</div>
+<div class="wrap">
+  <div>
+    <%= image_tag @post.image.url, class: 'w-100 img-fluid' %>
+  </div>
 
-<p><%= @taged_users.join(", ") %></p>
+  <p><%= @taged_users.join(", ") %></p>
 
-<p><%= @post.content %></p>
+  <p><%= @post.content %></p>
 
-<%= render partial: "/comments/comment", collection: @comments %>
-<%= form_with(model: @comment, url: post_comments_path(@post) ,local: true) do |form| %>
+  <%= render partial: "/comments/comment", collection: @comments %>
+  <%= form_with(model: @comment, url: post_comments_path(@post) ,local: true) do |form| %>
   <div>
     <%= form.text_field :content, placeholder: "輸入留言" %>
     <%= form.submit "留言" %>
   </div>
-<% end %>
+  <% end %>
+</div>
