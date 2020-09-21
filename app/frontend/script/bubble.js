@@ -1,4 +1,5 @@
 window.addEventListener('turbolinks:load', function () {
+
   const indexlogo = document.querySelector('#index-logo')
   const home = document.querySelector("#home")
   //btn.addEventListener('click', function () {
@@ -26,6 +27,7 @@ window.addEventListener('turbolinks:load', function () {
     });
   }
 
-  gsap.to("#index-logo", { duration: 1.5, y: -150, delay: 4 })
-  gsap.from('.login-form', { duration: 1.5, y: 300, delay: 4.5, opacity: 0 })
+  gsap.to("#index-logo", { duration: 1.5, y: -150, delay: 2 })
+  gsap.from('.login-form', { duration: 1.5, y: 300, delay: 2.5, opacity: 0 })
+
 })

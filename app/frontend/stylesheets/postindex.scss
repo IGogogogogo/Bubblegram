@@ -20,9 +20,14 @@
   border-top: 2px solid #ccc;
   position: fixed;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 740px;
   background: #fff;
   z-index: 10;
+  .nav-link{
+    color:rgb(139, 139, 139)
+  }
 }
 .text-black{
   color: #000;
@@ -40,8 +45,11 @@
   .post-pic{
       height: 500px;
   }
+  .index-nav{
+    width: 100%;
+  }
 }
-@media (max-width: 413px) {
+@media (max-width: 415px) {
   .container{
     padding: 0px;
     overflow: hidden;
@@ -57,5 +65,8 @@
     padding-left: 7px;
     padding-right: 7px;
     border: none !important;
+  }
+  .index-nav{
+    width: 100%;
   }
 }
