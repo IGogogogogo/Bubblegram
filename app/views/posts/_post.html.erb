@@ -19,19 +19,19 @@
         <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
           <%= link_to '編輯', edit_post_path(post), class: 'dropdown-item' %>
           <!-- Button trigger modal -->
-          <a class="dropdown-item text-danger" data-toggle="modal" data-target="#staticBackdrop"
+          <a class="dropdown-item text-danger" data-toggle="modal" data-target="#staticBackdrop-<%= post.id %>"
             style="cursor: pointer;">
             刪除
           </a>
         </div>
       </div>
 
-      <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal fade" id="staticBackdrop-<%= post.id %>" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel-<%= post.id %>" aria-hidden="true">
         <div class="modal-dialog modal-sm">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title text-danger" id="staticBackdropLabel">你確定要刪除嗎？</h5>
+              <h5 class="modal-title text-danger" id="staticBackdropLabel-<%= post.id %>">你確定要刪除嗎？</h5>
             </div>
             <div class="modal-body">
               請注意！<br>

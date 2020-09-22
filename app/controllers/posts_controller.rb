@@ -109,7 +109,7 @@ class PostsController < ApplicationController
   end
 
   def check_owner
-    if !@post.post_owner?(current_user)
+    if !(@post.post_owner?(current_user))
       redirect_to root_path, notice: '你不是文章所有者'
     end
   end
