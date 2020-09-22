@@ -7,16 +7,16 @@ import "../stylesheets/application"
 import "@fortawesome/fontawesome-free/js/all";
 
 import "./stories.js"
+import "owl.carousel"
 import "./search.js"
 import "./preview_photo"
 import "./bubble"
 import "./chat_message_view"
 import "./post_form.js"
 import "./load_posts.js"
-import gsap from "gsap";
+import "./owl_carousel.js"
+import gsap from "gsap"
 
-
-window.$ = $
 window.gsap = gsap
 
 document.addEventListener("turbolinks:load", () => {

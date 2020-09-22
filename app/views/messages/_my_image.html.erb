@@ -1,5 +1,6 @@
 <div class= "message me">
   <div class= "pic_name">
+    <%= image_tag message.user.avatar.url, class: "user-avatar", width: "50px", style: "border-radius: 50%" if message.user.avatar.present? %>
     <%= message.user.nick_name %>
   </div>
   <div class="pic">

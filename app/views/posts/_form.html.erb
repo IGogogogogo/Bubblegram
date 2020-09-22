@@ -8,18 +8,19 @@
 
 <%= form_with(model: post, url: url, class: "form", local: true) do |form| %>
   <div class="post-form-img" style="position: relative;">
-    <%= image_tag post.image.url, width: "100%", draggable: false if post.image.present? %>
+    <%#= image_tag post.image.url, width: "100%", draggable: false if post.image.present? %>
   </div>
 
   <div class="form-group">
     <%= form.label :image, 'image' %>
-    <img id="output" alt="">
-    <%= form.file_field :image, class: "form-control" %>
+    <%# <img id="output" alt=""> %>
+
+    <%= form.file_field :images, multiple: true, class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= form.label :content, '文章內文' %>
-    <%= form.text_field :content, class: "form-control" %>
+    <%= form.text_area :content, class: "form-control", style: 'border: none; border-bottom: 1px solid #ccc; resize: none;', placeholder: '增加相片說明 ...'%>
   </div>
 
   <div class="form-group">

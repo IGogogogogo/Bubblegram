@@ -1,8 +1,8 @@
 class Post < ApplicationRecord
-  mount_uploader :image, ImageUploader
+  mount_uploaders :images, ImageUploader
   has_rich_text :body
   validates :content, presence: true
-  validates :image, presence: true
+  validates :images, presence: true
 
   belongs_to :user, counter_cache: true
   has_many :comments, dependent: :destroy
@@ -11,7 +11,7 @@ class Post < ApplicationRecord
   has_many :taged_users, through: :user_tags, source: :user
 
 
-  has_many :favourites
+  has_many :favourites, dependent: :destroy
   has_many :thumbs_up_users, through: :favourites, source: :user
 
   scope :my_following_users, -> (followings) { where user_id: followings}  #找出所有追蹤中的使用者
@@ -26,8 +26,8 @@ class Post < ApplicationRecord
   end
   # 不會把自己算進去
 
-  def delete_post(user)
-    self.user != user
+  def post_owner?(current_user)
+    self.user == current_user
   end
 
 end

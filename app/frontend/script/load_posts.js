@@ -46,12 +46,22 @@ document.addEventListener("turbolinks:load", () => {
         url: url,
         type: "get",
         success: function(data) {
-          console.log("success：", url)
+          // console.log("success：", url)
           const postsEl = data.querySelector("body").innerHTML
           const postLoadTarget = document.querySelector(".post-load-target")
-
           const loadingDiv = document.querySelector(".loading")
-          loadingDiv.remove()
+
+          if (loadingDiv) {
+            loadingDiv.remove()
+            return
+          }
+
+          if (!postsEl || postsEl == "") {   //沒有新資料時移除事件監聽
+            postLoadPage.removeEventListener("scroll", loadPosts)
+            if (loadingDiv) { loadingDiv.remove() }
+            return
+          }
+
           if (type == "following_posts" || type == "my_posts") {
             postLoadTarget.innerHTML += postsEl
             postLoadTarget.appendChild(loadingDiv)
@@ -61,11 +71,6 @@ document.addEventListener("turbolinks:load", () => {
           } else if (type == "tag_img") {
             tagImg.innerHTML += postsEl
             tagImg.appendChild(loadingDiv)
-          }
-
-          if (postsEl == "") {   //沒有新資料時移除事件監聽
-            postLoadPage.removeEventListener("scroll", loadPosts)
-            loadingDiv.remove()
           }
         },
         error: function(errors) {

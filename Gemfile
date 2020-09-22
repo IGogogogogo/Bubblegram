@@ -32,11 +32,15 @@ gem 'devise', '~> 4.2'
 gem 'omniauth', '~> 1.9', '>= 1.9.1'
 gem 'omniauth-facebook', '~> 7.0'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
+gem 'redis'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'figaro', '~> 1.0'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
+
+# Vonage api openTook gem
+gem "opentok", "~> 4.0.0"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -44,6 +48,13 @@ group :development, :test do
   gem 'faker', '~> 2.13'
   gem 'thor', '~> 0.19.1'
   gem 'foreman', '~> 0.87.2'
+  gem 'capistrano', '3.14.1', require: false
+  gem 'capistrano-bundler', '2.0.1'
+  gem 'capistrano-rails', '1.6.1'
+  gem 'capistrano-passenger', '0.2.0'
+  gem 'net-ssh', '~> 6.1'
+  gem 'ed25519', '~> 1.2', '>= 1.2.4'
+  gem 'bcrypt_pbkdf', '~> 1.0', '>= 1.0.1'
 end
 
 group :development do
