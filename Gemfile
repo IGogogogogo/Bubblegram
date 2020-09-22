@@ -43,12 +43,12 @@ gem 'kaminari', '~> 1.2', '>= 1.2.1'
 gem "opentok", "~> 4.0.0"
 #用來存carrierwave 圖片到 aws s3
 gem "fog-aws", '~> 3.6', '>= 3.6.7'
+gem 'pundit', '~> 2.1'        #controller身份驗證
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'faker', '~> 2.13'
-  gem 'thor', '~> 1.0.1'
   gem 'foreman', '~> 0.87.2'
   gem 'capistrano', '3.14.1', require: false
   gem 'capistrano-bundler', '2.0.1'
