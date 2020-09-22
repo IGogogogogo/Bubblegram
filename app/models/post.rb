@@ -26,8 +26,8 @@ class Post < ApplicationRecord
   end
   # 不會把自己算進去
 
-  def delete_post(user)
-    self.user != user
+  def post_owner?(current_user)
+    self.user == current_user
   end
 
 end
