@@ -102,5 +102,4 @@ class PostsController < ApplicationController
   def post_params
     params.require(:post).permit(:content, :body, {taged_user_ids: []}, {images: []} )
   end
-
 end
