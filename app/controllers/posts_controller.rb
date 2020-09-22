@@ -38,6 +38,10 @@ class PostsController < ApplicationController
   end
 
   def new
+    if current_user.id != params[:user_id].to_i
+      redirect_to root_path, notice: '你不是文章所有者'
+    end
+
     @post = current_user.posts.new
     find_tag_users
     @url = user_posts_path(current_user)
@@ -45,6 +49,7 @@ class PostsController < ApplicationController
 
   def create
     @post = current_user.posts.new(post_params)
+    check_owner
 
     if @post.save
       redirect_to post_path(@post), notice: '文章新增成功'
