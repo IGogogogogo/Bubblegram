@@ -41,6 +41,7 @@ gem 'kaminari', '~> 1.2', '>= 1.2.1'
 
 # Vonage api openTook gem
 gem "opentok", "~> 4.0.0"
+gem 'pundit', '~> 2.1'        #controller身份驗證
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
