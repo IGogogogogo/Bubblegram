@@ -38,7 +38,7 @@ class User < ApplicationRecord
   scope :viewable_users, -> (current_user){ where(id: current_user.followings).or(User.where(id: current_user)) }
 
   # 建立user與直播房的關聯
-  has_one :room
+  has_one :room, dependent: :destroy
 
   def already_followed?(current_user) # 檢查自己是否已經追蹤對方
     fans.include?(current_user)
