@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 2020_09_20_105628) do
+ActiveRecord::Schema.define(version: 2020_09_22_033056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,15 +54,6 @@ ActiveRecord::Schema.define(version: 2020_09_20_105628) do
     t.index ["recipient_id", "sender_id"], name: "index_chats_on_recipient_id_and_sender_id", unique: true
     t.index ["recipient_id"], name: "index_chats_on_recipient_id"
     t.index ["sender_id"], name: "index_chats_on_sender_id"
-  end
-
-  create_table "collections", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "post_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["post_id"], name: "index_collections_on_post_id"
-    t.index ["user_id"], name: "index_collections_on_user_id"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -121,6 +111,7 @@ ActiveRecord::Schema.define(version: 2020_09_20_105628) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "comments_count", default: 0
     t.json "images"
+    t.integer "favourites_count", default: 0
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -175,8 +166,6 @@ ActiveRecord::Schema.define(version: 2020_09_20_105628) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "collections", "posts"
-  add_foreign_key "collections", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "favourites", "posts"

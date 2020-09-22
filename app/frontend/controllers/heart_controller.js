@@ -16,7 +16,8 @@ export default class extends Controller {
   favourite() {
     // console.log(this.heartTarget)
     let post_id = this.data.get('id')
-    console.log(post_id)
+    let strongNum = this.data.element.parentElement.parentElement.querySelector('.thumb-up strong')
+    let thumbNum = strongNum.textContent
 
     Rails.ajax({
       url: `/posts/${post_id}/favourite.json`,
@@ -27,15 +28,18 @@ export default class extends Controller {
         if (result["status"] == true) {
           this.likeTarget.classList.remove("far")
           this.likeTarget.classList.add("fas")
+          strongNum.textContent = `${parseInt(thumbNum) + 1} 個讚`
         } else {
           this.likeTarget.classList.remove("fas")
           this.likeTarget.classList.add("far")
+          strongNum.textContent = `${parseInt(thumbNum) - 1} 個讚`
         }
       },
       error: (err) => {
         console.log(err)
       },
     })
+
 
   }
 }
