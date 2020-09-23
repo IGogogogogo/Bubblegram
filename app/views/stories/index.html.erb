@@ -1,4 +1,5 @@
 <h1><%= @user.nick_name %>限時動態總覽</h1>
+<%= link_to '新增限時動態', new_user_story_path(current_user) %>
 
 <div class="container-fluid container-md">
   <section class="row">
@@ -49,7 +50,7 @@
 
             <div class="carousel-inner">
             <% @stories.each_with_index do |story,index| %>
-              <div class="story-img carousel-item <%= index == 0 ? 'active' : '' %>">
+              <div class="story-img carousel-item story_id <%= index == 0 ? 'active' : '' %>"  story_id="<%= story.id %>" >
                 <%= image_tag story.picture.url, class: 'd-block w-100' %>
               </div>
               <% end %>

@@ -17,6 +17,7 @@
     "select2": "^4.0.13",
     "source-code-pro": "git://github.com/adobe-fonts/source-code-pro.git#release",
     "stimulus": "^1.1.1",
+    "sweetalert2": "^10.3.2",
     "trix": "^1.2.0",
     "turbolinks": "^5.2.0"
   },
