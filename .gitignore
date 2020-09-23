@@ -27,6 +27,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/config/secrets.yml
 
 /public/packs
 /public/packs-test
@@ -41,4 +42,3 @@ public/uploads
 config/application.yml
 ngrok.sh
 config/environments/development.rb.bak
-
