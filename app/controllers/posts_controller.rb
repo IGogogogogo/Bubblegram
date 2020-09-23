@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy, :favourite]
-  before_action :check_owner, only: [:edit, :update, :destroy]
 
   def index
     per_count = 20
@@ -10,6 +9,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    authorize @post
     @taged_users = @post.taged_users.map{ |user| "@#{user.nick_name}" }
     @comments = @post.comments
     @comment = Comment.new
@@ -39,12 +39,15 @@ class PostsController < ApplicationController
 
   def new
     @post = current_user.posts.new
+    authorize @post
     find_tag_users
     @url = user_posts_path(current_user)
   end
 
   def create
     @post = current_user.posts.new(post_params)
+    authorize @post
+    # check_owner
 
     if @post.save
       redirect_to post_path(@post), notice: '文章新增成功'
@@ -56,14 +59,15 @@ class PostsController < ApplicationController
   end
 
   def edit
+    authorize @post
     find_tag_users
     @url = post_path
   end
 
   def update
     @post.assign_attributes(post_params)
+    authorize @post
     @post.taged_users = User.where(id: params[:post][:taged_users])
-
     if @post.save
       redirect_to post_path(@post), notice: '文章更新成功'
     else
@@ -74,6 +78,7 @@ class PostsController < ApplicationController
   end
 
   def destroy
+    authorize @post
     @post.destroy
     redirect_to root_path, notice: '文章成功刪除'
   end
@@ -100,6 +105,10 @@ class PostsController < ApplicationController
   end
 
   def post_params
+<<<<<<< HEAD
     params.require(:post).permit(:content, :body, {taged_user_ids: []}, {images: []} )
+=======
+    params.require(:post).permit(:content, :body, {images: []} )
+>>>>>>> b36866a... add pundit authorize for user and post
   end
 end
