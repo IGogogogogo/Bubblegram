@@ -14,14 +14,17 @@ class StoriesController < ApplicationController
   end
 
   def show
+    authorize @story
   end
 
   def new
     @story = Story.new
+    authorize @story
   end
 
   def create
     @story = current_user.stories.new(story_params)
+    authorize @story
 
     if @story.save
       redirect_to root_path, notice: "限時動態新增成功"
@@ -31,6 +34,7 @@ class StoriesController < ApplicationController
   end
 
   def destroy
+    authorize @story
     @story.destroy
     redirect_to user_stories_path, notice: "限時動態刪除成功"
   end
