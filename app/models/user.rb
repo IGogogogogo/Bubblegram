@@ -33,7 +33,7 @@ class User < ApplicationRecord
 
   scope :not_self, -> (current_user){ where.not(id: current_user.id) }
   #搜尋有關鍵字的user
-  scope :find_by_keyword, -> (keyword){ where(["nick_name LIKE ? OR email LIKE ?", "%#{keyword}%", "%#{keyword}%"]) }
+  scope :with_keyword, -> (keyword){ where(["nick_name LIKE ? OR email LIKE ?", "%#{keyword}%", "%#{keyword}%"]) }
   #自己和自己追蹤的人
   scope :viewable_users, -> (current_user){ where(id: current_user.followings).or(User.where(id: current_user)) }
 
