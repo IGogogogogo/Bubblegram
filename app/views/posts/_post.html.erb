@@ -12,20 +12,22 @@
       <!--Button---------------->
       <div class="option ml-auto g-btn px-2"></div>
 
-      <div class="dropdown">
-        <button class="btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          <i class="fas fa-ellipsis-h"></i>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <%= link_to '編輯', edit_post_path(post), class: 'dropdown-item' %>
-          <!-- Button trigger modal -->
-          <a class="dropdown-item text-danger" data-toggle="modal" data-target="#staticBackdrop-<%= post.id %>"
-            style="cursor: pointer;">
-            刪除
-          </a>
+      <% if owner?(post) %>
+        <div class="dropdown">
+          <button class="btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="fas fa-ellipsis-h"></i>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <%= link_to '編輯', edit_post_path(post), class: 'dropdown-item' %>
+            <!-- Button trigger modal -->
+            <a class="dropdown-item text-danger" data-toggle="modal" data-target="#staticBackdrop-<%= post.id %>"
+              style="cursor: pointer;">
+              刪除
+            </a>
+          </div>
         </div>
-      </div>
+      <% end %>
 
       <div class="modal fade" id="staticBackdrop-<%= post.id %>" data-backdrop="static" data-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel-<%= post.id %>" aria-hidden="true">
