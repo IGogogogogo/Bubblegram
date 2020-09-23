@@ -19,7 +19,8 @@ class UnreadMessageNotificationChannel < ApplicationCable::Channel
 
   private
   def redis
-    Redis.new
+    @redis = Redis.new unless @redis
+    @redis
   end
 
 end

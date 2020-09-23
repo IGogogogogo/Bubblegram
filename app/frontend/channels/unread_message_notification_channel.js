@@ -39,8 +39,9 @@ document.addEventListener("turbolinks:load",()=>{
       // // console.log(chatChannle.length)
 
       if(chatChannle.length === 1)return //有的話代表正在聊天室中，不發通知
-
-      this.newMessage(data.message) //執行newMessage方法
+      if(!data.read_message){
+        this.newMessage(data.message) //執行newMessage方法
+      }
 
       let chatUsers = Array.from(document.querySelectorAll(".chat-user")) //選取訊息盒的所有聊天的人
       // console.log(data)
