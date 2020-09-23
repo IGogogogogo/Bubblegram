@@ -6,11 +6,10 @@ class PagesController < ApplicationController
     @results = build_results
     @posts = Post.includes(:user, :thumbs_up_users).viewable_posts(viewable_users).order("created_at DESC").limit(per_count)
     @has_more_posts = (@posts.count >= per_count)
-    
   end
 
   private
-  
+
     # 將所需要的結果組成陣列，塞給render的collection
     def build_results
       [ # 若current_user 有限時動態，轉到show，若沒有，則到new
