@@ -31,10 +31,11 @@ export default class extends Controller {
     // console.log(OT.getDevices() )
     // 建立 publisher
     this.publisher = OT.initPublisher('video', {
-      insertMode: 'append',
+      insertMode: 'replace',
       width: '100%',
-      height: '100%',
+      height: '100vh',
       facingMode :"user",
+      fitMode: "contain",
       mirror:false,
       name: this.data.get("name"),
     }, this.handleError.bind(this))

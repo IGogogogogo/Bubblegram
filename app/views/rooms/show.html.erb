@@ -5,4 +5,6 @@
      data-vonageSub-session-id = "<%= @room.vonage_session_id %>"
      data-vonageSub-token = "<%= @token %>">
 </div>
-<%= link_to 'Back', root_path, data: {turbolinks: false}, class: 'back-link' %>
+<%= link_to root_path, data: {turbolinks: false}, class: 'back-link' do %>
+     <i class="fas fa-sign-out-alt"></i>
+<% end %>
