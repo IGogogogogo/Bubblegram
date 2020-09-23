@@ -1,8 +1,12 @@
-<div id="videos" 
-     data-controller = "vonagePub"
-     data-vonagePub-key="<%= ENV['vonage_api_key']%>"
-     data-vonagePub-session-id = "<%= @room.vonage_session_id %>"
-     data-vonagePub-token = "<%= @token %>"
-     data-vonagePub-name = "<%= current_user.nick_name%>正在直播！" >
-</div>
-<%= link_to 'Back', room_path, method: 'delete',data: {turbolinks: false}, class: 'back-link'  %>
+	<div 
+		id="video" class = "col-12 px-0 pb-3 "
+		data-controller = "vonagePub"
+		data-vonagePub-key="<%= ENV['vonage_api_key']%>"
+		data-vonagePub-session-id = "<%= @room.vonage_session_id %>"
+		data-vonagePub-token = "<%= @token %>"
+		data-vonagePub-name = "<%= current_user.nick_name%>正在直播！" 
+		>
+	</div>
+		<%= link_to room_path, method: 'delete',data: {turbolinks: false}, class: 'back-link' do %>
+			<i class="fas fa-sign-out-alt"></i>
+		<% end %>
