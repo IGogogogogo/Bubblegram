@@ -3,8 +3,14 @@ import consumer from "./consumer"
 document.addEventListener("turbolinks:load",()=>{
   // console.log(consumer.subscriptions)
 
-  let unreadChannel = consumer.subscriptions.subscriptions.filter(sub=> JSON.parse(sub.identifier).channel === "UnreadMessageNotificationChannel") //找有沒有在unreadchannel
-  if(unreadChannel.length === 1)return //如果有直接return 避免在訂閱一次
+  let unreadChannels = consumer.subscriptions.subscriptions.filter(sub=> JSON.parse(sub.identifier).channel === "UnreadMessageNotificationChannel") //找有沒有在unreadchannel
+  // console.log(unreadChannels)
+  if(unreadChannels.length >= 1){
+    unreadChannels.forEach((unreadChannel)=>{
+      consumer.subscriptions.remove(unreadChannel)
+    })
+  }
+  //如果有直接全部刪除避免多訂閱
 
 
   let unreadMessagesDiv= document.createElement("div")
