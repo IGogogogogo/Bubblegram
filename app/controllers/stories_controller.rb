@@ -18,7 +18,8 @@ class StoriesController < ApplicationController
   end
 
   def new
-    @story = Story.new
+    check_owner
+    @story = current_user.stories.new
     authorize @story
   end
 
