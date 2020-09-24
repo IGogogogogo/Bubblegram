@@ -52,7 +52,7 @@ document.addEventListener("turbolinks:load",()=>{
          let onlineText = chatUser[0].querySelector(".chat-user-info .online-text")
          if(onlineText){ //有無目前上線樣式
            chatUser[0].querySelector(".chat-user-info").append(unreadMessagesDiv)
-           onlineText.remove()
+           onlineText.classList.add("off-line")
           }
         }
 

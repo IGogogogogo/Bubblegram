@@ -22,11 +22,11 @@ consumer.subscriptions.create({channel: "UserOnlineChannel"}, {
     if (data.is_online){
       if(chatUser.length === 0)return
       chatUser[0].querySelector(".chat-user-pic .dot").classList.add("online-dot")  //給他綠點
-      chatUser[0].querySelector(".chat-user-info .online-text").textContent = data.online //以及上線中
+      chatUser[0].querySelector(".chat-user-info .online-text").classList.remove("off-line") //以及上線中
     }else{
       if(chatUser.length === 0)return
       chatUser[0].querySelector(".chat-user-pic .dot").classList.remove("online-dot")
-      chatUser[0].querySelector(".chat-user-info .online-text").textContent = ""
+      chatUser[0].querySelector(".chat-user-info .online-text").classList.add("off-line")
     }
 
     // Called when there's incoming data on the websocket for this channel
