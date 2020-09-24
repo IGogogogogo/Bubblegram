@@ -38,8 +38,10 @@ class PostsController < ApplicationController
   end
 
   def new
+    check_owner
     @post = current_user.posts.new
     authorize @post
+
     find_tag_users
     @url = user_posts_path(current_user)
   end
@@ -47,7 +49,6 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     authorize @post
-    # check_owner
 
     if @post.save
       redirect_to post_path(@post), notice: '文章新增成功'

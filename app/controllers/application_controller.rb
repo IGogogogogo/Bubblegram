@@ -13,6 +13,12 @@ class ApplicationController < ActionController::Base
     record.user == current_user
   end
 
+  def check_owner
+    if params[:user_id].to_i != current_user.id
+      redirect_to root_path
+    end
+  end
+
   protected
 
   def configure_permitted_parameters
