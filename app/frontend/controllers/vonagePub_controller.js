@@ -33,7 +33,7 @@ export default class extends Controller {
     this.publisher = OT.initPublisher('video', {
       insertMode: 'replace',
       width: '100%',
-      height: '100vh',
+      height: '100%',
       facingMode :"user",
       fitMode: "contain",
       mirror:false,
