@@ -4,7 +4,7 @@ window.addEventListener('turbolinks:load', function () {
   const home = document.querySelector("#home")
   //btn.addEventListener('click', function () {
   if (!indexlogo) return
-  for (var i = 0; i < 30; i++) {
+  for (var i = 0; i < 25; i++) {
     var d = document.createElement('div');
     d.className = 'bubble';
     var a = Math.random() * 40 + 25 + 'px';  //get the random number
