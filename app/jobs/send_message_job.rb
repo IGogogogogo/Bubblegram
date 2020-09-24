@@ -1,7 +1,7 @@
 class SendMessageJob < ApplicationJob
   queue_as :default
 
-  def perform(message)
+  def perform(message, new_message_counts)
     # Do something later
     my_message = ApplicationController.render(
       partial: "messages/my_message",
@@ -33,12 +33,9 @@ class SendMessageJob < ApplicationJob
     )
     ActionCable.server.broadcast(
       "unread_message_notification_channel",
-      { my_message: my_message,
-        other_message: other_message,
-        my_image: my_image,
-        other_image: other_image,
+      {
         message: message,
-        new_message_counts: Redis.new.lrange("#{message.chat_id}_#{message.user_id}_new_message",0,-1).length
+        new_message_counts: new_message_counts
       }
     )
 

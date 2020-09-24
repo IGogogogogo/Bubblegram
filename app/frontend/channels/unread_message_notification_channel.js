@@ -28,20 +28,14 @@ document.addEventListener("turbolinks:load",()=>{
       // Called when the subscription has been terminated by the server
     },
 
-    newMessage(data){
-      console.log(data)
-      this.perform("new_message",data) //將訊息傳送到unread＿message_channel.rb
-    },
-
     received(data) {
       let chatChannle = this.consumer.subscriptions.subscriptions.filter(sub=> JSON.parse(sub.identifier).channel === "ChatChannel") //找有沒有在chatchannel
 
-      // // console.log(chatChannle.length)
+      // console.log(chatChannle)
 
       if(chatChannle.length === 1)return //有的話代表正在聊天室中，不發通知
-      if(!data.read_message){
-        this.newMessage(data.message) //執行newMessage方法
-      }
+
+      // console.log(data.read_message)
 
       let chatUsers = Array.from(document.querySelectorAll(".chat-user")) //選取訊息盒的所有聊天的人
       // console.log(data)
@@ -49,6 +43,10 @@ document.addEventListener("turbolinks:load",()=>{
         return Number(user.dataset.chatUser) == data.message.user_id
       }) // 比對這則訊息是誰傳的
 
+
+      if(!data.read_message && (data.message.user_id == Number(chatUser[0].dataset.chatUser))){
+        this.perform("new_message",data.message)
+      }
 
       if (!!chatUser[0]){ // 如果有人傳新訊息把目前上線的div換成新訊息的div
          let onlineText = chatUser[0].querySelector(".chat-user-info .online-text")
