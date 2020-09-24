@@ -11,11 +11,13 @@ document.addEventListener('turbolinks:load',()=>{
     return
   }
 
+
+
   const chat_id = chat_room.dataset.chat
 
   // const unreadChannel = consumer.subscriptions.subscriptions.filter(sub=> JSON.parse(sub.identifier).channel === "UnreadMessageNotificationChannel")
 
- if(chatchannel.length === 1)return; //預防turbolink 重複註冊
+  if(chatchannel.length === 1)return; //預防turbolink 重複註冊
 
   consumer.subscriptions.create({channel:"ChatChannel", chat_id: chat_id}, {
     connected() {
@@ -35,25 +37,50 @@ document.addEventListener('turbolinks:load',()=>{
       const form = document.forms[0]
       const image_form =document.forms[1]
       const text_submit = document.querySelector("input[type='submit']")
+      let temp = document.querySelector("template")
+      let tempDiv = temp.content.querySelector(".message")
 
-      console.log(message_text_area.scrollHeight)
-      message_text_area.scrollTo(0, message_text_area.scrollHeight)
+      // console.log(message_text_area.scrollHeight)
+      // message_text_area.scrollTo(0, message_text_area.scrollHeight)
 
 
       if(data.message.user_id === user_id){
         form.reset()
-        if(data.message.content == null){
-          message_text_area.innerHTML += data.my_image
-        }else{
-          message_text_area.innerHTML += data.my_message
-        }
+        isContentNull(data.my_image, data.my_message)
       }else{
+        isContentNull(data.other_image, data.other_message)
+      }
+
+      function tempRender(message){
+        let clone;
+        tempDiv.innerHTML = message
+        clone = document.importNode(temp.content,true)
+        message_text_area.append(clone)
+      }
+
+      function isContentNull(image, message){
         if(data.message.content == null){
-          message_text_area.innerHTML += data.other_image
+          tempRender(image)
         }else{
-          message_text_area.innerHTML += data.other_message
+          tempRender(message)
         }
       }
+
+
+      // if(data.message.user_id === user_id){
+      //   form.reset()
+      //   if(data.message.content == null){
+      //     message_text_area.innerHTML += data.my_image
+      //   }else{
+      //     message_text_area.innerHTML += data.my_message
+      //   }
+      // }else{
+      //   if(data.message.content == null){
+      //     message_text_area.innerHTML += data.other_image
+      //   }else{
+      //     message_text_area.innerHTML += data.other_message
+      //   }
+      // }
 
 
       text_submit.setAttribute("disabled", true)
@@ -66,7 +93,7 @@ document.addEventListener('turbolinks:load',()=>{
       // setTimeout(() => {
         // console.log(message_text_area.scrollHeight)
         message_text_area.scrollTo(0, message_text_area.scrollHeight)
-      // }, 200)
+      // }, 500)
       // message_text_area.scrollTop += message_text_area.scrollHeight
 
 

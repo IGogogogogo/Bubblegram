@@ -24,12 +24,10 @@
       }
 
       .message + .message{
-        margin-top: 20px;
+        margin-bottom: 20px;
       }
 
       .message{
-        display: flex;
-        align-items: flex-start;
         .pic_name{
           display: flex;
           flex-direction: column;
@@ -53,6 +51,8 @@
       }
 
       .other{
+        display: flex;
+        align-items: flex-start;
         padding-right: 10%;
 
         .content{
@@ -68,6 +68,8 @@
       }
 
       .me{
+        display: flex;
+        align-items: flex-start;
         justify-content: flex-end;
         padding-left: 10%;
 
