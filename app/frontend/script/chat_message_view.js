@@ -10,80 +10,96 @@ document.addEventListener("turbolinks:load",()=>{
   const text_submit = document.querySelector("input[type='submit']")
   const message_text_area = document.querySelector(".message_text_area")
   const unreadLine = document.getElementById("unread-line")
+  let temp = document.querySelector("template")
+  let tempDiv = temp.content.querySelector(".message")
 
-  let page = 4
-  let urlPage = `.json?page=`
+  let pageCount = 4
   let url = document.location.href
-  let chatId = Number(url.split("/").pop())
+  let urlPage = `.json?page=`
+  // let chatId = Number(url.split("/").pop())
 
   function scrolling(e){
     if(e.target.scrollTop == 0){
-      page += 1
-      axios.get(url + urlPage + page)
+      pageCount += 1
+      axios.get(url + urlPage + pageCount)
       .then(function(response){
         return response.data
       })
-      .then(function(datas){
-        console.log(datas)
+      .then(async function(datas){
+        // console.log(datas)
+        let topMessage = document.querySelector(".message_text_area div")
         if(datas.length < 25){
-          document.body.removeEventListener('scroll',scroll)
-        }else{
-          e.target.scrollTop = (e.target.scrollHeight/4)
+          message_text_area.removeEventListener('scroll',scrolling)
         }
-
+        await render(datas)
+        topMessage.scrollIntoView()
       })
     }
   }
 
 
   function render(messages){
-    messages = messages.reverse()
     let renderMessage
 
     messages.forEach((message) => {
-
-      renderMessage = `<div class= "me">
+      if (message.current_user === message.user.id){
+        if (message.image.url === null){
+          renderMessage = `<div class= "me">
+          <div class= "pic_name">
+            <img class="user-avatar" width="50px" style="border-radius: 50%" src=${message.user.avatar.url}>
+            ${message.user.nick_name}
+          </div>
+          <div class="content">
+            ${message.content}
+          </div>
+        </div>`;
+        }else{
+          renderMessage = `<div class= "me">
       <div class= "pic_name">
-        <img class="user-avatar" width="50px" style="border-radius: 50%" src="/uploads/user/avatar/${message.user_id}/star-e01.png" />
-      </div>
-      <div class="content">
-        ${message.contnet}
-      </div>
-    </div>`;
-
-      renderMessage = `<div class= "other">
-    <div class= "pic_name">
-      <img class="user-avatar" width="50px" style="border-radius: 50%" src="/uploads/user/avatar/${message.user_id}/star-e01.png" />
-    </div>
-    <div class="content">
-      ${message.contnet}
-    </div>
-  </div>`;
-
-      renderMessage = `<div class= "me">
-      <div class= "pic_name">
-        <img class="user-avatar" width="50px" style="border-radius: 50%" src="/uploads/user/avatar/${message.user_id}/star-e01.png" />
+        <img class="user-avatar" width="50px" style="border-radius: 50%" src=${message.user.avatar.url}>
+        ${message.user.nick_name}
       </div>
       <div class="pic">
         ${message.image.url}
       </div>
      </div>`;
-
-      renderMessage= `<div class= "other">
-<div class= "pic_name">
-  <img class="user-avatar" width="50px" style="border-radius: 50%" src="/uploads/user/avatar/${message.user_id}/star-e01.png" />
-</div>
-<div class="pic">
-  ${message.image.url}
-</div>
-</div>`;
-
+        }
+      }else{
+        if (message.image.url === null){
+        renderMessage = `<div class= "other">
+          <div class= "pic_name">
+              <img class="user-avatar" width="50px" style="border-radius: 50%" src=${message.user.avatar.url}>
+              ${message.user.nick_name}
+          </div>
+          <div class="content">
+            ${message.content}
+          </div>
+        </div>`;
+        }else{
+          renderMessage= `<div class= "other">
+          <div class= "pic_name">
+              <img class="user-avatar" width="50px" style="border-radius: 50%" src=${message.user.avatar.url}>
+              ${message.user.nick_name}
+          </div>
+          <div class="pic">
+            ${message.image.url}
+          </div>
+          </div>`;
+        }
+      }
+      appendMessage(renderMessage)
     });
 
   }
-
-  console.log(url)
-  console.log(chatId)
+  function appendMessage(message){
+    let clone;
+    let fisrtNode = document.querySelector(".message_text_area div")
+    tempDiv.innerHTML = message
+    clone = document.importNode(temp.content,true)
+    message_text_area.insertBefore(clone,fisrtNode)
+  }
+  // console.log(url)
+  // console.log(chatId)
 
   message_text_area.addEventListener("scroll", scrolling)
   text_area.addEventListener("keyup",()=>{

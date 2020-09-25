@@ -13,19 +13,12 @@ class ChatsController < ApplicationController
   end
 
   def show
-    # @user = User.find(params[:id])
     @chat = Chat.find(params[:id])
     @message = Message.new
     @messages = @chat.messages.includes(:user).limit(100)
     @messages_json = @chat.messages.includes(:user).page(params[:page]).order(id: :desc)
-    @other_user = @chat.opposed_user(current_user)
-    sender = @other_user.id
+    sender = @chat.opposed_user(current_user).id
 
-
-    # respond_to do |format|
-    #   format.html { render :show }
-    #   format.json {render json: @messages_json}
-    # end
 
     if redis.lrange("#{@chat.id}_#{sender}_new_message",0,-1).present?
       first_unreand_message = JSON.parse(redis.lrange("#{@chat.id}_#{sender}_new_message",0,-1)[0])

@@ -3,8 +3,7 @@ json.array! @messages_json do |message|
   json.content message.content
   json.image message.image
   json.user do
-    json.id User.find(message.user_id).id
-    json.name User.find(message.user_id).nick_name
-    json.avatar User.find(message.user_id).avatar
+    json.extract! message.user, :id, :nick_name, :avatar
   end
+  json.current_user current_user.id
 end
