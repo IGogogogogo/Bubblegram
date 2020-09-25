@@ -60,7 +60,7 @@ document.addEventListener("turbolinks:load",()=>{
         ${message.user.nick_name}
       </div>
       <div class="pic">
-        ${message.image.url}
+        <img src=${message.image.url}>
       </div>
      </div>`;
         }
@@ -82,7 +82,7 @@ document.addEventListener("turbolinks:load",()=>{
               ${message.user.nick_name}
           </div>
           <div class="pic">
-            ${message.image.url}
+            <img src=${message.image.url}>
           </div>
           </div>`;
         }
@@ -120,10 +120,11 @@ document.addEventListener("turbolinks:load",()=>{
     image_value.value = ""
 
   })
-  if(unreadLine){
+  if(!!unreadLine){
     unreadLine.scrollIntoView();
+  }else{
+    message_text_area.scrollTo(0, message_text_area.scrollHeight)
   }
-  message_text_area.scrollTop += message_text_area.scrollHeight
   // text_form.addEventListener("submit",(e)=>{
     //   text_submit.setAttribute("disabled", true)
     //   console.log(text_area.value)

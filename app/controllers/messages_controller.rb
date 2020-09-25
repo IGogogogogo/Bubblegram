@@ -2,8 +2,17 @@ class MessagesController < ApplicationController
   def create
     chat_room = Chat.find(params[:chat_id])
     @message = chat_room.messages.create(params_message)
+    opposed_user = chat_room.opposed_user(current_user).id
 
     SendMessageJob.perform_later(@message, new_message_counts)
+
+    if !redis.get("user_#{opposed_user}_online").present?
+      redis.rpush("#{@message.chat_id}_#{@message.user_id}_new_message", @message.to_json)
+    end
+
+    if !redis.get("user_#{opposed_user}_unreadMessage").present? && redis.get("user_#{opposed_user}_online").present?
+      redis.rpush("#{@message.chat_id}_#{@message.user_id}_new_message", @message.to_json)
+    end
     # @message.save
     # redirect_to chat_path(chat_room)
   end

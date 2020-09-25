@@ -22,6 +22,7 @@ consumer.subscriptions.create({channel: "UserOnlineChannel"}, {
     if (data.is_online){
       if(chatUser.length === 0)return
       chatUser[0].querySelector(".chat-user-pic .dot").classList.add("online-dot")  //給他綠點
+      if(chatUser[0].querySelector(".chat-user-info .unread-messages"))return
       chatUser[0].querySelector(".chat-user-info .online-text").classList.remove("off-line") //以及上線中
     }else{
       if(chatUser.length === 0)return

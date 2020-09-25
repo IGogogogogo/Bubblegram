@@ -44,16 +44,13 @@ document.addEventListener("turbolinks:load",()=>{
       }) // 比對這則訊息是誰傳的
 
 
-      if(!data.read_message && (data.message.user_id == Number(chatUser[0].dataset.chatUser))){
+      if(!data.read_message && (data.message.user_id == Number(chatUser[0].dataset.chatUser))){ //比對user是不是傳送訊息的user
         this.perform("new_message",data.message)
       }
 
       if (!!chatUser[0]){ // 如果有人傳新訊息把目前上線的div換成新訊息的div
-         let onlineText = chatUser[0].querySelector(".chat-user-info .online-text")
-         if(onlineText){ //有無目前上線樣式
-           chatUser[0].querySelector(".chat-user-info").append(unreadMessagesDiv)
-           onlineText.classList.add("off-line")
-          }
+         chatUser[0].querySelector(".chat-user-info .online-text").classList.add("off-line")
+         chatUser[0].querySelector(".chat-user-info").append(unreadMessagesDiv)
         }
 
         if(!data.read_message){// 判斷有無讀取訊息

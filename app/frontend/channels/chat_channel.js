@@ -40,12 +40,6 @@ document.addEventListener('turbolinks:load',()=>{
       let temp = document.querySelector("template")
       let tempDiv = temp.content.querySelector(".message")
 
-      // console.log(message_text_area.scrollHeight)
-      // message_text_area.scrollTo(0, message_text_area.scrollHeight)
-      console.log(data.my_message)
-      console.log(data.other_message)
-      console.log(data.my_image)
-      console.log(data.other_image)
 
       if(data.message.user_id === user_id){
         form.reset()
@@ -96,7 +90,7 @@ document.addEventListener('turbolinks:load',()=>{
       setTimeout(() => {
         // console.log(message_text_area.scrollHeight)
         message_text_area.scrollTo(0, message_text_area.scrollHeight)
-      }, 500)
+      }, 100)
       // message_text_area.scrollTop += message_text_area.scrollHeight
 
 

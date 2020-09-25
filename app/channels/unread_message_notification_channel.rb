@@ -1,9 +1,11 @@
 class UnreadMessageNotificationChannel < ApplicationCable::Channel
   def subscribed
     stream_from "unread_message_notification_channel"
+    redis.set("user_#{current_user.id}_unreadMessage", "1")
   end
 
   def unsubscribed
+    redis.del("user_#{current_user.id}_unreadMessage")
     # Any cleanup needed when channel is unsubscribed
   end
 
