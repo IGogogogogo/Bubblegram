@@ -9,7 +9,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    authorize @post
     @taged_users = @post.taged_users.map{ |user| "@#{user.nick_name}" }
     @comments = @post.comments
     @comment = Comment.new
@@ -40,7 +39,6 @@ class PostsController < ApplicationController
   def new
     check_owner
     @post = current_user.posts.new
-    authorize @post
 
     find_tag_users
     @url = user_posts_path(current_user)
