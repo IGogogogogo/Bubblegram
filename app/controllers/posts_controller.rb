@@ -47,11 +47,6 @@ class PostsController < ApplicationController
     @post = current_user.posts.new(post_params)
 
     if @post.save
-      if params["post"]["taged_user_ids"]
-        params["post"]["taged_user_ids"].each do |user_id|
-          @post.taged_users << User.find(user_id) if user_id
-        end
-      end
       redirect_to post_path(@post), notice: '文章新增成功'
     else
       find_tag_users
@@ -105,7 +100,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:content, :body,  {images: []} )
+    params.require(:post).permit(:content, :body, {taged_user_ids: []}, {images: []} )
   end
 
 end

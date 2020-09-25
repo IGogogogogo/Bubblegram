@@ -1,7 +1,7 @@
 
 <div class="wrap">
   <div class="owl-carousel owl-theme">
-    <%= render partial: "/posts/carousel_img", collection: @post.images, as: :image, locals: {images: @post.images} %>
+    <%= render partial: "/posts/carousel_img", collection: @post.images, as: :image %>
   </div>
 
   <p><%= @taged_users.join(", ") %></p>
