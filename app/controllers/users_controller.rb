@@ -3,7 +3,6 @@ class UsersController < ApplicationController
   # before_action :only_owner, only: [:edit, :update]
 
   def show
-    authorize @user
     per_count = 36
     @my_posts = @user.posts.order("created_at DESC").limit(per_count)
     @taged_posts = @user.taged_posts.order("created_at DESC").limit(per_count)

@@ -14,7 +14,6 @@ class StoriesController < ApplicationController
   end
 
   def show
-    authorize @story
   end
 
   def new
