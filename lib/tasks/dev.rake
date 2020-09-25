@@ -60,11 +60,15 @@ namespace :dev do
     COUNT = 100
     # User.all.each do |user|
     COUNT.times do
-      num = rand(1000)
+      images = []
+      rand(1..5).times do
+        images << "https://picsum.photos/500/500/?random=#{rand(1000)}"
+      end
+
       post = Post.new(
         user: User.all.sample(1).first,
         content: Faker::Lorem.sentence,
-        remote_images_urls: ["https://picsum.photos/500/500/?random=#{num}"]
+        remote_images_urls: images
         # body: Faker::Lorem.sentence
       )
       post.save!
