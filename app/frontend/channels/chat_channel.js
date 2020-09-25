@@ -44,6 +44,10 @@ document.addEventListener('turbolinks:load',()=>{
       if(data.message.user_id === user_id){
         form.reset()
         isContentNull(data.my_image, data.my_message)
+        setTimeout(() => {
+          // console.log(message_text_area.scrollHeight)
+          message_text_area.scrollTo(0, message_text_area.scrollHeight)
+        }, 100)
       }else{
         isContentNull(data.other_image, data.other_message)
       }
@@ -87,10 +91,19 @@ document.addEventListener('turbolinks:load',()=>{
       // console.log(message_text_area.scrollHeight)
 
       // debugger
-      setTimeout(() => {
+
+        if(message_text_area.scrollHeight - window.innerHeight <= message_text_area.scrollTop){
+          setTimeout(() => {
+            // console.log(message_text_area.scrollHeight)
+            message_text_area.scrollTo(0, message_text_area.scrollHeight)
+          }, 100)
+        }
+
+        // function scrollToBottom(){
+        //   message_text_area.scrollTo(0, message_text_area.scrollHeight)
+        // }
+      // setTimeout(scrollToBottom, 100)
         // console.log(message_text_area.scrollHeight)
-        message_text_area.scrollTo(0, message_text_area.scrollHeight)
-      }, 100)
       // message_text_area.scrollTop += message_text_area.scrollHeight
 
 
