@@ -42,7 +42,10 @@ document.addEventListener('turbolinks:load',()=>{
 
       // console.log(message_text_area.scrollHeight)
       // message_text_area.scrollTo(0, message_text_area.scrollHeight)
-
+      console.log(data.my_message)
+      console.log(data.other_message)
+      console.log(data.my_image)
+      console.log(data.other_image)
 
       if(data.message.user_id === user_id){
         form.reset()
