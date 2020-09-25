@@ -93,10 +93,10 @@ document.addEventListener('turbolinks:load',()=>{
       // console.log(message_text_area.scrollHeight)
 
       // debugger
-      // setTimeout(() => {
+      setTimeout(() => {
         // console.log(message_text_area.scrollHeight)
         message_text_area.scrollTo(0, message_text_area.scrollHeight)
-      // }, 500)
+      }, 500)
       // message_text_area.scrollTop += message_text_area.scrollHeight
 
 
