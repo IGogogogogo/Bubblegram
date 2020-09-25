@@ -15,7 +15,7 @@ class ChatsController < ApplicationController
   def show
     @chat = Chat.find(params[:id])
     @message = Message.new
-    @messages = @chat.messages.includes(:user).limit(100)
+    @messages = @chat.messages.includes(:user).order(id: :desc).limit(100).reverse
     @messages_json = @chat.messages.includes(:user).page(params[:page]).order(id: :desc)
     sender = @chat.opposed_user(current_user).id
 
