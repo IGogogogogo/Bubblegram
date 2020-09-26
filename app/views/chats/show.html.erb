@@ -15,13 +15,17 @@
       </div>
     </div>
     <div class="message_text_area">
+<<<<<<< HEAD
        <%= render partial: "messages/message", collection: @messages, as: :message, locals:{unread_message: @unread_message} %>
 
 
+=======
+      <%= render partial: "messages/message", collection: @messages, as: :message, locals:{unread_message: @unread_message} %>
+>>>>>>> 535a749... send welcome message for new user
     </div>
     <div class="searchbar">
       <%= form_with(model: @message, url: chat_messages_path(@chat)) do |f| %>
-        <%= f.text_field :content, placeholder: "發送訊息........", autocomplete: "off"%>
+        <%= f.text_area :content, placeholder: "發送訊息........", autocomplete: "off"%>
         <%= f.submit "傳送" , class:"disappear", disabled: true%>
       <% end %>
       <%= form_with(model: @message, url: chat_messages_path(@chat), class: "image_form" ) do |f| %>
