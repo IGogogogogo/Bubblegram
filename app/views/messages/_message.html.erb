@@ -13,7 +13,7 @@
     </div>
   <% else %>
     <div class= "content">
-      <%= message.content %>
+      <%= simple_format(message.content) %>   <!----simple_format 讓\n換行字元換成HTML的<br>---->
     </div>
   <% end %>
 </div>

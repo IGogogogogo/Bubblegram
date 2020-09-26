@@ -4,6 +4,6 @@
     <%= message.user.nick_name %>
   </div>
   <div class="content">
-    <%= message.content %>
+    <%= simple_format(message.content) %>
   </div>
 </div>
