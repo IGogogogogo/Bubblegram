@@ -44,7 +44,8 @@ document.addEventListener("turbolinks:load",()=>{
       }) // 比對這則訊息是誰傳的
 
 
-      if(!data.read_message && (data.message.user_id == Number(chatUser[0].dataset.chatUser))){ //比對user是不是傳送訊息的user
+      if(!data.read_message && (data.message.user_id == Number(chatUser[0].dataset.chatUser))){
+        //比對user是不是傳送訊息的user
         this.perform("new_message",data.message)
       }
 

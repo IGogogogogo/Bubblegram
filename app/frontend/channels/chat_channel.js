@@ -93,20 +93,12 @@ document.addEventListener('turbolinks:load',()=>{
       // debugger
 
         if(message_text_area.scrollHeight - window.innerHeight <= message_text_area.scrollTop){
+          //判斷捲軸是不是在最底部
           setTimeout(() => {
             // console.log(message_text_area.scrollHeight)
-            message_text_area.scrollTo(0, message_text_area.scrollHeight)
+            message_text_area.scrollTo(0, message_text_area.scrollHeight) //捲軸移動到最底部
           }, 100)
         }
-
-        // function scrollToBottom(){
-        //   message_text_area.scrollTo(0, message_text_area.scrollHeight)
-        // }
-      // setTimeout(scrollToBottom, 100)
-        // console.log(message_text_area.scrollHeight)
-      // message_text_area.scrollTop += message_text_area.scrollHeight
-
-
 
     }
   });

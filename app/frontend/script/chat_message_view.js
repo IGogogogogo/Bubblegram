@@ -29,10 +29,10 @@ document.addEventListener("turbolinks:load",()=>{
         // console.log(datas)
         let topMessage = document.querySelector(".message_text_area div")
         if(datas.length < 25){
-          message_text_area.removeEventListener('scroll',scrolling)
+          message_text_area.removeEventListener('scroll',scrolling) //取消監聽捲軸
         }
-        await render(datas)
-        topMessage.scrollIntoView()
+        await render(datas) //等待訊息全部載入完
+        topMessage.scrollIntoView() //將捲軸移動至載入前的第一則訊息
       })
     }
   }
@@ -40,51 +40,50 @@ document.addEventListener("turbolinks:load",()=>{
 
   function render(messages){
     let renderMessage
-
     messages.forEach((message) => {
-      if (message.current_user === message.user.id){
-        if (message.image.url === null){
+      if (message.current_user === message.user.id){  //判斷這則訊息的傳送者是不是正在使用的user
+        if (message.image.url === null){  //判斷這則訊息有沒有照片
           renderMessage = `<div class= "me">
-          <div class= "pic_name">
-            <img class="user-avatar" width="50px" style="border-radius: 50%" src=${message.user.avatar.url}>
-            ${message.user.nick_name}
-          </div>
-          <div class="content">
-            ${message.content}
-          </div>
-        </div>`;
+                            <div class= "pic_name">
+                              <img class="user-avatar" width="50px" style="border-radius: 50%" src=${message.user.avatar.url}>
+                              ${message.user.nick_name}
+                            </div>
+                            <div class="content">
+                              ${message.content}
+                            </div>
+                          </div>`;
         }else{
           renderMessage = `<div class= "me">
-      <div class= "pic_name">
-        <img class="user-avatar" width="50px" style="border-radius: 50%" src=${message.user.avatar.url}>
-        ${message.user.nick_name}
-      </div>
-      <div class="pic">
-        <img src=${message.image.url}>
-      </div>
-     </div>`;
+                            <div class= "pic_name">
+                              <img class="user-avatar" width="50px" style="border-radius: 50%" src=${message.user.avatar.url}>
+                              ${message.user.nick_name}
+                            </div>
+                            <div class="pic">
+                              <img src=${message.image.url}>
+                            </div>
+                          </div>`;
         }
       }else{
         if (message.image.url === null){
-        renderMessage = `<div class= "other">
-          <div class= "pic_name">
-              <img class="user-avatar" width="50px" style="border-radius: 50%" src=${message.user.avatar.url}>
-              ${message.user.nick_name}
-          </div>
-          <div class="content">
-            ${message.content}
-          </div>
-        </div>`;
+          renderMessage = `<div class= "other">
+                            <div class= "pic_name">
+                              <img class="user-avatar" width="50px" style="border-radius: 50%" src=${message.user.avatar.url}>
+                              ${message.user.nick_name}
+                            </div>
+                            <div class="content">
+                              ${message.content}
+                            </div>
+                          </div>`;
         }else{
           renderMessage= `<div class= "other">
-          <div class= "pic_name">
-              <img class="user-avatar" width="50px" style="border-radius: 50%" src=${message.user.avatar.url}>
-              ${message.user.nick_name}
-          </div>
-          <div class="pic">
-            <img src=${message.image.url}>
-          </div>
-          </div>`;
+                            <div class= "pic_name">
+                              <img class="user-avatar" width="50px" style="border-radius: 50%" src=${message.user.avatar.url}>
+                              ${message.user.nick_name}
+                            </div>
+                            <div class="pic">
+                              <img src=${message.image.url}>
+                            </div>
+                          </div>`;
         }
       }
       appendMessage(renderMessage)
@@ -98,10 +97,9 @@ document.addEventListener("turbolinks:load",()=>{
     clone = document.importNode(temp.content,true)
     message_text_area.insertBefore(clone,fisrtNode)
   }
-  // console.log(url)
-  // console.log(chatId)
 
-  message_text_area.addEventListener("scroll", scrolling)
+  message_text_area.addEventListener("scroll", scrolling) //監聽訊息範圍捲軸
+
   text_area.addEventListener("keyup",()=>{
     // console.log(text_area.value.split(" ").join(""))
     if(text_area.value.split(" ").join("") !== ""){
@@ -121,9 +119,9 @@ document.addEventListener("turbolinks:load",()=>{
 
   })
   if(!!unreadLine){
-    unreadLine.scrollIntoView();
+    unreadLine.scrollIntoView(); //如果有未讀線的div捲軸移動至那個div
   }else{
-    message_text_area.scrollTo(0, message_text_area.scrollHeight)
+    message_text_area.scrollTo(0, message_text_area.scrollHeight) //沒有的話移至最底部
   }
   // text_form.addEventListener("submit",(e)=>{
     //   text_submit.setAttribute("disabled", true)
