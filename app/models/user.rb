@@ -5,10 +5,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable,
          :omniauthable, omniauth_providers: %i[facebook google_oauth2]
-  
+
   mount_uploader :avatar, AvatarUploader      #carrierwave
   after_create :add_blank_avatar              #預設使用者大頭照
   after_create :add_defult_following          #預設追蹤官方帳號
+  after_create :send_welcome_message          #傳送歡迎訊息
 
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -103,6 +104,20 @@ class User < ApplicationRecord
   def add_defult_following          #預設追蹤官方帳號
     if self != User.first
       self.followings << User.first
+    end
+  end
+
+  def send_welcome_message          #傳送歡迎訊息
+    office_account = User.first
+    message_content =
+    %Q[歡迎加入Bubblegram，貼心小提醒：
+      1.記得更換大頭貼，讓朋友找得到你！
+      2.也別忘了去找找朋友，與他們分享你的喜悅！]
+    # %Q 內的文字換行會自動變成\n , %Q跟%q的差別是雙引號或單引號
+
+    if self != office_account
+      chat = Chat.create(sender_id: office_account.id, recipient_id: self.id)
+      chat.messages.create(user: office_account, content: message_content)
     end
   end
 end

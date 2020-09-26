@@ -12,13 +12,14 @@
         <%= message.user.nick_name %>
       </div>
     </div>
+
     <% if message.image.url.present? %>
       <div class= "pic">
         <%= image_tag message.image_url if message.image_url.present?%>
       </div>
     <% else %>
       <div class= "content">
-        <%= message.content %>
+        <%= simple_format(message.content) %>
       </div>
     <% end %>
   </div>
