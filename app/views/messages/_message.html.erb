@@ -4,9 +4,13 @@
 
 <div class= "message" data-message-id="<%= message.id %>">
   <div class="<%= message.user_id == current_user.id ? 'me' : 'other'%>">
-    <div class= "pic_name">
-      <%= image_tag message.user.avatar.url, class: "user-avatar", width: "50px", style: "border-radius: 50%" if message.user.avatar.present? %>
-      <%= message.user.nick_name %>
+    <div class= "pic-name">
+      <div class = "avatar">
+        <%= image_tag message.user.avatar.url, class: "user-avatar" if message.user.avatar.present? %>
+      </div>
+      <div class = "user-name">
+        <%= message.user.nick_name %>
+      </div>
     </div>
     <% if message.image.url.present? %>
       <div class= "pic">

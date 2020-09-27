@@ -10,8 +10,9 @@ document.addEventListener("turbolinks:load",()=>{
   const text_submit = document.querySelector("input[type='submit']")
   const message_text_area = document.querySelector(".message_text_area")
   const unreadLine = document.getElementById("unread-line")
-  let temp = document.querySelector("template")
-  let tempDiv = temp.content.querySelector(".message")
+  let temp = document.querySelector("#message-template")
+  // let temp = document.querySelector("template")
+  // let tempDiv = temp.content.querySelector(".message")
 
   let pageCount = 4
   let url = document.location.href
@@ -31,71 +32,48 @@ document.addEventListener("turbolinks:load",()=>{
         if(datas.length < 25){
           message_text_area.removeEventListener('scroll',scrolling) //取消監聽捲軸
         }
-        await render(datas) //等待訊息全部載入完
+        await appendMessage(datas) //等待訊息全部載入完
         topMessage.scrollIntoView() //將捲軸移動至載入前的第一則訊息
       })
     }
   }
 
 
-  function render(messages){
-    let renderMessage
-    messages.forEach((message) => {
-      if (message.current_user === message.user.id){  //判斷這則訊息的傳送者是不是正在使用的user
-        if (message.image.url === null){  //判斷這則訊息有沒有照片
-          renderMessage = `<div class= "me">
-                            <div class= "pic_name">
-                              <img class="user-avatar" width="50px" style="border-radius: 50%" src=${message.user.avatar.url}>
-                              ${message.user.nick_name}
-                            </div>
-                            <div class="content">
-                              ${message.content}
-                            </div>
-                          </div>`;
-        }else{
-          renderMessage = `<div class= "me">
-                            <div class= "pic_name">
-                              <img class="user-avatar" width="50px" style="border-radius: 50%" src=${message.user.avatar.url}>
-                              ${message.user.nick_name}
-                            </div>
-                            <div class="pic">
-                              <img src=${message.image.url}>
-                            </div>
-                          </div>`;
-        }
-      }else{
-        if (message.image.url === null){
-          renderMessage = `<div class= "other">
-                            <div class= "pic_name">
-                              <img class="user-avatar" width="50px" style="border-radius: 50%" src=${message.user.avatar.url}>
-                              ${message.user.nick_name}
-                            </div>
-                            <div class="content">
-                              ${message.content}
-                            </div>
-                          </div>`;
-        }else{
-          renderMessage= `<div class= "other">
-                            <div class= "pic_name">
-                              <img class="user-avatar" width="50px" style="border-radius: 50%" src=${message.user.avatar.url}>
-                              ${message.user.nick_name}
-                            </div>
-                            <div class="pic">
-                              <img src=${message.image.url}>
-                            </div>
-                          </div>`;
-        }
-      }
-      appendMessage(renderMessage)
-    });
-
+  function appendMessage(datas){
+    let firstNode = document.querySelector(".message_text_area div")
+    datas.forEach((message) => {
+      let newMessage = createMessage(message)
+      message_text_area.insertBefore(newMessage, firstNode)
+    })
   }
-  function appendMessage(message){
-    let clone;
-    let fisrtNode = document.querySelector(".message_text_area div")
-    tempDiv.innerHTML = message
-    clone = document.importNode(temp.content,true)
-    message_text_area.insertBefore(clone,fisrtNode)
+
+  function createMessage(message) {
+    let clone = document.importNode(temp.content, true)
+    console.log(clone)
+    let headPhoto = document.createElement("img")
+    headPhoto.src = message.user.avatar.url
+    headPhoto.classList = ["user-avatar"]
+    clone.querySelector(".avatar").appendChild(headPhoto)
+    clone.querySelector(".user-name").textContent = message.user.nick_name
+
+    if (message.current_user === message.user.id){
+      clone.querySelector(".sender").classList = ["me"]
+    } else {
+      clone.querySelector(".sender").classList = ["other"]
+    }
+
+    let typeDiv = clone.querySelector(".type")
+    if (message.image.url === null) {
+      typeDiv.classList = ["content"]
+      typeDiv.textContent = message.content
+    } else {
+      typeDiv.classList = ["pic"]
+      let img = document.createElement("img")
+      img.src = message.image.url
+      typeDiv.appendChild(img)
+    }
+
+    return clone
   }
 
   message_text_area.addEventListener("scroll", scrolling) //監聽訊息範圍捲軸

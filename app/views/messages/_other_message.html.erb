@@ -1,7 +1,11 @@
 <div class= "other">
   <div class= "pic_name">
-    <%= image_tag message.user.avatar.url, class: "user-avatar", width: "50px", style: "border-radius: 50%" if message.user.avatar.present? %>
-    <%= message.user.nick_name %>
+    <div class = "avatar">
+      <%= image_tag message.user.avatar.url, class: "user-avatar", width: "50px", style: "border-raidus = 50%" if message.user.avatar.present? %>
+    </div>
+    <div class = "user-name">
+      <%= message.user.nick_name %>
+    </div>
   </div>
   <div class="content">
     <%= message.content %>
