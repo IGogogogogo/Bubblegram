@@ -1,5 +1,6 @@
 <div class="col-12 border border-gray mb-4 px-0">
   <div class="user-post">
+    <!--User info---------------->
     <div class="user-info d-flex align-items-center p-2">
       <div class="user-photo">
         <%= image_tag post.user.avatar.url, class: "rounded-circle img-fluid" if post.user.avatar.present? %>
@@ -8,7 +9,7 @@
       <div class="user-name ml-2">
         <strong><%= link_to post.user.nick_name, user_path(post.user), class: 'text-black' %></strong>
       </div>
-
+      <!--Button---------------->
       <div class="option ml-auto g-btn px-2"></div>
 
       <div class="dropdown">
@@ -47,6 +48,7 @@
     </div>
   </div>
 
+  <!---IMAGES---------------->
   <div class="post-pic w-100 h-100">
     <div class="owl-carousel owl-theme">
       <%= render partial: "/posts/carousel_img", collection: post.images, as: :image, locals: {images: post.images} %>
