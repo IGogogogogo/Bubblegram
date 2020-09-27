@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 document.addEventListener("turbolinks:load",()=>{
   const message_box = document.querySelector(".message_box")
   if(!message_box)return
@@ -8,6 +10,74 @@ document.addEventListener("turbolinks:load",()=>{
   const text_submit = document.querySelector("input[type='submit']")
   const message_text_area = document.querySelector(".message_text_area")
   const unreadLine = document.getElementById("unread-line")
+  let temp = document.querySelector("#message-template")
+  // let temp = document.querySelector("template")
+  // let tempDiv = temp.content.querySelector(".message")
+
+  let pageCount = 4
+  let url = document.location.href
+  let urlPage = `.json?page=`
+  // let chatId = Number(url.split("/").pop())
+
+  function scrolling(e){
+    if(e.target.scrollTop == 0){
+      pageCount += 1
+      axios.get(url + urlPage + pageCount)
+      .then(function(response){
+        return response.data
+      })
+      .then(async function(datas){
+        console.log(datas)
+        let topMessage = document.querySelector(".message_text_area div")
+        if(datas.length < 25){
+          message_text_area.removeEventListener('scroll',scrolling) //取消監聽捲軸
+        }
+        await appendMessage(datas) //等待訊息全部載入完
+        topMessage.scrollIntoView() //將捲軸移動至載入前的第一則訊息
+      })
+    }
+  }
+
+
+  function appendMessage(datas){
+    datas = datas.reverse()
+    let firstNode = document.querySelector(".message_text_area div")
+    datas.forEach((message) => {
+      let newMessage = createMessage(message)
+      message_text_area.insertBefore(newMessage, firstNode)
+    })
+  }
+
+  function createMessage(message) {
+    let clone = document.importNode(temp.content, true)
+    // console.log(clone)
+    let headPhoto = document.createElement("img")
+    headPhoto.src = message.user.avatar.url
+    headPhoto.classList = ["user-avatar"]
+    clone.querySelector(".avatar").appendChild(headPhoto)
+    clone.querySelector(".user-name").textContent = message.user.nick_name
+
+    if (message.current_user === message.user.id){
+      clone.querySelector(".sender").classList = ["me"]
+    } else {
+      clone.querySelector(".sender").classList = ["other"]
+    }
+
+    let typeDiv = clone.querySelector(".type")
+    if (message.image.url === null) {
+      typeDiv.classList = ["content"]
+      typeDiv.textContent = message.content
+    } else {
+      typeDiv.classList = ["pic"]
+      let img = document.createElement("img")
+      img.src = message.image.url
+      typeDiv.appendChild(img)
+    }
+
+    return clone
+  }
+
+  message_text_area.addEventListener("scroll", scrolling) //監聽訊息範圍捲軸
 
   text_area.addEventListener("keyup",()=>{
     // console.log(text_area.value.split(" ").join(""))
@@ -27,10 +97,11 @@ document.addEventListener("turbolinks:load",()=>{
     image_value.value = ""
 
   })
-  if(unreadLine){
-    unreadLine.scrollIntoView();
+  if(!!unreadLine){
+    unreadLine.scrollIntoView(); //如果有未讀線的div捲軸移動至那個div
+  }else{
+    message_text_area.scrollTo(0, message_text_area.scrollHeight) //沒有的話移至最底部
   }
-  message_text_area.scrollTop += message_text_area.scrollHeight
   // text_form.addEventListener("submit",(e)=>{
     //   text_submit.setAttribute("disabled", true)
     //   console.log(text_area.value)

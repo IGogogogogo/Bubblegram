@@ -27,13 +27,17 @@
 
 .go-btn,
 .fb-btn{
+  height: 51px;
   line-height: 51px;
   padding: 0;
 }
 .go-btn{
-  background-image: linear-gradient(to right, #4285F4,#DB4437,#F4B400,#0F9D58);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  // background-image: linear-gradient(to right, #4285F4,#DB4437,#F4B400,#0F9D58);
+  // -webkit-background-clip: text;
+  // -webkit-text-fill-color: transparent;
   font-size: 18px;
-  border-image:linear-gradient(to left, #4285F4,#DB4437,#F4B400,#0F9D58); border-image-slice: 1;
+  color: rgb(127, 207, 214);
+  background-color: transparent;
+  border-color: rgb(127, 207, 214);
+  // border-image:linear-gradient(to left, #4285F4,#DB4437,#F4B400,#0F9D58); border-image-slice: 1;
 }

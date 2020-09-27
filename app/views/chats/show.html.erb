@@ -16,6 +16,8 @@
     </div>
     <div class="message_text_area">
        <%= render partial: "messages/message", collection: @messages, as: :message, locals:{unread_message: @unread_message} %>
+
+
     </div>
     <div class="searchbar">
       <%= form_with(model: @message, url: chat_messages_path(@chat)) do |f| %>
@@ -29,3 +31,18 @@
     </div>
   </div>
 </div>
+  <template>
+    <div class="message"></div>
+  </template>
+ <template id="message-template">
+   <div class = "message">
+    <div class="sender"> <!--me/other------------->
+      <div class= "pic-name">
+        <div class = "avatar"></div>
+        <div class = "user-name"></div>
+      </div>
+
+      <div class="type"></div> <!--img/content------------->
+    </div>
+  </div>
+</template>
