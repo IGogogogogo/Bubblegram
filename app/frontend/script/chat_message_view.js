@@ -27,7 +27,7 @@ document.addEventListener("turbolinks:load",()=>{
         return response.data
       })
       .then(async function(datas){
-        // console.log(datas)
+        console.log(datas)
         let topMessage = document.querySelector(".message_text_area div")
         if(datas.length < 25){
           message_text_area.removeEventListener('scroll',scrolling) //取消監聽捲軸
@@ -40,6 +40,7 @@ document.addEventListener("turbolinks:load",()=>{
 
 
   function appendMessage(datas){
+    datas = datas.reverse()
     let firstNode = document.querySelector(".message_text_area div")
     datas.forEach((message) => {
       let newMessage = createMessage(message)
@@ -49,7 +50,7 @@ document.addEventListener("turbolinks:load",()=>{
 
   function createMessage(message) {
     let clone = document.importNode(temp.content, true)
-    console.log(clone)
+    // console.log(clone)
     let headPhoto = document.createElement("img")
     headPhoto.src = message.user.avatar.url
     headPhoto.classList = ["user-avatar"]

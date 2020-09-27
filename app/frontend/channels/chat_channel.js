@@ -63,7 +63,7 @@ document.addEventListener('turbolinks:load',()=>{
         let clone;
         tempDiv.innerHTML = message
         clone = document.importNode(temp.content,true)
-        message_text_area.append(clone)
+        message_text_area.appendChild(clone)
       }
 
       function isContentNull(image, message){
