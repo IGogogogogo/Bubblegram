@@ -2,7 +2,7 @@ class MessagesController < ApplicationController
   def create
     chat_room = Chat.find(params[:chat_id])
     @message = chat_room.messages.create(params_message)
-    opposed_user = chat_room.opposed_user(current_user).id
+    @opposed_user = chat_room.opposed_user(current_user).id
 
     SendMessageJob.perform_later(@message, new_message_counts)
 
@@ -23,20 +23,15 @@ private
   end
 
   def is_unread_channel_connect?
-    redis.get("user_#{opposed_user}_unreadMessage").present?
+    redis.get("user_#{@opposed_user}_unreadMessage").present?
   end
 
   def is_online_channel_connect?
-    redis.get("user_#{opposed_user}_online").present?
+    redis.get("user_#{@opposed_user}_online").present?
   end
 
   def new_message_counts
     redis.lrange("#{@message.chat_id}_#{@message.user_id}_new_message",0,-1).length
-  end
-
-  def redis
-    @redis =  Redis.new unless @redis
-    @redis
   end
 
 end
