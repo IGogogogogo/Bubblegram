@@ -4,19 +4,19 @@ window.addEventListener('turbolinks:load', function () {
   let addBtn = document.querySelectorAll('.footer-btn')[2]
   let likeBtn = document.querySelectorAll('.footer-btn')[3]
   let profileBtn = document.querySelectorAll('.footer-btn')[4]
-  let userId = location.href.split("/")[4]
 
 
 
-  if (location.href === "http://localhost:3000/") {
+  if (location.href === homeBtn.href) {
     homeBtn.classList.add('active')
-  } else if (location.href === "http://localhost:3000/searches") {
+  } else if (location.href === searchBtn.href) {
     searchBtn.classList.add('active')
-  } else if (location.href === `http://localhost:3000/users/${userId}/posts/new`) {
+  } else if (location.href === addBtn.href) {
     addBtn.classList.add('active')
-  } else if (location.href === "http://localhost:3000/#") {
+  } else if (location.href === likeBtn.href) {
     likeBtn.classList.add('active')
-  } else if (location.href === `http://localhost:3000/users/${userId}`) {
+  } else if (location.href === profileBtn.href) {
     profileBtn.classList.add('active')
   }
+
 })
