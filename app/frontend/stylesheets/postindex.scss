@@ -29,12 +29,20 @@
     color:rgb(139, 139, 139)
   }
 }
+.nav-link.active{
+  background: #7fcfd6 !important;
+  color: #fff !important;
+}
+a{
+  color: rgb(139, 139, 139);
+}
 .text-black{
   color: #000;
 }
 .text-gray{
   color: #aaa;
 }
+
 @media (max-width: 999px){
   .col-12{
     padding: 0;
