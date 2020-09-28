@@ -13,6 +13,7 @@ import "./chat_message_view"
 import "./post_form.js"
 import "./load_posts.js"
 import "./owl_carousel.js"
+import "./active"
 import gsap from "gsap"
 
 window.gsap = gsap
