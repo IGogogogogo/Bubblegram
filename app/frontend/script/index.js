@@ -14,9 +14,12 @@ import "./post_form.js"
 import "./load_posts.js"
 import "./owl_carousel.js"
 import "./active"
+import Swiper, { Pagination } from 'swiper';
 import gsap from "gsap"
 
+Swiper.use([Pagination]);
 window.gsap = gsap
+window.Swiper = Swiper
 
 document.addEventListener("turbolinks:load", () => {
   $('[data-toggle="tooltip"]').tooltip()
