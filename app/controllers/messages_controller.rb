@@ -7,11 +7,11 @@ class MessagesController < ApplicationController
     SendMessageJob.perform_later(@message, new_message_counts)
 
     if !is_online_channel_connect?  #判斷對方使用者有沒有在線上
-      redis.rpush("#{@message.chat_id}_#{@message.user_id}_new_message", @message.to_json) #下線將訊息存為新訊息
+      redis.rpush("#{@message.chatroom_id}_#{@message.user_id}_new_message", @message.to_json) #下線將訊息存為新訊息
     end
 
     if !is_unread_channel_connect? && is_online_channel_connect? #如果對方使用者在線上且通知channel斷線（代表正在換頁）
-      redis.rpush("#{@message.chat_id}_#{@message.user_id}_new_message", @message.to_json) #將訊息存為新訊息
+      redis.rpush("#{@message.chatroom_id}_#{@message.user_id}_new_message", @message.to_json) #將訊息存為新訊息
     end
     # @message.save
     # redirect_to chat_path(chat_room)
@@ -31,7 +31,7 @@ private
   end
 
   def new_message_counts
-    redis.lrange("#{@message.chat_id}_#{@message.user_id}_new_message",0,-1).length
+    redis.lrange("#{@message.chatroom_id}_#{@message.user_id}_new_message",0,-1).length
   end
 
 end
