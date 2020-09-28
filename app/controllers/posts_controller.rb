@@ -104,10 +104,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-<<<<<<< HEAD
     params.require(:post).permit(:content, :body, {taged_user_ids: []}, {images: []} )
-=======
-    params.require(:post).permit(:content, :body, {images: []} )
->>>>>>> b36866a... add pundit authorize for user and post
   end
 end
