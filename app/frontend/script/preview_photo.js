@@ -1,14 +1,31 @@
 window.addEventListener('turbolinks:load', function () {
-  var imageInput = document.querySelector("#post_image")
-  if (!imageInput) return
-  imageInput.addEventListener("change", function (event) {
-    imageInput.style.display = 'none';
-    var reader = new FileReader();
-    reader.onload = function () {
-      var output = document.getElementById('output');
+  $("#post_images").change(function () {
+    readURL(this);
+  });
+  function readURL(input) {
+    if (input.files && input.files.length >= 0) {
+      $('.swiper-pagination').css('display', 'block')
+      for (var i = 0; i < input.files.length; i++) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          var img = $("<img>").attr('src', e.target.result);
+          var div = $("<div></div>").append(img)
+          div.addClass("swiper-slide").css('height', '400px')
+          $(".swiper-wrapper").append(div);
+        }
+        reader.readAsDataURL(input.files[i]);
+      }
+    }
+  }
 
-      output.src = reader.result;
-    };
-    reader.readAsDataURL(event.target.files[0]); // 類似addEventListener 監聽input裡面的屬性，當input有東西進來之後就會跑去執行onload方法
+  var mySwiper = new Swiper('.swiper-container', {
+    // Optional parameters
+    direction: 'horizontal',
+    autoplay: true,
+    observer: true,
+    // If we need pagination
+    pagination: {
+      el: '.swiper-pagination',
+    },
   })
 })

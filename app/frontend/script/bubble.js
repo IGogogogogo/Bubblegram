@@ -4,7 +4,7 @@ window.addEventListener('turbolinks:load', function () {
   const home = document.querySelector("#home")
   //btn.addEventListener('click', function () {
   if (!indexlogo) return
-  for (var i = 0; i < 20; i++) {
+  for (var i = 0; i < 30; i++) {
     var d = document.createElement('div');
     d.className = 'bubble';
     var a = Math.random() * 40 + 25 + 'px';  //get the random number
@@ -20,7 +20,7 @@ window.addEventListener('turbolinks:load', function () {
 
     $(a).animate({
       bottom: home.offsetHeight + 'px',
-      left: '+=' + ((Math.random() * 45) - 25) + 'px'  //control the direction of the bubble
+      left: '+=' + ((Math.random() * 50) - 25) + 'px'  //control the direction of the bubble
     }, Math.random() * 4000 + 2000, 'linear', function () {
       a.style.bottom = '0px'; // where bubble come out of bottom of the screen
       Animate(a)
@@ -28,6 +28,6 @@ window.addEventListener('turbolinks:load', function () {
   }
 
   gsap.to("#index-logo", { duration: 1.5, y: -150, delay: 2 })
-  gsap.from('.login-form', { duration: 1.5, delay: 3, opacity: 0 })
+  gsap.from('.login-form', { duration: 1.5, delay: 2.8, opacity: 0 })
 
 })
