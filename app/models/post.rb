@@ -1,13 +1,14 @@
 class Post < ApplicationRecord
   mount_uploaders :images, ImageUploader
-  has_rich_text :body
+  # has_rich_text :body
   validates :content, presence: true
   validates :images, presence: true
+  validate :limit_images_count         #限制貼文圖片最多5張
 
   belongs_to :user, counter_cache: true
   has_many :comments, dependent: :destroy
   #貼文標籤
-  has_many :user_tags, foreign_key: :post_id, dependent: :destroy
+  has_many :user_tags, foreign_key: :post_id, dependent: :destroy, inverse_of: :post  #inverse_of 即時更新關聯物件的狀態
   has_many :taged_users, through: :user_tags, source: :user
 
 
@@ -24,10 +25,14 @@ class Post < ApplicationRecord
   def favorited_by?(user)
     thumbs_up_users.include?(user)
   end
-  # 不會把自己算進去
 
-  def post_owner?(current_user)
-    self.user == current_user
+  private
+
+  def limit_images_count
+    # LIMIT_COUNT = 5
+    if self.images.count > 5
+      errors.add(:base, "Can't upload more than 5 images")
+    end
   end
 
 end

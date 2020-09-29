@@ -6,7 +6,7 @@ const { default: consumer } = require("./consumer")
 const channels = require.context('.', true, /_channel\.js$/)
 channels.keys().forEach(channels)
 
-// document.addEventListener("turbolinks:load",()=>{
-//   console.log(consumer.subscriptions)// 觀察有幾個訂閱
+document.addEventListener("turbolinks:load",()=>{
+  console.log(consumer.subscriptions)// 觀察有幾個訂閱
 
-// })
+})

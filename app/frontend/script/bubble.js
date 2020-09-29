@@ -28,6 +28,6 @@ window.addEventListener('turbolinks:load', function () {
   }
 
   gsap.to("#index-logo", { duration: 1.5, y: -150, delay: 2 })
-  gsap.from('.login-form', { duration: 1.5, y: 300, delay: 2.5, opacity: 0 })
+  gsap.from('.login-form', { duration: 1.5, delay: 3, opacity: 0 })
 
 })

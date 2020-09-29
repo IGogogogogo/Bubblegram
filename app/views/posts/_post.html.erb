@@ -1,5 +1,6 @@
 <div class="col-12 border border-gray mb-4 px-0">
   <div class="user-post">
+    <!--User info---------------->
     <div class="user-info d-flex align-items-center p-2">
       <div class="user-photo">
         <%= image_tag post.user.avatar.url, class: "rounded-circle img-fluid" if post.user.avatar.present? %>
@@ -8,30 +9,32 @@
       <div class="user-name ml-2">
         <strong><%= link_to post.user.nick_name, user_path(post.user), class: 'text-black' %></strong>
       </div>
-
+      <!--Button---------------->
       <div class="option ml-auto g-btn px-2"></div>
 
-      <div class="dropdown">
-        <button class="btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false">
-          <i class="fas fa-ellipsis-h"></i>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-          <%= link_to '編輯', edit_post_path(post), class: 'dropdown-item' %>
-          <!-- Button trigger modal -->
-          <a class="dropdown-item text-danger" data-toggle="modal" data-target="#staticBackdrop"
-            style="cursor: pointer;">
-            刪除
-          </a>
+      <% if owner?(post) %>
+        <div class="dropdown">
+          <button class="btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            <i class="fas fa-ellipsis-h"></i>
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <%= link_to '編輯', edit_post_path(post), class: 'dropdown-item' %>
+            <!-- Button trigger modal -->
+            <a class="dropdown-item text-danger" data-toggle="modal" data-target="#staticBackdrop-<%= post.id %>"
+              style="cursor: pointer;">
+              刪除
+            </a>
+          </div>
         </div>
-      </div>
+      <% end %>
 
-      <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal fade" id="staticBackdrop-<%= post.id %>" data-backdrop="static" data-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel-<%= post.id %>" aria-hidden="true">
         <div class="modal-dialog modal-sm">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title text-danger" id="staticBackdropLabel">你確定要刪除嗎？</h5>
+              <h5 class="modal-title text-danger" id="staticBackdropLabel-<%= post.id %>">你確定要刪除嗎？</h5>
             </div>
             <div class="modal-body">
               請注意！<br>
@@ -47,6 +50,7 @@
     </div>
   </div>
 
+  <!---IMAGES---------------->
   <div class="post-pic w-100 h-100">
     <div class="owl-carousel owl-theme">
       <%= render partial: "/posts/carousel_img", collection: post.images, as: :image, locals: {images: post.images} %>
@@ -82,7 +86,7 @@
 
     <div class="user-post-content">
       <div class="thumb-up ">
-        <strong>654個讚</strong>
+        <strong><%= post.favourites_count %>個讚</strong>
       </div>
 
       <div class="">

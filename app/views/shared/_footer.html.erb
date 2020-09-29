@@ -2,23 +2,23 @@
   <% if user_signed_in? %>
   <nav class="index-nav">
     <div class="nav nav-tabs w-100 text-center" id="nav-tab" role="tablist">
-      <%= link_to root_path, class: "nav-link flex-grow-1" do %>
+      <%= link_to root_path, class: "nav-link flex-grow-1 footer-btn" do %>
       <i class="fas fa-home"></i>
       <% end %>
 
-      <%= link_to searches_path, class: "nav-link flex-grow-1" do %>
+      <%= link_to searches_path, class: "nav-link flex-grow-1 footer-btn" do %>
       <i class="fas fa-search"></i>
       <% end %>
 
-      <%= link_to new_user_post_path(current_user), class: "nav-link flex-grow-1" do %>
+      <%= link_to new_user_post_path(current_user), class: "nav-link flex-grow-1 footer-btn" do %>
       <i class="fas fa-plus-square"></i>
       <% end %>
 
-      <%= link_to "#", class: "nav-link flex-grow-1" do %>
+      <%= link_to "#", class: "nav-link flex-grow-1 footer-btn" do %>
       <i class="fas fa-heart"></i>
       <% end %>
 
-      <%= link_to user_path(current_user), class: "nav-link flex-grow-1" do %>
+      <%= link_to user_path(current_user), class: "nav-link flex-grow-1 footer-btn" do %>
       <i class="fas fa-user"></i>
       <% end %>
     </div>

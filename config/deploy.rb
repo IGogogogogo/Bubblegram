@@ -1,7 +1,7 @@
 # config valid for current version and patch releases of Capistrano
 lock '~> 3.14.1'
 
-set :application, 'test'
+set :application, 'bubblegram'
 set :repo_url, 'git@github.com:IGogogogogo/Bubblegram.git'
 
 # Default branch is :master
@@ -23,7 +23,7 @@ set :deploy_to, '/home/deploy/staging'
 # set :pty, true
 
 # Default value for :linked_files is []
-append :linked_files, 'config/application.yml', 'config/database.yml'
+append :linked_files, 'config/application.yml', 'config/database.yml', 'config/secrets.yml'
 
 # Default value for linked_dirs is []
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system'
