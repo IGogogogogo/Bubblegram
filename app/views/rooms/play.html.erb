@@ -1,13 +1,27 @@
-	<div 
+<div
 		id="pub-video" class = "col-12 px-0 pb-3 "
 		data-controller = "vonagePub"
 		data-vonagePub-room-id="<%= @room.id %>"
 		data-vonagePub-key="<%= ENV['vonage_api_key']%>"
 		data-vonagePub-session-id = "<%= @room.vonage_session_id %>"
 		data-vonagePub-token = "<%= @token %>"
-		data-vonagePub-name = "<%= current_user.nick_name%>正在直播！" 
-		>
-	</div>
-		<%= link_to destroy_room_room_path, method: 'post',data: {turbolinks: false}, class: 'back-link' do %>
-			<i class="fas fa-sign-out-alt"></i>
-		<% end %>
+		data-vonagePub-name = "<%= current_user.nick_name%>正在直播！"
+>
+</div>
+
+<div class = "room-message">
+  <div class="message-text-area">
+    <% @messages.each do |message| %>
+     <%= message.content %>
+    <% end %>
+  </div>
+  <div class="searchbar">
+    <%= form_with(model: @message, url: messages_path(room_id: @room)) do |f| %>
+      <%= f.text_field :content, placeholder: "發送訊息........", autocomplete: "off"%>
+      <%= f.submit "傳送" , class:"disappear"%>
+    <% end %>
+  </div>
+</div>
+<%= link_to destroy_room_room_path, method: 'post',data: {turbolinks: false}, class: 'back-link' do %>
+	<i class="fas fa-sign-out-alt"></i>
+<% end %>
