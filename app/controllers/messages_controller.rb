@@ -1,10 +1,16 @@
 class MessagesController < ApplicationController
   def create
-    chat_room = Chat.find(params[:chat_id])
-    @message = chat_room.messages.create(params_message)
-    @opposed_user = chat_room.opposed_user(current_user).id
+    live_stream_room = Room.find(params[:room_id]) if params[:room_id]
+    chat_room = Chat.find(params[:chat_id]) if params[:chat_id]
+    @live_stream_message = live_stream_room.messages.create(params_message)
 
-    SendMessageJob.perform_later(@message, new_message_counts)
+
+
+    return if !chat_room
+    @opposed_user = chat_room.opposed_user(current_user).id
+    @chat_message = chat_room.messages.create(params_message)
+
+    SendMessageJob.perform_later(@chat_message, new_message_counts)
 
     if !is_online_channel_connect?  #判斷對方使用者有沒有在線上
       redis.rpush("#{@message.chatroom_id}_#{@message.user_id}_new_message", @message.to_json) #下線將訊息存為新訊息
