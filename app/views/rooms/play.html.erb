@@ -9,7 +9,7 @@
 >
 </div>
 
-<div class = "room-message">
+<div class = "room-message" data-controller = "roomMessage" data-roomMessage-id="<%= @room.id %>">
   <div class="message-text-area">
     <% @messages.each do |message| %>
      <%= message.content %>

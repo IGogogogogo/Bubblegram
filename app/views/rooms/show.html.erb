@@ -6,10 +6,10 @@
      data-vonageSub-token = "<%= @token %>">
 </div>
 <div class= "end-notice col-6 mx-auto d-none">直播已經結束囉！</div>
-<div class = "room-message">
+<div class = "room-message" data-controller = "roomMessage" data-roomMessage-id = "<%= @room.id %>">
   <div class="message-text-area">
-     <% @messages.each do |message| %>
-     <%= message.content %>
+    <% @messages.each do |message| %>
+      <%= message.content %>
     <% end %>
   </div>
   <div class="searchbar">
