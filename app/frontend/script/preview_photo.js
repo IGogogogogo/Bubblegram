@@ -4,7 +4,7 @@ window.addEventListener('turbolinks:load', function () {
   });
   function readURL(input) {
     if (input.files && input.files.length >= 0) {
-      $('.swiper-pagination').css('display', 'block')
+      $('.upload-btn').css('display', 'none')
       for (var i = 0; i < input.files.length; i++) {
         var reader = new FileReader();
         reader.onload = function (e) {

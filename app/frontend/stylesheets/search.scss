@@ -1,0 +1,37 @@
+.search-form{
+  width: 100%;
+  display: flex;
+  border: 1px solid #7fcfd6;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  input,
+  input:focus{
+    border: none;
+    outline: none;
+    background: transparent;
+  }
+  input[type="text"]{
+    width: 100%;
+    padding-left: 15px;
+  }
+  input[type="submit"]{
+    background: #7fcfd6;
+    border-radius: 0 10px 10px 0;
+  }
+}
+#keyword{
+  border-radius: 10px 0 0 10px;
+  background: transparent;
+}
+.search-post-title{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  height: 54px;
+  line-height: 54px;
+  font-size: 25px;
+  border-bottom: 1px solid #ccc;
+  margin: 0;
+}
