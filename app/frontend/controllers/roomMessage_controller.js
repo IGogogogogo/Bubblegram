@@ -4,7 +4,7 @@ import consumer from "../channels/consumer"
 export default class extends Controller {
   connect() {
     let temp =  document.querySelector("#message-template")
-    console.log("room connect")
+    let form = document.forms[0]
     let messageTextArea = document.querySelector(".message-text-area")
     let roomMessageController = this;
 
@@ -22,9 +22,15 @@ export default class extends Controller {
           // Called when the subscription has been terminated by the server
         },
         received(data) {
-          console.log(data)
+          // console.log(data)
           let message = renderTemplate(data)
           messageTextArea.append(message)
+          let currentUser = Number(roomMessageController.data.get("user"))
+
+          if(currentUser === data.user.id){
+            form.reset();
+          }
+
           function renderTemplate(message){
             let clone = document.importNode(temp.content,true)
               clone.querySelector(".name").textContent = message.user.nick_name

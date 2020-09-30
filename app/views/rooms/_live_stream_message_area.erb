@@ -1,0 +1,11 @@
+<div class = "room-message" data-controller = "roomMessage" data-roomMessage-id = "<%= @room.id %>" data-roomMessage-user = "<%= current_user.id %>">
+  <div class="message-text-area">
+    <%= render partial: "messages/live_stream_message", collection: @messages, as: :message %>
+  </div>
+  <div class="searchbar">
+    <%= form_with(model: @message, url: messages_path(room_id: @room)) do |f| %>
+      <%= f.text_field :content, placeholder: "發送訊息........", autocomplete: "off"%>
+      <%= f.submit "傳送" , class:"disappear"%>
+    <% end %>
+  </div>
+</div>
