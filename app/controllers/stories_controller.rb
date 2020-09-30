@@ -13,9 +13,6 @@ class StoriesController < ApplicationController
     # byebug
   end
 
-  def show
-  end
-
   def new
     check_owner
     @story = current_user.stories.new

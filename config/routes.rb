@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update] do
     resource :follows, only: [:create, :destroy]
-    resources :stories, only: [:index, :show, :new, :create, :destroy ]
+    resources :stories, only: [:index, :new, :create, :destroy ]
 
     resources :posts, shallow: true do
       member do
@@ -23,12 +23,12 @@ Rails.application.routes.draw do
       get :followings
     end
   end
-  
+
   # 產生show create destory 與 play 路徑
   resources :rooms, only: [:show, :destory, :create, :destroy] do
     member do
       get :play
-    end 
+    end
   end
   resources :searches, only: [:index] do
     collection do
