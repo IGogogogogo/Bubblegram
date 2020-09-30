@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_owner
-    if params[:user_id].to_i != current_user.id
+    if params[:user_id] != current_user.nick_name
       redirect_to root_path
     end
   end
@@ -29,18 +29,7 @@ class ApplicationController < ActionController::Base
     @redis =  Redis.new unless @redis
     @redis
   end
-  # def already_followed(user)                  #檢查自己是否已經追蹤對方
-  #   user.fans.include?(current_user)
-  # end
 
-  # def default_url_options(options = {})
-  #   host_options = if Rails.env.development?
-  #     { host: request.headers["HTTP_X_ORIGINAL_HOST"] }
-  #   else
-  #     {}
-  #   end
-  #   options.merge(host_options)
-  # end
   private
 
   def not_authorized

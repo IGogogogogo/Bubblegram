@@ -19,8 +19,9 @@
           <%= render partial: "/stories/story", collection: @results, as: :user %>
         </div>
         <%= render partial: "/posts/post", collection: @posts, as: :post %>
+
         <% if @has_more_posts %>
-        <%= render "/shared/loading" %>
+          <%= render "/shared/loading" %>
         <% end %>
       </div>
     </div>
