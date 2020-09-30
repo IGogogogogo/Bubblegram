@@ -1,6 +1,6 @@
 class RoomsController < ApplicationController
   # 直播間的rooms
-  before_action :find_room, only: %i[show play destroy]
+  before_action :find_room, only: %i[show play destroy destroy_room]
 
   def show
     opentok = OpenTok::OpenTok.new(ENV['vonage_api_key'], ENV['vonage_secret'])
@@ -24,7 +24,7 @@ class RoomsController < ApplicationController
     end
   end
 
-  def destroy
+  def destroy_room
     @room.destroy
     redirect_to root_path
   end

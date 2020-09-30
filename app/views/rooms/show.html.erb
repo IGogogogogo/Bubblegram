@@ -5,6 +5,7 @@
      data-vonageSub-session-id = "<%= @room.vonage_session_id %>"
      data-vonageSub-token = "<%= @token %>">
 </div>
+<div class= "end-notice col-6 mx-auto d-none">直播已經結束囉！</div>
 <%= link_to root_path, data: {turbolinks: false}, class: 'back-link' do %>
      <i class="fas fa-sign-out-alt"></i>
 <% end %>
