@@ -21,7 +21,7 @@
 .share.g-btn,
 .collect.g-btn,
 #dropdownMenu2{
-  font-size: 18px;
+  font-size: 25px;
 }
 .index-nav{
   border-top: 2px solid #ccc;
@@ -83,5 +83,15 @@ a{
   }
   .index-nav{
     width: 100%;
+  }
+  .like.btn,
+  .comment.btn,
+  .share.g-btn,
+  .collect.g-btn,
+  #dropdownMenu2{
+    font-size: 20px;
+  }
+  div.post-content{
+    margin-top: 0;
   }
 }

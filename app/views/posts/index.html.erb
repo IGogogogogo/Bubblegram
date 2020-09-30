@@ -1,13 +1,14 @@
+<h4 class="post-index-title">你的貼文</h4>
 <div class="post-load-page" style="overflow-y: auto; overflow-x: hidden; height: 100vh;">
   <div class=" row justify-content-center">
-      <div class="col-12 col-md-12">
+    <div class="col-12 col-md-12">
 
-        <div class="user-posts post-load-target">
-          <%= render partial: "/posts/post", collection: @posts, as: :post %>
-          <% if @has_more_posts %>
-            <%= render "/shared/loading" %>
-          <% end %>
-        </div>
+      <div class="user-posts post-load-target">
+        <%= render partial: "/posts/post", collection: @posts, as: :post %>
+        <% if @has_more_posts %>
+        <%= render "/shared/loading" %>
+        <% end %>
       </div>
     </div>
+  </div>
 </div>
