@@ -1,0 +1,59 @@
+.stories {
+  position: relative;
+  max-width: 380px;
+  margin: auto;
+
+  .header{
+    position: absolute;
+    background-color: rgba(99, 99, 99, 0.6);
+    top: 25px;
+    color: #fff;
+    z-index: 3;
+
+    .user-pic{
+      width: 40px;
+    }
+
+    .header-btn{
+      display: inline-block;
+      margin-left: auto;
+      background-color: transparent;
+      color: rgb(127, 207, 214);
+      border-color: transparent;
+      padding: 5px;
+      font-size: 22px;
+    }
+
+
+  }
+
+  .story-pic{
+    .carousel-indicators {
+      height: 25px;
+      li{
+        flex-grow: 1
+      }
+    }
+
+
+    .story-img {
+      position: relative;
+    }
+  }
+
+  .control {
+    background-color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+
+
+  .carousel-indicators{
+    top: 0;
+    background-color: rgba(99, 99, 99, 0.6);
+  }
+}

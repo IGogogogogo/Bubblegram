@@ -1,70 +1,68 @@
 <%= link_to '新增限時動態', new_user_story_path(current_user) %>
 
-<section class="warp">
-    <header calss="header">
-      <div class="menber">
-        <div >
-          <!-- <img src="https://picsum.photos/500/400?random=1" alt="X" class="menber-pic" > -->
-          <%= image_tag @user.avatar.url, class:'rounded-circle align-middle img-fluid menber-pic' %>
-        </div>
-        <div class="menber-name">
-          <strong>
-            <%= @user.nick_name %>
-          </strong>
-        </div>
-        <% @stories.each_with_index do |story,index| %>
-        <div class="<%= index == 0 ? 'active' : '' %>">
-          <%# creat_time %>
-            <%= time_ago_in_words(story.created_at) %>
-        </div>
+<section class="stories" data-user=<%= @user.id %>>
+  <div class="header d-flex justify-content-between w-100 px-2">
+    <div class="header-info d-flex align-items-center">
+      <div class="user-pic pr-2">
+        <% if @user == current_user %>
+          <%= link_to new_user_story_path(current_user) do  %>
+            <%= image_tag @user.avatar.url, class:'rounded-circle align-middle img-fluid' %>
+
+          <% end %>
+        <% else %>
+          <%= image_tag @user.avatar.url, class:'rounded-circle align-middle img-fluid' %>
         <% end %>
-        <button class="fun-btn"><i class="fas fa-ellipsis-h"></i></button>
+
       </div>
-    </header>
 
-    <div class = "pic-div">
-      <!-- 以下輪播 -->
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <% @stories.each_with_index do |story, index| %>
-          <li data-target="#carouselExampleIndicators" data-slide-to="<%= index %>" class="<% index == 0 ? 'active' : '' %>"></li>
-          <% end %>
-        </ol>
+      <div class="member-name pr-2">
+        <strong><%= @user.nick_name %></strong>
+      </div>
 
-        <div class="carousel-inner">
-          <% @stories.each_with_index do |story,index| %>
-          <div class="story-img carousel-item story_id <%= index == 0 ? 'active' : '' %>"  story_id="<%= story.id %>" >
-            <%= image_tag story.picture.url, class: 'd-block w-100' %>
-          </div>
-          <% end %>
+      <!--時間---->
+      <% @stories.each_with_index do |story,index| %>
+        <div class="member-time story-<%= story.id %>" style="<%= 'display: none' if index != 0 %>"">
+          <%= time_ago_in_words(story.created_at) %>
         </div>
-
-          <button class="goroot">
-            <%= link_to root_path, class: "goroot" do  %>
-              <i class="fas fa-times"></i>
-            <% end %>
-          </button>
-          <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-          </a>
-
-      </div>
-      <!-- 以上輪播 -->
+      <% end %>
     </div>
-  </section>
 
-  <div class="modal-fun">
-    <div class="modal-card">
-      <div class="modal-del btn" id="story_delete">
-        <a href="#">刪除</a>
-      </div>
-      <div  class="modal-cancel">
-        <a href="#" >取消</a>
-      </div>
-    </div>
+    <% if @user == current_user %>
+      <button class="header-btn"><i class="fas fa-times"></i></button>
+    <% end %>
   </div>
+
+  <div class="story-pic">
+    <!-- 以下輪播 -->
+    <div id="stories-carousel" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators mx-0">
+        <% @stories.each_with_index do |story, index| %>
+          <li data-slide-to="<%= index %>" class="<% index == 0 ? 'active' : '' %>"></li>
+        <% end %>
+      </ol>
+
+      <div class="carousel-inner">
+        <% @stories.each_with_index do |story,index| %>
+          <div class="story-img carousel-item story_id <%= index == 0 ? 'active' : '' %>"  data-story="<%= story.id %>" >
+            <%= image_tag story.picture.url, class: 'w-100'%>
+          </div>
+        <% end %>
+      </div>
+
+      <a class="carousel-control-prev" href="#stories-carousel" role="button" data-slide="prev">
+        <div class="control">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </div>
+      </a>
+
+      <a class="carousel-control-next" href="#stories-carousel" role="button" data-slide="next">
+        <div class="control">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </div>
+      </a>
+    </div>
+    <!-- 以上輪播 -->
+  </div>
+</section>
