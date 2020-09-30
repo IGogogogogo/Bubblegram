@@ -6,6 +6,11 @@ document.addEventListener("turbolinks:load", () => {
   if(!storiesSection){ return }
   document.querySelector(".container").style.padding = "0"
 
+  // 輪播秒數
+  $('.carousel').carousel({
+    interval: 2000
+  })
+
   ////刪除story
   const headerBtn = document.querySelector('.header-btn')
   if(!headerBtn){return}
