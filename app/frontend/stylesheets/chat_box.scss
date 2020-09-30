@@ -1,3 +1,30 @@
+.user-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  max-width: 740px;
+  width: 100%;
+  margin:auto;
+  background-color: rgb(245, 245, 245);
+  z-index: 2;
+  border-bottom: 1px solid rgb(209, 209, 209);
+  .user-name{
+    text-align: center;
+    letter-spacing: 2px;
+    line-height: 50px;
+  }
+}
+.chat-user-container{
+  max-width: 740px;
+  width: 100%;
+  margin: auto;
+
+}
+
+
+
+
 .chat-user{
   display: flex;
 
