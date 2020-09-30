@@ -5,9 +5,8 @@
     <div class="header-info d-flex align-items-center">
       <div class="user-pic pr-2">
         <% if @user == current_user %>
-          <%= link_to new_user_story_path(current_user) do  %>
+          <%= link_to new_user_story_path(current_user), class:'add-story' do  %>
             <%= image_tag @user.avatar.url, class:'rounded-circle align-middle img-fluid' %>
-
           <% end %>
         <% else %>
           <%= image_tag @user.avatar.url, class:'rounded-circle align-middle img-fluid' %>

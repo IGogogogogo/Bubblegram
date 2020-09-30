@@ -12,6 +12,24 @@
 
     .user-pic{
       width: 40px;
+
+    }
+
+    .add-story{
+      position: relative;
+    }
+    .add-story::after{
+      height: 15px;
+      width: 15px;
+      position: absolute;
+      content: "+";
+      color: white;
+      background-color: rgb(127, 207, 214);
+      left: 70%;
+      top: 70%;
+      border-radius: 50%;
+      text-align: center;
+      line-height: 13px;
     }
 
     .header-btn{
@@ -24,7 +42,6 @@
       font-size: 22px;
     }
 
-
   }
 
   .story-pic{
@@ -34,7 +51,6 @@
         flex-grow: 1
       }
     }
-
 
     .story-img {
       position: relative;
