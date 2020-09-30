@@ -23,3 +23,20 @@
   left: 0;
   z-index: 11;
 }
+.room-message{
+  position: absolute;
+  bottom: 0;
+  z-index: 12;
+  .message-text-area{
+    .message + .message{
+      margin-top: 10px;
+    }
+    .message{
+      display: flex;
+
+      .name{
+        margin-right: 5px;
+      }
+    }
+  }
+}
