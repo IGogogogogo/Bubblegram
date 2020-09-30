@@ -11,9 +11,7 @@
 
 <div class = "room-message" data-controller = "roomMessage" data-roomMessage-id="<%= @room.id %>">
   <div class="message-text-area">
-    <% @messages.each do |message| %>
-     <%= message.content %>
-    <% end %>
+    <%= render partial: "messages/live_stream_message", collection: @messages, as: :message%>
   </div>
   <div class="searchbar">
     <%= form_with(model: @message, url: messages_path(room_id: @room)) do |f| %>
@@ -25,3 +23,9 @@
 <%= link_to destroy_room_room_path, method: 'post',data: {turbolinks: false}, class: 'back-link' do %>
 	<i class="fas fa-sign-out-alt"></i>
 <% end %>
+<template id="message-template">
+   <div class = "message">
+      <div class = "name"></div>
+      <div class="content"></div> <!--img/content------------->
+  </div>
+</template>

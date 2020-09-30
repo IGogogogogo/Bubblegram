@@ -3,7 +3,9 @@ import consumer from "../channels/consumer"
 
 export default class extends Controller {
   connect() {
+    let temp =  document.querySelector("#message-template")
     console.log("room connect")
+    let messageTextArea = document.querySelector(".message-text-area")
     let roomMessageController = this;
 
     this.subscription = consumer.subscriptions.create(
@@ -20,15 +22,21 @@ export default class extends Controller {
           // Called when the subscription has been terminated by the server
         },
         received(data) {
-
+          console.log(data)
+          let message = renderTemplate(data)
+          messageTextArea.append(message)
+          function renderTemplate(message){
+            let clone = document.importNode(temp.content,true)
+              clone.querySelector(".name").textContent = message.user.nick_name
+              clone.querySelector(".content").textContent = message.message.content
+              return clone
+          }
         }
       }
-    );
-  }
+      );
+    }
 
-  disconnect() {
-    this.subscription.unsubscribe();
-  }
-
-
+    disconnect() {
+      this.subscription.unsubscribe();
+    }
 }

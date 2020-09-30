@@ -3,8 +3,9 @@ class MessagesController < ApplicationController
     live_stream_room = Room.find(params[:room_id]) if params[:room_id]
     chat_room = Chat.find(params[:chat_id]) if params[:chat_id]
     @live_stream_message = live_stream_room.messages.create(params_message)
+    @user = User.find(@live_stream_message.user_id)
 
-
+    SendLiveStreamMessageJob.perform_later(@live_stream_message, @user)
 
     return if !chat_room
     @opposed_user = chat_room.opposed_user(current_user).id
