@@ -16,6 +16,7 @@ export default class extends Controller {
     console.log('sub disconnect');
     if (this.session) { this.session.disconnect() }
     document.querySelector('.end-notice').classList.remove('d-none')
+    document.querySelector(".room-message").remove()
     // this.session.unsubscribe(subscriber)
   }
 
