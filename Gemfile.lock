@@ -60,6 +60,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
+    babosa (1.0.3)
     bcrypt (3.1.15)
     bcrypt_pbkdf (1.0.1)
     bindex (0.8.1)
@@ -326,6 +327,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  babosa (~> 1.0, >= 1.0.3)
   bcrypt_pbkdf (~> 1.0, >= 1.0.1)
   bootsnap (>= 1.4.2)
   byebug
