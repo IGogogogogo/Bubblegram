@@ -1,4 +1,7 @@
 class Post < ApplicationRecord
+  extend FriendlyId
+  friendly_id :post_firendly_params, use: :slugged #使用friendly_id 替換 post id
+
   mount_uploaders :images, ImageUploader
   # has_rich_text :body
   validates :content, presence: true
@@ -35,4 +38,7 @@ class Post < ApplicationRecord
     end
   end
 
+  def post_firendly_params
+    Digest::SHA1.hexdigest([Time.now, rand].join).to_i(base=16)%10**20
+  end
 end
