@@ -6,7 +6,7 @@ class ChatsController < ApplicationController
   end
 
   def create
-    @user = User.friendly.find(params[:user_id])
+    @user = User.find(params[:user_id])
     @chat = Chat.get(current_user.id, @user.id)
 
     redirect_to chat_path(@chat.id)

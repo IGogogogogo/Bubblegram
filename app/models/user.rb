@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   extend FriendlyId
-  friendly_id :nick_name, use: :slugged         #使用friendly_id 替換 routes 顯示的 id
+  friendly_id :nick_name, use: [:finders, :slugged]
+  #使用friendly_id 替換 params, finder 用params[:id] 也能找到 user
 
   validates :nick_name, presence: true
   validates :email, uniqueness: true
@@ -97,8 +98,7 @@ class User < ApplicationRecord
     Redis.new.get("user_#{self.id}_online").present?
   end
 
-  #把英文數字轉為utf-8
-  def normalize_friendly_id(input)
+  def normalize_friendly_id(input) #把英文數字轉為utf-8
     input.to_s.to_slug.normalize.to_s
   end
 

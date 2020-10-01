@@ -3,7 +3,7 @@ class PostsController < ApplicationController
 
   def index
     per_count = 20
-    @user = User.friendly.find(params[:user_id])
+    @user = User.find(params[:user_id])
     @posts = @user.posts.includes(:thumbs_up_users).order("created_at DESC").limit(per_count)
     @has_more_posts = (@posts.count >= per_count)
   end
@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   end
 
   def load_posts     #依照kaminari page & type 讀取新貼文
-    @user = User.friendly.find(params[:user_id]) if params[:user_id]
+    @user = User.find(params[:user_id]) if params[:user_id]
     if params[:type] == "following_posts"
       users = User.viewable_users(current_user)
       @posts = Post.viewable_posts(users).includes(:user).order("created_at DESC").page(params[:page]).per(20)
