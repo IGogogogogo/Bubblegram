@@ -1,9 +1,8 @@
 class User < ApplicationRecord
   extend FriendlyId
-  friendly_id :nick_name, use: [:finders, :slugged]
-  #使用friendly_id 替換 params, finder 用params[:id] 也能找到 user
+  friendly_id :nick_name, use: :slugged #使用friendly_id 替換 params
 
-  validates :nick_name, presence: true
+  validates :nick_name, presence: true, uniqueness: { case_sensitive: false }   #大小寫視為同一種
   validates :email, uniqueness: true
 
   devise :database_authenticatable, :registerable,

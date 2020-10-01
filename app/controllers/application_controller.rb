@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def check_owner
-    if params[:user_id] != current_user.nick_name
+    if params[:user_id] != current_user.nick_name.downcase
       redirect_to root_path
     end
   end
