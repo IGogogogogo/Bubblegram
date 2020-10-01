@@ -49,7 +49,7 @@ class PostsController < ApplicationController
     authorize @post
 
     if @post.save
-      redirect_to post_path(@post), notice: '文章新增成功'
+      redirect_to root_path, notice: '文章新增成功'
     else
       find_tag_users
       @url = user_posts_path(current_user)
