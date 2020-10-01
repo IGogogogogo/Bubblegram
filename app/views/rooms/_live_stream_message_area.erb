@@ -6,7 +6,7 @@
     <%= form_with(model: @message, url: messages_path(room_id: @room)) do |f| %>
       <%= f.text_field :content, placeholder: "發送訊息........", autocomplete: "off"%>
       <label for="submit"><i class="far fa-paper-plane"></i></label>
-      <%= f.submit "傳送" ,id: "submit", class:"disappear" %>
+      <%= f.submit "傳送" ,id: "submit", class:"disappear", disabled: true %>
     <% end %>
   </div>
 </div>

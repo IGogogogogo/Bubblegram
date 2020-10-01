@@ -6,7 +6,10 @@ export default class extends Controller {
     let temp =  document.querySelector("#message-template")
     let form = document.forms[0]
     let messageTextArea = document.querySelector(".message-text-area")
+    let textContent = document.querySelector("input[type='text']")
+    let textSubmit = document.querySelector("input[type='submit']")
     let roomMessageController = this;
+
 
     this.subscription = consumer.subscriptions.create(
       {
@@ -27,8 +30,20 @@ export default class extends Controller {
           messageTextArea.append(message)
           let currentUser = Number(roomMessageController.data.get("user"))
 
+          if(messageTextArea.scrollHeight - window.innerHeight <= messageTextArea.scrollTop){
+            //判斷捲軸是不是在最底部
+            setTimeout(() => {
+              // console.log(message_text_area.scrollHeight)
+              messageTextArea.scrollTo(0, messageTextArea.scrollHeight) //捲軸移動到最底部
+            }, 100)
+          }
           if(currentUser === data.user.id){
             form.reset();
+            textSubmit.setAttribute("disabled", true)
+            setTimeout(() => {
+              // console.log(message_text_area.scrollHeight)
+              messageTextArea.scrollTo(0, messageTextArea.scrollHeight) //捲軸移動到最底部
+            }, 100)
           }
 
           function renderTemplate(message){
@@ -42,6 +57,17 @@ export default class extends Controller {
         }
       }
       );
+
+      console.log(textContent)
+      console.log(textSubmit)
+      textContent.addEventListener("keyup",(e)=>{
+        console.log(e)
+        if(textContent.value.split(" ").join("") !== ""){
+          textSubmit.removeAttribute("disabled", false)
+        }else{
+          textSubmit.setAttribute("disabled", true)
+        }
+      })
     }
 
     disconnect() {
