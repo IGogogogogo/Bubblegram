@@ -1,6 +1,6 @@
 class Chat < ApplicationRecord
   extend FriendlyId
-  friendly_id :chat_friendly_token, use: [:finders, :slugged]        #使用friendly_id 替換 routes 顯示的 id
+  friendly_id :friendly_params, use: :slugged       #使用friendly_id 替換 routes 顯示的 id
 
   validates :sender_id, uniqueness: { scope: :recipient_id }
 
@@ -33,13 +33,5 @@ class Chat < ApplicationRecord
 
   def unread_messages(user)#有幾則新訊息
     Redis.new.lrange("#{self.id}_#{self.opposed_user(user).id}_new_message",0,-1).length
-  end
-
-  def normalize_friendly_id(input) #把英文數字轉為utf-8
-    input.to_s.to_slug.normalize.to_s
-  end
-
-  def chat_friendly_token     #使用Devise token 作為 params
-    Devise.friendly_token
   end
 end
