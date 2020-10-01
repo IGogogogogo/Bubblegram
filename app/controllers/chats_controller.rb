@@ -14,6 +14,7 @@ class ChatsController < ApplicationController
 
   def show
     @chat = Chat.find(params[:id])
+    check_member
     @message = Message.new
     @messages = @chat.messages.includes(:user).order(id: :desc).limit(100).reverse
     @messages_json = @chat.messages.includes(:user).page(params[:page]).order(id: :desc)
@@ -33,8 +34,14 @@ class ChatsController < ApplicationController
   end
 
   private
+
   def any_new_messages?
     redis.lrange("#{@chat.id}_#{@sender}_new_message",0,-1).present?
   end
 
+  def check_member
+    if @chat.sender_id != current_user.id && @chat.recipient_id != current_user.id
+      redirect_to root_path, notice: "你不是聊天室成員！"
+    end
+  end
 end
