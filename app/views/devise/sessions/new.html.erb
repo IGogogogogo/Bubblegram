@@ -17,7 +17,6 @@
     <label for="user_password" class="position-absolute password-label"><i class="fas fa-unlock-alt"></i></label>
     <%= f.password_field :password, autocomplete: "current-password", class: 'form-control rounded-pill pl-5' %>
   </div>
-  <a href="<%= new_user_password_path %>" class="float-right pb-3"><small>忘記密碼？</small></a>
 
   <div class="actions">
     <%= f.submit "登入", class: 'btn btn-primary w-100 btn-login' %>
