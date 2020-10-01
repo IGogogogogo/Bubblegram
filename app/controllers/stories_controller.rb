@@ -2,7 +2,7 @@ class StoriesController < ApplicationController
   before_action :find_story, only: [:show, :destroy]
 
   def index
-    @user = User.friendly.find(params[:user_id])
+    @user = User.find(params[:user_id])
     @stories = @user.stories.includes(:user).order("created_at DESC").where('created_at >= ?', Time.zone.now - 1.day)
     # 去撈24hr內po的storiesa，測試時可以用5.second。
 
