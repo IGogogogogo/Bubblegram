@@ -1,8 +1,16 @@
 <div class = "message">
-  <div class = "name">
-    <%= message.user.nick_name %>
+     <div class = "user-avatar">
+       <%= image_tag message.user.avatar.url, class: "rounded-circle" if message.user.avatar.present?%>
+     </div>
+     <div class="content">
+       <div class = "name-with-time">
+           <div class = "name">
+              <%= message.user.nick_name %>
+           </div>
+           <div class="time"></div>
+       </div>
+       <div class="text-content">
+          <%= message.content %>
+       </div>
+     </div>
   </div>
-  <div class="content">
-    <%= message.content %>
-  </div>
-</div>
