@@ -1,17 +1,25 @@
 // publisher scss
 .OT_publisher{
-  position: absolute;
-  top: 50 px ;
+  position: fixed;
+  top: 0 ;
+  left: 0;
+  height: 100vh;
+  z-index: 11;
 }
 .back-link{
+  font-size: 36px;
+  color:rgb(139, 139, 139);
   position: absolute;
-  right: 10px;
-  z-index: 3;
-  top: 60px;
+  right: 0;
+  z-index: 12;
+  bottom: 40px;
 }
 // subscriber scss
 .OT_subscriber{
   width: 100% !important;
   height: 100vh !important;
-  position: absolute;
+  position: fixed;
+  top: 0 ;
+  left: 0;
+  z-index: 11;
 }
