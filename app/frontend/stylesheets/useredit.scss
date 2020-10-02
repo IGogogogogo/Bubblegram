@@ -1,0 +1,47 @@
+.user-edit-group{
+  position: relative;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 20px;
+
+  label{
+    position: absolute;
+    bottom: 0px;
+    pointer-events: none;
+    transition: all .3s ease;
+  }
+  input,
+  textarea{
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0, .12);
+  padding-left: 50px;
+  }
+  textarea{
+    resize: none;
+  }
+
+  input:focus,
+  textarea:focus{
+    outline: none;
+  }
+
+  .underline{
+    position: absolute;
+    bottom: 0;
+    height: 2px;
+    width: 100%;
+    &::before, &::after{
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #7fcfd6;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .3s ease;
+    }
+  }
+}

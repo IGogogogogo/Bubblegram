@@ -8,7 +8,7 @@ window.addEventListener('turbolinks:load', function () {
       for (var i = 0; i < input.files.length; i++) {
         var reader = new FileReader();
         reader.onload = function (e) {
-          var img = $("<img max-width='400px' width='100%' height='350'>").attr('src', e.target.result);
+          var img = $("<img max-width='400px' width='100%' height='300px'>").attr('src', e.target.result);
           var div = $("<div></div>").append(img)
           div.addClass("swiper-slide").css('height', '400px')
           $(".swiper-wrapper").append(div);
