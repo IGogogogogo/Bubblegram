@@ -1,5 +1,6 @@
 window.addEventListener('turbolinks:load', function () {
-  document.querySelector('.upload-btn').addEventListener('click', function () {
+  let uploadBtn = document.querySelector('.upload-btn')
+  uploadBtn.addEventListener('click', function () {
     document.getElementById('post_images').click()
   })
 })

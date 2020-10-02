@@ -12,7 +12,9 @@
     <% end %>
   </ul>
   <% end %>
-
+  <div id="user-edit-pic">
+    <%= image_tag @user.avatar.url, id: 'user-preview' if @user.avatar %>
+  </div>
   <%= form_with(model: @user, local: true) do |f| %>
   <div class="user-edit-group">
     <%= f.file_field :avatar, autocomplete: "off" %>
