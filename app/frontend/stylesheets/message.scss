@@ -16,7 +16,7 @@
     .message_text_area{
       height: calc(100% - 130px);
       overflow: auto;
-      padding: 0 20px;
+      padding: 0 20px 20px 20px;
       box-sizing: border-box;
 
       #unread-line{
@@ -28,6 +28,9 @@
       }
 
       .message{
+        p{
+          margin: 0;
+        }
         .pic-name{
           display: flex;
           flex-direction: column;
@@ -99,18 +102,16 @@
 
     .searchbar{
       position: absolute;
-      bottom: 15px;
+      bottom: 10px;
       left: 0;
       right: 0;
-
       width: 95%;
-      height: 33px;
-
+      min-height: 50px;
       display: flex;
       border: 1px solid #ccc;
       border-radius: 20px;
       box-sizing: border-box;
-      padding: 15px;
+      padding: 5px 10px;
       margin: auto;
       align-items: center;
 
@@ -121,12 +122,11 @@
         display: flex;
 
         #message_content{
+          resize: none;
           width: 100%;
-          height: 33px;
           padding: 3px 5px;
           box-sizing: border-box;
           border: none;
-          background-color: transparent;
           &:focus{
             outline: none;
             background: transparent;
@@ -134,6 +134,9 @@
         }
         #message_content::-webkit-scrollbar {
           display: none;          //隱藏訊息輸入匡scrollbar
+        }
+        #message_content::placeholder{
+          vertical-align: center;
         }
 
         input[type='submit']{
