@@ -3,7 +3,7 @@ import axios from 'axios'
 document.addEventListener("turbolinks:load",()=>{
   const message_box = document.querySelector(".message_box")
   if(!message_box)return
-  // const text_form = document.forms[0]
+  const text_form = document.forms[0]
   const image_form =document.forms[1]
   const text_area = document.getElementById("message_content")
   const image_value= image_form.elements["message[image]"]
@@ -11,6 +11,7 @@ document.addEventListener("turbolinks:load",()=>{
   const message_text_area = document.querySelector(".message_text_area")
   const unreadLine = document.getElementById("unread-line")
   let temp = document.querySelector("#message-template")
+  let searchBar
   // let temp = document.querySelector("template")
   // let tempDiv = temp.content.querySelector(".message")
 
@@ -79,9 +80,13 @@ document.addEventListener("turbolinks:load",()=>{
 
   message_text_area.addEventListener("scroll", scrolling) //監聽訊息範圍捲軸
 
-  text_area.addEventListener("keyup",()=>{
-    // console.log(text_area.value.split(" ").join(""))
-    if(text_area.value.split(" ").join("") !== ""){
+  text_area.addEventListener("keyup",(e)=>{
+    searchBar = document.querySelector(".searchbar")
+    text_area.style.height = calcTextAreaHeight(text_area.value) + "px"
+
+    // console.log( text_area.value.match(/\n/g).length > 0)
+    console.log()
+    if(text_area.value.match(/\S/)){
       text_submit.classList.remove("disappear")
       image_form.classList.add("disappear")
       text_submit.removeAttribute("disabled", false)
@@ -92,6 +97,30 @@ document.addEventListener("turbolinks:load",()=>{
     }
   })
 
+  text_area.addEventListener("keypress",(e)=>{
+    if(text_area.value.match(/\S/)){
+      if (event.keyCode == 13 && !event.shiftKey) {
+        e.preventDefault()
+        text_form.submit()
+      }
+    }
+  })
+
+  function noEmptyWord(value){
+    return (value.split(" ").join("") !== "")
+  }
+  function noBreakLine(value){
+    return (value.split("\n").join("") !== "")
+  }
+
+  function calcTextAreaHeight(value){
+    let lines = (value.match(/\n/g) || []).length
+    if (lines >= 5 ){
+      lines = 5
+    }
+    let newHeight = 33 + lines * 20;
+    return newHeight;
+  }
   image_value.addEventListener("change",()=>{
     image_form.submit()
     image_value.value = ""
