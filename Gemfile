@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'carrierwave', '~> 2.1'
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
+gem 'carrierwave-video', '~> 0.6.0'
+gem 'streamio-ffmpeg', '~> 2.0.0'
 
 # Create Member system
 gem 'devise', '~> 4.2'

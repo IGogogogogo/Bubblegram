@@ -1,3 +1,4 @@
 <div>
-  <%= image_tag image.url, class: "w-100 h-100 align-middle img-fluid" if image %>
+  <%= video_tag image.rescaled.url, class: "w-100 h-100", controls: true if image.content_type.include?("video") %>
+  <%= image_tag image.resized.url, class: "w-100 h-100 align-middle img-fluid" if image.content_type.include?("image") %>
 </div>

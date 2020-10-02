@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   validates :content, presence: true
   validates :images, presence: true
   validate :limit_images_count         #限制貼文圖片最多5張
+  validate :limit_images_size          #限制貼文圖片大小10MB
 
   belongs_to :user, counter_cache: true
   has_many :comments, dependent: :destroy
@@ -35,4 +36,11 @@ class Post < ApplicationRecord
     end
   end
 
+  def limit_images_size        #限制貼文圖片大小10MB
+    self.images.map do |image|
+      if image.size > 10.megabytes
+        errors.add(:base, "Can't upload more than 10 megabytes")
+      end
+    end
+  end
 end
