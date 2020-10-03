@@ -2,15 +2,16 @@ import Rails from "@rails/ujs"
 import Swal from "sweetalert2"
 
 document.addEventListener("turbolinks:load", () => {
+  console.log("stories")
   const storiesSection = document.querySelector('.stories')
   if(!storiesSection){ return }
   document.querySelector(".container").style.padding = "0"
   document.querySelector("body").style.backgroundColor = "#262626"
-  document.querySelector(".index-nav").style.display = "none"
+  document.querySelector(".index-nav").parentNode.style.display = "none"
 
   // 輪播秒數
   $('.carousel').carousel({
-    interval: 2000
+    interval: 1000000
   })
 
   ////打開功能區塊
@@ -21,7 +22,7 @@ document.addEventListener("turbolinks:load", () => {
   if(!headerBtn){return}
 
   headerBtn.addEventListener("click", function(){
-    console.log("123")
+    $("#stories-carousel").carousel('pause')
     if(modalFun.style.display != 'block'){
       modalFun.style.display = 'block'
     }
@@ -74,6 +75,57 @@ document.addEventListener("turbolinks:load", () => {
       }
     })
   }
+
+  ///切換上一個人使用這限時動態
+  const prevBtn = document.querySelector(".carousel-control-prev")
+  prevBtn.addEventListener("click", function(){
+    console.log("123")
+    const $activeImg = document.querySelector('.story-img.active')
+    const carouselIndex = $activeImg.dataset.index
+    const prevUser = storiesSection.dataset.prevUser
+    console.log(carouselIndex)
+    console.log(prevUser != "")
+    const isFirstImg = Number(carouselIndex) - 1 == 0
+    if (isFirstImg) {
+      console.log(isFirstImg)
+      $("#stories-carousel").carousel('pause')
+      if (prevUser == ""){
+        console.log("back")
+        prevBtn.pathname = "/"
+      } else {
+        console.log("prev")
+        prevBtn.pathname = `/users/${prevUser}/stories`
+      }
+    }
+
+
+  })
+
+  ///切換下一個使用者的限時動態
+  console.log($("#stories-carousel"))
+  $("#stories-carousel").on('slide.bs.carousel', function () {
+    //第二個人不能進來這個事件
+    console.log("change")
+    // checkLastStory()
+  })
+
+  const checkLastStory = () => {
+    console.log("checkLastStory")
+    const $activeImg = document.querySelector('.story-img.active')
+    const carouselIndex = $activeImg.dataset.index
+    const storiesCount = $activeImg.dataset.storiesCount
+    const nextUser = storiesSection.dataset.nextUser
+    if (Number(carouselIndex) + 1 == Number(storiesCount)) {
+      $("#stories-carousel").carousel('pause')
+
+      if (nextUser != "") {
+        document.location.pathname = `/users/${nextUser}/stories`
+      } else if (nextUser == "") {
+        document.location.pathname = "/"
+      }
+    }
+  }
+
 
 
   ///顯示時間

@@ -1,4 +1,4 @@
-<section class="stories" data-user=<%= @user.id %>>
+<section class="stories" data-user=<%= @user.id %> data-name=<%= @user.nick_name %> data-next-user=<%= @next_user_name %> data-prev-user=<%= @prev_user_name %>>
   <header>
     <div class="member">
       <div class="member-pic">
@@ -50,7 +50,9 @@
 
       <div class="carousel-inner">
         <% @stories.each_with_index do |story,index| %>
-          <div class="story-img carousel-item story_id <%= index == 0 ? 'active' : '' %>"  data-story="<%= story.id %>" >
+          <div class="story-img carousel-item story_id <%= index == 0 ? 'active' : '' %>"  data-story="<%= story.id %>" data-index="<%= index %>" data-stories-count="<%= @stories.length %>">
+          <p class="text-light"><%= story.id %></p>
+          <p class="text-light"><%= index %></p>
             <%= image_tag story.picture.url, class: 'd-block'%>
           </div>
         <% end %>

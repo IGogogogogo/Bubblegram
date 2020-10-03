@@ -7,6 +7,14 @@ class StoriesController < ApplicationController
     # 去撈24hr內po的storiesa，測試時可以用5.second。
 
     # 讓原先的 N + 1 Query 變成 1 (Post) + 1 (User)，scope寫在models
+    stories_users = [User.last].concat(User.last.followings.includes(:stories).order("created_at DESC")).select{|user| user.exist_story?}.map{|user| user.nick_name}
+    if stories_users.index(@user.nick_name) + 1 != stories_users.length
+      @next_user_name = stories_users[stories_users.index(@user.nick_name) + 1]
+    end
+
+    if stories_users.index(@user.nick_name) != 0
+      @prev_user_name = stories_users[stories_users.index(@user.nick_name) - 1]
+    end
   end
 
   def new
