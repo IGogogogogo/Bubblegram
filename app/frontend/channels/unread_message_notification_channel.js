@@ -6,11 +6,9 @@ document.addEventListener("turbolinks:load",()=>{
   let unreadChannels = consumer.subscriptions.subscriptions.filter(sub=> JSON.parse(sub.identifier).channel === "UnreadMessageNotificationChannel") //找有沒有在unreadchannel
   // console.log(unreadChannels)
   if(unreadChannels.length >= 1){
-    unreadChannels.forEach((unreadChannel)=>{
-      consumer.subscriptions.remove(unreadChannel)
-    })
+    return
   }
-  //如果有直接全部刪除避免多訂閱
+  //如果有直接return避免多訂閱
 
 
   let unreadMessagesDiv= document.createElement("div")
@@ -31,7 +29,6 @@ document.addEventListener("turbolinks:load",()=>{
     received(data) {
       let chatChannle = this.consumer.subscriptions.subscriptions.filter(sub=> JSON.parse(sub.identifier).channel === "ChatChannel") //找有沒有在chatchannel
 
-      // console.log(chatChannle)
 
       if(chatChannle.length === 1)return //有的話代表正在聊天室中，不發通知
 
