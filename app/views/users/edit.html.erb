@@ -1,35 +1,45 @@
-<h1>Use edit</h1>
+<div class="wrap">
+  <h4 class="user-edit-title">用戶編輯</h4>
 
   <% if @user.errors.any? %>
-    <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li>
-          <%= msg %>
-        </li>
-      <% end %>
-    </ul>
+  <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+    <li style="color: red;">
+      <small>
+        <%= msg %>
+      </small>
+    </li>
+    <% end %>
+  </ul>
   <% end %>
-
-<%= form_with(model: @user, local: true) do |f| %>
-  <div>
+  <div id="user-edit-pic">
+    <%= image_tag @user.avatar.url, id: 'user-preview' if @user.avatar %>
+  </div>
+  <%= form_with(model: @user, local: true) do |f| %>
+  <div class="user-edit-group">
+    <%= f.file_field :avatar, autocomplete: "off" %>
+    <div class="underline"></div>
     <%= f.label "avatar" %>
-    <%= f.file_field :avatar %>
   </div>
 
-  <div>
-    <%= f.label "nick_name" %>
-    <%= f.text_field "nick_name" %>
+  <div class="user-edit-group">
+    <%= f.text_field "nick_name", autocomplete: "off" %>
+    <div class="underline"></div>
+    <%= f.label "暱稱" %>
   </div>
 
-  <div>
-    <%= f.label "email" %>
-    <%= f.text_field "email" %>
+  <div class="user-edit-group">
+    <%= f.text_field "email", autocomplete: "off" %>
+    <div class="underline"></div>
+    <%= f.label "信箱" %>
   </div>
 
-  <div>
-    <%= f.label "description" %>
-    <%= f.text_area "description" %>
+  <div class="user-edit-group">
+    <%= f.text_area "description", autocomplete: "off" %>
+    <div class="underline"></div>
+    <%= f.label "描述" %>
   </div>
 
   <%= f.submit %>
-<% end %>
+  <% end %>
+</div>

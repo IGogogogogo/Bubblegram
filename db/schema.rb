@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_22_033056) do
+ActiveRecord::Schema.define(version: 2020_10_01_105522) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,9 +51,11 @@ ActiveRecord::Schema.define(version: 2020_09_22_033056) do
     t.integer "recipient_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
     t.index ["recipient_id", "sender_id"], name: "index_chats_on_recipient_id_and_sender_id", unique: true
     t.index ["recipient_id"], name: "index_chats_on_recipient_id"
     t.index ["sender_id"], name: "index_chats_on_sender_id"
+    t.index ["slug"], name: "index_chats_on_slug", unique: true
   end
 
   create_table "comments", force: :cascade do |t|
@@ -84,6 +86,17 @@ ActiveRecord::Schema.define(version: 2020_09_22_033056) do
     t.index ["following_id"], name: "index_follows_on_following_id"
   end
 
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
   create_table "identities", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "provider"
@@ -112,6 +125,8 @@ ActiveRecord::Schema.define(version: 2020_09_22_033056) do
     t.integer "comments_count", default: 0
     t.json "images"
     t.integer "favourites_count", default: 0
+    t.string "slug"
+    t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -121,6 +136,8 @@ ActiveRecord::Schema.define(version: 2020_09_22_033056) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_rooms_on_slug", unique: true
     t.index ["user_id"], name: "index_rooms_on_user_id"
   end
 
@@ -161,8 +178,10 @@ ActiveRecord::Schema.define(version: 2020_09_22_033056) do
     t.integer "collections_count", default: 0
     t.string "avatar"
     t.text "description"
+    t.string "slug"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["slug"], name: "index_users_on_slug", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

@@ -44,6 +44,8 @@ gem "opentok", "~> 4.0.0"
 #用來存carrierwave 圖片到 aws s3
 gem "fog-aws", '~> 3.6', '>= 3.6.7'
 gem 'pundit', '~> 2.1'        #controller身份驗證
+gem 'friendly_id', '~> 5.4'   #隱藏 routes id
+gem 'babosa', '~> 1.0', '>= 1.0.3' #routes id 支援中文
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

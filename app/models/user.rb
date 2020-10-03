@@ -1,5 +1,8 @@
 class User < ApplicationRecord
-  validates :nick_name, presence: true
+  extend FriendlyId
+  friendly_id :nick_name, use: :slugged #使用friendly_id 替換 params
+
+  validates :nick_name, presence: true, uniqueness: { case_sensitive: false }   #大小寫視為同一種
   validates :email, uniqueness: true
 
   devise :database_authenticatable, :registerable,
@@ -53,6 +56,7 @@ class User < ApplicationRecord
     end
   end
 
+  #第三方登入
   def self.from_omniauth(auth, signed_in_resource = nil)
     # 1. 搜尋用 google, fb 登入過的 user (identity 紀錄的 user)
     identity = Identity.find_for_oauth(auth)
@@ -91,6 +95,14 @@ class User < ApplicationRecord
   #判斷使用者是否上線
   def is_online?
     Redis.new.get("user_#{self.id}_online").present?
+  end
+
+  def normalize_friendly_id(input) #把英文數字轉為utf-8
+    input.to_s.to_slug.normalize.to_s
+  end
+
+  def should_generate_new_friendly_id?
+    slug.blank? || nick_name_changed? # slug 為 nil 或 nick_name column 變更時更新
   end
 
   private

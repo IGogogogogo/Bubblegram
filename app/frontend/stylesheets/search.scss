@@ -1,0 +1,27 @@
+.search-form{
+  width: 100%;
+  display: flex;
+  border: 1px solid #7fcfd6;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  input,
+  input:focus{
+    border: none;
+    outline: none;
+    background: transparent;
+  }
+  input[type="text"]{
+    width: 100%;
+    height: 50px;
+    padding-left: 15px;
+  }
+  input[type="submit"]{
+    background: #7fcfd6;
+    border-radius: 0 10px 10px 0;
+    width: 100px;
+  }
+}
+#keyword{
+  border-radius: 10px 0 0 10px;
+  background: transparent;
+}

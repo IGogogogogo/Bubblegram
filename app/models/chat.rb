@@ -1,8 +1,10 @@
 class Chat < ApplicationRecord
+  extend FriendlyId
+  friendly_id :friendly_params, use: :slugged       #使用friendly_id 替換 routes 顯示的 id
+
   validates :sender_id, uniqueness: { scope: :recipient_id }
 
   has_many :messages, dependent: :destroy
-
   belongs_to :sender, foreign_key: :sender_id, class_name: 'User'
   belongs_to :recipient, foreign_key: :recipient_id, class_name: 'User'
 
@@ -32,5 +34,4 @@ class Chat < ApplicationRecord
   def unread_messages(user)#有幾則新訊息
     Redis.new.lrange("#{self.id}_#{self.opposed_user(user).id}_new_message",0,-1).length
   end
-
 end

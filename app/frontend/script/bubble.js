@@ -4,30 +4,32 @@ window.addEventListener('turbolinks:load', function () {
   const home = document.querySelector("#home")
   //btn.addEventListener('click', function () {
   if (!indexlogo) return
-  for (var i = 0; i < 20; i++) {
-    var d = document.createElement('div');
-    d.className = 'bubble';
-    var a = Math.random() * 40 + 25 + 'px';  //get the random number
-    d.style.width = a;
-    d.style.height = a;
-    d.style.bottom = Math.random() * 1000 + 'px';  //where bubble come out of bottom of the screen
-    d.style.left = Math.random() * home.offsetWidth + 'px';  //where bubble come out of left of the screen
-    document.body.appendChild(d); //put d into body
-    Animate(d)
+  for (let i = 0; i < 25; i++) {
+    let bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    let size = Math.random() * 40 + 25 + 'px';  // 取得亂數決定泡泡大小
+    bubble.style.width = size;
+    bubble.style.height = size;
+    bubble.style.bottom = Math.random() * 1000 + 'px';  // 亂數決定泡泡在不同的 bottom 位置產生
+    bubble.style.left = Math.random() * home.offsetWidth + 'px';  // 亂數決定泡泡在不同的方向
+    home.appendChild(bubble);
+    Animate(bubble)
   }
 
-  function Animate(a) {
+  function Animate(bubble) {
 
-    $(a).animate({
+    $(bubble).animate({
       bottom: home.offsetHeight + 'px',
-      left: '+=' + ((Math.random() * 45) - 25) + 'px'  //control the direction of the bubble
+      left: '+=' + ((Math.random() * 50) - 25) + 'px'
     }, Math.random() * 4000 + 2000, 'linear', function () {
-      a.style.bottom = '0px'; // where bubble come out of bottom of the screen
-      Animate(a)
+      bubble.style.bottom = '0px';
+      Animate(bubble)
     });
   }
 
+
+  // Gsap JS 製作動畫的套件
   gsap.to("#index-logo", { duration: 1.5, y: -150, delay: 2 })
-  gsap.from('.login-form', { duration: 1.5, delay: 3, opacity: 0 })
+  gsap.from('.login-form', { duration: 1.5, delay: 2.8, opacity: 0 })
 
 })

@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   resources :rooms, only: [:show, :destory, :create, :destroy] do
     member do
       get :play
+      post :destroy_room
     end
   end
   resources :searches, only: [:index] do
