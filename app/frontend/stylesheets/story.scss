@@ -1,36 +1,50 @@
 .stories {
-  position: relative;
-  max-width: 380px;
+  width: 100%;
+  height: 100vh;
+  max-width: 500px;
   margin: auto;
+  display: flex;
+  flex-direction: column;
 
-  .header{
-    position: absolute;
-    background-color: rgba(99, 99, 99, 0.6);
-    top: 25px;
+  .member{
+    display:flex;
+    align-items: center;
+    background: linear-gradient(180deg, #eee 0%, transparent);
     color: #fff;
-    z-index: 3;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    max-width: 500px;
+    padding: 5px;
 
-    .user-pic{
-      width: 40px;
+    .member-pic{
+      width: 50px;
+      height: 50px;
+      border-radius: 100%;
+      padding: 5px;
 
+      .add-story{
+        position: relative;
+
+        &:after{
+          height: 15px;
+          width: 15px;
+          position: absolute;
+          content: "+";
+          color: white;
+          background-color: rgb(127, 207, 214);
+          left: 70%;
+          top: 70%;
+          border-radius: 50%;
+          text-align: center;
+          line-height: 13px;
+        }
+      }
     }
 
-    .add-story{
-      position: relative;
-    }
-    .add-story::after{
-      height: 15px;
-      width: 15px;
-      position: absolute;
-      content: "+";
-      color: white;
-      background-color: rgb(127, 207, 214);
-      left: 70%;
-      top: 70%;
-      border-radius: 50%;
-      text-align: center;
-      line-height: 13px;
-    }
+    // .create_time{
+    //   color: rgb(255, 255, 255, 0.6);
+    // }
 
     .header-btn{
       display: inline-block;
@@ -38,23 +52,41 @@
       background-color: transparent;
       color: rgb(127, 207, 214);
       border-color: transparent;
-      padding: 5px;
+      padding: 10px;
       font-size: 22px;
+      outline: none !important;
     }
 
+    .goroot{
+      right: 10px;
+      font-size: x-large;
+      background-color: transparent;
+      border: none;
+      color: whitesmoke;
+      outline: none !important;
+    }
   }
 
   .story-pic{
-    .carousel-indicators {
-      height: 25px;
-      li{
-        flex-grow: 1
+    height: 100%;
+
+    .story-img{
+      height: 100vh;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
       }
     }
+  }
 
-    .story-img {
-      position: relative;
-    }
+  .carousel-item img{
+    height: 100%;
+  }
+
+  .carousel-indicators{
+   bottom: initial;
   }
 
   .control {
@@ -68,8 +100,69 @@
   }
 
 
-  .carousel-indicators{
+  // .modal-fun.open{
+  //   display: block;
+  // }
+
+
+
+  /* RWD */
+  @media screen and (min-width: 768px) {
+    .member{
+      position: static;
+      background: #262626;
+    }
+
+    .carousel-indicators{
+      bottom: initial;
+      top: -22px;
+    }
+  }
+
+  .modal-fun{
+    background-color: rgba(127, 207, 214, .6);
+    position: fixed;
     top: 0;
-    background-color: rgba(99, 99, 99, 0.6);
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+
+    .modal-card{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      width: 300px;
+      border-radius: 10px;
+
+
+
+    .modal-del{
+      border-bottom: 1px solid #cccccc !important;
+    }
+
+    .modal-del,
+    .modal-cancel{
+      width: 100%;
+      text-align: center;
+    }
+    .modal-del a{
+      width: 100%;
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color:  red;
+    }
+
+    .modal-cancel a{
+      width: 100%;
+      display: block;
+      padding: 10px;
+      text-decoration: none;
+      color: black;
+    }
+    }
   }
 }

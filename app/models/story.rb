@@ -6,4 +6,6 @@ class Story < ApplicationRecord
 
   belongs_to :user
   # socpe viewable_stories -> (users){ where(user_id: users) }
+
+  scope :stories_oneday, -> {where('created_at >= ?', Time.zone.now - 1.day)} # 找24hr的story
 end

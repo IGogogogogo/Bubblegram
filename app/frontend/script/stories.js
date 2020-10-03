@@ -5,18 +5,41 @@ document.addEventListener("turbolinks:load", () => {
   const storiesSection = document.querySelector('.stories')
   if(!storiesSection){ return }
   document.querySelector(".container").style.padding = "0"
+  document.querySelector("body").style.backgroundColor = "#262626"
+  document.querySelector(".index-nav").style.display = "none"
 
   // 輪播秒數
   $('.carousel').carousel({
     interval: 2000
   })
 
-  ////刪除story
+  ////打開功能區塊
   const headerBtn = document.querySelector('.header-btn')
+  const modalFun = document.querySelector('.modal-fun')
+  const modalDel = document.querySelector('.modal-del')
+  const modalCancel = document.querySelector('.modal-cancel')
   if(!headerBtn){return}
 
-  headerBtn.addEventListener("click", (e) => {
+  headerBtn.addEventListener("click", function(){
+    console.log("123")
+    if(modalFun.style.display != 'block'){
+      modalFun.style.display = 'block'
+    }
+  })
+
+  // headerBtn.addEventListener('click', function(){
+  //   modalFun.classList.add('open')
+  // })
+  // modalCancel.addEventListener('click', function(){
+  //   modalFun.classList.remove('open')
+  // })
+
+  //刪除story
+  modalDel.addEventListener("click", (e) => delStory(e))
+
+  const delStory = (e) => {
     e.preventDefault()
+    modalFun.style.display = "none"
     $("#stories-carousel").carousel('pause')
 
     const userId = document.querySelector(".stories").dataset.user // 取得 user id
@@ -50,18 +73,19 @@ document.addEventListener("turbolinks:load", () => {
         })
       }
     })
-  })
+  }
+
 
   ///顯示時間
   ////////輪播的事件
-  $('#stories-carousel').on('slide.bs.carousel', function () {
-    // console.log("change")
+  // $('#stories-carousel').on('slide.bs.carousel', function () {
+  //   // console.log("change")
 
-    const $activeImg = document.querySelector('.story-img.active')
-    const storyId = $activeImg.dataset.story
-    Array.from(document.querySelectorAll(".member-time")).forEach((el) => {
-      el.style.display = "none"
-    })
-    document.querySelector(`.member-time.story-${storyId}`).style.display = "block"
-  })
+  //   const $activeImg = document.querySelector('.story-img.active')
+  //   const storyId = $activeImg.dataset.story
+  //   Array.from(document.querySelectorAll(".member-time")).forEach((el) => {
+  //     el.style.display = "none"
+  //   })
+  //   document.querySelector(`.member-time.story-${storyId}`).style.display = "block"
+  // })
 })

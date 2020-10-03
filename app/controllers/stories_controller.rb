@@ -20,12 +20,16 @@ class StoriesController < ApplicationController
   end
 
   def create
+    # byebug
     @story = current_user.stories.new(story_params)
+    # byebug
     authorize @story
-
+    # byebug
     if @story.save
-      redirect_to root_path, notice: "限時動態新增成功"
+      redirect_to user_stories_path, notice: "限時動態新增成功"
     else
+      # byebugc
+
       render :new
     end
   end
@@ -33,7 +37,13 @@ class StoriesController < ApplicationController
   def destroy
     authorize @story
     @story.destroy
-    redirect_to user_stories_path, notice: "限時動態刪除成功"
+    stories_count = current_user.stories.stories_oneday.count
+
+    if(stories_count == 0)
+      redirect_to root_path, notice: "已經沒有限時動態"
+    else
+      redirect_to user_stories_path, notice: "限時動態刪除成功"
+    end
   end
 
   private
@@ -43,6 +53,8 @@ class StoriesController < ApplicationController
   end
 
   def story_params
-    params.require(:story).permit(:content, :picture)
+    # params.permit(:picture)
+    # 問助教為什麼不給過？
+    params.require(:story).permit(:picture)
   end
 end
