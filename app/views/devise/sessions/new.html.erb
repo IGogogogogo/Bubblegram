@@ -20,18 +20,9 @@
 
   <div class="actions">
     <%= f.submit "登入", class: 'btn btn-primary w-100 btn-login' %>
-    <p class="text-center m-0 py-2">-Or-</p>
+    <p class="text-center m-0 py-3" style="color: #8b8b8b">-Or-</p>
 
-    <div class="d-flex">
-      <a href="<%= user_facebook_omniauth_authorize_path %>" type="submit" class="btn btn-primary w-100 fb-btn"><i
-          class="fab fa-facebook-f mr-3"></i>Facebook</a>
-
-
-
-      <a href="<%= user_google_oauth2_omniauth_authorize_path %>" type="submit" class="btn w-100 go-btn ml-2"><span
-          class="font-weight-bold mr-2" style="font-size: 20px;">G</span>
-        Google</a>
-    </div>
+    <%= render "devise/shared/links" %>
     <p class="text-center pt-2">還沒有帳號?
       <%= link_to "註冊", new_user_registration_path %>
     </p>

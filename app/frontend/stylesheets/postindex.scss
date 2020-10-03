@@ -1,3 +1,4 @@
+
 .border-gray{
   border-color: #ccc !important;
 }
@@ -6,7 +7,7 @@
   cursor: pointer;
 }
 .user-video{
-  border: 3px solid #ffaa00;
+  border: 3px solid #7fcfd6;
   padding: 3px;
   border-radius: 100%;
   width: 60px;
@@ -15,6 +16,13 @@
 .user-info .option i,
 .user-post-content i {
   font-size: 20px;
+}
+.like.btn,
+.comment.btn,
+.share.g-btn,
+.collect.g-btn,
+#dropdownMenu2{
+  font-size: 25px;
 }
 .index-nav{
   border-top: 2px solid #ccc;
@@ -76,5 +84,15 @@ a{
   }
   .index-nav{
     width: 100%;
+  }
+  .like.btn,
+  .comment.btn,
+  .share.g-btn,
+  .collect.g-btn,
+  #dropdownMenu2{
+    font-size: 20px;
+  }
+  div.post-content{
+    margin-top: 0;
   }
 }

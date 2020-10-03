@@ -15,6 +15,9 @@ import "./load_posts.js"
 import "./owl_carousel.js"
 import "./active"
 import "./footer_ disappear"
+import "./upload"
+import "./user_pic_upload"
+
 import Swiper, { Pagination } from 'swiper';
 import gsap from "gsap"
 

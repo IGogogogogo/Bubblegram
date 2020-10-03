@@ -1,0 +1,14 @@
+#comment_content{
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  &:focus{
+    outline: none;
+  }
+}
+#comment_submit{
+  border: none;
+  color: #fff;
+  background: #7fcfd6;
+  border-radius: 6px;
+}

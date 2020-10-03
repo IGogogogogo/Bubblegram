@@ -1,41 +1,50 @@
 <% if post.errors.any? %>
-  <ul>
-    <% post.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-  </ul>
+<ul>
+  <% post.errors.full_messages.each do |msg| %>
+  <li style="color: red;"><small><%= msg %></small></li>
+  <% end %>
+</ul>
 <% end %>
 
 <%= form_with(model: post, url: url, class: "form", local: true) do |form| %>
-  <div class="post-form-img" style="position: relative;">
-    <%#= image_tag post.image.url, width: "100%", draggable: false if post.image.present? %>
-  </div>
-  <!-- Slider main container -->
-  <div class="swiper-container" style="width:100%; max-width:400px;">
-    <!-- Additional required wrapper -->
-    <div class="swiper-wrapper" style=" display: flex; align-items: center;">
-      <!-- Slides -->
+
+<!-- Slider main container -->
+<div class="swiper-container" style="width:100%; max-width:400px; max-height: 300px;">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper" style=" display: flex; align-items: center;">
+    <!-- Slides -->
+    <% post.images.each do |image| %>
+    <div class="swiper-slide">
+      <%= image_tag image.url, width: "100%", draggable: false if post.images.present? %>
     </div>
-    <!-- If we need pagination -->
-    <div class="swiper-pagination" style="display: none;"></div>
+    <% end %>
   </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+</div>
 
-  <div class="form-group">
-    <%= form.label :image, 'image' %>
-    <%= form.file_field :images, multiple: true, class: "form-control" %>
+<% if post.images.empty? %>
+<div class="form-group add-photo">
+  <div class="upload-btn">
+    <i class="fas fa-upload fa-4x"></i>
+    <p>上傳照片</p>
   </div>
+  <%= form.file_field :images, multiple: true, class: "form-control" %>
+</div>
+<% end %>
 
-  <div class="form-group">
-    <%= form.label :content, '文章內文' %>
-    <%= form.text_area :content, class: "form-control", style: 'border: none; border-bottom: 1px solid #ccc; resize: none;', placeholder: '增加相片說明 ...'%>
-  </div>
+<div class="form-group post-content">
+  <%= form.text_area :content, class: "form-control"%>
+  <div class="underline"></div>
+  <%= form.label :content, '文章內文' %>
+</div>
 
-  <div class="form-group">
-    <%= form.label :taged_user_ids, 'Tag' %>
-    <select name="post[taged_user_ids][]" multiple="multiple" class="form-control taged_users">
-      <%= options_for_select(users, taged_id) %>
-    </select>
-  </div>
+<div class="form-group">
+  <%= form.label :taged_user_ids, 'Tag' %>
+  <select name="post[taged_user_ids][]" multiple="multiple" class="form-control taged_users">
+    <%= options_for_select(users, taged_id) %>
+  </select>
+</div>
 
-  <%= form.submit '確認' %>
+<%= form.submit '確認', class:'post-submit' %>
 <% end %>

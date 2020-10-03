@@ -1,5 +1,5 @@
-
 <div class="wrap">
+  <h4 class="post-show-title">你的貼文</h4>
   <div class="owl-carousel owl-theme">
     <%= render partial: "/posts/carousel_img", collection: @post.images, as: :image if @post.images %>
   </div>
@@ -10,9 +10,9 @@
 
   <%= render partial: "/comments/comment", collection: @comments %>
   <%= form_with(model: @comment, url: post_comments_path(@post) ,local: true) do |form| %>
-  <div>
+  <div class="d-flex">
     <%= form.text_field :content, placeholder: "輸入留言" %>
-    <%= form.submit "留言" %>
+    <%= form.submit "留言", id: 'comment_submit' %>
   </div>
   <% end %>
 </div>
