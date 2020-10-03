@@ -1,3 +1,5 @@
-
-console.log("search")
-document.querySelector(".search-result").innerHTML = '<%= j render(partial: "/users/user", collection: @users, as: :user) %>'
+<% if @users != []  %>
+  document.querySelector(".search-result").innerHTML = '<%= j render(partial: "/users/user", collection: @users, as: :user) %>'
+<% else %>
+  document.querySelector(".search-result").innerHTML = '<div class="default d-flex flex-column align-items-center my-5"><%= image_tag("/no_user.png", class: "w-100") %><div class="text h6 text-black-50">沒有符合條件的使用者！</div></div>'
+<% end %>
