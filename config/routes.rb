@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :messages, only: [:create]
+
   # 產生show create destory 與 play 路徑
   resources :rooms, only: [:show, :destory, :create, :destroy] do
     member do

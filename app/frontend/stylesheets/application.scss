@@ -31,7 +31,8 @@ h4.user-signup-title{
 .field-sign-up input:focus ~ .underline::before, .underline::after,
 .post-content textarea:focus ~ .underline::before, .underline::after,
 .user-edit-group input:focus ~ .underline::before, .underline::after,
-.user-edit-group textarea:focus ~ .underline::before, .underline::after{
+.user-edit-group textarea:focus ~ .underline::before, .underline::after,
+.comment input:focus ~ .underline::before, .underline::after{
   transform: scaleX(1);
 }
 nav{

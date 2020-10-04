@@ -5,7 +5,25 @@
      data-vonageSub-session-id = "<%= @room.vonage_session_id %>"
      data-vonageSub-token = "<%= @token %>">
 </div>
-<div class= "end-notice col-6 mx-auto d-none">直播已經結束囉！</div>
+<div class= "end-notice col-12 mx-auto d-none flex-column ">
+     <%= image_tag("/no_stream.png",class: "w-100") %>
+     <div class="text-center h3 text-black-50" >直播已經結束囉！</div>
+</div>
+<%= render partial: "rooms/live_stream_message_area", locals: {messages: @messages, message: @message, room: @room } %>
 <%= link_to root_path, data: {turbolinks: false}, class: 'back-link' do %>
      <i class="fas fa-sign-out-alt"></i>
 <% end %>
+<template id="message-template">
+   <div class = "message">
+     <div class = "user-avatar">
+       <img src="" alt="" class = "rounded-circle">
+     </div>
+     <div class="content">
+       <div class = "name-with-time">
+           <div class = "name"></div>
+           <div class="time"></div>
+       </div>
+       <div class="text-content"></div>
+     </div>
+  </div>
+</template>

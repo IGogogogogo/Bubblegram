@@ -110,10 +110,11 @@ ActiveRecord::Schema.define(version: 2020_10_01_105522) do
     t.text "content"
     t.string "image"
     t.bigint "user_id", null: false
-    t.bigint "chat_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["chat_id"], name: "index_messages_on_chat_id"
+    t.string "chatroom_type"
+    t.bigint "chatroom_id"
+    t.index ["chatroom_type", "chatroom_id"], name: "index_messages_on_chatroom_type_and_chatroom_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
@@ -190,7 +191,6 @@ ActiveRecord::Schema.define(version: 2020_10_01_105522) do
   add_foreign_key "favourites", "posts"
   add_foreign_key "favourites", "users"
   add_foreign_key "identities", "users"
-  add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
   add_foreign_key "rooms", "users"
   add_foreign_key "stories", "users"

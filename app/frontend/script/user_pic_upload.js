@@ -1,7 +1,7 @@
 window.addEventListener('turbolinks:load', function () {
   let editUserPicBtn = document.querySelector('#user-edit-pic')
   let userAvatar = document.getElementById('user_avatar')
-  if (!editUserPicBtn) return
+  if (!userAvatar) return
   editUserPicBtn.addEventListener('click', function () {
     userAvatar.click()
   })
