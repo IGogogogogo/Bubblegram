@@ -45,16 +45,20 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(post_params)
-    authorize @post
+    # byebug
+    HardWorker.perform_async(current_user.id, post_params.to_h)
+    redirect_to root_path, notice: '文章新增中...'
 
-    if @post.save
-      redirect_to post_path(@post), notice: '文章新增成功'
-    else
-      find_tag_users
-      @url = user_posts_path(current_user)
-      render :new
-    end
+    # @post = current_user.posts.new(post_params)
+    # authorize @post
+
+    # if @post.save
+    #   redirect_to post_path(@post), notice: '文章新增成功'
+    # else
+    #   find_tag_users
+    #   @url = user_posts_path(current_user)
+    #   render :new
+    # end
   end
 
   def edit

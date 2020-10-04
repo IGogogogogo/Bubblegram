@@ -99,6 +99,7 @@ GEM
       streamio-ffmpeg
     childprocess (3.0.0)
     concurrent-ruby (1.1.7)
+    connection_pool (2.2.3)
     crass (1.0.6)
     devise (4.7.2)
       bcrypt (~> 3.0)
@@ -279,6 +280,10 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
+    sidekiq (6.1.2)
+      connection_pool (>= 2.2.2)
+      rack (~> 2.0)
+      redis (>= 4.2.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
       listen (>= 2.7, < 4.0)
@@ -363,6 +368,7 @@ DEPENDENCIES
   redis
   sass-rails (>= 6)
   selenium-webdriver
+  sidekiq (~> 6.1, >= 6.1.2)
   spring
   spring-watcher-listen (~> 2.0.0)
   streamio-ffmpeg (~> 2.0.0)

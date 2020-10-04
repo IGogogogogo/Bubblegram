@@ -29,12 +29,14 @@ gem 'image_processing', '~> 1.2'
 gem 'carrierwave-video', '~> 0.6.0'
 gem 'streamio-ffmpeg', '~> 2.0.0'
 
+
 # Create Member system
 gem 'devise', '~> 4.2'
 gem 'omniauth', '~> 1.9', '>= 1.9.1'
 gem 'omniauth-facebook', '~> 7.0'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
 gem 'redis'
+gem 'sidekiq', '~> 6.1', '>= 6.1.2'   #非同步排程工具(需要redis)
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
