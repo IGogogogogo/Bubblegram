@@ -2,19 +2,11 @@ class StoriesController < ApplicationController
   before_action :find_story, only: [:show, :destroy]
 
   def index
-    @user = User.find(params[:user_id])
-    @stories = @user.stories.includes(:user).order("created_at DESC").where('created_at >= ?', Time.zone.now - 1.day)
+    viewable_users = User.viewable_users(current_user)
+    @stories = Story.where(user: viewable_users).includes(:user).order("user_id", "created_at DESC").group_by(&:user_id)    #產生hash key = user_id
+    # @stories = Story.where(user: viewable_users).includes(:user).stories_oneday
     # 去撈24hr內po的storiesa，測試時可以用5.second。
-
-    # 讓原先的 N + 1 Query 變成 1 (Post) + 1 (User)，scope寫在models
-    stories_users = [User.last].concat(User.last.followings.includes(:stories).order("created_at DESC")).select{|user| user.exist_story?}.map{|user| user.nick_name}
-    if stories_users.index(@user.nick_name) + 1 != stories_users.length
-      @next_user_name = stories_users[stories_users.index(@user.nick_name) + 1]
-    end
-
-    if stories_users.index(@user.nick_name) != 0
-      @prev_user_name = stories_users[stories_users.index(@user.nick_name) - 1]
-    end
+    # render json: @stories
   end
 
   def new
