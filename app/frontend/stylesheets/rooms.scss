@@ -1,6 +1,6 @@
 // publisher scss
 .OT_publisher{
-  position: fixed;
+  position: fixed !important;
   top: 0 ;
   left: 0;
   height: 100vh !important;
@@ -18,7 +18,7 @@
 .OT_subscriber{
   width: 100% !important;
   height: 100vh !important;
-  position: fixed;
+  position: fixed !important;
   top: 0 ;
   left: 0;
   z-index: 11;
