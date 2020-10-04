@@ -8,6 +8,8 @@ document.addEventListener("turbolinks:load", () => {
 
   cssSettiong()
   requestStories()
+  carouselStart()
+  whenCarouselChange()
 
   function cssSettiong () {
     document.querySelector(".container").style.padding = "0"
@@ -35,28 +37,55 @@ document.addEventListener("turbolinks:load", () => {
   }
 
   function renderStories(data) {
-    data.forEach(user => {
-      createUserInfo(user)
+      ///////之後再改成當前user
 
-    });
+    createUserInfo(data[0])
+
+    createStories(data[0].user.stories)
   }
 
-  function createUserInfo(user) {
-    console.log(user.user.avatar.url)
-    console.log(user.nick_name)
-    console.log(user.stories)
+  function createUserInfo(info) {
+    document.querySelector(".user-avatar img").src = info.user.avatar.url
+    document.querySelector(".user-name span").textContent = info.user.nick_name
   }
 
-  $('.stories.story-owl-carousel').owlCarousel({
-    loop: false,
-    margin: 0,
-    nav: false,
-    responsive:{
-      0:{
-          items:1
+  function createStories(info) {
+    console.log(info)
+    document.querySelector(".story-time span").textContent = info[0].time
+    const storiesMain = document.querySelector(".stories-main")
+    info.forEach(story => {
+      const newStory = document.createElement("div")
+      const img = document.createElement("img")
+      img.src = story.picture.url
+      img.classList.add("w-100")
+      img.style.height = "100vh"
+      newStory.dataset.time = story.time
+      newStory.appendChild(img)
+      $('.owl-carousel').trigger('add.owl.carousel', newStory)
+    })
+    storiesMain.classList.add("owl-carousel")
+  }
+
+  function carouselStart() {
+    $('.stories.story-owl-carousel').owlCarousel({
+      loop: false,
+      margin: 0,
+      nav: false,
+      responsive:{
+        0:{
+            items:2
+        }
       }
-    }
-  })
+    })
+  }
+
+  function whenCarouselChange() {
+    $('.owl-carousel').on('changed.owl.carousel', function() {
+      const storyTime = document.querySelector(".story-time span")
+      const storyActive = document.querySelector(".owl-item.active div")
+      if (storyActive) storyTime.textContent = storyActive.dataset.time
+    })
+  }
 
 
 })
