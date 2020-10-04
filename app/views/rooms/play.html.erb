@@ -1,8 +1,30 @@
-<div id="videos" 
-     data-controller = "vonagePub"
-     data-vonagePub-key="<%= ENV['vonage_api_key']%>"
-     data-vonagePub-session-id = "<%= @room.vonage_session_id %>"
-     data-vonagePub-token = "<%= @token %>"
-     data-vonagePub-name = "<%= current_user.nick_name%>正在直播！" >
+<div
+		id="pub-video" class = "col-12 px-0 pb-3 "
+		data-controller = "vonagePub"
+		data-vonagePub-room-id="<%= @room.id %>"
+		data-vonagePub-key="<%= ENV['vonage_api_key']%>"
+		data-vonagePub-session-id = "<%= @room.vonage_session_id %>"
+		data-vonagePub-token = "<%= @token %>"
+		data-vonagePub-name = "<%= current_user.nick_name%>正在直播！"
+>
 </div>
-<%= link_to 'Back', room_path, method: 'delete',data: {turbolinks: false}, class: 'back-link'  %>
+<%= render partial: "rooms/live_stream_message_area", locals: {messages: @messages, message: @message, room: @room } %>
+
+<%= link_to destroy_room_room_path, method: 'post',data: {turbolinks: false}, class: 'back-link' do %>
+	<i class="fas fa-sign-out-alt"></i>
+<% end %>
+
+<template id="message-template">
+   <div class = "message">
+     <div class = "user-avatar">
+       <img src="" alt="" class = "rounded-circle">
+     </div>
+     <div class="content">
+       <div class = "name-with-time">
+           <div class = "name"></div>
+           <div class="time"></div>
+       </div>
+       <div class="text-content"></div>
+     </div>
+  </div>
+</template>

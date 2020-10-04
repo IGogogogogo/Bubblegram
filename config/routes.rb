@@ -23,12 +23,15 @@ Rails.application.routes.draw do
       get :followings
     end
   end
-  
+
+  resources :messages, only: [:create]
+
   # 產生show create destory 與 play 路徑
   resources :rooms, only: [:show, :destory, :create, :destroy] do
     member do
       get :play
-    end 
+      post :destroy_room
+    end
   end
   resources :searches, only: [:index] do
     collection do

@@ -2,15 +2,11 @@ class StoriesController < ApplicationController
   before_action :find_story, only: [:show, :destroy]
 
   def index
-    @stories = Story.includes(:user).where(user_id: params[:user_id]).order("created_at DESC").where('created_at >= ?', Time.zone.now - 1.day)
+    @user = User.find(params[:user_id])
+    @stories = @user.stories.includes(:user).order("created_at DESC").where('created_at >= ?', Time.zone.now - 1.day)
     # 去撈24hr內po的storiesa，測試時可以用5.second。
 
-    @user = User.find_by(id: params[:user_id])
-
-    # users = [current_user].concat(current_user.followings)
-    # @stories = Story.viewable_stories(users).order("created_at DESC")
     # 讓原先的 N + 1 Query 變成 1 (Post) + 1 (User)，scope寫在models
-    # byebug
   end
 
   def show

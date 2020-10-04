@@ -50,6 +50,7 @@ document.addEventListener('turbolinks:load',()=>{
 
       if(data.message.user_id === user_id){
         form.reset()
+        form.querySelector("textarea").style.height = 33 + "px"
         isContentNull(data.my_image, data.my_message)
         setTimeout(() => {
           // console.log(message_text_area.scrollHeight)

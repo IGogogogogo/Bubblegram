@@ -37,6 +37,14 @@ class ImageUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg gif png mp4)
   end
 
+  # Provide a default URL as a default if there hasn't been a file uploaded:
+  # def default_url(*args)
+  #   # For Rails 3.1+ asset pipeline compatibility:
+  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
+  #
+  #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
+  # end
+
   def encode        #用 FFMPEG 壓縮影片
     movie = ::FFMPEG::Movie.new(current_path)
     tmp_path = File.join( File.dirname(current_path), "tmpfile.mp4" )
