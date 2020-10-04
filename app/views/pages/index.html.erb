@@ -2,20 +2,14 @@
 <div class="post-load-page" style="overflow: auto; height: 100vh;">
   <div class="container-fluid container-md">
 
-    <%# 之後要做if使用者有限時動態，要出現限時動態。else新增限時動態end %>
-    <div class="story">
-      <%#= link_to '新增限時動態', new_user_story_path(current_user) %>
-    </div>
-
-
 
     <!-- Main post  -->
     <div class="row justify-content-center">
       <div class="col-12 px-0 pb-3 following-posts post-load-target">
 
-        <!-- limit video -->
+        <!-- limit video story-->
         <div
-          class="limit-video d-flex justify-content-around align-items-center text-center border-bottom border-gray mb-3">
+          class="limit-video d-flex justify-content-start align-items-center text-center border-bottom border-gray mb-3 px-3">
           <%= render partial: "/stories/story", collection: @results, as: :user %>
         </div>
 
