@@ -80,6 +80,8 @@ GEM
     capistrano-rails (1.6.1)
       capistrano (~> 3.1)
       capistrano-bundler (>= 1.1, < 3)
+    capistrano-upload-config (0.7.0)
+      capistrano (>= 3.0)
     capybara (3.33.0)
       addressable
       mini_mime (>= 0.1.3)
@@ -335,6 +337,7 @@ DEPENDENCIES
   capistrano-bundler (= 2.0.1)
   capistrano-passenger (= 0.2.0)
   capistrano-rails (= 1.6.1)
+  capistrano-upload-config (~> 0.7.0)
   capybara (>= 2.15)
   carrierwave (~> 2.1)
   devise (~> 4.2)
