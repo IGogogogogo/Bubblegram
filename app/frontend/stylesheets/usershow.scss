@@ -1,8 +1,9 @@
 .post-load-page{
   overflow: auto;
-  height: 100vh;
+  height: calc(100vh - 120px) ;
   width: 740px;
   margin: auto;
+  overflow-y: hidden;
 }
 
 @media (max-width:415px){

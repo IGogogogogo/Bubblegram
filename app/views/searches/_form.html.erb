@@ -2,7 +2,7 @@
 
   <h4 class="search-post-title">搜尋</h4>
   <%= form_with(url: search_searches_path, method: :get, class: "search-form") do |f| %>
-  <%= f.text_field :keyword, class: 'search-input' %>
+  <%= f.text_field :keyword, class: 'search-input',autocomplete: "off" %>
   <%= f.submit "Search" %>
   <% end %>
 
