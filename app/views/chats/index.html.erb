@@ -6,35 +6,37 @@
 <div class = "char-search-bar section">
   <div class="chat-search-container">
     <%= render partial: "searches/chat_form" %>
+    <div class = "search-chat-area">
+    </div>
   </div>
 </div>
 
-  <div class = "search-chat-area">
-  </div>
   <div class = "chat-user-list section" data-user="<%= current_user.id%>">
     <div class="chat-user-container">
     <% if @chats.present? %>
         <% @chats.each do |chat| %>
-          <div class = "chat-user" data-chat-user = "<%= chat.opposed_user(current_user).id%>">
-            <div class = "chat-user-pic">
-              <%= image_tag chat.opposed_user(current_user).avatar.url, class: "user-avatar", width: "50px", style: "border-radius: 50%" if chat.opposed_user(current_user).avatar.present? %>
-              <div class = "dot <%= "online-dot" if chat.opposed_user(current_user).is_online? %>"></div>
-            </div>
-            <div class = "chat-user-info" data-messages-count = "<%= chat.unread_messages(current_user)  %>">
-              <%= link_to chat.opposed_user(current_user).nick_name, chat_path(chat) %>
-              <% if chat.any_unread_messages?(current_user) %>
-                <div class="unread-messages">
-                  您有<%= chat.unread_messages(current_user) %>則新訊息
-                </div>
-              <% end %>
-              <% if chat.opposed_user(current_user).is_online? %>
-              <div class = "online-text <%= "off-line" if chat.any_unread_messages?(current_user)%>">
-                目前在線上
+          <%= link_to chat_path(chat) do %>
+            <div class = "chat-user" data-chat-user = "<%= chat.opposed_user(current_user).id%>">
+              <div class = "chat-user-pic">
+                <%= image_tag chat.opposed_user(current_user).avatar.url, class: "user-avatar" if chat.opposed_user(current_user).avatar.present? %>
+                <div class = "dot <%= "online-dot" if chat.opposed_user(current_user).is_online? %>"></div>
               </div>
-              <% end %>
+              <div class = "chat-user-info" data-messages-count = "<%= chat.unread_messages(current_user)  %>">
+                <%= chat.opposed_user(current_user).nick_name %>
+                <% if chat.any_unread_messages?(current_user) %>
+                  <div class="unread-messages">
+                    您有<%= chat.unread_messages(current_user) %>則新訊息
+                  </div>
+                <% end %>
+                <% if chat.opposed_user(current_user).is_online? %>
+                <div class = "online-text <%= "off-line" if chat.any_unread_messages?(current_user)%>">
+                  目前在線上
+                </div>
+                <% end %>
+              </div>
+              <div class="notice-dot <%= "message-notice-dot" if chat.any_unread_messages?(current_user)%>"></div>
             </div>
-            <div class="notice-dot <%= "message-notice-dot" if chat.any_unread_messages?(current_user)%>"></div>
-          </div>
+          <% end %>
         <% end %>
       <% end %>
     </div>
