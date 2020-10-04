@@ -1,88 +1,43 @@
-<section class="stories" data-user=<%= @user.id %> data-name=<%= @user.nick_name %> data-next-user=<%= @next_user_name %> data-prev-user=<%= @prev_user_name %>>
-  <header>
-    <div class="member">
-      <div class="member-pic">
-        <% if @user == current_user %>
-          <%= link_to new_user_story_path(current_user), class:'add-story' do  %>
-            <%= image_tag @user.avatar.url, class:'member-pic' %>
-          <% end %>
-        <% else %>
-          <%= image_tag @user.avatar.url, class:'member-pic' %>
-        <% end %>
-      </div>
+<section class="stories w-100 m-auto" data-self-name=<%= @user %> data-users=<%= @viewable_users %>>
+  <header class="d-flex align-items-center w-100">
 
-      <div class="member-name mx-3">
-        <strong><%= @user.nick_name %></strong>
-      </div>
+    <div class="user-avatar" style="width: 50px">
+      <img src="https://picsum.photos/200/200/?random=1" class="rounded-circle w-100">
+    </div>
 
-      <!--時間---->
-      <div class="carousel-inner">
-      <% @stories.each_with_index do |story,index| %>
-        <div class="create_time carousel-item member-time story-<%= story.id %> <%= index == 0 ? 'active' : '' %>" style="<%= 'display: none' if index != 0 %>"">
-          <%= time_ago_in_words(story.created_at) %>
-        </div>
-      <% end %>
-      </div>
+    <div class="user-name ml-2 mr-2">
+      <span>台北暴徒</span>
+    </div>
+
+    <!--時間---->
+    <div class="story-time">
+      <span>Time</span>
+    </div>
 
 
-    <% if @user == current_user %>
-      <button class="header-btn">
+    <div class="header-btn ml-auto">
+      <!-----選單--->
+      <button class="btn-dot">
         <i class="fas fa-ellipsis-h"></i>
       </button>
-    <% end %>
-    <button class="goroot">
-      <%= link_to root_path do %>
-        <i class="fas fa-times"></i>
-      <% end %>
-
-    </button>
+      <!---回首頁------->
+      <button class="btn-home">
+        <%= link_to root_path do %>
+          <i class="fas fa-times"></i>
+        <% end %>
+      </button>
     </div>
   </header>
 
-  <div class="story-pic">
-    <!-- 以下輪播 -->
-    <div id="stories-carousel" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <% @stories.each_with_index do |story, index| %>
-          <li data-target="#stories-carousel" data-slide-to="<%= index %>" class="<% index == 0 ? 'active' : '' %>"></li>
-        <% end %>
-      </ol>
-
-      <div class="carousel-inner">
-        <% @stories.each_with_index do |story,index| %>
-          <div class="story-img carousel-item story_id <%= index == 0 ? 'active' : '' %>"  data-story="<%= story.id %>" data-index="<%= index %>" data-stories-count="<%= @stories.length %>">
-          <p class="text-light"><%= story.id %></p>
-          <p class="text-light"><%= index %></p>
-            <%= image_tag story.picture.url, class: 'd-block'%>
-          </div>
-        <% end %>
-      </div>
-
-      <a class="carousel-control-prev" href="#stories-carousel" role="button" data-slide="prev">
-        <div class="control">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </div>
-      </a>
-
-      <a class="carousel-control-next" href="#stories-carousel" role="button" data-slide="next">
-        <div class="control">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </div>
-      </a>
+  <div class="owl-carousel">
+    <div class="story-pic ">
+      <img src="https://picsum.photos/300/500/?random=2" class="w-100">
     </div>
-    <!-- 以上輪播 -->
-  </div>
 
-  <div class="modal-fun">
-  <div class="modal-card">
-    <div class="modal-del">
-      <a href="#">刪除</a>
-    </div>
-    <div  class="modal-cancel">
-      <a href="#" >取消</a>
+    <div class="story-pic ">
+      <img src="https://picsum.photos/300/500/?random=3" class="w-100">
     </div>
   </div>
-</div>
+
+
 </section>
