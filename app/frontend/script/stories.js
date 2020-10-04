@@ -35,6 +35,7 @@ document.addEventListener("turbolinks:load", () => {
   //   modalFun.classList.remove('open')
   // })
 
+
   //刪除story
   modalDel.addEventListener("click", (e) => delStory(e))
 
@@ -77,54 +78,56 @@ document.addEventListener("turbolinks:load", () => {
   }
 
   ///切換上一個人使用這限時動態
-  const prevBtn = document.querySelector(".carousel-control-prev")
-  prevBtn.addEventListener("click", function(){
-    console.log("123")
-    const $activeImg = document.querySelector('.story-img.active')
-    const carouselIndex = $activeImg.dataset.index
-    const prevUser = storiesSection.dataset.prevUser
-    console.log(carouselIndex)
-    console.log(prevUser != "")
-    const isFirstImg = Number(carouselIndex) - 1 == 0
-    if (isFirstImg) {
-      console.log(isFirstImg)
-      $("#stories-carousel").carousel('pause')
-      if (prevUser == ""){
-        console.log("back")
-        prevBtn.pathname = "/"
-      } else {
-        console.log("prev")
-        prevBtn.pathname = `/users/${prevUser}/stories`
-      }
-    }
+  // const prevBtn = document.querySelector(".carousel-control-prev")
+  // prevBtn.addEventListener("click", function(){
+  //   console.log("123")
+  //   const $activeImg = document.querySelector('.story-img.active')
+  //   const carouselIndex = $activeImg.dataset.index
+  //   const prevUser = storiesSection.dataset.prevUser
+  //   console.log(carouselIndex)
+  //   console.log(prevUser != "")
+  //   const isFirstImg = Number(carouselIndex) - 1 == 0
+  //   const users = storiesSection.dataset.users
+  //   console.log(users)
+  //   if (isFirstImg) {
+  //     console.log(isFirstImg)
+  //     $("#stories-carousel").carousel('pause')
+  //     if (prevUser == ""){
+  //       console.log("back")
+  //       prevBtn.pathname = "/"
+  //     } else {
+  //       console.log("prev")
+  //       prevBtn.pathname = `/users/${prevUser}/stories`
+  //     }
+  //   }
 
 
-  })
+  // })
 
-  ///切換下一個使用者的限時動態
-  console.log($("#stories-carousel"))
-  $("#stories-carousel").on('slide.bs.carousel', function () {
-    //第二個人不能進來這個事件
-    console.log("change")
-    // checkLastStory()
-  })
+  // ///切換下一個使用者的限時動態
+  // console.log($("#stories-carousel"))
+  // $("#stories-carousel").on('slide.bs.carousel', function () {
+  //   //第二個人不能進來這個事件
+  //   console.log("change")
+  //   // checkLastStory()
+  // })
 
-  const checkLastStory = () => {
-    console.log("checkLastStory")
-    const $activeImg = document.querySelector('.story-img.active')
-    const carouselIndex = $activeImg.dataset.index
-    const storiesCount = $activeImg.dataset.storiesCount
-    const nextUser = storiesSection.dataset.nextUser
-    if (Number(carouselIndex) + 1 == Number(storiesCount)) {
-      $("#stories-carousel").carousel('pause')
+  // const checkLastStory = () => {
+  //   console.log("checkLastStory")
+  //   const $activeImg = document.querySelector('.story-img.active')
+  //   const carouselIndex = $activeImg.dataset.index
+  //   const storiesCount = $activeImg.dataset.storiesCount
+  //   const nextUser = storiesSection.dataset.nextUser
+  //   if (Number(carouselIndex) + 1 == Number(storiesCount)) {
+  //     $("#stories-carousel").carousel('pause')
 
-      if (nextUser != "") {
-        document.location.pathname = `/users/${nextUser}/stories`
-      } else if (nextUser == "") {
-        document.location.pathname = "/"
-      }
-    }
-  }
+  //     if (nextUser != "") {
+  //       document.location.pathname = `/users/${nextUser}/stories`
+  //     } else if (nextUser == "") {
+  //       document.location.pathname = "/"
+  //     }
+  //   }
+  // }
 
 
 

@@ -1,4 +1,7 @@
-<section class="stories" data-user=<%= @user.id %> data-name=<%= @user.nick_name %> data-next-user=<%= @next_user_name %> data-prev-user=<%= @prev_user_name %>>
+<section class="stories"
+          data-user=<%= @user.id %>
+          data-name=<%= @user.nick_name %>
+          data-users=<%= @stories_users %>>
   <header>
     <div class="member">
       <div class="member-pic">
@@ -16,9 +19,9 @@
       </div>
 
       <!--時間---->
-      <div class="carousel-inner">
+      <div class="carousel-inner create_time">
       <% @stories.each_with_index do |story,index| %>
-        <div class="create_time carousel-item member-time story-<%= story.id %> <%= index == 0 ? 'active' : '' %>" style="<%= 'display: none' if index != 0 %>"">
+        <div class=" carousel-item member-time story-<%= story.id %> <%= index == 0 ? 'active' : '' %>" style="<%= 'display: none' if index != 0 %>"">
           <%= time_ago_in_words(story.created_at) %>
         </div>
       <% end %>
@@ -51,8 +54,8 @@
       <div class="carousel-inner">
         <% @stories.each_with_index do |story,index| %>
           <div class="story-img carousel-item story_id <%= index == 0 ? 'active' : '' %>"  data-story="<%= story.id %>" data-index="<%= index %>" data-stories-count="<%= @stories.length %>">
-          <p class="text-light"><%= story.id %></p>
-          <p class="text-light"><%= index %></p>
+          <%# class="text-light"><%= story.id %>
+          <%# class="text-light"><%= index %>
             <%= image_tag story.picture.url, class: 'd-block'%>
           </div>
         <% end %>
@@ -76,13 +79,13 @@
   </div>
 
   <div class="modal-fun">
-  <div class="modal-card">
-    <div class="modal-del">
-      <a href="#">刪除</a>
-    </div>
-    <div  class="modal-cancel">
-      <a href="#" >取消</a>
+    <div class="modal-card">
+      <div class="modal-del">
+        <a href="#">刪除</a>
+      </div>
+      <div  class="modal-cancel">
+        <a href="#" >取消</a>
+      </div>
     </div>
   </div>
-</div>
 </section>
