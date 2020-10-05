@@ -1,6 +1,6 @@
 .message_box{
   margin-top: -70px;
-  height: calc(100vh - 50px);
+  height: calc(90vh - 90px);
   .message_container{
     height: 100%;
     position: relative;
@@ -175,6 +175,9 @@
 }
 
 @media screen and (min-width: 768px){
+  .message_box{
+    height: calc(100vh - 50px);
+  }
   .message_container{
     border-bottom: 1px solid #ccc;
   }

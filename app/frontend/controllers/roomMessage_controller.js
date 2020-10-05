@@ -8,7 +8,7 @@ export default class extends Controller {
     let messageTextArea = document.querySelector(".message-text-area")
     let textContent = document.querySelector("input[type='text']")
     let textSubmit = document.querySelector("input[type='submit']")
-    let roomMessageController = this;
+    let roomMessageController = this
 
 
     this.subscription = consumer.subscriptions.create(
