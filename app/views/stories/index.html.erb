@@ -1,6 +1,8 @@
-<section class="stories w-100 m-auto" data-self-name=<%= @user %> data-users=<%= @viewable_users %>>
+<section class="stories w-100 m-auto"
+  data-self-name="<%= @user.nick_name %>"
+  data-viewable-users="<%= @viewable_users %>"
+>
   <header class="d-flex align-items-center w-100">
-
     <div class="user-avatar" style="width: 50px">
       <img src="https://picsum.photos/200/200/?random=1" class="rounded-circle w-100">
     </div>
@@ -13,7 +15,6 @@
     <div class="story-time">
       <span>Time</span>
     </div>
-
 
     <div class="header-btn ml-auto">
       <!-----選單--->
