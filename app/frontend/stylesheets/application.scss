@@ -112,3 +112,17 @@ nav{
 img{
   object-fit: cover;
 }
+
+.chat-path{
+  position: relative;
+  .message-dot{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    left: 15px;
+    right: 0;
+    margin: auto;
+    background-color: rgb(197, 64, 64);
+  }
+}
