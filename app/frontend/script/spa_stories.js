@@ -65,12 +65,14 @@ document.addEventListener("turbolinks:load", () => {
   }
 
   function carouselStart() {        ////owl carousel 輪播功能
-    $('.stories.story-owl-carousel').owlCarousel({
+    $('.stories .owl-carousel').owlCarousel({
+      center: true,
       loop: false,
       margin: 0,
-      nav: false,
+      nav: true,
+      touchDrag: true,
       autoplay: true,
-      autoplayTimeout: 100,
+      autoplayTimeout: 2000,
       responsive:{
         0:{
             items:1
@@ -86,23 +88,34 @@ document.addEventListener("turbolinks:load", () => {
       if (storyActive) { storyTime.textContent = storyActive.dataset.time }
 
       // 如果是當前 user最後的限動就跳下一位 user的限動
-      if (document.querySelector(".owl-stage") && document.querySelector(".owl-stage").lastChild) {
-        setTimeout(()=>{   ////class active 不會馬上出現，所以用setTimeout
-          if (document.querySelector(".owl-stage").lastChild.classList.contains("active")) {
-            const nextUser = storiesSection.dataset.nextUser
-            console.log(nextUser)
-            if (nextUser != "undefined") {  ////沒下一位 user 時回首頁
-              console.log("true")
-              requestStories(nextUser)
-              setNextAndPrevUser(nextUser)
-            } else {
-              console.log("false")
-              document.location.pathname = "/"
-            }
-          }
-        }, 10)
+      const owlStage = document.querySelector(".owl-stage")   ////owl-item 的外層 div
+      if (owlStage && owlStage.lastChild) {
+        const nextUser = storiesSection.dataset.nextUser
+        toAnotherUserStories(owlStage.lastChild, nextUser)
+      }
+
+      // 如果是當前 user 第一個限動就跳上一位 user的限動
+      if (owlStage && owlStage.firstChild) {
+        // const prevUser = storiesSection.dataset.prevUser
+        // toFirstUserStories(owlStage.firstChild, prevUser)
       }
     })
+  }
+
+  function toAnotherUserStories(storyDiv, user) {
+    setTimeout(()=>{   ////class active 不會馬上出現，所以用setTimeout
+      if (storyDiv.classList.contains("active")) {
+        console.log(user)
+        if (user != "undefined") {  ////沒下一位 user 時回首頁
+          console.log("true")
+          requestStories(user)
+          setNextAndPrevUser(user)
+        } else {
+          console.log("false")
+          document.location.pathname = "/"
+        }
+      }
+    }, 10)
   }
 
   function setNextAndPrevUser(selfName) {     //////設定上一位/下一位 限動 user
