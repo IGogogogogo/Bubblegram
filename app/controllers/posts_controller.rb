@@ -46,7 +46,7 @@ class PostsController < ApplicationController
 
   def create
     # byebug
-    HardWorker.perform_async(current_user.id, post_params.to_h)
+    UploadFileJob.new.perform(current_user.id, post_params)
     redirect_to root_path, notice: '文章新增中...'
 
     # @post = current_user.posts.new(post_params)

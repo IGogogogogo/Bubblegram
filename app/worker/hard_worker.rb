@@ -1,5 +1,5 @@
 class HardWorker
-  include Sidekiq::Worker
+  # include Sidekiq::Worker
 
   def perform(user_id, post_params)
     user = User.find(user_id)
