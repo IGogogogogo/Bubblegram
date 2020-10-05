@@ -41,6 +41,9 @@
   background: #7fcfd6 !important;
   color: #fff !important;
 }
+.user-story + .user-story{
+  margin-left: 25px;
+}
 a{
   color: rgb(139, 139, 139);
 }
