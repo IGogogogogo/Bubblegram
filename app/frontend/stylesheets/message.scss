@@ -2,6 +2,8 @@
   margin-top: -70px;
   height: calc(90vh - 90px);
   .message_container{
+    margin: auto;
+    max-width: 720px;
     height: 100%;
     position: relative;
     border-top: 1px solid #ccc;
