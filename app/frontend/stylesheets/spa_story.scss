@@ -13,6 +13,27 @@
     z-index: 3;
     max-width: 500px;
     width: 100%;
+
+    .btn-dot {
+      display: inline-block;
+      margin-left: auto;
+      background-color: transparent;
+      color: rgb(127, 207, 214);
+      border-color: transparent;
+      padding: 10px;
+      font-size: 22px;
+      outline: none;
+    }
+
+    .header-btn {
+      .btn-home {
+        font-size: x-large;
+        background-color: transparent;
+        border: none;
+        color: whitesmoke;
+        outline: none;
+      }
+    }
   }
 
   .story-pic img{

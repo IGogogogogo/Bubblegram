@@ -39,7 +39,12 @@ document.addEventListener("turbolinks:load", () => {
 
   function renderStories(data) {
     createUserInfo(data.user)
-    createStories(data.stories)
+    document.querySelector(".story-time span").textContent = data.stories[0].time
+
+    data.stories.forEach(story => {
+      const newStory = createStories(story)
+      $('.owl-carousel').trigger('add.owl.carousel', newStory)
+    })
   }
 
   function createUserInfo(user) {    ////建立 user 資料
@@ -47,22 +52,16 @@ document.addEventListener("turbolinks:load", () => {
     document.querySelector(".user-name span").textContent = user.nick_name
   }
 
-  function createStories(stories) {      ////建立 story(輪播) 資料
+  function createStories(story) {      ////建立 story(輪播) 資料
     // console.log(stories)
-    document.querySelector(".story-time span").textContent = stories[0].time
-    const storiesMain = document.querySelector(".stories-main")
-
-    stories.forEach(story => {
-      const newStory = document.createElement("div")
-      const img = document.createElement("img")
-      img.src = story.picture.url
-      img.classList.add("w-100")
-      img.style.height = "100vh"
-      newStory.dataset.time = story.time
-      newStory.appendChild(img)
-      $('.owl-carousel').trigger('add.owl.carousel', newStory)
-    })
-    storiesMain.classList.add("owl-carousel")
+    const newStory = document.createElement("div")
+    const img = document.createElement("img")
+    img.src = story.picture.url
+    img.classList.add("w-100")
+    img.style.height = "100vh"
+    newStory.dataset.time = story.time
+    newStory.appendChild(img)
+    return newStory
   }
 
   function carouselStart() {        ////owl carousel 輪播功能
@@ -70,6 +69,8 @@ document.addEventListener("turbolinks:load", () => {
       loop: false,
       margin: 0,
       nav: false,
+      autoplay: true,
+      autoplayTimeout: 100,
       responsive:{
         0:{
             items:1
