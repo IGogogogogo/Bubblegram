@@ -1,6 +1,7 @@
 <section class="stories w-100 m-auto"
-  data-self-name="<%= @user.nick_name %>"
-  data-viewable-users="<%= @viewable_users %>"
+  data-user-name="<%= @user.nick_name %>"
+  data-user-avatar="<%= @user.avatar.url %>"
+  data-story-time="<%= @first_story_time %>"
 >
   <header class="d-flex align-items-center w-100 pt-2 px-2">
     <div class="user-avatar" style="width: 50px">

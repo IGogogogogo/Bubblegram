@@ -2,20 +2,30 @@ class StoriesController < ApplicationController
   before_action :find_story, only: [:show, :destroy]
 
   def index
-    # @user = current_user.nick_name
+    # @user = User.find(params[:user_id])
     # viewable_users = User.viewable_users(current_user)
     # @viewable_users = viewable_users.map(&:nick_name)
     # @stories = Story.where(user: viewable_users).includes(:user).order("user_id", "created_at DESC").group_by(&:user_id)    #產生hash key = user_id
     # # @stories = Story.where(user: viewable_users).includes(:user).stories_oneday
     # 去撈24hr內po的storiesa，測試時可以用5.second。
+    # @user = User.find(params[:user_id])
+    # @stories = @user.stories.includes(:user).order("created_at DESC")
+    # @viewable_users = [current_user].concat(current_user.followings.order("created_at DESC")).map(&:nick_name)
+
+    # @result = {
+    #   stories: @stories,
+    #   user: @user,
+    #   viewable_users: @viewable_users
+    # }
     @user = User.find(params[:user_id])
-    @stories = @user.stories.includes(:user).order("created_at DESC")
-    @viewable_users = [current_user].concat(current_user.followings.order("created_at DESC")).map(&:nick_name)
+    viewable_user = [current_user].concat(current_user.followings.order("created_at DESC"))
+    # @viewable_user = viewable_user.map(&:nick_name)
+    @stories = viewable_user.map{ |user| user.stories.order("created_at DESC") }.flatten!  #flatten!把多層巢狀 array 變成一層
+    @first_story_time = @user.stories.last.created_at
 
     @result = {
       stories: @stories,
-      user: @user,
-      viewable_users: @viewable_users
+      user_index: viewable_user.index(@user)
     }
   end
 
