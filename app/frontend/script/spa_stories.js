@@ -2,7 +2,7 @@ import Rails from '@rails/ujs'
 
 document.addEventListener("turbolinks:load", () => {
   const storiesSection = document.querySelector(".stories")
-  const carouselTime = 1000
+  const carouselTime = 100000
 
   if (!storiesSection) return
   console.log("spa stories")
@@ -30,7 +30,11 @@ document.addEventListener("turbolinks:load", () => {
       type: "get",
       success: function(data) {
         console.log(data)
-        renderStories(data)
+        // renderStories(data)
+
+        $('.owl-carousel').owlCarousel({
+          onDragged: renderStories(data)
+        });
       },
       error: function(errors) {
         console.log(errors)
@@ -39,13 +43,19 @@ document.addEventListener("turbolinks:load", () => {
   }
 
   function renderStories(data) {
-    createUserInfo(data.user)
+    // createUserInfo(data.user)
     document.querySelector(".story-time span").textContent = data.stories[0].time
 
-    data.stories.forEach(story => {
-      const newStory = createStories(story)
+    // data.stories.forEach(story => {
+    //   const newStory = createStories(story)
+    //   $('.owl-carousel').trigger('add.owl.carousel', newStory)
+    // })
+
+    for(let i=0; i<data.stories.length; i++) {
+      const newStory = createStories(data.stories[i], i, data.stories.length)
       $('.owl-carousel').trigger('add.owl.carousel', newStory)
-    })
+    }
+    carouselStart()
   }
 
   function createUserInfo(user) {    ////建立 user 資料
@@ -53,15 +63,29 @@ document.addEventListener("turbolinks:load", () => {
     document.querySelector(".user-name span").textContent = user.nick_name
   }
 
-  function createStories(story) {      ////建立 story(輪播) 資料
+  function createStories(story, index, count) {      ////建立 story(輪播) 資料
     // console.log(stories)
+    createUserInfo(story.user)
     const newStory = document.createElement("div")
     const img = document.createElement("img")
+    const info = document.createElement("div")    //////////
+
+    newStory.dataset.storyIndex = index
+    newStory.dataset.storyCount = count
+    newStory.dataset.storyId = story.id
+    newStory.dataset.author = story.user.nick_name
+    info.innerHTML += `<p>#index: ${newStory.dataset.storyIndex}/${newStory.dataset.storyCount}</p>`
+    info.innerHTML += `<p>#id: ${newStory.dataset.storyId}</p>`
+    info.innerHTML += `<p>#author: ${newStory.dataset.author}</p>`
+    info.style = "position: absolute;top: 40%;font-size: 50px;background-color: #000;"
+
     img.src = story.picture.url
     img.classList.add("w-100")
     img.style.height = "100vh"
     newStory.dataset.time = story.time
     newStory.appendChild(img)
+    newStory.appendChild(info)          //////////
+    newStory.id = `story-id-${story.id}`
     return newStory
   }
 
@@ -83,8 +107,8 @@ document.addEventListener("turbolinks:load", () => {
   }
 
   function whenCarouselChange() {     ///輪播事件
-    $('.owl-carousel').on('changed.owl.carousel', function(event) {
-      console.log(event)
+    $('.owl-carousel').on('changed.owl.carousel', function() {
+      // console.log(event)
       const storyTime = document.querySelector(".story-time span")
       const storyActive = document.querySelector(".owl-item.active div")
       if (storyActive) { storyTime.textContent = storyActive.dataset.time }
@@ -92,41 +116,67 @@ document.addEventListener("turbolinks:load", () => {
       // 如果是當前 user 最後的限動就跳下一位 user 的限動
       const owlStage = document.querySelector(".owl-stage")   ////owl-item 的外層 div
       if (owlStage && owlStage.lastChild) {
-        const nextUser = storiesSection.dataset.nextUser
-        addToNewUserEvent(owlStage.lastChild, nextUser)
-      }
-
-      // 如果是當前 user 第一個限動就跳上一位 user 的限動
-      if (owlStage && owlStage.firstChild) {
-        const prevUser = storiesSection.dataset.prevUser
-        addToNewUserEvent(owlStage.firstChild, prevUser)
+        // const nextUser = storiesSection.dataset.nextUser
+        $('.owl-carousel').owlCarousel({   ////class active 不會馬上出現，用 callback 事件
+          onDragged: addJumpToNextEvent()
+        })
       }
     })
   }
 
-  function addToNewUserEvent(storyDiv, user) {
-    setTimeout(()=>{   ////class active 不會馬上出現，所以用setTimeout
-      if (storyDiv.classList.contains("active")) {
-        console.log(user)
-        // document.querySelector(".owl-next").addEventListener("click", toAnotherStories)
-        setTimeout(() => { toAnotherStories }, 1000);
-      }
-    }, 10)
+  function addJumpToNextEvent() {
+    // const owlStage = document.querySelector(".owl-stage")
+    const nextUser = storiesSection.dataset.nextUser
+    // console.log("?:" + isTailStory())
+    if (isLastStory()) {
+      console.log(nextUser)
+      document.querySelector(".owl-next").addEventListener("click", toNextUserStories)
+      setTimeout(() => { toNextUserStories(nextUser) }, carouselTime);
+    }
   }
 
-  const toAnotherStories = () => {
-    console.log("toAnotherStories")
-    const user = storiesSection.dataset.nextUser
-    if (user != "nobody") {  ////沒 user 時回首頁
-      requestStories(user)
-      setNextAndPrevUser(user)
+  function isLastStory() {
+    console.log("isLastStory?")
+    // setTimeout(() => {
+      if (document.querySelector(".owl-item.active")) {
+        const index = document.querySelector(".owl-item.active").firstChild.dataset.storyIndex
+        const StoryCount = document.querySelector(".owl-item.active").firstChild.dataset.storyCount
+        console.log("index: " + Number(index))
+        console.log("StoryCount: " + StoryCount)
+
+        if (StoryCount - 2 == Number(index)) {
+          return true
+        }
+      }
+  }
+
+  const toNextUserStories = () => {
+    console.log("toNextUserStories")
+    const _user = storiesSection.dataset.nextUser
+    console.log(_user)
+
+    if (_user != "nobody") {  ////沒 user 時回首頁
+      requestStories(_user)
+      setNextAndPrevUser(_user)
+      setTimeout(() => {
+        $('.owl-carousel').trigger('next.owl.carousel')
+      }, 50)
       // const usersCount = JSON.parse(storiesSection.dataset.viewableUsers).length
       // $('.owl-carousel').trigger("to.owl.carousel", [0, 1])
     } else {
       document.location.pathname = "/"
     }
-    document.querySelector(".owl-next").removeEventListener("click", toAnotherStories)
+    document.querySelector(".owl-next").removeEventListener("click", toNextUserStories)
   }
+
+
+  // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+  // console.log(document.querySelector(".owl-prev"))
+  // document.querySelector(".owl-prev").addEventListener("click", toPrevUserStories)
+
+
+  // function toPrevUserStories(){
+  // }
 
   function setNextAndPrevUser(selfName) {     //////設定上一位/下一位 限動 user
     const viewableUsers = JSON.parse(storiesSection.dataset.viewableUsers)

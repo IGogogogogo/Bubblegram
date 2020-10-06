@@ -14,13 +14,13 @@ json.user do
   json.extract! @result[:user], :id, :nick_name, :avatar
 end
 
-json.prevUser @result[:prev_user]
-json.nextUser @result[:next_user]
-
 json.stories do
   json.array! @result[:stories] do |story|
     json.id story.id
     json.picture story.picture
     json.time story.created_at
+    json.user do
+      json.extract! story.user, :nick_name, :avatar
+    end
   end
 end
