@@ -4,7 +4,7 @@ class Post < ApplicationRecord
 
   mount_uploaders :images, ImageUploader
   # has_rich_text :body
-  validates :content, presence: true
+  # validates :content, presence: true
   validates :images, presence: true
   validate :limit_images_count         #限制貼文圖片最多5張
 
