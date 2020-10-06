@@ -5,7 +5,7 @@ window.addEventListener('turbolinks:load', function () {
   let likeBtn = document.querySelectorAll('.footer-btn')[3]
   let profileBtn = document.querySelectorAll('.footer-btn')[4]
 
-
+  if(!homeBtn)return
 
   if (location.href === homeBtn.href) {
     homeBtn.classList.add('active')
