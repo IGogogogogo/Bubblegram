@@ -6,7 +6,8 @@
       <% end %>
 
       <%= link_to root_path, class: "logo", style: 'text-decoration: none;' do %>
-      <h1 class="h4 mb-0">BubbleGram</h1>
+         <%= image_tag("/logo.png", class: "mb-0", style:"height: 35px") %>
+      <%# <h1 class="h4 mb-0">BubbleGram</h1> %>
       <% end %>
 
       <%= link_to chats_path, class: 'chat p-1' do %>
