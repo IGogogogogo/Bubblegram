@@ -21,7 +21,9 @@ class ApplicationController < ActionController::Base
   end
 
   def has_any_chatroom_new_message?
-    redis.lrange("#{current_user.id}_chat_notice",0,-1).present?
+    any_new_message_chatroom = redis.lrange("#{current_user.id}_chat_notice",0,-1)
+    any_new_message_chatroom.delete("")
+    any_new_message_chatroom.length
   end
   protected
 
