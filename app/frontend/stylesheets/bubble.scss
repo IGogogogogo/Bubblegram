@@ -8,20 +8,10 @@
   border-radius:100%;
 }
 #index-logo{
-  font-size: 50px;
-  // color: rgb(78, 77, 77);
-  background: linear-gradient(to left,  rgb(12, 242, 250) 0%, #003d3d 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-  font-family:'Great Vibes',cursive;
   position:absolute;
   top:50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  text-align:center;
-  width:100%;
-  height:100px;
-  opacity:0.8;
 }
 .color{
   width:30px;
