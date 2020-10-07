@@ -126,6 +126,9 @@
       }
     }
   }
+  .message-text-area::-webkit-scrollbar {
+    display: none;
+  }
 
   .searchbar{
     margin-top: 5px;
