@@ -18,6 +18,7 @@ import "./footer_ disappear"
 import "./upload"
 import "./user_pic_upload"
 import "./sign_up"
+import "./textarea_autosize"
 
 import Swiper, { Pagination } from 'swiper';
 import gsap from "gsap"
