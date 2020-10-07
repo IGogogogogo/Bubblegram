@@ -34,10 +34,10 @@
     <%= f.label "信箱" %>
   </div>
 
-  <div class="user-edit-group">
-    <%= f.text_area "description", autocomplete: "off" %>
+  <div class="user-edit-group textarea-wrap">
+    <%= f.text_area "description", autocomplete: "off",class: "auto-size-textarea" ,rows: "1"  %>
     <div class="underline"></div>
-    <%= f.label "描述" %>
+    <%= f.label "描述",class:"desc-label" %>
   </div>
 
   <%= f.submit "更新個人資料", id: 'user_edit_btn' %>
