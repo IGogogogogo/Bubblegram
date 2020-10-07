@@ -1,12 +1,8 @@
 <div class="wrap">
-
-  <h4 class="search-post-title">搜尋</h4>
   <%= form_with(url: search_searches_path, method: :get, class: "search-form") do |f| %>
-  <%= f.text_field :keyword, class: 'search-input' %>
-  <%= f.submit "Search" %>
+  <%= f.text_field :keyword, class: 'search-input' ,placeholder: "搜尋", autocomplete: "off"%>
   <% end %>
 
-  <div class="search-result w-100 bg-light">
-
+  <div class="search-result w-100 ">
   </div>
 </div>

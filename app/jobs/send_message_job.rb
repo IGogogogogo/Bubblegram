@@ -23,7 +23,7 @@ class SendMessageJob < ApplicationJob
 
 
     ActionCable.server.broadcast(         #aciton cable 提供的方法 可以第二個參數的資料 廣播到第一個參數特定的頻道
-      "chat_channel_#{message.chat_id}",
+      "chat_channel_#{message.chatroom_id}",
       { my_message: my_message,
         other_message: other_message,
         my_image: my_image,
