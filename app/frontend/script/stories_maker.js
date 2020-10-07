@@ -5,7 +5,7 @@ document.addEventListener("turbolinks:load", () => {
   const carouselTime = 100000
 
   if (!storiesSection) return
-  console.log("stories maker")
+  // console.log("stories maker")
   // const userName = storiesSection.dataset.userName
   cssSetting()
   requestStories(storiesSection.dataset)
@@ -39,7 +39,7 @@ document.addEventListener("turbolinks:load", () => {
   }
 
   function renderStories(stories) {
-    console.log(stories)
+    // console.log(stories)
     for(let i=0; i<stories.main.length; i++) {
       const newStoryItem = createStoryItem(stories.main[i], i, stories.main.length)
       $('.owl-carousel').trigger('add.owl.carousel', newStoryItem)
@@ -49,7 +49,7 @@ document.addEventListener("turbolinks:load", () => {
 
   function toSelectedStory(stories) {
     console.log("toSelectedStory")
-    console.log(stories)
+    // console.log(stories)
     stories.position.forEach(user => {
       if (user.user.name == stories.user_name) {
         const index = Number(user.index)
@@ -67,7 +67,6 @@ document.addEventListener("turbolinks:load", () => {
     const newStoryItem = document.createElement("div")
     const img = document.createElement("img")
 
-
     newStoryItem.dataset.storyIndex = index
     newStoryItem.dataset.storyCount = count
     newStoryItem.dataset.storyId = story.id
@@ -79,7 +78,7 @@ document.addEventListener("turbolinks:load", () => {
     img.style.height = "100vh"
     newStoryItem.dataset.storyTime = story.time
     newStoryItem.appendChild(img)
-    newStoryItem.appendChild(testInfo(newStoryItem))          //////////test 資料 以後拿掉
+    // newStoryItem.appendChild(testInfo(newStoryItem))          //////////test 資料 以後拿掉
     newStoryItem.id = `story-id-${story.id}`
     return newStoryItem
   }
@@ -103,31 +102,41 @@ document.addEventListener("turbolinks:load", () => {
 
   function whenCarouselChange() {     ///輪播事件
     $('.owl-carousel').on('changed.owl.carousel', function() {
-      console.log("changed")
-      setTimeout(() => {
-        const storyActiveData = storiesSection.querySelector(".owl-item.active div").dataset
-        console.log(storyActiveData)
-        renewUserInfoAndStoryTime(storyActiveData)
+      // console.log("changed")
+      setTimeout(() => {    //////用setTimeout 才找得到 active item
+        const storyActive = storiesSection.querySelector(".owl-item.active div")
+        console.log(storyActive)
+        renewUserInfoAndStoryTime(storyActive.dataset)
+        redirectToHomeIfLastStory(storyActive)
       }, 0)
     })
   }
 
-  function renewUserInfoAndStoryTime({userAvatar, userName, storyTime}) {
+  function renewUserInfoAndStoryTime({userAvatar, userName, storyTime}) {  //更新使用者資料跟限動時間
     storiesSection.querySelector(".user-avatar img").src = userAvatar
     storiesSection.querySelector(".user-name span").textContent = userName
     storiesSection.querySelector(".story-time span").textContent = storyTime
   }
 
-  function testInfo(newStoryItem) {
-    const info = document.createElement("div")    //////////
-    info.innerHTML += `<p>#index: ${newStoryItem.dataset.storyIndex}/${newStoryItem.dataset.storyCount}</p>`
-    info.innerHTML += `<p>#id: ${newStoryItem.dataset.storyId}</p>`
-    info.innerHTML += `<p>#name: ${newStoryItem.dataset.userName}</p>`
-    info.style = "position: absolute;top: 40%;font-size: 50px;background-color: #000;"
-    return info
+  function redirectToHomeIfLastStory(storyItem) {    ////沒有下個限時動態時加上回首頁事件
+    if (storyItem.parentNode == document.querySelector(".owl-stage").lastChild){
+      setTimeout(() => {
+        document.location.pathname = "/"
+      }, carouselTime);
+
+      document.querySelector(".owl-next").addEventListener("click", () => {
+        document.location.pathname = "/"
+      })
+    }
   }
 
+  // function testInfo(newStoryItem) {
+  //   const info = document.createElement("div")    //////////
+  //   info.innerHTML += `<p>#index: ${newStoryItem.dataset.storyIndex}/${newStoryItem.dataset.storyCount}</p>`
+  //   info.innerHTML += `<p>#id: ${newStoryItem.dataset.storyId}</p>`
+  //   info.innerHTML += `<p>#name: ${newStoryItem.dataset.userName}</p>`
+  //   info.style = "position: absolute;top: 40%;font-size: 50px;background-color: #000;"
+  //   return info
+  // }
 
-  ////render後跳到這個 user 的 限動
-  ///沒限動時回首頁
 })
