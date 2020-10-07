@@ -1,26 +1,78 @@
+.user-header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  margin:auto;
+  background-color: #fff;
+  z-index: 2;
+  border-bottom: 1px solid rgb(209, 209, 209);
+  .user-name{
+    background: linear-gradient(to left,  rgb(3, 159, 165) 0%, #012929 100%);
+	    -webkit-background-clip: text;
+	    -webkit-text-fill-color: transparent;
+      font-family:'Great Vibes',cursive;
+    text-align: center;
+    font-size:24px;
+    letter-spacing: 2px;
+    line-height: 55px;
+  }
+}
+
+.chat-search-container{
+  max-width: 740px;
+  width: 100%;
+  margin: auto;
+  padding: 0 10px;
+}
+
+
+.chat-user-container{
+  max-width: 740px;
+  width: 100%;
+  margin: auto;
+  padding: 0 10px;
+  a{
+    text-decoration: none;
+  }
+  a + a{
+    display: block;
+    margin-top:15px;
+  }
+}
+
 .chat-user{
   display: flex;
 
   .chat-user-pic{
     position: relative;
+    width: 65px;
+    height: 65px;
+
+    img{
+      width: 100%;
+      border-radius: 50%;
+    }
 
     .online-dot{
-      width: 10px;
-      height: 10px;
+      width: 12px;
+      height: 12px;
       background-color: rgb(97, 228, 10);
       position: absolute;
       border-radius: 50%;
-      right: 2px;
-      bottom: 2px;
+      right: 3px;
+      bottom: 3px;
     }
   }
 
   .chat-user-info{
     padding-top:5px;
     margin-left: 10px;
+    font-size: 18px;
     .unread-messages,
     .online-text{
-      font-size:12px;
+      font-size:14px;
     }
     .off-line{
       display: none
@@ -35,7 +87,4 @@
     margin-left: auto;
     margin-right: 30px;
   }
-}
-.chat-user + .chat-user{
-  margin-top:10px;
 }

@@ -1,7 +1,7 @@
 window.addEventListener('turbolinks:load', function () {
 
   let postImagesInput = document.getElementById('post_images')
-
+  if (!postImagesInput) return
   postImagesInput.addEventListener('change', function () {
     previewPostPhoto(this)
   })

@@ -1,8 +1,10 @@
 .search-form{
+  max-width: 740px;
   width: 100%;
   display: flex;
   border: 1px solid #7fcfd6;
   border-radius: 10px;
+  margin: auto;
   margin-bottom: 20px;
   input,
   input:focus{
@@ -17,6 +19,7 @@
   }
   input[type="submit"]{
     background: #7fcfd6;
+    color: #fff;
     border-radius: 0 10px 10px 0;
     width: 100px;
   }
@@ -24,4 +27,11 @@
 #keyword{
   border-radius: 10px 0 0 10px;
   background: transparent;
+}
+
+.search-chat-area,
+.search-result{
+  .user-item + .user-item{
+    margin-top: 15px;
+  }
 }
