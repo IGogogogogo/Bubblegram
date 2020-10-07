@@ -21,6 +21,6 @@ json.stories do
   json.array! @result[:stories] do |story|
     json.id story.id
     json.picture story.picture
-    json.time story.created_at
+    json.time time_ago_in_words(story.created_at)
   end
 end

@@ -4,19 +4,11 @@
 >
   <header class="member d-flex align-items-center w-100 pt-2 px-2">
     <div class="member-pic user-avatar" style="width: 50px">
-      <% if @user == current_user %>
-        <%= link_to new_user_story_path(current_user), class:'add-story' do  %>
-          <%= image_tag @user.avatar.url, class:'member-pic rounded-circle w-100' %>
-        <% end %>
-      <% else %>
         <%= image_tag @user.avatar.url, class:'member-pic rounded-circle w-100' %>
-      <% end %>
-    </div>
-      <img src="https://picsum.photos/200/200/?random=1" class="rounded-circle w-100">
     </div>
 
     <div class="user-name member-name ml-2 mr-2">
-      <span><%= @user.nick_name %>台北暴徒</span>
+      <span><%= @user.nick_name %></span>
     </div>
 
     <!--時間---->
