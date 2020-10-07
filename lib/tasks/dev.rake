@@ -56,9 +56,9 @@ namespace :dev do
 
   task fake_posts: :environment do
     print "\n正在建立使用者 posts 資料"
-    # Post.destroy_all
+    Post.destroy_all
     COUNT = 100
-    # User.all.each do |user|
+#     User.all.each do |user|
     COUNT.times do
       images = []
       rand(1..5).times do
@@ -66,13 +66,13 @@ namespace :dev do
       end
 
       post = Post.new(
-        user: User.find(23),
+        user: User.all.sample(1).first,
         content: Faker::Lorem.sentence,
         remote_images_urls: images
         # body: Faker::Lorem.sentence
       )
       post.save!
-      # post.taged_users = User.all.sample(rand(3..7))
+      post.taged_users = User.all.sample(rand(3..7))
 
       print "."
     end
