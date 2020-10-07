@@ -15,8 +15,8 @@
       <% end %>
 
       <%= link_to chats_path, class: "chat-path nav-link flex-grow-1 footer-btn" do %>
-      <i class="far fa-comment-alt">
-      </i>
+      <div class = "<%= "message-dot" if has_any_chatroom_new_message? %>"></div>
+      <i class="far fa-comment-alt"></i>
       <% end %>
 
       <%= link_to user_path(current_user), class: "nav-link flex-grow-1 footer-btn" do %>

@@ -12,6 +12,7 @@ class UnreadMessageNotificationChannel < ApplicationCable::Channel
   def new_message(data)
     # puts "------------------我是主要負責建立通知------------------------------"
     redis.rpush("#{data["chatroom_id"]}_#{data["user_id"]}_new_message",data.to_json)
+    redis.rpush("#{current_user.id}_chat_notice","#{data["chatroom_id"]}_#{data["user_id"]}_new_message")
     #使用redis將新的訊息存起來
     # redis 是一個 key 跟 value 形式 key的設計是紀錄這則訊息 是哪一個聊天室 以及 哪一個人？
     # value 是從unread_message_channel.js 傳過來的那則訊息 轉成json格式（為了之後要做處理方便）
