@@ -6,7 +6,10 @@
       <% end %>
 
       <%= link_to root_path, class: "logo", style: 'text-decoration: none;' do %>
-         <%= image_tag("/logo.png", class: "mb-0", style:"height: 35px") %>
+      <div class="mb-0" style="height: 35px">
+        <%= image_tag("/text_logo.svg",class: "h-100") %>
+      </div>
+         <%#= image_tag("/logo.png", class: "mb-0", style:"height: 35px") %>
       <%# <h1 class="h4 mb-0">BubbleGram</h1> %>
       <% end %>
 

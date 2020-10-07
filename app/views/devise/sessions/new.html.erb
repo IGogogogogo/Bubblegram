@@ -1,8 +1,10 @@
 
 <div id="home">
 <p class="alert" style="color: red;"><%= alert %></p>
-  <%= image_tag("/logo.png", id: 'index-logo') %>
-</div>
+  <div id='index-logo'>
+    <%= image_tag("/text_logo.svg",class: "w-100") %>
+  </div>
+  </div>
 <div class="container position-absolute login-form wrap">
 
   <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true) do |f| %>
