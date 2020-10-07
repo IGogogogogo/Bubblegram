@@ -20,11 +20,12 @@ class StoriesController < ApplicationController
     @user = User.find(params[:user_id])
     viewable_user = [current_user].concat(current_user.followings.order("created_at DESC"))
     # @viewable_user = viewable_user.map(&:nick_name)
-    @stories = viewable_user.map{ |user| user.stories.order("created_at DESC") }.flatten!  #flatten!把多層巢狀 array 變成一層
+    @stories = viewable_user.map{ |user| user.stories.order("created_at DESC") }
     @first_story_time = @user.stories.last.created_at
 
     @result = {
       stories: @stories,
+      user_name: @user.nick_name,
       user_index: viewable_user.index(@user)
     }
   end
@@ -32,7 +33,7 @@ class StoriesController < ApplicationController
   def new
     check_owner
     @story = current_user.stories.new
-    authorize @story
+    # authorize @story
   end
 
   def create

@@ -6,14 +6,11 @@ document.addEventListener("turbolinks:load", () => {
 
   if (!storiesSection) return
   console.log("stories maker")
-  const userName = storiesSection.dataset.userName
-  console.log(userName)
+  // const userName = storiesSection.dataset.userName
   cssSetting()
-  requestStories(userName)
+  requestStories(storiesSection.dataset)
   carouselStart()
   whenCarouselChange()
-  console.log(storiesSection)
-  console.log(storiesSection.dataset)
   renewUserInfoAndStoryTime(storiesSection.dataset)
 
   function cssSetting() {       ///設定限時動態頁面 css style
@@ -24,7 +21,7 @@ document.addEventListener("turbolinks:load", () => {
     storiesSection.classList.add("text-light")
   }
 
-  function requestStories(userName) {       ///get 請求取得限時動態
+  function requestStories({userName}) {       ///get 請求取得限時動態
     // console.log(userName)
     const url = `/users/${userName}/stories.json`
     Rails.ajax({
@@ -43,10 +40,26 @@ document.addEventListener("turbolinks:load", () => {
 
   function renderStories(stories) {
     console.log(stories)
-    for(let i=0; i<stories.length; i++) {
-      const newStoryItem = createStoryItem(stories[i], i, stories.length)
+    for(let i=0; i<stories.main.length; i++) {
+      const newStoryItem = createStoryItem(stories.main[i], i, stories.main.length)
       $('.owl-carousel').trigger('add.owl.carousel', newStoryItem)
     }
+    toSelectedStory(stories)
+  }
+
+  function toSelectedStory(stories) {
+    console.log("toSelectedStory")
+    console.log(stories)
+    stories.position.forEach(user => {
+      if (user.user.name == stories.user_name) {
+        const index = Number(user.index)
+        console.log(user.user.name)
+        console.log(user.index)
+        console.log(Number(index) == 19)
+        console.log("toSelectedStory!!!!")
+        $('.owl-carousel').trigger("to.owl.carousel", [index, 1])
+      }
+    });
   }
 
   function createStoryItem(story, index, count) {      ////建立 story(輪播物件) 資料
@@ -71,7 +84,6 @@ document.addEventListener("turbolinks:load", () => {
     return newStoryItem
   }
 
-
   function carouselStart() {        ////owl carousel 輪播功能
     $('.stories .owl-carousel').owlCarousel({
       center: true,
@@ -94,8 +106,9 @@ document.addEventListener("turbolinks:load", () => {
       console.log("changed")
       setTimeout(() => {
         const storyActiveData = storiesSection.querySelector(".owl-item.active div").dataset
+        console.log(storyActiveData)
         renewUserInfoAndStoryTime(storyActiveData)
-      }, 100)
+      }, 0)
     })
   }
 
@@ -113,4 +126,8 @@ document.addEventListener("turbolinks:load", () => {
     info.style = "position: absolute;top: 40%;font-size: 50px;background-color: #000;"
     return info
   }
+
+
+  ////render後跳到這個 user 的 限動
+  ///沒限動時回首頁
 })
