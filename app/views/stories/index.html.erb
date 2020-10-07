@@ -1,6 +1,7 @@
 <section class="stories w-100 m-auto"
-  data-self-name="<%= @user.nick_name %>"
-  data-viewable-users="<%= @viewable_users %>"
+  data-user-name="<%= @user.nick_name %>"
+  data-user-avatar="<%= @user.avatar.url %>"
+  data-story-time="<%= @first_story_time %>"
 >
   <header class="member d-flex align-items-center w-100 pt-2 px-2">
     <div class="member-pic user-avatar" style="width: 50px">
@@ -8,12 +9,12 @@
     </div>
 
     <div class="user-name member-name ml-2 mr-2">
-      <span><%= @user.nick_name %></span>
+      <span>User Name</span>
     </div>
 
     <!--時間---->
     <div class="story-time create_time">
-      <span>Time</span>
+      <span>Story Time</span>
     </div>
 
     <div class="header-btn ml-auto">
