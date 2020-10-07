@@ -16,15 +16,29 @@ window.addEventListener('turbolinks:load', function () {
         reader.readAsDataURL(input.files[i]); // 讀取 input 傳進去的檔案並轉成 url 格式 (base64 編碼)
         reader.onload = function (e) { // 當讀取完成後觸發
           let image = document.createElement('img')
-          image.setAttribute('src', e.target.result) // result 是 Filereader 的方法可以把最後的結果送出(取決於用哪種方式讀取檔案)，這邊是使用 readAsDataURL 所以會轉成 url 格式
-          image.style.maxWidth = '400px'
+          image.src = e.target.result // result 是 Filereader 的方法可以把最後的結果送出(取決於用哪種方式讀取檔案)，這邊是使用 readAsDataURL 所以會轉成 url 格式
           image.style.width = '100%'
-          image.style.height = '350px'
+          image.style.height = '100%'
           image.style.objectFit = 'cover'
+
+          image.onload = function (e) {
+            let canvas = document.createElement('canvas')
+            let max_width = 500
+            //let max_height = 400
+            //let scaleSize = max_width / e.target.width
+            //canvas.height = e.target.height * scaleSize
+            canvas.width = max_width
+            canvas.height = 400
+
+            let ctx = canvas.getContext('2d') // 代表我們 canvas 要處理的是 2d圖片
+            ctx.drawImage(e.target, 0, 0, canvas.width, canvas.height)
+            let srcEncoded = ctx.canvas.toDataURL(e.target, 'image/jpeg', 0.8)
+            image.src = srcEncoded
+          }
 
           let div = document.createElement('div')
           div.appendChild(image)
-          div.style.width = '100%'
+          div.style.width = '500px'
           div.style.height = '400px'
           div.className = 'swiper-slide'
 
