@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     member do
       get :fans
       get :followings
+      get :follow
     end
   end
 
