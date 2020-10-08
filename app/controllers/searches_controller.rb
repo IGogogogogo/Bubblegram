@@ -1,5 +1,7 @@
 class SearchesController < ApplicationController
   def index
+    per_count = 36
+    @posts = Post.all.sample(per_count)
   end
 
   def search

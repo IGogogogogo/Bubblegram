@@ -1,1 +1,9 @@
 <%= render "form" %>
+
+<div class="post-load-page">
+  <div class="overflow-hidden">
+    <div class="form-row post-img">
+      <%= render partial: "/posts/post_img", collection: @posts, as: :post %>
+    </div>
+  </div>
+</div>
