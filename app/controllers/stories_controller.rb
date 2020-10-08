@@ -31,7 +31,7 @@ class StoriesController < ApplicationController
   end
 
   def new
-    check_owner
+    # check_owner
     @story = current_user.stories.new
     # authorize @story
   end
@@ -70,8 +70,8 @@ class StoriesController < ApplicationController
   end
 
   def story_params
-    # params.permit(:picture)
-    # 問助教為什麼不給過？
+    # 表單沒有收到 picture 時，沒有 params(:story)，需要先判斷否則會噴錯
+    return {} if params[:story].nil?
     params.require(:story).permit(:picture)
   end
 end
