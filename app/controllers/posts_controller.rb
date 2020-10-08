@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @taged_users = @post.taged_users.map{ |user| "@#{user.nick_name}" }
+    @taged_users = @post.taged_users
     @comments = @post.comments
     @comment = Comment.new
   end

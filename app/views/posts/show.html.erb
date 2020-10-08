@@ -4,7 +4,16 @@
     <%= render partial: "/posts/carousel_img", collection: @post.images, as: :image if @post.images %>
   </div>
 
-  <p><%= @taged_users.join(", ") %></p>
+  <p class="post-tag">
+    <%= "與" if @taged_users != [] %>
+    <% @taged_users.each_with_index do |user, index| %>
+      <%= link_to user_path(user) do %>
+        <span>@<%= user.nick_name %></span>
+        <%= ", " if index < @taged_users.count - 1 %>
+      <% end %>
+    <% end %>
+  </p>
+
 
   <p><%= @post.content %></p>
 
