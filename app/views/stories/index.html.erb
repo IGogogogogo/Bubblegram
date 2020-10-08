@@ -3,9 +3,20 @@
   data-user-avatar="<%= @user.avatar.url %>"
   data-story-time="<%= @first_story_time %>"
 >
-  <header class="member d-flex align-items-center w-100 pt-2 px-2">
-    <div class="member-pic user-avatar" style="width: 50px">
-        <%= image_tag @user.avatar.url, class:'member-pic rounded-circle w-100' %>
+  <header class="member  w-100 pt-2 px-2">
+    <div class="dots">
+      <div class="dot active"><span></span></div>
+      <div class="dot"><span></span></div>
+      <div class="dot"><span></span></div>
+      <div class="dot"><span></span></div>
+      <div class="dot"><span></span></div>
+      <div class="dot"><span></span></div>
+      <div class="dot"><span></span></div>
+    </div>
+
+  <div class="member-title d-flex align-items-center">
+    <div class="member-pic user-avatar">
+        <%= image_tag @user.avatar.url, class:'rounded-circle w-100' %>
     </div>
 
     <div class="user-name member-name ml-2 mr-2">
@@ -29,16 +40,15 @@
         <% end %>
       </button>
     </div>
+
+  </div>
+
+
   </header>
 
   <div class="story-pic">
     <!-- 以下輪播 -->
     <div class="stories-main owl-carousel">
-      <div class="owl-dots d-flex">
-        <div class="owl-dot active"><span>1</span></div>
-        <div class="owl-dot"><span>2</span></div>
-        <div class="owl-dot"><span>3</span></div>
-      </div>
     </div>
     <!-- 以上輪播 -->
   </div>

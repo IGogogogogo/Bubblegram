@@ -1,4 +1,5 @@
 import Rails from '@rails/ujs'
+import Swal from 'sweetalert2'
 
 document.addEventListener("turbolinks:load", () => {
   const storiesSection = document.querySelector(".stories")
@@ -60,6 +61,62 @@ document.addEventListener("turbolinks:load", () => {
         $('.owl-carousel').trigger("to.owl.carousel", [index, 1])
       }
     });
+  }
+
+  // 打開功能區塊
+  const btnDot = document.querySelector('.btn-dot')
+  const modalFun = document.querySelector('.modal-fun')
+  const modalDel = document.querySelector('.modal-del')
+  if(!btnDot){return}
+
+  btnDot.addEventListener("click", function(){
+    console.log(btnDot)
+    // $("#stories-carousel").carousel('pause')
+    if(modalFun.style.display != 'block'){
+      modalFun.style.display = 'block'
+    }
+  })
+
+  //刪除story
+  modalDel.addEventListener("click", (e) => delStory(e))
+  console.log(delStory)
+
+  const delStory = (e) => {
+    e.preventDefault()
+    modalFun.style.display = "none"
+    // $("#stories-carousel").carousel('pause')
+
+    // const userId = document.querySelector(".stories").dataset.user // 取得 user id
+    // const $activeImg = document.querySelector('.story-img.active')
+    // const storyId = $activeImg.dataset.story
+    // const url = `/users/${userId}/stories/${storyId}`
+
+    Swal.fire({
+      title: '你確定要刪除嗎？',
+      // text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: '刪除',
+      cancelButtonText: '取消'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        //前端畫面刪除
+        if ($activeImg) $activeImg.remove()
+        const $firstImg = document.querySelector('.carousel-inner .story-img')
+        if ($firstImg) $firstImg.classList.add('active')
+
+        //資料庫刪除
+        // Rails.ajax({
+        //   url: url,
+        //   type: "DELETE",
+        //   success: function(){
+        //     console.log("success:", url)
+        //   }
+        // })
+      }
+    })
   }
 
   function createStoryItem(story, index, count) {      ////建立 story(輪播物件) 資料
