@@ -18,15 +18,28 @@ document.addEventListener("turbolinks:load", () => {
     const userPosts = document.querySelector(".user-posts")
     const myBtn = document.querySelector(".my-posts-btn")
     const tagBtn = document.querySelector(".tag-posts-btn")
+    const randPosts = document.querySelector(".rand-posts")
 
     if (followingPosts) {
       return "following_posts"
     } else if (userPosts) {
       return "my_posts"
-    } else if (myBtn.classList.contains("active")) {
+    } else if (randPosts) {
+      return "rand_img"
+    }else if (myBtn.classList.contains("active")) {
       return "post_img"
     } else if (tagBtn.classList.contains("active")) {
       return "tag_img"
+    }
+  }
+
+  function getUrl(type) {
+    if (type == "rand_img") {
+      return "/load_rand_img"
+    } else if (type == "post_img" || type == "tag_img") {
+      return "/users/load_img"
+    } else {
+      return "/users/load_posts"
     }
   }
 
@@ -37,8 +50,8 @@ document.addEventListener("turbolinks:load", () => {
       // console.log("loadPosts.........................")
       page += 1
       const user_id = document.location.href.split("users/")[1]  //從目前網址取得params user id
-      const type = getType()
-      let url = `/users/load_posts?page=${page}&type=${type}`
+      let type = getType()
+      let url = getUrl(type) + `?page=${page}&type=${type}`
 
       if (user_id) { url += `&user_id=${user_id}` }
 
@@ -46,36 +59,41 @@ document.addEventListener("turbolinks:load", () => {
         url: url,
         type: "get",
         success: function(data) {
-          // console.log("success：", url)
           const postsEl = data.querySelector("body").innerHTML
           const postLoadTarget = document.querySelector(".post-load-target")
-          const loadingDiv = document.querySelector(".loading")
+          const oldLoadingEls = document.querySelectorAll(".loading")
+          const newLoadingEl = document.createElement("div")
+          const loadImg = document.createElement("img")
+          loadImg.src = "/loading.gif"
+          loadImg.classList = "w-100"
+          newLoadingEl.classList = "loading"
+          newLoadingEl.style = "padding: 0 40%;"
+          newLoadingEl.appendChild(loadImg)
 
-          if (loadingDiv) {
-            loadingDiv.remove()
-            return
+          if (oldLoadingEls) {
+            Array.from(oldLoadingEls).forEach(el => {
+              el.remove()
+            });
           }
 
           if (!postsEl || postsEl == "") {   //沒有新資料時移除事件監聽
             postLoadPage.removeEventListener("scroll", loadPosts)
-            if (loadingDiv) { loadingDiv.remove() }
             return
           }
 
-          if (type == "following_posts" || type == "my_posts") {
-            postLoadTarget.innerHTML += postsEl
-            postLoadTarget.appendChild(loadingDiv)
-          } else if (type == "post_img") {
+          if (type == "post_img") {
             postImg.innerHTML += postsEl
-            postImg.appendChild(loadingDiv)
+            postImg.appendChild(newLoadingEl)
           } else if (type == "tag_img") {
             tagImg.innerHTML += postsEl
-            tagImg.appendChild(loadingDiv)
+            tagImg.appendChild(newLoadingEl)
+          } else {
+            postLoadTarget.innerHTML += postsEl
+            postLoadTarget.appendChild(newLoadingEl)
           }
         },
         error: function(errors) {
           console.log(errors)
-          // window.location.href = "/users/sign_in"
         }
       })
     }
