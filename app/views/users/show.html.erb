@@ -43,7 +43,7 @@
           <div class="profile-intro py-2 w-100 ml-3">
             <div class="profile-user-name"><strong><%= @user.nick_name %></strong></div>
             <div class="profile-user-infro">
-              <%= @user.description %>
+              <%= simple_format(@user.description) %>
             </div>
           </div>
         </div>
