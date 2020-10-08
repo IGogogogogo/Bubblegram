@@ -1,7 +1,8 @@
 .post-load-page{
   overflow: auto;
   // height: calc(100vh - 120px);
-  width: 740px;
+  width: 100%;
+  max-width: 740px;
   margin: auto;
 }
 
