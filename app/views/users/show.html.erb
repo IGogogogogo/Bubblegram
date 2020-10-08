@@ -76,12 +76,12 @@
     <div class="tab-content post-load-target" id="nav-tabContent">
       <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <% if @my_posts != [] %>
-        <div class="form-row post-img">
-          <%= render partial: "/posts/post_img", collection: @my_posts, as: :post %>
-          <% if @has_more_my_posts %>
-          <%= render "/shared/loading" %>
-          <% end %>
-        </div>
+          <div class="form-row post-img">
+            <%= render partial: "/posts/post_img", collection: @my_posts, as: :post %>
+            <% if @has_more_my_posts %>
+              <%= render "/shared/loading" %>
+            <% end %>
+          </div>
         <% else %>
           <div class="default d-flex flex-column align-items-center my-5">
             <%= image_tag("/no_post.png", class: "w-100") %>
@@ -96,7 +96,7 @@
           <div class="form-row tag-img">
             <%= render partial: "/posts/post_img", collection: @taged_posts, as: :post %>
             <% if @has_more_tag_posts %>
-            <%= render "/shared/loading" %>
+              <%= render "/shared/loading" %>
             <% end %>
           </div>
         <% else %>
