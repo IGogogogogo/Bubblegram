@@ -15,30 +15,33 @@
 
 .btn-login{
   background: rgb(127, 207, 214);
+  color: #ffffff;
   padding: 13px 0;
   border-color: transparent;
   letter-spacing: 2px;
+  transition: .6s;
+}
+.btn-login:hover{
+  background: rgb(69, 192, 203);
+  color: #ffffff;
 }
 .go-btn,
 .fb-btn{
   background-color: transparent;
   color: rgb(127, 207, 214);
   border-color: rgb(127, 207, 214);
-}
-
-.go-btn,
-.fb-btn{
   height: 51px;
   line-height: 51px;
   padding: 0;
 }
-.go-btn{
-  // background-image: linear-gradient(to right, #4285F4,#DB4437,#F4B400,#0F9D58);
-  // -webkit-background-clip: text;
-  // -webkit-text-fill-color: transparent;
-  font-size: 18px;
-  color: rgb(127, 207, 214);
-  background-color: transparent;
-  border-color: rgb(127, 207, 214);
-  // border-image:linear-gradient(to left, #4285F4,#DB4437,#F4B400,#0F9D58); border-image-slice: 1;
+.fb-btn:hover{
+  background-color: #395692;
+  color: #ffffff;;
+}
+
+
+.go-btn:hover{
+  background-color: #f2594e;
+  color: #ffffff;
+  border-color:#f2594e ;
 }
