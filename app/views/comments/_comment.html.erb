@@ -2,7 +2,8 @@
   <div class="comment-context">
     <%= image_tag comment.user.avatar.url %>
     <span style="font-weight: 600;"><%= comment.user.nick_name %></span>
-    <%= comment.content %>
+
+    <%= simple_format(comment.content) %>
   </div>
 
   <small class="time" style="">
