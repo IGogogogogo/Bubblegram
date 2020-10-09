@@ -21,6 +21,9 @@
         font-size:12px;
         padding: 2px 5px;
       }
+      .btn:focus{
+        box-shadow: none;
+      }
       .cancel-follow{
         color:#8b8b8b;
         border: 1px solid #7fcfd6;
