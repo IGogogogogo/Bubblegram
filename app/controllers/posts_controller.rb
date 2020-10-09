@@ -86,7 +86,7 @@ class PostsController < ApplicationController
   def update
     @post.assign_attributes(post_params)
     authorize @post
-    @post.taged_users = User.where(id: params[:post][:taged_users])
+
     if @post.save
       redirect_to post_path(@post), notice: '文章更新成功'
     else
@@ -119,7 +119,7 @@ class PostsController < ApplicationController
   end
 
   def find_tag_users
-    @users = User.all.map{ |u| ["@#{u.nick_name}", u.id] }
+    @users = current_user.followings.map{ |u| ["@#{u.nick_name}", u.id] }
     @taged_id = @post.taged_users.map{ |u| u.id }
   end
 
