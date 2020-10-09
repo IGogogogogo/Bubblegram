@@ -21,8 +21,8 @@ Rails.application.routes.draw do
     end
 
     member do
-      get :fans
-      get :followings
+      # get :fans
+      # get :followings
       get :follow
     end
   end
@@ -41,7 +41,8 @@ Rails.application.routes.draw do
   resources :searches, only: [:index] do
     collection do
       get :search
-      get :search_follow
+      get :search_fans
+      get :search_followings
     end
   end
 
