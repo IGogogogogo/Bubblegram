@@ -1,47 +1,44 @@
-<section class="stories w-100 m-auto"
+<section class="stories"
   data-user-name="<%= @user.nick_name %>"
   data-current-user="<%= current_user.nick_name %>"
   data-user-avatar="<%= @user.avatar.url %>"
   data-story-time="<%= time_ago_in_words(@first_story_time) %>"
   data-story-index="0"
 >
-  <header class="member  w-100 pt-2 px-2">
+  <header class="member">
     <div class="dots">
     </div>
 
-  <div class="member-title d-flex align-items-center">
-    <div class="member-pic user-avatar">
-        <%= image_tag @user.avatar.url, class:'rounded-circle w-100' %>
-    </div>
+    <div class="member-title">
+      <div class="user-avatar">
+          <%= image_tag @user.avatar.url %>
+      </div>
 
-    <div class="user-name member-name ml-2 mr-2">
-      <span>User Name</span>
-    </div>
+      <div class="user-name">
+        <span>User Name</span>
+      </div>
 
-    <!--時間---->
-    <div class="story-time create_time">
-      <span>Story Time</span>
-    </div>
+      <!--時間---->
+      <div class="story-time">
+        <span>Story Time</span>
+      </div>
 
-    <div class="header-btn ml-auto">
-      <!-----選單--->
-      <% if @user == current_user %>
-        <button class="btn-dot">
-          <i class="fas fa-ellipsis-h"></i>
-        </button>
-      <% end %>
-
-      <!---回首頁------->
-      <button class="btn-home">
-        <%= link_to root_path do %>
-          <i class="fas fa-times"></i>
+      <div class="header-btn">
+        <!-----選單--->
+        <% if @user == current_user %>
+          <button class="btn-dot">
+            <i class="fas fa-ellipsis-h"></i>
+          </button>
         <% end %>
-      </button>
+
+        <!---回首頁------->
+        <button class="btn-home">
+          <%= link_to root_path do %>
+            <i class="fas fa-times"></i>
+          <% end %>
+        </button>
+      </div>
     </div>
-
-  </div>
-
-
   </header>
 
   <div class="story-pic">

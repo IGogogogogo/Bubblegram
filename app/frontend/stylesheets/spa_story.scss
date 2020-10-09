@@ -6,8 +6,9 @@
   height: 100vh;
   width: 100%;
   max-width: 500px;
+  margin: auto;
 
-  header {
+  .member {
     position: absolute;
     top: 0;
     z-index: 3;
@@ -15,32 +16,7 @@
     width: 100%;
     background: linear-gradient(180deg, #eee 0%, transparent);
     color: #fff;
-
-    .btn-dot {
-      display: inline-block;
-      margin-left: auto;
-      background-color: transparent;
-      color: rgb(127, 207, 214);
-      border-color: transparent;
-      padding: 10px;
-      font-size: 22px;
-      outline: none;
-    }
-
-    .member-pic{
-      width: 50px;
-    }
-
-    .header-btn {
-      .btn-home {
-        font-size: x-large;
-        background-color: transparent;
-        border: none;
-        color: whitesmoke;
-        outline: none;
-        position: relative;
-      }
-    }
+    padding-top: 50% 50%;
 
     .dots{
       display: flex;
@@ -57,6 +33,53 @@
 
       .active{
         background-color:rgba(255, 255, 255, 1);
+      }
+    }
+
+    .member-title{
+      display: flex;
+      align-items: center;
+      padding: 5px;
+
+      .user-avatar{
+        width: 50px;
+
+        img{
+          width: 100%;
+          border-radius: 100%;
+        }
+      }
+
+      .user-name{
+        margin: 0 5px;
+      }
+
+      .story-time{
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    .header-btn {
+      margin-left: auto;
+
+      .btn-dot {
+        display: inline-block;
+        margin-left: auto;
+        background-color: transparent;
+        color: rgb(127, 207, 214);
+        border-color: transparent;
+        padding: 10px;
+        font-size: 22px;
+        outline: none;
+      }
+
+      .btn-home {
+        font-size: x-large;
+        background-color: transparent;
+        border: none;
+        color: whitesmoke;
+        outline: none;
+        position: relative;
       }
     }
   }
@@ -89,13 +112,6 @@
         outline: none;
       }
     }
-    // .owl-dots {
-    //   position: absolute;
-    //   top: 100px;
-    //   height: 50px;
-    //   width: 100%;
-    //   z-index: 50;
-    // }
   }
 
     /* RWD */
@@ -118,10 +134,7 @@
       left: 0;
       bottom: 7px;
     }
-
   }
-
-
 
   .modal-fun{
     background-color: rgba(127, 207, 214, .6);
