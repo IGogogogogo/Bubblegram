@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   resources :searches, only: [:index] do
     collection do
       get :search
+      get :search_follow
     end
   end
 
