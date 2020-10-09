@@ -1,36 +1,38 @@
-<div class="post-show">
-  <%= render "post_user", post: @post %>
-  <div class="owl-carousel owl-theme">
-    <%= render partial: "/posts/carousel_img", collection: @post.images, as: :image if @post.images %>
-  </div>
+<div class="wrap">
+  <div class="post-show">
+    <%= render "post_user", post: @post %>
+    <div class="owl-carousel owl-theme">
+      <%= render partial: "/posts/carousel_img", collection: @post.images, as: :image if @post.images %>
+    </div>
 
-  <div class="post-text px-2">
-    <% if @taged_users != [] %>
-      <p class="post-tag my-0">
-        與
-        <% @taged_users.each_with_index do |user, index| %>
-          <%= link_to user_path(user) do %>
-            <span>@<%= user.nick_name %></span>
-            <%= ", " if index < @taged_users.count - 1 %>
+    <div class="post-text px-2">
+      <% if @taged_users != [] %>
+        <p class="post-tag my-0">
+          與
+          <% @taged_users.each_with_index do |user, index| %>
+            <%= link_to user_path(user) do %>
+              <span>@<%= user.nick_name %></span>
+              <%= ", " if index < @taged_users.count - 1 %>
+            <% end %>
           <% end %>
-        <% end %>
+        </p>
+      <% end %>
+
+      <p class="pt-2">
+        <strong><%= @post.user.nick_name %></strong>
+        <%= @post.content %>
       </p>
-    <% end %>
 
-    <p class="pt-2">
-      <strong><%= @post.user.nick_name %></strong>
-      <%= @post.content %>
-    </p>
+      <%= render partial: "/comments/comment", collection: @comments %>
 
-    <%= render partial: "/comments/comment", collection: @comments %>
+      <%= form_with(model: @comment, url: post_comments_path(@post), class:"comment-form", remote: true) do |form| %>
+        <div class="d-flex w-100 comment">
+          <%= form.text_area :content, placeholder: "輸入留言", autocomplete: "off", style: "height:33px", class: 'flex-grow-1', autocomplete: "off"  %>
+          <div class="underline"></div>
+          <%= form.submit "留言", id: 'comment_submit' %>
+        </div>
+      <% end %>
+    </div>
 
-    <%= form_with(model: @comment, url: post_comments_path(@post) ,local: true) do |form| %>
-      <div class="d-flex w-100 comment">
-        <%= form.text_area :content, placeholder: "輸入留言", autocomplete: "off", style: "height:33px", class: 'flex-grow-1', autocomplete: "off"  %>
-        <div class="underline"></div>
-        <%= form.submit "留言", id: 'comment_submit' %>
-      </div>
-    <% end %>
   </div>
-
 </div>
