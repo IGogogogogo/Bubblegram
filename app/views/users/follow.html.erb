@@ -1,42 +1,44 @@
 <h4 class="user-show-title"><%= @user.nick_name %></h4>
-<nav class="py-3">
-      <div class="nav nav-tabs d-flex w-100" id="nav-tab" role="tablist">
-        <a class="nav-link flex-grow-1 text-center active" id="nav-fans-tab" data-toggle="tab"
-          href="#nav-fans" role="tab" aria-controls="nav-fans" aria-selected="true">
-          <span><%= @user_fans.count %>粉絲</span>
-        </a>
-        <a class="nav-link flex-grow-1 text-center" id="nav-following-tab" data-toggle="tab" href="#nav-following"
-          role="tab" aria-controls="nav-following" aria-selected="false">
-        <span><%= @user_followings.count %>追蹤名單</span>
-        </a>
-      </div>
-    </nav>
+    <div class="fans-following-search-container">
+      <nav class="py-3">
+        <div class="nav nav-tabs d-flex w-100" id="nav-tab" role="tablist">
+          <a class="nav-link flex-grow-1 text-center active" id="nav-fans-tab" data-toggle="tab"
+            href="#nav-fans" role="tab" aria-controls="nav-fans" aria-selected="true">
+            <span><%= @user_fans.count %>粉絲</span>
+          </a>
+          <a class="nav-link flex-grow-1 text-center" id="nav-following-tab" data-toggle="tab" href="#nav-following"
+            role="tab" aria-controls="nav-following" aria-selected="false">
+          <span><%= @user_followings.count %>追蹤名單</span>
+          </a>
+        </div>
+      </nav>
 
 
-    <div class="tab-content" id="nav-tabContent">
-      <div class="tab-pane fade show active" id="nav-fans" role="tabpanel" aria-labelledby="nav-fans-tab">
-        <div class = "follow-search-bar section">
-          <div class="follow-search-container">
-            <%= render partial: "searches/follow_form" , locals: {user: @user}%>
-            <div class = "search-fans-area">
+      <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-fans" role="tabpanel" aria-labelledby="nav-fans-tab">
+          <div class = "follow-search-bar section">
+            <div class="follow-search-container">
+              <%= render partial: "searches/follow_form" , locals: {user: @user}%>
+              <div class = "search-fans-area">
+              </div>
             </div>
           </div>
+          <div class="user-fans-contanier search-section">
+            <%= render partial: "/users/user", collection: @user_fans, as: :user %>
+          </div>
         </div>
-        <div class="user-fans-contanier">
-          <%= render partial: "/users/user", collection: @user_fans, as: :user %>
-        </div>
-      </div>
 
-      <div class="tab-pane fade show" id="nav-following" role="tabpanel" aria-labelledby="nav-following-tab">
-        <div class = "follow-search-bar section">
-          <div class="follow-search-container">
-            <%= render partial: "searches/follow_form" , locals: {user: @user}%>
-            <div class = "search-followings-area">
+        <div class="tab-pane fade show" id="nav-following" role="tabpanel" aria-labelledby="nav-following-tab">
+          <div class = "follow-search-bar section">
+            <div class="follow-search-container">
+              <%= render partial: "searches/follow_form" , locals: {user: @user}%>
+              <div class = "search-followings-area">
+              </div>
             </div>
           </div>
+            <div class="user-followings-container search-section">
+              <%= render partial: "/users/user", collection: @user_followings, as: :user %>
+            </div>
         </div>
-          <div class="user-followings-container">
-            <%= render partial: "/users/user", collection: @user_followings, as: :user %>
-          </div>
       </div>
     </div>
