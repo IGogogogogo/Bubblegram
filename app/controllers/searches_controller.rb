@@ -10,4 +10,12 @@ class SearchesController < ApplicationController
       @users = User.includes(:fans).not_self(current_user).with_keyword(params[:keyword]).limit(10)
     end
   end
+
+  def search_follow
+    if params[:keyword].present?
+      @user = User.find(params[:user_id])
+      @user_followings = @user.followings.with_keyword(params[:keyword])
+      @user_fans = @user.fans.with_keyword(params[:keyword])
+    end
+  end
 end
