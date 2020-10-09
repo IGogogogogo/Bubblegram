@@ -4,7 +4,9 @@
   <div class="overflow-hidden">
     <div class="form-row post-load-target rand-posts">
       <%= render partial: "/posts/post_img", collection: @posts, as: :post %>
-      <%= render partial: "/shared/loading" %>
+      <% if @posts.length >= 36 %>
+        <%= render partial: "/shared/loading" %>
+      <% end %>
     </div>
   </div>
 </div>
