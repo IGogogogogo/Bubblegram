@@ -14,7 +14,7 @@ json.stories do
 
     json.story do
       json.picture stories[0].picture
-      json.time stories[0].created_at
+      json.time time_ago_in_words(stories[0].created_at)
     end
 
     index += stories.count

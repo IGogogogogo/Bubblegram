@@ -47,6 +47,7 @@ document.addEventListener("turbolinks:load", () => {
       $('.owl-carousel').trigger('add.owl.carousel', newStoryItem)
     }
     toSelectedStory(stories)
+    createStoryDots(stories.position)
   }
 
   function toSelectedStory(stories) {
@@ -55,13 +56,29 @@ document.addEventListener("turbolinks:load", () => {
     stories.position.forEach(user => {
       if (user.user.name == stories.user_name) {
         const index = Number(user.index)
-        console.log(user.user.name)
-        console.log(user.index)
-        console.log(Number(index) == 19)
-        console.log("toSelectedStory!!!!")
         $('.owl-carousel').trigger("to.owl.carousel", [index, 1])
       }
     });
+  }
+
+  function createStoryDots(position) {
+    position.forEach(info => {
+      if (storiesSection.dataset.userName == info.user.name) {
+        for(let i=0; i<info.count; i++){
+          const dot = document.createElement("div")
+          const span = document.createElement("span")
+          dot.appendChild(span)
+          dot.classList = "dot"
+          dot.dataset.index = i
+
+          if(i == 0){
+            dot.classList = "dot active"
+          }
+
+          document.querySelector(".dots").appendChild(dot)
+        }
+      }
+    })
   }
 
   // 打開功能區塊
@@ -177,21 +194,33 @@ document.addEventListener("turbolinks:load", () => {
         console.log(storyActive)
         renewUserInfoAndStoryTime(storyActive.dataset)
         redirectToHomeIfLastStory(storyActive)
+        checkoutDotActive(storyActive)
       }, 0)
     })
+  }
+
+  function checkoutDotActive(storyActive) {
+    console.log("ture")
+    console.log(storyActive)
+    // console.log(storyActive.dataset.storyCount)
+    Array.from(document.querySelectorAll(".dot")).forEach((dot) => {
+      console.log(dot.dataset)
+    })
+    console.log(document.querySelector(".dot.active").dataset)
+    console.log(storiesSection.dataset.storyIndex)
   }
 
   function renewUserInfoAndStoryTime({userAvatar, userName, storyTime}) {  //更新使用者資料跟限動時間
     storiesSection.querySelector(".user-avatar img").src = userAvatar
     storiesSection.querySelector(".user-name span").textContent = userName
     storiesSection.querySelector(".story-time span").textContent = storyTime
-    console.log(currentUser)
-    console.log(userName)
+    const btnDot = storiesSection.querySelector(".btn-dot")
+
+    if(!btnDot) return
     if (currentUser == userName) {
-      console.log("true")
-      storiesSection.querySelector(".btn-dot").style.display = "inline-block"
+      btnDot.style.display = "inline-block"
     } else {
-      storiesSection.querySelector(".btn-dot").style.display = "none"
+      btnDot.style.display = "none"
     }
   }
 
