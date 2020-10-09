@@ -1,5 +1,6 @@
 <section class="stories w-100 m-auto"
   data-user-name="<%= @user.nick_name %>"
+  data-current-user="<%= current_user.nick_name %>"
   data-user-avatar="<%= @user.avatar.url %>"
   data-story-time="<%= @first_story_time %>"
 >
@@ -30,9 +31,12 @@
 
     <div class="header-btn ml-auto">
       <!-----選單--->
-      <button class="btn-dot">
-        <i class="fas fa-ellipsis-h"></i>
-      </button>
+      <% if @user == current_user %>
+        <button class="btn-dot">
+          <i class="fas fa-ellipsis-h"></i>
+        </button>
+      <% end %>
+
       <!---回首頁------->
       <button class="btn-home">
         <%= link_to root_path do %>

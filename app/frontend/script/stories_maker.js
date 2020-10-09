@@ -3,6 +3,7 @@ import Swal from 'sweetalert2'
 
 document.addEventListener("turbolinks:load", () => {
   const storiesSection = document.querySelector(".stories")
+  const currentUser = storiesSection.dataset.currentUser
   const carouselTime = 100000
 
   if (!storiesSection) return
@@ -184,6 +185,14 @@ document.addEventListener("turbolinks:load", () => {
     storiesSection.querySelector(".user-avatar img").src = userAvatar
     storiesSection.querySelector(".user-name span").textContent = userName
     storiesSection.querySelector(".story-time span").textContent = storyTime
+    console.log(currentUser)
+    console.log(userName)
+    if (currentUser == userName) {
+      console.log("true")
+      storiesSection.querySelector(".btn-dot").style.display = "inline-block"
+    } else {
+      storiesSection.querySelector(".btn-dot").style.display = "none"
+    }
   }
 
   function redirectToHomeIfLastStory(storyItem) {    ////沒有下個限時動態時加上回首頁事件
