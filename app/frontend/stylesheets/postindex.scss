@@ -12,6 +12,11 @@
   border-radius: 100%;
   width: 60px;
   height: 60px;
+  > div{
+    overflow : hidden;
+    text-overflow : ellipsis;
+    white-space : nowrap;
+  }
 }
 .user-info .option i,
 .user-post-content i {
