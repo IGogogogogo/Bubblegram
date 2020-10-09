@@ -48,8 +48,9 @@ document.addEventListener("turbolinks:load", () => {
   function loadPosts() {                           //滑動到畫面底部會請求載入更多post
     if (scrollToBottom()) {
       // console.log("loadPosts.........................")
+
       page += 1
-      const user_id = document.location.href.split("users/")[1]  //從目前網址取得params user id
+      const user_id = document.location.pathname.split("users/")[1].split("/")[0]  //從目前網址取得params user id
       let type = getType()
       let url = getUrl(type) + `?page=${page}&type=${type}`
 
@@ -75,7 +76,6 @@ document.addEventListener("turbolinks:load", () => {
               el.remove()
             });
           }
-
           if (!postsEl || postsEl == "") {   //沒有新資料時移除事件監聽
             postLoadPage.removeEventListener("scroll", loadPosts)
             return

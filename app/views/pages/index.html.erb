@@ -15,7 +15,9 @@
 
         <% if @posts !=[] %>
           <%= render partial: "/posts/post", collection: @posts, as: :post %>
-          <%= render partial: "/shared/loading" %>
+          <% if @posts.count >= 20 %>
+            <%= render partial: "/shared/loading" %>
+          <% end %>
         <% else %>
           <div class="default d-flex flex-column align-items-center position-relative" style="bottom: -30%">
             <div class="welcome h3 text-black-50">歡迎使用 Bubblegram !</div>
