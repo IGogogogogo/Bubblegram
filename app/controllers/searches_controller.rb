@@ -1,5 +1,7 @@
 class SearchesController < ApplicationController
   def index
+    per_count = 36
+    @posts = Post.order("favourites_count DESC").limit(per_count)
   end
 
   def search

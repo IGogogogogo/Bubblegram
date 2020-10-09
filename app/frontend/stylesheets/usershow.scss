@@ -1,12 +1,15 @@
 .post-load-page{
   overflow: auto;
-  height: 100vh;
-  width: 740px;
+  // height: calc(100vh - 120px);
+  width: 100%;
+  max-width: 740px;
   margin: auto;
 }
+
 
 @media (max-width:415px){
   .post-load-page{
     width: 100%;
+    // height: 70vh;
   }
 }

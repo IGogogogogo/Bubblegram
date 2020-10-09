@@ -10,6 +10,11 @@
     pointer-events: none;
     transition: all .3s ease;
   }
+
+  .desc-label{
+    top: 0px
+  }
+
   input,
   textarea{
   display: block;
@@ -45,11 +50,16 @@
     }
   }
 }
+
+.textarea-wrap{
+  height: auto;
+}
+
 #user-edit-pic{
   position: relative;
   width: 200px;
   height: 200px;
-  margin: auto;
+  margin: 25px auto;
   cursor: pointer;
   &::before{
     content: '+';

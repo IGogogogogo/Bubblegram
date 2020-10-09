@@ -1,2 +1,11 @@
 <h4 class="search-title" >搜尋</h4>
 <%= render "form" %>
+
+<div class="post-load-page">
+  <div class="overflow-hidden">
+    <div class="form-row post-load-target rand-posts">
+      <%= render partial: "/posts/post_img", collection: @posts, as: :post %>
+      <%= render partial: "/shared/loading" %>
+    </div>
+  </div>
+</div>

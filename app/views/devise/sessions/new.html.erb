@@ -1,7 +1,10 @@
 
 <div id="home">
-  <p id="index-logo">Bubblegram!</p>
-</div>
+<p class="alert" style="color: red;"><%= alert %></p>
+  <div id='index-logo'>
+    <%= image_tag("/text_logo.svg",class: "w-100") %>
+  </div>
+  </div>
 <div class="container position-absolute login-form wrap">
 
   <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true, html: { novalidate: true, class: 'needs-validation' }) do |f| %>
@@ -25,7 +28,7 @@
   </div>
 
   <div class="actions">
-    <%= f.submit "登入", class: 'btn btn-primary w-100 btn-login' %>
+    <%= f.submit "登入", class: 'btn w-100 btn-login' %>
     <p class="text-center m-0 py-3" style="color: #8b8b8b">-Or-</p>
 
     <%= render "devise/shared/links" %>

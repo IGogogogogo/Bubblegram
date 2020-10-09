@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   validates :nick_name, presence: true, uniqueness: { case_sensitive: false }   #大小寫視為同一種
   validates :email, uniqueness: true
+  validate :nick_name_format     #驗證 nick_name 格式只有中英文底線 12字以內
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :trackable,
@@ -130,6 +131,13 @@ class User < ApplicationRecord
     if self != office_account
       chat = Chat.create(sender_id: office_account.id, recipient_id: self.id)
       chat.messages.create(user: office_account, content: message_content)
+    end
+  end
+
+  def nick_name_format
+    if !self.nick_name.match?(/\A[\w\u4E00-\u9FFF]{1,12}\z/)
+      #正規表達式, \A\z代表字串開頭結尾, []是字串要符合的格式, \w 是英文大小寫+數字+底線, \u4E00-\u9FFF是中文 UTF-8 代號, {1,12}代表1到12字
+      errors.add(:base, "暱稱格式不符")
     end
   end
 end
