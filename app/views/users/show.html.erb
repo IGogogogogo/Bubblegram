@@ -78,7 +78,9 @@
         <% if @my_posts != [] %>
           <div class="form-row post-img">
             <%= render partial: "/posts/post_img", collection: @my_posts, as: :post %>
-            <%= render partial: "/shared/loading" %>
+            <% if @my_posts.length >= 36 %>
+              <%= render partial: "/shared/loading" %>
+            <% end %>
           </div>
         <% else %>
           <div class="default d-flex flex-column align-items-center my-5">
@@ -92,7 +94,9 @@
         <% if @taged_posts != [] %>
           <div class="form-row tag-img">
             <%= render partial: "/posts/post_img", collection: @taged_posts, as: :post %>
-            <%= render partial: "/shared/loading" %>
+            <% if @taged_posts.length >= 36 %>
+              <%= render partial: "/shared/loading" %>
+            <% end %>
           </div>
         <% else %>
           <div class="default d-flex flex-column align-items-center my-5">
