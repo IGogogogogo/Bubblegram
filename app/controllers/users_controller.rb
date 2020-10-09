@@ -11,6 +11,8 @@ class UsersController < ApplicationController
   end
 
   def follow
+    @followings = params[:followings]
+    @fans = params[:fans]
     @user_fans = @user.fans
     @user_followings = @user.followings
   end

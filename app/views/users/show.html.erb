@@ -23,7 +23,7 @@
           <!---粉絲數---->
           <div class="followers-count text-center flex-grow-1">
             <div class="num font-weight-bold">
-              <%= link_to follow_user_path(@user), class: 'text-black' do %>
+              <%= link_to follow_user_path(@user, fans: "fans"), class: 'text-black' do %>
               <div><%= @user.fans_count %></div>
               <div class="follower">Followers</div>
               <% end %>
@@ -33,7 +33,7 @@
           <!---追蹤數---------->
           <div class="following-count text-center flex-grow-1">
             <div class="num font-weight-bold">
-              <%= link_to follow_user_path(@user), class: 'text-black' do %>
+              <%= link_to follow_user_path(@user, followings: "followings"), class: 'text-black' do %>
               <div><%= @user.followings_count %></div>
               <div class="following">Following</div>
               <% end %>
