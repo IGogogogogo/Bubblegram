@@ -1,9 +1,8 @@
 <div>
   <%= image_tag comment.user.avatar.url, style: 'width: 30px; border-radius: 50%;' %>
-  <span style="font-weight: 600;"><%= comment.user.nick_name %></span>
+  <span class="mx-2" style="font-weight: 600;"><%= comment.user.nick_name %></span>
   <%= comment.content %>
 </div>
-
-<small style="font-size: 12px; margin-left: 35px;">
+<small class="d-block mb-2" style="font-size: 12px; margin-left: 35px;">
   - <%= time_ago_in_words comment.created_at %>
 </small>

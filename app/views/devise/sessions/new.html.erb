@@ -1,21 +1,27 @@
 
 <div id="home">
-<p class="alert" style="color: red;"><%= alert %></p>
   <p id="index-logo">Bubblegram!</p>
 </div>
 <div class="container position-absolute login-form wrap">
 
-  <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true) do |f| %>
+  <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true, html: { novalidate: true, class: 'needs-validation' }) do |f| %>
 
-  <div class="form-group position-relative mb-4">
-    <label for="user_email" class="position-absolute email-label">
-      <i class="fas fa-envelope"></i></label>
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control rounded-pill pl-5' %>
+  <div class="form-group position-relative mb-2">
+    <label for="user_email" class="email-label">
+      <i class="fas fa-envelope"></i>
+    </label>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control rounded-pill pl-3', required: true, placeholder: '請輸入電子信箱' %>
+    <div class="invalid-feedback">
+        請輸入正確的電子信箱
+    </div>
   </div>
 
-  <div class="form-group position-relative">
-    <label for="user_password" class="position-absolute password-label"><i class="fas fa-unlock-alt"></i></label>
-    <%= f.password_field :password, autocomplete: "current-password", class: 'form-control rounded-pill pl-5' %>
+  <div class="form-group position-relative mb-4">
+    <label for="user_password" class="password-label"><i class="fas fa-unlock-alt"></i></label>
+    <%= f.password_field :password, autocomplete: "current-password", class: 'form-control rounded-pill pl-3', required: true, placeholder: '請輸入密碼' %>
+     <div class="invalid-feedback">
+        請輸入正確的密碼
+    </div>
   </div>
 
   <div class="actions">

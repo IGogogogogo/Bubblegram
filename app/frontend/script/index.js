@@ -17,6 +17,7 @@ import "./active"
 import "./footer_ disappear"
 import "./upload"
 import "./user_pic_upload"
+import "./validation"
 
 import Swiper, { Pagination } from 'swiper';
 import gsap from "gsap"
