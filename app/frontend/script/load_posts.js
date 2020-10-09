@@ -8,7 +8,13 @@ document.addEventListener("turbolinks:load", () => {
   let tagPage = 1
   let myPage = 1
 
-  if (postLoadPage) { postLoadPage.addEventListener("scroll", loadPosts) }  //加入捲軸滾動事件
+  if(!postLoadPage) return
+
+  window.onscroll = function() {
+    if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {   ////滑動到畫面底部
+      loadPosts()            ////載入更多post
+    }
+  }
 
   if (postNav) { postNav.addEventListener("click", (e) => switchPosts(e)) }  //user show 個人/tag貼文切換
 
@@ -43,60 +49,57 @@ document.addEventListener("turbolinks:load", () => {
     }
   }
 
-  function scrollToBottom() { return postLoadPage.scrollHeight - window.innerHeight - 2 <= postLoadPage.scrollTop }
-
-  function loadPosts() {                           //滑動到畫面底部會請求載入更多post
-    if (scrollToBottom()) {
+  function loadPosts() {                           //請求載入更多post
       // console.log("loadPosts.........................")
+    page += 1
+    let type = getType()
+    let url = getUrl(type) + `?page=${page}&type=${type}`
 
-      page += 1
-      const user_id = document.location.pathname.split("users/")[1].split("/")[0]  //從目前網址取得params user id
-      let type = getType()
-      let url = getUrl(type) + `?page=${page}&type=${type}`
-
-      if (user_id) { url += `&user_id=${user_id}` }
-
-      Rails.ajax({
-        url: url,
-        type: "get",
-        success: function(data) {
-          const postsEl = data.querySelector("body").innerHTML
-          const postLoadTarget = document.querySelector(".post-load-target")
-          const oldLoadingEls = document.querySelectorAll(".loading")
-          const newLoadingEl = document.createElement("div")
-          const loadImg = document.createElement("img")
-          loadImg.src = "/loading.gif"
-          loadImg.classList = "w-100"
-          newLoadingEl.classList = "loading"
-          newLoadingEl.style = "padding: 0 40%;"
-          newLoadingEl.appendChild(loadImg)
-
-          if (oldLoadingEls) {
-            Array.from(oldLoadingEls).forEach(el => {
-              el.remove()
-            });
-          }
-          if (!postsEl || postsEl == "") {   //沒有新資料時移除事件監聽
-            postLoadPage.removeEventListener("scroll", loadPosts)
-            return
-          }
-
-          if (type == "post_img") {
-            postImg.innerHTML += postsEl
-            postImg.appendChild(newLoadingEl)
-          } else if (type == "tag_img") {
-            tagImg.innerHTML += postsEl
-            tagImg.appendChild(newLoadingEl)
-          } else {
-            postLoadTarget.innerHTML += postsEl
-            postLoadTarget.appendChild(newLoadingEl)
-          }
-        },
-        error: function(errors) {
-          console.log(errors)
-        }
-      })
+    if (document.location.pathname.split("users/")[1]) {   //從目前網址取得params user id
+      const user_id = document.location.pathname.split("users/")[1].split("/")[0]
+      url += `&user_id=${user_id}`
     }
+
+    Rails.ajax({
+      url: url,
+      type: "get",
+      success: function(data) {
+        const postsEl = data.querySelector("body").innerHTML
+        const postLoadTarget = document.querySelector(".post-load-target")
+        const oldLoadingEls = document.querySelectorAll(".loading")
+        const newLoadingEl = document.createElement("div")
+        const loadImg = document.createElement("img")
+        loadImg.src = "/loading.gif"
+        loadImg.classList = "w-100"
+        newLoadingEl.classList = "loading"
+        newLoadingEl.style = "padding: 0 40%;"
+        newLoadingEl.appendChild(loadImg)
+
+        if (oldLoadingEls) {
+          Array.from(oldLoadingEls).forEach(el => {
+            el.remove()
+          });
+        }
+        if (!postsEl || postsEl == "") {   //沒有新資料時移除事件監聽
+          postLoadPage.removeEventListener("scroll", loadPosts)
+          return
+        }
+
+        if (type == "post_img") {
+          postImg.innerHTML += postsEl
+          postImg.appendChild(newLoadingEl)
+        } else if (type == "tag_img") {
+          tagImg.innerHTML += postsEl
+          tagImg.appendChild(newLoadingEl)
+        } else {
+          postLoadTarget.innerHTML += postsEl
+          postLoadTarget.appendChild(newLoadingEl)
+        }
+      },
+      error: function(errors) {
+        console.log(errors)
+      }
+    })
   }
 
   const switchPosts = (e) => {                  //showPosts: 切換我的貼文/我被標記的貼文
