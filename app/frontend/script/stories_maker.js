@@ -79,7 +79,7 @@ document.addEventListener("turbolinks:load", () => {
 
   //刪除story
   modalDel.addEventListener("click", (e) => delStory(e))
-  console.log(delStory)
+  // console.log(delStory)
 
   const delStory = (e) => {
     e.preventDefault()
@@ -90,6 +90,14 @@ document.addEventListener("turbolinks:load", () => {
     // const $activeImg = document.querySelector('.story-img.active')
     // const storyId = $activeImg.dataset.story
     // const url = `/users/${userId}/stories/${storyId}`
+    const $activeImg = storiesSection.querySelector(".owl-item.active div")
+    const nickName = $activeImg.dataset.userName
+    const storyId = $activeImg.dataset.storyId
+    const url = `/users/${nickName}/stories/${storyId}`
+    console.log(nickName)
+    console.log($activeImg)
+    console.log(storyId)
+    console.log(url)
 
     Swal.fire({
       title: '你確定要刪除嗎？',
@@ -103,18 +111,21 @@ document.addEventListener("turbolinks:load", () => {
     }).then((result) => {
       if (result.isConfirmed) {
         //前端畫面刪除
-        if ($activeImg) $activeImg.remove()
-        const $firstImg = document.querySelector('.carousel-inner .story-img')
-        if ($firstImg) $firstImg.classList.add('active')
+        // if ($activeImg) $activeImg.remove()
+        // const $firstImg = document.querySelector('.owl-item')
+        // if ($firstImg) $firstImg.classList.add('active')
 
-        //資料庫刪除
-        // Rails.ajax({
-        //   url: url,
-        //   type: "DELETE",
-        //   success: function(){
-        //     console.log("success:", url)
-        //   }
-        // })
+        // 資料庫刪除
+        Rails.ajax({
+          url: url,
+          type: "DELETE",
+          success: function(){
+            //刪除會回首頁，待問助教
+            // $('.owl-carousel').trigger('destroy.owl.carousel').removeClass('owl-carousel owl-loaded');
+            // $('.owl-carousel').find('.owl-stage-outer').children().unwrap();
+            console.log("success:", url)
+          }
+        })
       }
     })
   }
