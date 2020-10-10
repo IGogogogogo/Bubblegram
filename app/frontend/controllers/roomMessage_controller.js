@@ -8,8 +8,11 @@ export default class extends Controller {
     let messageTextArea = document.querySelector(".message-text-area")
     let textContent = document.querySelector("input[type='text']")
     let textSubmit = document.querySelector("input[type='submit']")
-    let roomMessageController = this;
+    let footer = document.querySelector(".index-nav")
+    let roomMessageController = this
 
+    footer.style.display = "none"
+    footer.style.opacity = "0"
 
     this.subscription = consumer.subscriptions.create(
       {
@@ -19,6 +22,10 @@ export default class extends Controller {
       {
         connected() {
           console.log("connected to live_stream_room" + roomMessageController.data.get("id"))
+          setTimeout(() => {
+            // console.log(message_text_area.scrollHeight)
+            messageTextArea.scrollTo(0, messageTextArea.scrollHeight) //捲軸移動到最底部
+          }, 100)
           // Called when the subscription is ready for use on the server
         },
         disconnected() {

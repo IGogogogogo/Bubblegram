@@ -1,9 +1,11 @@
 .message_box{
   margin-top: -70px;
-  height: calc(100vh - 50px);
+  height: calc(90vh - 90px);
   .message_container{
+    margin: auto;
+    max-width: 720px;
     height: 100%;
-    position: relative;
+    // position: relative;
     border-top: 1px solid #ccc;
     border-left: 1px solid #ccc;
     border-right: 1px solid #ccc;
@@ -102,10 +104,10 @@
 
     .searchbar{
       position: absolute;
-      bottom: 10px;
+      bottom: 50px;
       left: 0;
       right: 0;
-      width: 95%;
+      max-width: 690px;
       min-height: 50px;
       display: flex;
       border: 1px solid #ccc;
@@ -175,6 +177,9 @@
 }
 
 @media screen and (min-width: 768px){
+  .message_box{
+    height: calc(100vh - 50px);
+  }
   .message_container{
     border-bottom: 1px solid #ccc;
   }

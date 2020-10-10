@@ -11,20 +11,24 @@ Rails.application.routes.draw do
       member do
         post :favourite
       end
+
       resources :comments, only: [:create]
     end
 
     collection do
-      get :load_posts, to: 'posts#load_posts'         #用在載入新貼文
+      get :load_posts, to: 'posts#load_posts'     #用在載入新貼文 page index & posts index
+      get :load_img, to: 'posts#load_img'         #用在載入新貼文 user show
     end
 
     member do
-      get :fans
-      get :followings
+      # get :fans
+      # get :followings
+      get :follow
     end
   end
 
   get :stories, to: 'stories#load_stories'
+  get :load_rand_img, to: 'posts#load_rand_img'  #用在載入新貼文 search index
 
   resources :messages, only: [:create]
 
@@ -38,6 +42,8 @@ Rails.application.routes.draw do
   resources :searches, only: [:index] do
     collection do
       get :search
+      get :search_fans
+      get :search_followings
     end
   end
 

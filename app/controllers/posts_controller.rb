@@ -5,31 +5,51 @@ class PostsController < ApplicationController
     per_count = 20
     @user = User.find(params[:user_id])
     @posts = @user.posts.includes(:thumbs_up_users).order("created_at DESC").limit(per_count)
-    @has_more_posts = (@posts.count >= per_count)
   end
 
   def show
-    @taged_users = @post.taged_users.map{ |user| "@#{user.nick_name}" }
+    @taged_users = @post.taged_users
     @comments = @post.comments
     @comment = Comment.new
   end
 
   def load_posts     #依照kaminari page & type 讀取新貼文
     @user = User.find(params[:user_id]) if params[:user_id]
+    @partial = "/posts/post"
+    per_count = 20
+
     if params[:type] == "following_posts"
       users = User.viewable_users(current_user)
-      @posts = Post.viewable_posts(users).includes(:user).order("created_at DESC").page(params[:page]).per(20)
-      @partial = "/posts/post"
+      @posts = Post.viewable_posts(users).includes(:user).order("created_at DESC").page(params[:page]).per(per_count)
     elsif params[:type] == "my_posts"
-      @posts = @user.posts.order("created_at DESC").page(params[:page]).per(20)
-      @partial = "/posts/post"
-    elsif params[:type] == "post_img"
-      @posts = @user.posts.order("created_at DESC").page(params[:page]).per(36)
-      @partial = "/posts/post_img"
-    elsif params[:type] == "tag_img"
-      @posts = @user.taged_posts.order("created_at DESC").page(params[:page]).per(36)
-      @partial = "/posts/post_img"
+      @posts = @user.posts.order("created_at DESC").page(params[:page]).per(per_count)
     end
+
+    respond_to do |format|
+      format.html  { render partial: @partial, collection: @posts, as: :post}
+    end
+  end
+
+  def load_img
+    @user = User.find(params[:user_id])
+    @partial = "/posts/post_img"
+    per_count = 36
+
+    if params[:type] == "post_img"
+      @posts = @user.posts.order("created_at DESC").page(params[:page]).per(per_count)
+    elsif params[:type] == "tag_img"
+      @posts = @user.taged_posts.order("created_at DESC").page(params[:page]).per(per_count)
+    end
+
+    respond_to do |format|
+      format.html  { render partial: @partial, collection: @posts, as: :post}
+    end
+  end
+
+  def load_rand_img
+    per_count = 36
+    @partial = "/posts/post_img"
+    @posts = Post.order("favourites_count DESC").page(params[:page]).per(per_count)
 
     respond_to do |format|
       format.html  { render partial: @partial, collection: @posts, as: :post}
@@ -66,7 +86,7 @@ class PostsController < ApplicationController
   def update
     @post.assign_attributes(post_params)
     authorize @post
-    @post.taged_users = User.where(id: params[:post][:taged_users])
+
     if @post.save
       redirect_to post_path(@post), notice: '文章更新成功'
     else
@@ -99,7 +119,7 @@ class PostsController < ApplicationController
   end
 
   def find_tag_users
-    @users = User.all.map{ |u| ["@#{u.nick_name}", u.id] }
+    @users = current_user.followings.map{ |u| ["@#{u.nick_name}", u.id] }
     @taged_id = @post.taged_users.map{ |u| u.id }
   end
 

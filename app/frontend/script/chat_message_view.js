@@ -97,21 +97,21 @@ document.addEventListener("turbolinks:load",()=>{
     }
   })
 
-  text_area.addEventListener("keypress",(e)=>{
-    if(text_area.value.match(/\S/)){
-      if (event.keyCode == 13 && !event.shiftKey) {
-        e.preventDefault()
-        text_form.submit()
-      }
-    }
-  })
+  // text_area.addEventListener("keypress",(e)=>{ //按enter會送出不會換行
+  //   if(text_area.value.match(/\S/)){
+  //     if (event.keyCode == 13 && !event.shiftKey) {
+  //       e.preventDefault()
+  //       text_form.submit()
+  //     }
+  //   }
+  // })
 
-  function noEmptyWord(value){
-    return (value.split(" ").join("") !== "")
-  }
-  function noBreakLine(value){
-    return (value.split("\n").join("") !== "")
-  }
+  // function noEmptyWord(value){     //判斷空白字元
+  //   return (value.split(" ").join("") !== "")
+  // }
+  // function noBreakLine(value){    //判斷換行
+  //   return (value.split("\n").join("") !== "")
+  // }
 
   function calcTextAreaHeight(value){
     let lines = (value.match(/\n/g) || []).length

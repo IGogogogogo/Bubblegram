@@ -1,10 +1,39 @@
 // publisher scss
-.OT_publisher{
-  position: fixed;
-  top: 0 ;
+#videos,
+#pub-video{
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute;
+  top: 0;
+  bottom: 0;
   left: 0;
-  height: 100vh;
+  right: 0;
+  margin: auto;
   z-index: 11;
+
+  .OT_root{
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    // z-index: 11;
+  }
+
+}
+
+
+.OT_publisher{
+  // position: fixed;
+  // top: 0 ;
+  // left: 0;
+  // // height: 100vh;
+  // z-index: 11;
 }
 .back-link{
   font-size: 36px;
@@ -16,16 +45,19 @@
 }
 // subscriber scss
 .OT_subscriber{
-  width: 100% !important;
-  height: 100vh !important;
-  position: fixed;
-  top: 0 ;
-  left: 0;
-  z-index: 11;
+//   width: 100% !important;
+//   height: 100vh !important;
+//   position: fixed;
+//   top: 0 ;
+//   left: 0;
+//   z-index: 11;
 }
+
 .room-message{
+  // outline:1px solid red;
   width: 60%;
   position: absolute;
+  left: 0;
   bottom: 0;
   padding-left: 5px;
   z-index: 12;
@@ -34,6 +66,7 @@
     .room-message{
       max-width: 500px;
       bottom: 50px;
+      width: 50%;
     }
   }
   .message-text-area{
@@ -93,16 +126,20 @@
       }
     }
   }
+  .message-text-area::-webkit-scrollbar {
+    display: none;
+  }
 
   .searchbar{
     margin-top: 5px;
 
     form{
+      position: relative;
       display: flex;
       align-items: center;
-      border:1px solid black;
+      border:1px solid rgb(78, 78, 78);
       border-radius: 10px;
-      background-color: rgb(0,0,0);
+      background-color: white;
       width: 100%;
 
       input[type="text"]{
@@ -110,11 +147,11 @@
         padding:5px 0 5px 10px;
         background-color: transparent;
         border: 0px;
-        color:white;
+        color: black;
       }
 
       input[type="text"]::placeholder{
-        color:white;
+        color:black;
       }
 
       input[type="text"]:focus{
@@ -125,9 +162,12 @@
       label[for='submit']{
         cursor: pointer;
         font-size: 25px;
-        color: white;
-        margin: 0;
-        margin-right: 10px;
+        color: black;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 10px;
+        margin: auto;
 
       }
       input[type="submit"]{

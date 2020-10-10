@@ -1,0 +1,11 @@
+<% if @user_fans != []  %>
+    <%# console.log("fans") %>
+    if(document.querySelector(".search-fans-area")){
+      document.querySelector(".search-fans-area").innerHTML = '<%= j render(partial: "/users/user", collection: @user_fans, as: :user) %>'
+    }
+
+<% else %>
+     if(document.querySelector(".search-fans-area")){
+      document.querySelector(".search-fans-area").innerHTML = '<div class="default d-flex flex-column align-items-center my-5"><%= image_tag("/no_user.png", class: "w-100") %><div class="text h6 text-black-50 bg-white">沒有符合條件的使用者！</div></div>'
+    }
+<% end %>

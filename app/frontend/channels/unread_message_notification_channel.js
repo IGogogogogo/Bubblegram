@@ -13,6 +13,7 @@ document.addEventListener("turbolinks:load",()=>{
 
   let unreadMessagesDiv= document.createElement("div")
   unreadMessagesDiv.classList.add("unread-messages")
+  let currentUserId = document.querySelector(".chat-path").dataset.user
 
 
   consumer.subscriptions.create("UnreadMessageNotificationChannel", {
@@ -27,12 +28,17 @@ document.addEventListener("turbolinks:load",()=>{
     },
 
     received(data) {
+      if(!data.read_message && (data.message.user_id == Number(currentUserId))){
+
+        //比對user是不是傳送訊息的user
+        this.perform("new_message",{message: data.message, current_user: currentUserId})
+      }
       let chatChannle = this.consumer.subscriptions.subscriptions.filter(sub=> JSON.parse(sub.identifier).channel === "ChatChannel") //找有沒有在chatchannel
 
 
       if(chatChannle.length === 1)return //有的話代表正在聊天室中，不發通知
-
       // console.log(data.read_message)
+      this.perform("chat_message_notice",{message: data.message, current_user: currentUserId})
 
       let chatUsers = Array.from(document.querySelectorAll(".chat-user")) //選取訊息盒的所有聊天的人
       // console.log(data)
@@ -40,11 +46,6 @@ document.addEventListener("turbolinks:load",()=>{
         return Number(user.dataset.chatUser) == data.message.user_id
       }) // 比對這則訊息是誰傳的
 
-
-      if(!data.read_message && (data.message.user_id == Number(chatUser[0].dataset.chatUser))){
-        //比對user是不是傳送訊息的user
-        this.perform("new_message",data.message)
-      }
 
       if (!!chatUser[0]){ // 如果有人傳新訊息把目前上線的div換成新訊息的div
          chatUser[0].querySelector(".chat-user-info .online-text").classList.add("off-line")

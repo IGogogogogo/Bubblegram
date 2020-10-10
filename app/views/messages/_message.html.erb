@@ -8,9 +8,6 @@
       <div class = "avatar">
         <%= image_tag message.user.avatar.url, class: "user-avatar" if message.user.avatar.present? %>
       </div>
-      <div class = "user-name">
-        <%= message.user.nick_name %>
-      </div>
     </div>
 
     <% if message.image.url.present? %>

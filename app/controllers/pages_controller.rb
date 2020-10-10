@@ -5,7 +5,6 @@ class PagesController < ApplicationController
     viewable_users = User.viewable_users(current_user)
     @results = build_results
     @posts = Post.includes(:user, :thumbs_up_users).viewable_posts(viewable_users).order("created_at DESC").limit(per_count)
-    @has_more_posts = (@posts.count >= per_count)
   end
 
   private

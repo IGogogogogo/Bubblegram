@@ -1,55 +1,6 @@
 <div class="col-12 border border-gray mb-5 px-0 pb-2">
-  <div class="user-post">
-    <!--User info---------------->
-    <div class="user-info d-flex align-items-center p-2">
-      <div class="user-photo">
-        <%= image_tag post.user.avatar.url, class: "rounded-circle img-fluid" if post.user.avatar.present? %>
-      </div>
-
-      <div class="user-name ml-2">
-        <strong><%= link_to post.user.nick_name, user_path(post.user), class: 'text-black' %></strong>
-      </div>
-      <!--Button---------------->
-      <div class="option ml-auto g-btn px-2"></div>
-
-      <% if owner?(post) %>
-        <div class="dropdown">
-          <button class="btn" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-            <i class="fas fa-ellipsis-h"></i>
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <%= link_to '編輯', edit_post_path(post), class: 'dropdown-item' %>
-            <!-- Button trigger modal -->
-            <a class="dropdown-item text-danger" data-toggle="modal" data-target="#staticBackdrop-<%= post.id %>"
-              style="cursor: pointer;">
-              刪除
-            </a>
-          </div>
-        </div>
-      <% end %>
-
-      <div class="modal fade" id="staticBackdrop-<%= post.id %>" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel-<%= post.id %>" aria-hidden="true">
-        <div class="modal-dialog modal-sm">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title text-danger" id="staticBackdropLabel-<%= post.id %>">你確定要刪除嗎？</h5>
-            </div>
-            <div class="modal-body">
-              請注意！<br>
-              貼文一經刪除過後，就沒辦法再找回來了哦！
-            </div>
-            <div class="modal-footer">
-              <a type="button" class="btn btn-secondary" data-dismiss="modal">取消</a>
-              <%= link_to '刪除', post_path(post), method: 'DELETE', class: 'btn btn-outline-danger' %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <!---post user and btn---------------------->
+  <%= render partial: "/posts/post_user", locals: { post: post } %>
   <!---IMAGES---------------->
   <div class="post-pic w-100 h-100">
     <div class="owl-carousel owl-theme">
@@ -76,11 +27,11 @@
       </div>
 
       <div class="share g-btn pl-3">
-        <i class="far fa-share-square"></i>
+        <%# <i class="far fa-share-square"></i> %>
       </div>
 
       <div class="collect g-btn ml-auto">
-        <i class="far fa-flag"></i>
+        <%# <i class="far fa-flag"></i> %>
       </div>
     </div>
 

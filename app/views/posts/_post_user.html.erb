@@ -1,0 +1,14 @@
+<div class="user-post">
+  <!--User info---------------->
+  <div class="user-info d-flex align-items-center p-2">
+    <div class="user-photo">
+      <%= image_tag post.user.avatar.url, class: "rounded-circle img-fluid" if post.user.avatar.present? %>
+    </div>
+
+    <div class="user-name ml-2">
+      <strong><%= link_to post.user.nick_name, user_path(post.user), class: 'text-black' %></strong>
+    </div>
+    <!--Button---------------->
+    <%= render partial: "posts/post_btn", locals: {post: post} %>
+  </div>
+</div>

@@ -64,6 +64,6 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.hosts << "5ce765faa126.ngrok.io" 
+  config.hosts << "d4495eafc324.ngrok.io"
   # config.action_controller.forgery_protection_origin_check = false
 end
