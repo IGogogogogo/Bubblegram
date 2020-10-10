@@ -19,7 +19,6 @@ import "./upload"
 import "./user_pic_upload"
 import "./sign_up"
 import "./reset_container.js"
-import "./follow_page"
 
 import Swiper, { Pagination } from 'swiper';
 import gsap from "gsap"
