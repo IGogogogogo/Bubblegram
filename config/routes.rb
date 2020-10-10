@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get :stories, to: 'stories#load_stories'
+
   resources :messages, only: [:create]
 
   # 產生show create destory 與 play 路徑

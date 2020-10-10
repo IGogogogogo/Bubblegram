@@ -30,6 +30,30 @@ class StoriesController < ApplicationController
     }
   end
 
+  def load_stories
+    @user_name = params[:user]
+    @user = User.find(params[:user])
+    @current_user = current_user
+    @viewable_users = [current_user].concat(current_user.followings.order("created_at DESC")).map(&:nick_name)
+    @stories = @user.stories.order("created_at DESC")
+    @stories_count = @stories.count
+
+    @user_index = @viewable_users.index(@user_name)
+    @prev_user =  @user_index > 0 ? @viewable_users[@user_index - 1] : nil
+    @next_user = @viewable_users[@user_index + 1]
+
+    @result = {
+      user: @user,
+      user_inex: @user_index,
+      prev_user: @prev_user,
+      next_user: @next_user,
+      current_user: @current_user,
+      viewable_users: @viewable_users,
+      stories: @stories,
+      stories_count: @stories_count
+    }
+  end
+
   def new
     # check_owner
     @story = current_user.stories.new
