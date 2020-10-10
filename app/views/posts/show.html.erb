@@ -1,7 +1,7 @@
 <div class="wrap">
   <div class="post-show">
     <%= render "post_user", post: @post %>
-    <div class="post-show-carousel owl-carousel owl-theme">
+    <div class="post-pic-carousel owl-carousel owl-theme">
       <%= render partial: "/posts/carousel_img", collection: @post.images, as: :image if @post.images %>
     </div>
 
