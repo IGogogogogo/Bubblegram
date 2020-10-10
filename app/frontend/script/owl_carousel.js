@@ -24,6 +24,9 @@ document.addEventListener("turbolinks:load", () => {
     responsive: {
       0: {
         items: 5
+      },
+      1000: {
+        items: 10
       }
     }
   })
