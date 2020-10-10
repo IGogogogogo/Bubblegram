@@ -3,7 +3,7 @@ import Swal from "sweetalert2"
 
 document.addEventListener("turbolinks:load", () => {
   console.log("123")
-  const carouselTime = 1000000 ////限動輪播時間
+  const carouselTime = 3000 ////限動輪播時間
   const storiesSection = document.querySelector(".stories")
 
   if(!storiesSection) return
@@ -28,6 +28,7 @@ document.addEventListener("turbolinks:load", () => {
         storiesSection.dataset.prevUser = data.stories.prev_user
         storiesSection.dataset.nextUser = data.stories.next_user
         storiesSection.dataset.storiesCount = data.stories.stories_count
+        storiesSection.dataset.storyId = data.stories.main[0].id
         storiesSection.dataset.storyIndex = index
 
         renderStories(data.stories)
@@ -58,6 +59,7 @@ document.addEventListener("turbolinks:load", () => {
     carouselStart()
     createDots()
     addCarouselChangeEvent()
+    createHeaderBtn()
     document.querySelector(".owl-prev").addEventListener("click", toPrevUserLastStory)
     // document.querySelector(".owl-next").addEventListener("click", toNextUserStories)
   }
@@ -110,7 +112,7 @@ document.addEventListener("turbolinks:load", () => {
     dotsArray[0].style.backgroundColor = "#fff"
   }
 
-   ///輪播事件
+   ///輪播事件////////////////////////////////////////
   function addCarouselChangeEvent() {
     $('.owl-carousel').on('changed.owl.carousel', function() {
       console.log("changed")
@@ -120,6 +122,7 @@ document.addEventListener("turbolinks:load", () => {
         const storyActive = storiesSection.querySelector(".owl-item.active div")
 
         storiesSection.dataset.storyIndex = storyActive.dataset.storyIndex   ////設定index 用於判斷要不要請求另一個使用者限動
+        storiesSection.dataset.storyId = storyActive.dataset.storyId   //////設定story id 用於刪除路徑
         changeStoryTime(storyActive.dataset)
         const isLastStory = Number(storyActive.dataset.storyIndex) + 1 == Number(storiesSection.dataset.storiesCount)
 
@@ -169,16 +172,6 @@ document.addEventListener("turbolinks:load", () => {
     timeItem.textContent = storyTime
   }
 
-  function testInfo(newStoryItem) {
-    const info = document.createElement("div")    //////////
-
-    info.innerHTML += `<p>#index: ${newStoryItem.dataset.storyIndex}</p>`
-    info.innerHTML += `<p>#id: ${newStoryItem.dataset.storyId}</p>`
-    info.innerHTML += `<p>#storyTime: ${newStoryItem.dataset.storyTime}</p>`
-    info.style = "position: absolute;top: 40%;font-size: 50px;background-color: #000;"
-    return info
-  }
-
   function cssSetting() {       ///設定限時動態頁面 css style
     document.querySelector(".container").style.padding = "0"
     document.querySelector(".container").classList.remove("pb-5")
@@ -187,6 +180,7 @@ document.addEventListener("turbolinks:load", () => {
     storiesSection.classList.add("text-light")
   }
 
+  /////啟動輪播套件功能
   function carouselStart() {        ////owl carousel 輪播功能
     $('.stories .owl-carousel').owlCarousel({
       center: true,
@@ -202,5 +196,80 @@ document.addEventListener("turbolinks:load", () => {
         }
       }
     })
+  }
+
+  //////建立功能按鈕
+  function createHeaderBtn() {
+    const btnDot = document.querySelector('.btn-dot')
+    const modalFun = document.querySelector('.modal-fun')
+    const modalDel = document.querySelector('.modal-del')
+    const isOwner = storiesSection.dataset.userName == storiesSection.dataset.currentUser
+
+    if(isOwner) {
+      btnDot.style.display = "block"   // 顯示點點點
+    }
+
+    btnDot.addEventListener("click", function(){
+      $('.stories .owl-carousel').trigger('stop.owl.autoplay')
+
+      if(modalFun.style.display != "block"){
+        modalFun.style.display = "block"      // 打開功能區塊
+      }
+    })
+    // //刪除story
+    modalDel.addEventListener("click", (e) => delStory(modalFun, e))
+  }
+
+  ////刪除自己特定限動
+  function delStory(modalFun, e) {
+    e.preventDefault()
+    modalFun.style.display = "none"
+    console.log("del")
+
+    const storyId = storiesSection.dataset.storyId
+    const storyIndex = storiesSection.dataset.storyIndex
+    const userName = storiesSection.dataset.userName
+
+    const url = `/users/${userName}/stories/${storyId}`
+    console.log(url)
+
+    Swal.fire({
+      title: '你確定要刪除嗎？',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: '刪除',
+      cancelButtonText: '取消'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        console.log(result)
+        //前端畫面刪除
+        $(".owl-carousel").trigger('remove.owl.carousel', [storyIndex]).trigger('refresh.owl.carousel');
+
+        // 資料庫刪除
+        Rails.ajax({
+          url: url,
+          type: "DELETE",
+          success: function(){
+            console.log("success:", url)
+          }
+        })
+      } else {
+        $('.stories .owl-carousel').trigger('play.owl.autoplay')
+      }
+    })
+  }
+
+
+  //////測試資訊
+  function testInfo(newStoryItem) {
+    const info = document.createElement("div")    //////////
+
+    info.innerHTML += `<p>#index: ${newStoryItem.dataset.storyIndex}</p>`
+    info.innerHTML += `<p>#id: ${newStoryItem.dataset.storyId}</p>`
+    info.innerHTML += `<p>#storyTime: ${newStoryItem.dataset.storyTime}</p>`
+    info.style = "position: absolute;top: 40%;font-size: 50px;background-color: #000;"
+    return info
   }
 })

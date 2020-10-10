@@ -1,8 +1,10 @@
 <section class="stories w-100 m-auto"
+  data-current-user="<%= @current_user.nick_name %>"
   data-user-name="<%= @user_name %>"
   data-prev-user=""
   data-next-user=""
   data-story-index="0"
+  data-story-id=""
 >
   <header class="member  w-100 pt-2 px-2">
     <div class="member-title d-flex align-items-center">
@@ -19,13 +21,11 @@
         <span>Story Time</span>
       </div>
 
-      <div class="header-btn ml-auto">
+      <div class="header-btn ml-auto d-flex">
         <!-----選單--->
-        <% if @user == current_user %>
-          <button class="btn-dot">
-            <i class="fas fa-ellipsis-h"></i>
-          </button>
-        <% end %>
+        <button class="btn-dot" style="display: none;">
+          <i class="fas fa-ellipsis-h"></i>
+        </button>
 
         <!---回首頁------->
         <button class="btn-home">
@@ -40,7 +40,16 @@
 
   <div class="story-pic">
     <!-- 以下輪播 -->
+  </div>
 
-    <!-- 以上輪播 -->
+  <div class="modal-fun">
+    <div class="modal-card">
+      <div class="modal-del">
+        <a href="#">刪除</a>
+      </div>
+      <div  class="modal-cancel">
+        <a href="#" >取消</a>
+      </div>
+    </div>
   </div>
 </section>
