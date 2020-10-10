@@ -2,18 +2,237 @@ import Rails from '@rails/ujs'
 import Swal from "sweetalert2"
 
 document.addEventListener("turbolinks:load", () => {
-  const storiesSection = document.querySelector(".stories")
-  const carouselTime = 100000
+  console.log("123")
+  const carouselTime = 1000000 ////限動輪播時間
+  // 功能:
+  // 1. 可以載入限動
+  // 2. 可以輪播（自動，按鈕，滑動）
+  // 3. 可以換上下使用者
+  // 4. 可以刪除
+  // 5. 有白線提示目前限動
 
-  if (!storiesSection) return
-  console.log("spa stories")
-  const selfName = storiesSection.dataset.selfName
-  console.log(selfName)
+
+  // 步驟：
+  // 請求 [當前使用者] 限動
+  //   [id]
+  //   [picture]
+  //   [create time]
+  //   [限動數量]
+
+  const storiesSection = document.querySelector(".stories")
+  if(!storiesSection) return
+  const userName = storiesSection.dataset.userName
+
   cssSetting()
-  requestStories(selfName)
-  carouselStart()
-  whenCarouselChange()
-  setNextAndPrevUser(selfName)
+  requestStories(userName)
+
+  ////請求個人現動json
+  function requestStories(name, index=0) {
+    const url = `/stories.json?user=${name}`
+
+    Rails.ajax({
+      url: url,
+      type: "get",
+      success: function(data) {
+        document.querySelector(".story-pic").innerHTML = ""
+        storiesSection.dataset.userName = data.stories.user_name
+        storiesSection.dataset.prevUser = data.stories.prev_user
+        storiesSection.dataset.nextUser = data.stories.next_user
+        storiesSection.dataset.storyIndex = index
+
+        renderStories(data.stories)
+
+        if (index == "last") {
+          console.log(data.stories.main.length)
+          index = data.stories.main.length - 1
+          $('.owl-carousel').trigger("to.owl.carousel", [index, 1])
+        }
+
+      },
+      error: function(errors) {
+        console.log(errors)
+      }
+    })
+  }
+
+  ////加入元素與事件（建立現動+白線+啟動輪播套件+輪播事件）
+  function renderStories(stories){
+    const storyPic = document.querySelector(".story-pic")
+    const owlCarousel = document.createElement("div")
+    owlCarousel.classList = "owl-carousel"
+
+    for(let i=0; i<stories.main.length; i++) {
+      const newStoryItem = createStoryItem(stories.main[i], i)
+      owlCarousel.appendChild(newStoryItem)
+    }
+    storyPic.appendChild(owlCarousel)
+    addUserInfoAndStoryTime(stories)
+    carouselStart()
+    createDots()
+    addCarouselChangeEvent()
+    replacePrevUserWhenFirstStory()
+  }
+
+  /////加入 使用者資料和現動時間
+  function addUserInfoAndStoryTime(stories){
+    const memberImg = document.querySelector(".member-pic img")
+    const memberName = document.querySelector(".member-name span")
+    const storyTime = document.querySelector(".story-time span")
+    memberImg.src = stories.user_avatar
+    memberName.textContent = stories.user_name
+    storyTime.textContent = stories.main[0].time
+  }
+
+  /////建立限動元素
+  function createStoryItem(story, index) {
+    // console.log(stories)
+    const newStoryItem = document.createElement("div")
+    const img = document.createElement("img")
+
+    newStoryItem.dataset.storyIndex = index
+    newStoryItem.dataset.storyId = story.id
+    newStoryItem.dataset.storyTime = story.time
+    img.src = story.picture.url
+    img.classList = "w-100"
+    img.style.height = "100vh"
+
+    newStoryItem.appendChild(img)
+    newStoryItem.appendChild(testInfo(newStoryItem))          //////////test 資料 以後拿掉
+    newStoryItem.id = `story-id-${story.id}`
+    return newStoryItem
+  }
+
+  //////建立上方動態白線
+  function createDots() {
+    const dots = document.querySelector(".owl-dots")
+    dots.style.position = "absolute"
+    dots.style.top = "20%"
+    dots.style.width = "100%"
+    dots.style.display = "flex"
+
+    const dotsArray = Array.from(document.querySelectorAll(".owl-dot"))
+    for(let i = 0; i< dotsArray.length; i++) {
+      dotsArray[i].style.flexGrow = "1"
+      dotsArray[i].style.height = "3px"
+      dotsArray[i].style.backgroundColor = "#aaa"
+      dotsArray[i].style.margin = "0 2px"
+    }
+
+    dotsArray[0].style.backgroundColor = "#fff"
+  }
+
+   ///輪播事件
+  function addCarouselChangeEvent() {
+    $('.owl-carousel').on('changed.owl.carousel', function() {
+      console.log("changed")
+      changeActiveDot()
+
+      setTimeout(() => {  //////用setTimeout 才找得到 active item
+        const storyActive = storiesSection.querySelector(".owl-item.active div")
+        const lastStory = document.querySelector(".owl-stage").lastChild.firstChild
+        // console.log(storyActive.dataset)
+
+        storiesSection.dataset.storyIndex = storyActive.dataset.storyIndex
+        console.log(storyActive.dataset.storyIndex)
+        console.log("index: " + storiesSection.dataset.storyIndex)
+
+        changeStoryTime(storyActive.dataset)
+
+        if(storyActive == lastStory){
+          document.querySelector(".owl-next").addEventListener("click", () => replaceToNextUserStories())
+          setTimeout(() => replaceToNextUserStories(), carouselTime);
+        }
+      }, 0)
+    })
+  }
+
+  /////替換成下個使用者限動
+  function replaceToNextUserStories() {
+    console.log(storiesSection.dataset)
+    const nextUser = storiesSection.dataset.nextUser
+    requestStories(nextUser)
+  }
+
+  ////如果是第一則限動，按上一個限動時替換成上一個使用者最後的限動
+  function replacePrevUserWhenFirstStory() {
+    console.log(storiesSection.dataset.storyIndex)
+    const storyIndex = storiesSection.dataset.storyIndex
+    const prevUserName = storiesSection.dataset.prevUser
+    console.log(storyIndex)
+    console.log(storiesSection.dataset)
+    console.log(prevUserName)
+    if (storyIndex == "0") {
+      console.log("true")
+      document.querySelector(".owl-prev").addEventListener("click", () => requestStories(prevUserName, "last"))
+    }
+
+  }
+
+  //////////改變現動白線顏色
+  function changeActiveDot() {
+    const dotsArray = Array.from(document.querySelectorAll(".owl-dot"))
+    dotsArray.forEach((dot) => {
+      dot.style.backgroundColor = "#aaa"
+    })
+    document.querySelector(".owl-dot.active").style.backgroundColor = "#fff"
+  }
+
+  ////改變現動時間
+  function changeStoryTime({storyTime}) {
+    const timeItem = document.querySelector(".story-time span")
+    timeItem.textContent = storyTime
+  }
+
+  function testInfo(newStoryItem) {
+    const info = document.createElement("div")    //////////
+
+    info.innerHTML += `<p>#index: ${newStoryItem.dataset.storyIndex}</p>`
+    info.innerHTML += `<p>#id: ${newStoryItem.dataset.storyId}</p>`
+    info.innerHTML += `<p>#storyTime: ${newStoryItem.dataset.storyTime}</p>`
+    info.style = "position: absolute;top: 40%;font-size: 50px;background-color: #000;"
+    return info
+  }
+
+
+  // 請求 [使用者與所有追蹤人名字]
+  //   所有人[nick name]
+
+  // 建立 [使用者] 限動
+  //   限動有 [id] 作為刪除判斷
+  //   當前現動有 [active]
+  //   限動外層加入 [user name]
+
+  // 到目前 [使用者] [最後的限動][按下一個]時
+  //   有[下個使用者]
+  //     有[下個使用者]限動
+  //       跳到[下個使用者][第一個]限動
+  //     沒有[下個使用者]限動
+  //       請求[下個使用者]限動
+  //       隱藏目前限動外層
+  //       建立[新使用者]限動
+  //       跳到[下個使用者][第一個]限動
+  //   沒有[下個使用者]
+  //     回首頁
+
+
+  // 目前是[使用者][第一個現動][按上一個]時
+  // 有[上個使用者]
+  //   有[上個使用者]限動
+  //     跳到[上個使用者][最後的]限動
+  //   沒有[上個使用者]限動
+  //     請求[上個使用者]限動
+  //     隱藏目前限動外層
+  //     建立[新使用者]限動
+  //     跳到[上個使用者][最後的]限動
+  // 沒有[上個使用者]
+  //   回首頁
+
+  // [使用者]是本人時
+  //   加入刪除選項
+
+  // 限動刪除時
+  //   取得id
+  //   刪除
 
   function cssSetting() {       ///設定限時動態頁面 css style
     document.querySelector(".container").style.padding = "0"
@@ -23,230 +242,20 @@ document.addEventListener("turbolinks:load", () => {
     storiesSection.classList.add("text-light")
   }
 
-  function requestStories(selfName) {       ///get 請求取得限時動態
-    // console.log(selfName)
-    const url = `/users/${selfName}/stories.json`
-    Rails.ajax({
-      url: url,
-      type: "get",
-      success: function(data) {
-        console.log(data)
-        // renderStories(data)
-
-        $('.owl-carousel').owlCarousel({
-          onDragged: renderStories(data)
-        });
-      },
-      error: function(errors) {
-        console.log(errors)
-      }
-    })
-  }
-
-  function renderStories(data) {
-    // createUserInfo(data.user)
-    document.querySelector(".story-time span").textContent = data.stories[0].time
-
-    // data.stories.forEach(story => {
-    //   const newStory = createStories(story)
-    //   $('.owl-carousel').trigger('add.owl.carousel', newStory)
-    // })
-
-    for(let i=0; i<data.stories.length; i++) {
-      const newStory = createStories(data.stories[i], i, data.stories.length)
-      $('.owl-carousel').trigger('add.owl.carousel', newStory)
-    }
-    carouselStart()
-  }
-
-  function createUserInfo(user) {    ////建立 user 資料
-    document.querySelector(".user-avatar img").src = user.avatar.url
-    document.querySelector(".user-name span").textContent = user.nick_name
-  }
-
-  function createStories(story, index, count) {      ////建立 story(輪播) 資料
-    // console.log(stories)
-    createUserInfo(story.user)
-    const newStory = document.createElement("div")
-    const img = document.createElement("img")
-    const info = document.createElement("div")    //////////
-
-    newStory.dataset.storyIndex = index
-    newStory.dataset.storyCount = count
-    newStory.dataset.storyId = story.id
-    newStory.dataset.author = story.user.nick_name
-    info.innerHTML += `<p>#index: ${newStory.dataset.storyIndex}/${newStory.dataset.storyCount}</p>`
-    info.innerHTML += `<p>#id: ${newStory.dataset.storyId}</p>`
-    info.innerHTML += `<p>#author: ${newStory.dataset.author}</p>`
-    info.style = "position: absolute;top: 40%;font-size: 50px;background-color: #000;"
-
-    img.src = story.picture.url
-    img.classList.add("w-100")
-    img.style.height = "100vh"
-    newStory.dataset.time = story.time
-    newStory.appendChild(img)
-    newStory.appendChild(info)          //////////
-    newStory.id = `story-id-${story.id}`
-    return newStory
-  }
-
-  // 打開功能區塊
-  const btnDot = document.querySelector('.btn-dot')
-  const modalFun = document.querySelector('.modal-fun')
-  const modalDel = document.querySelector('.modal-del')
-  if(!btnDot){return}
-
-  btnDot.addEventListener("click", function(){
-    console.log(btnDot)
-    // $("#stories-carousel").carousel('pause')
-    if(modalFun.style.display != 'block'){
-      modalFun.style.display = 'block'
-    }
-  })
-
-  //刪除story
-  modalDel.addEventListener("click", (e) => delStory(e))
-
-  const delStory = (e) => {
-    e.preventDefault()
-    modalFun.style.display = "none"
-    // $("#stories-carousel").carousel('pause')
-
-    // const userId = document.querySelector(".stories").dataset.user // 取得 user id
-    // const $activeImg = document.querySelector('.story-img.active')
-    // const storyId = $activeImg.dataset.story
-    // const url = `/users/${userId}/stories/${storyId}`
-
-    Swal.fire({
-      title: '你確定要刪除嗎？',
-      // text: "You won't be able to revert this!",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: '刪除',
-      cancelButtonText: '取消'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        //前端畫面刪除
-        if ($activeImg) $activeImg.remove()
-        const $firstImg = document.querySelector('.carousel-inner .story-img')
-        if ($firstImg) $firstImg.classList.add('active')
-
-        //資料庫刪除
-        // Rails.ajax({
-        //   url: url,
-        //   type: "DELETE",
-        //   success: function(){
-        //     console.log("success:", url)
-        //   }
-        // })
-      }
-    })
-  }
-
   function carouselStart() {        ////owl carousel 輪播功能
     $('.stories .owl-carousel').owlCarousel({
+      center: true,
       loop: false,
       margin: 0,
       nav: true,
       touchDrag: true,
       autoplay: true,
-      autoplayTimeout: 5000,
+      autoplayTimeout: carouselTime,
       responsive:{
         0:{
             items:1
         }
       }
     })
-  }
-
-  function whenCarouselChange() {     ///輪播事件
-    $('.owl-carousel').on('changed.owl.carousel', function() {
-      // console.log(event)
-      const storyTime = document.querySelector(".story-time span")
-      const storyActive = document.querySelector(".owl-item.active div")
-      if (storyActive) { storyTime.textContent = storyActive.dataset.time }
-
-      // 如果是當前 user 最後的限動就跳下一位 user 的限動
-      const owlStage = document.querySelector(".owl-stage")   ////owl-item 的外層 div
-      if (owlStage && owlStage.lastChild) {
-        // const nextUser = storiesSection.dataset.nextUser
-        $('.owl-carousel').owlCarousel({   ////class active 不會馬上出現，用 callback 事件
-          onDragged: addJumpToNextEvent()
-        })
-      }
-    })
-  }
-
-  function addJumpToNextEvent() {
-    // const owlStage = document.querySelector(".owl-stage")
-    const nextUser = storiesSection.dataset.nextUser
-    // console.log("?:" + isTailStory())
-    if (isLastStory()) {
-      console.log(nextUser)
-      document.querySelector(".owl-next").addEventListener("click", toNextUserStories)
-      setTimeout(() => { toNextUserStories(nextUser) }, carouselTime);
-    }
-  }
-
-  function isLastStory() {
-    console.log("isLastStory?")
-    // setTimeout(() => {
-      if (document.querySelector(".owl-item.active")) {
-        const index = document.querySelector(".owl-item.active").firstChild.dataset.storyIndex
-        const StoryCount = document.querySelector(".owl-item.active").firstChild.dataset.storyCount
-        console.log("index: " + Number(index))
-        console.log("StoryCount: " + StoryCount)
-
-        if (StoryCount - 2 == Number(index)) {
-          return true
-        }
-      }
-  }
-
-  const toNextUserStories = () => {
-    console.log("toNextUserStories")
-    const _user = storiesSection.dataset.nextUser
-    console.log(_user)
-
-    if (_user != "nobody") {  ////沒 user 時回首頁
-      requestStories(_user)
-      setNextAndPrevUser(_user)
-      setTimeout(() => {
-        $('.owl-carousel').trigger('next.owl.carousel')
-      }, 50)
-      // const usersCount = JSON.parse(storiesSection.dataset.viewableUsers).length
-      // $('.owl-carousel').trigger("to.owl.carousel", [0, 1])
-    } else {
-      document.location.pathname = "/"
-    }
-    document.querySelector(".owl-next").removeEventListener("click", toNextUserStories)
-  }
-
-
-  // console.log("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-  // console.log(document.querySelector(".owl-prev"))
-  // document.querySelector(".owl-prev").addEventListener("click", toPrevUserStories)
-
-
-  // function toPrevUserStories(){
-  // }
-
-  function setNextAndPrevUser(selfName) {     //////設定上一位/下一位 限動 user
-    const viewableUsers = JSON.parse(storiesSection.dataset.viewableUsers)
-    const selfIndex = viewableUsers.indexOf(selfName)
-
-    if (selfIndex + 1 != viewableUsers.length) {
-      storiesSection.dataset.nextUser = viewableUsers[selfIndex + 1]
-    } else {
-      storiesSection.dataset.nextUser = "nobody"
-    }
-
-    if (selfIndex >= 0 ) {
-      storiesSection.dataset.prevUser = viewableUsers[selfIndex - 1]
-    } else {
-      storiesSection.dataset.nextUser = "nobody"
-    }
   }
 })

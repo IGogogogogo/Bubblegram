@@ -1,0 +1,46 @@
+<section class="stories w-100 m-auto"
+  data-user-name="<%= @user_name %>"
+  data-prev-user=""
+  data-next-user=""
+  data-story-index="0"
+>
+  <header class="member  w-100 pt-2 px-2">
+    <div class="member-title d-flex align-items-center">
+      <div class="member-pic">
+        <img src="" class="rounded-circle w-100">
+      </div>
+
+      <div class="member-name ml-2 mr-2">
+        <span>User Name</span>
+      </div>
+
+      <!--時間---->
+      <div class="story-time create_time">
+        <span>Story Time</span>
+      </div>
+
+      <div class="header-btn ml-auto">
+        <!-----選單--->
+        <% if @user == current_user %>
+          <button class="btn-dot">
+            <i class="fas fa-ellipsis-h"></i>
+          </button>
+        <% end %>
+
+        <!---回首頁------->
+        <button class="btn-home">
+          <%= link_to root_path do %>
+            <i class="fas fa-times"></i>
+          <% end %>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <div class="story-pic">
+    <!-- 以下輪播 -->
+
+    <!-- 以上輪播 -->
+  </div>
+</section>
