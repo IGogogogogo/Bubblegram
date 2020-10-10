@@ -34,8 +34,9 @@ class StoriesController < ApplicationController
     @user_name = params[:user]
     @user = User.find(params[:user])
     @current_user = current_user
-    @viewable_users = [current_user].concat(current_user.followings.order("created_at DESC")).map(&:nick_name)
-    @stories = @user.stories.order("created_at DESC")
+    #找到追蹤中且有限動的使用者，依照建立時間排序
+    @viewable_users = [current_user].concat(current_user.followings.select{|u| u.stories.stories_oneday.count > 0}.sort_by(&:created_at).reverse).map(&:nick_name)
+    @stories = @user.stories.stories_oneday.order("created_at DESC")
     @stories_count = @stories.count
 
     @user_index = @viewable_users.index(@user_name)
@@ -61,16 +62,11 @@ class StoriesController < ApplicationController
   end
 
   def create
-    # byebug
     @story = current_user.stories.new(story_params)
-    # byebug
     authorize @story
-    # byebug
     if @story.save
       redirect_to user_stories_path, notice: "限時動態新增成功"
     else
-      # byebugc
-
       render :new
     end
   end
