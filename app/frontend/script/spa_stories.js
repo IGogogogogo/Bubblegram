@@ -2,7 +2,7 @@ import Rails from '@rails/ujs'
 import Swal from "sweetalert2"
 
 document.addEventListener("turbolinks:load", () => {
-  console.log("123")
+  // console.log("123")
   const carouselTime = 3000 ////限動輪播時間
   const storiesSection = document.querySelector(".stories")
 

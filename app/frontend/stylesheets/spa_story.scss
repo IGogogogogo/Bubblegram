@@ -7,6 +7,7 @@
     position: absolute;
     top: 0;
     z-index: 3;
+    background: linear-gradient(180deg, #777 0%, transparent);
     max-width: 500px;
     width: 100%;
     color: #fff;
@@ -54,17 +55,6 @@
         background-color:rgba(255, 255, 255, 1);
       }
     }
-  }
-
-  header::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(180deg, #777 0%, transparent);
-    opacity: 0.3;
   }
 
   .story-pic img{
