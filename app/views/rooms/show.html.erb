@@ -1,9 +1,11 @@
 <div id="videos"
+     class="video"
      action="show"
      data-controller = "vonageSub"
      data-vonageSub-key = "<%= ENV['vonage_api_key']%>"
      data-vonageSub-session-id = "<%= @room.vonage_session_id %>"
      data-vonageSub-token = "<%= @token %>">
+  <div class="heart"></div>
 </div>
 <div class= "end-notice col-12 mx-auto d-none flex-column ">
      <%= image_tag("/no_stream.png",class: "w-100") %>

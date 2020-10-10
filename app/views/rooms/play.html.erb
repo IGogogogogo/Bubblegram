@@ -1,5 +1,6 @@
 <div
 		id="pub-video"
+    class="video"
 		data-controller = "vonagePub"
 		data-vonagePub-room-id="<%= @room.id %>"
 		data-vonagePub-key="<%= ENV['vonage_api_key']%>"
@@ -7,6 +8,7 @@
 		data-vonagePub-token = "<%= @token %>"
 		data-vonagePub-name = "<%= current_user.nick_name%>正在直播！"
 >
+  <div class="heart"></div>
 </div>
 <%= render partial: "rooms/live_stream_message_area", locals: {messages: @messages, message: @message, room: @room } %>
 

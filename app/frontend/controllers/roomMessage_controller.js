@@ -31,8 +31,34 @@ export default class extends Controller {
         disconnected() {
           // Called when the subscription has been terminated by the server
         },
-        received(data) {
-          // console.log(data)
+        async received(data) {
+
+
+          if(data.message.content === "heart"){
+            await createHeart()
+            return
+            function createHeart(){
+              let video = document.querySelector(".video")
+              let heart = document.createElement('div')
+              // console.log(video.offsetHeight)
+              heart.className = 'heart'
+              heart.style.bottom = -50 + "px"
+              heart.style.opacity = "1"
+              // heart.style.animation = "heart-rising 3s"
+              video.appendChild(heart)
+              Animate(heart)
+
+              function Animate(){
+                $(heart).animate({
+                  bottom: "+=" + 500 + "px",
+                  opacity: 0
+                }, 2000,()=>{
+                  document.querySelector(".heart").remove()
+                })
+              }
+            }
+          }
+
           let message = renderTemplate(data)
           messageTextArea.append(message)
           let currentUser = Number(roomMessageController.data.get("user"))

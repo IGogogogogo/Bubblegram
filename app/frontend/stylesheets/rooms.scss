@@ -24,7 +24,39 @@
     margin: auto;
     // z-index: 11;
   }
+  .heart {
+    position: absolute;
+    bottom: -100px;
+    right: 50px;
+    opacity: 0;
+    background-color: pink;
+    height: 20px;
+    width: 20px;
+    transform: rotate(-45deg);
+    z-index: 20;
 
+    &::after {
+      background-color: pink;
+      content: "";
+      border-radius: 50%;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 0px;
+      left: 10px;
+    }
+    &::before {
+      content: '';
+      background-color: pink;
+      border-radius: 50%;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: -10px;
+      left: 0px;
+    }
+
+  }
 }
 
 
@@ -133,7 +165,7 @@
   .searchbar{
     margin-top: 5px;
 
-    form{
+    form:first-child{
       position: relative;
       display: flex;
       align-items: center;
@@ -159,7 +191,7 @@
         background-color: transparent;
       }
 
-      label[for='submit']{
+      label[name='text-submit']{
         cursor: pointer;
         font-size: 25px;
         color: black;
@@ -168,13 +200,27 @@
         bottom: 0;
         right: 10px;
         margin: auto;
-
       }
       input[type="submit"]{
         margin-left: auto;
         display: none;
       }
-
+    }
+    form:last-child{
+      label[name='heart-submit']{
+        cursor: pointer;
+        font-size: 25px;
+        color: pink;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 30px;
+        margin: auto;
+      }
+      #heart-submit{
+        margin-left: auto;
+        display: none;
+      }
     }
 
   }
