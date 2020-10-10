@@ -1,0 +1,37 @@
+<div class="wrap">
+  <h4 class="user-signup-title">註冊</h4>
+
+  <%= form_with(model: resource, as: resource_name, url: registration_path(resource_name), local: true, class:"user-sign-up") do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field-sign-up">
+    <%= f.text_field :nick_name, autocomplete: "off" %>
+    <div class="underline"></div>
+    <%= f.label :nick_name, '暱稱' %>
+  </div>
+
+  <div class="field-sign-up">
+    <%= f.email_field :email, autocomplete: "off"%>
+    <div class="underline"></div>
+    <%= f.label :email, '信箱' %>
+  </div>
+  <div class="field-sign-up">
+    <%= f.password_field :password, autocomplete: "off" %>
+    <div class="underline"></div>
+    <%= f.label :password, '密碼' %>
+  </div>
+
+  <div class="field-sign-up">
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <div class="underline"></div>
+    <%= f.label :password_confirmation, '再次確認', style: 'width: 34px' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "註冊", id: 'signup_submit'%>
+  </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+
+</div>

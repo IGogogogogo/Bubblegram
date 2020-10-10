@@ -1,0 +1,22 @@
+<div class="container-fluid bubble-bg-color fixed-top">
+  <div class="wrap">
+    <nav class="py-2 d-flex justify-content-between align-items-center">
+      <%= link_to rooms_path ,class: "camera p-1" ,style: "font-size: 20px;",data: {turbolinks: false}, method: 'post' do %>
+        <i class="fas fa-video"></i>
+      <% end %>
+
+      <%= link_to root_path, class: "logo", style: 'text-decoration: none;' do %>
+      <div class="mb-0" style="height: 35px">
+        <%= image_tag("/text_logo.svg",class: "h-100") %>
+      </div>
+         <%#= image_tag("/logo.png", class: "mb-0", style:"height: 35px") %>
+      <%# <h1 class="h4 mb-0">BubbleGram</h1> %>
+      <% end %>
+
+      <%= link_to chats_path, class: 'chat p-1' do %>
+      <%# <i class="far fa-comment-alt"></i> %>
+      <% end %>
+    </nav>
+  </div>
+
+</div>

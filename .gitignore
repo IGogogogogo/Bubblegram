@@ -27,6 +27,7 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+/config/secrets.yml
 
 /public/packs
 /public/packs-test
@@ -34,3 +35,10 @@
 /yarn-error.log
 yarn-debug.log*
 .yarn-integrity
+
+# Ignore database yml (忽略database設定檔)
+/config/database.yml
+public/uploads
+config/application.yml
+ngrok.sh
+config/environments/development.rb.bak

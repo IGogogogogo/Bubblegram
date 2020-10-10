@@ -1,0 +1,46 @@
+<div class = "message_box section" data-chat= "<%= @chat.id %>" data-user="<%= current_user.id%>">
+  <div class="message_container">
+    <div class = "message_text_header chat-user">
+      <div class = "chat-user-pic">
+        <%= image_tag @chat.opposed_user(current_user).avatar.url, class: "user-avatar", width: "50px", style: "border-radius: 50%" if @chat.opposed_user(current_user).avatar.present? %>
+        <div class = "dot <%= "online-dot" if @chat.opposed_user(current_user).is_online? %>"></div>
+      </div>
+      <div class = "chat-user-info">
+        <%= @chat.opposed_user(current_user).nick_name %>
+          <% if @chat.opposed_user(current_user).is_online? %>
+            <div class = "online-text">
+              目前在線上
+            </div>
+          <% end %>
+      </div>
+    </div>
+    <div class="message_text_area">
+      <%= render partial: "messages/message", collection: @messages, as: :message, locals:{unread_message: @unread_message} %>
+    </div>
+    <div class="searchbar">
+      <%= form_with(model: @message, url: chat_messages_path(@chat)) do |f| %>
+        <%= f.text_area :content, placeholder: "發送訊息........", autocomplete: "off", style: "height:33px" %>
+        <%= f.submit "傳送" , class:"disappear", disabled: true %>
+      <% end %>
+      <%= form_with(model: @message, url: chat_messages_path(@chat), class: "image_form" ) do |f| %>
+        <label for="message_image"><i class="far fa-image"></i></label>
+        <%= f.file_field :image %>
+      <% end %>
+    </div>
+  </div>
+</div>
+  <template>
+    <div class="message"></div>
+  </template>
+ <template id="message-template">
+   <div class = "message">
+    <div class="sender"> <!--me/other------------->
+      <div class= "pic-name">
+        <div class = "avatar"></div>
+        <div class = "user-name"></div>
+      </div>
+
+      <div class="type"></div> <!--img/content------------->
+    </div>
+  </div>
+</template>

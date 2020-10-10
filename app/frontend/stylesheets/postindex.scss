@@ -1,0 +1,102 @@
+
+.border-gray{
+  border-color: #ccc !important;
+}
+.g-btn{
+  padding: 0;
+  cursor: pointer;
+}
+.user-video{
+  border: 3px solid #7fcfd6;
+  padding: 3px;
+  border-radius: 100%;
+  width: 60px;
+  height: 60px;
+}
+.user-info .option i,
+.user-post-content i {
+  font-size: 20px;
+}
+.like.btn,
+.comment.btn,
+.share.g-btn,
+.collect.g-btn,
+#dropdownMenu2{
+  font-size: 25px;
+}
+.index-nav{
+  border-top: 2px solid #ccc;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 740px;
+  background: #fff;
+  z-index: 10;
+  .nav-link{
+    color:rgb(139, 139, 139)
+  }
+}
+.nav-link.active{
+  background: #7fcfd6 !important;
+  color: #fff !important;
+}
+.user-story + .user-story{
+  margin-left: 25px;
+}
+
+.post-tag, a{
+  color: rgb(139, 139, 139);
+}
+.text-black{
+  color: #000;
+}
+.text-gray{
+  color: #aaa;
+}
+
+@media (max-width: 999px){
+  .col-12{
+    padding: 0;
+  }
+  .user-story:nth-child(6) ~ .user-story{
+      display: none;
+    }
+  .post-pic{
+      height: 500px;
+  }
+  .index-nav{
+    width: 100%;
+  }
+}
+@media (max-width: 415px) {
+  .container{
+    padding: 0px;
+    overflow: hidden;
+  }
+  .limit-video{
+    padding: 10px 0;
+    margin-bottom: 10px;
+    .user-story:nth-child(5) ~ .user-story{
+      display: none;
+    }
+  }
+  .col-12{
+    padding-left: 7px;
+    padding-right: 7px;
+    border: none !important;
+  }
+  .index-nav{
+    width: 100%;
+  }
+  .like.btn,
+  .comment.btn,
+  .share.g-btn,
+  .collect.g-btn,
+  #dropdownMenu2{
+    font-size: 20px;
+  }
+  div.post-content{
+    margin-top: 0;
+  }
+}

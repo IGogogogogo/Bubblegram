@@ -1,0 +1,33 @@
+
+<div id="home">
+<p class="alert" style="color: red;"><%= alert %></p>
+  <div id='index-logo'>
+    <%= image_tag("/text_logo.svg",class: "w-100") %>
+  </div>
+  </div>
+<div class="container position-absolute login-form wrap">
+
+  <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true) do |f| %>
+
+  <div class="form-group position-relative mb-4">
+    <label for="user_email" class="position-absolute email-label">
+      <i class="fas fa-envelope"></i></label>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control rounded-pill pl-5' %>
+  </div>
+
+  <div class="form-group position-relative">
+    <label for="user_password" class="position-absolute password-label"><i class="fas fa-unlock-alt"></i></label>
+    <%= f.password_field :password, autocomplete: "current-password", class: 'form-control rounded-pill pl-5' %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "登入", class: 'btn w-100 btn-login' %>
+    <p class="text-center m-0 py-3" style="color: #8b8b8b">-Or-</p>
+
+    <%= render "devise/shared/links" %>
+    <p class="text-center pt-2">還沒有帳號?
+      <%= link_to "註冊", new_user_registration_path %>
+    </p>
+  </div>
+  <% end %>
+</div>

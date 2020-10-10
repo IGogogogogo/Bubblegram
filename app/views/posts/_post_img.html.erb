@@ -1,0 +1,5 @@
+<div class="col-4 pr-0 pb-1">
+  <%= link_to post_path(post), class: "d-block" do %>
+    <%= image_tag post.images[0].url, class: "photo w-100" if post.images[0] %>
+  <% end %>
+</div>

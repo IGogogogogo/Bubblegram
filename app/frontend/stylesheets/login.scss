@@ -1,0 +1,47 @@
+.login-form{
+  a{
+   color: rgb(92, 187, 195);
+  }
+}
+.password-label,
+.email-label{
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  font-size: 22px;
+  color: rgb(127, 207, 214);
+  // rgb(92, 187, 195)
+}
+
+.btn-login{
+  background: rgb(127, 207, 214);
+  color: #ffffff;
+  padding: 13px 0;
+  border-color: transparent;
+  letter-spacing: 2px;
+  transition: .6s;
+}
+.btn-login:hover{
+  background: rgb(69, 192, 203);
+  color: #ffffff;
+}
+.go-btn,
+.fb-btn{
+  background-color: transparent;
+  color: rgb(127, 207, 214);
+  border-color: rgb(127, 207, 214);
+  height: 51px;
+  line-height: 51px;
+  padding: 0;
+}
+.fb-btn:hover{
+  background-color: #395692;
+  color: #ffffff;;
+}
+
+
+.go-btn:hover{
+  background-color: #f2594e;
+  color: #ffffff;
+  border-color:#f2594e ;
+}

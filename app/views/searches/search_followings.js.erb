@@ -1,0 +1,11 @@
+<% if @user_followings != []  %>
+    <%# console.log("follow") %>
+    if(document.querySelector(".search-followings-area").classList){
+      document.querySelector(".search-followings-area").innerHTML = '<%= j render(partial: "/users/user", collection: @user_followings, as: :user) %>'
+    }
+
+<% else %>
+     if(document.querySelector(".search-followings-area")){
+      document.querySelector(".search-followings-area").innerHTML = '<div class="default d-flex flex-column align-items-center my-5"><%= image_tag("/no_user.png", class: "w-100") %><div class="text h6 text-black-50 bg-white">沒有符合條件的使用者！</div></div>'
+    }
+<% end %>

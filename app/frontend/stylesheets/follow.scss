@@ -1,0 +1,47 @@
+.fans-following-search-container{
+  max-width: 740px;
+  width: 100%;
+  margin: auto;
+
+  .tab-content{
+    padding: 0 10px;
+  }
+}
+.search-followings-area,
+.search-fans-area,
+.search-result,
+.search-section{
+  .user-item{
+    display: flex;
+    align-items: center;
+    .btn-follow{
+      margin-left: auto;
+      .btn{
+        width: 90px !important;
+        font-size:12px;
+        padding: 2px 5px;
+      }
+      .btn:focus{
+        box-shadow: none;
+      }
+      .cancel-follow{
+        color:#8b8b8b;
+        border: 1px solid #7fcfd6;
+      }
+      .follow{
+        color:white;
+        background: #7fcfd6;
+
+      }
+    }
+  }
+}
+
+.search-followings-area,
+.search-fans-area,
+.search-result,
+.search-section{
+  .user-item + .user-item{
+    margin-top:15px;
+  }
+}

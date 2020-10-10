@@ -1,0 +1,128 @@
+@import "~bootstrap/scss/bootstrap";
+
+.bubble-bg-color{
+  background-color: #fff;
+  border-bottom: .5px solid rgb(219, 218, 218);
+  //background: linear-gradient(180deg, #9b90c2, #f5f5f5);
+}
+h4.edit-post-title,
+h4.post-index-title,
+h4.search-post-title,
+h4.post-show-title,
+h4.user-show-title,
+h4.user-edit-title,
+h4.user-signup-title{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 54px;
+  line-height: 54px;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0;
+}
+.field-sign-up input:focus ~ label,
+.post-content textarea:focus ~ label,
+.user-edit-group input:focus ~ label,
+.user-edit-group textarea:focus ~ label{
+  color: #7fcfd6;
+}
+.field-sign-up input:focus ~ .underline::before, .underline::after,
+.post-content textarea:focus ~ .underline::before, .underline::after,
+.user-edit-group input:focus ~ .underline::before, .underline::after,
+.user-edit-group textarea:focus ~ .underline::before, .underline::after,
+.comment input:focus ~ .underline::before, .underline::after{
+  transform: scaleX(1);
+}
+nav{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  .logo{
+    text-decoration: none;
+    //color: #6a4c9c;
+    .h4{
+      background: linear-gradient(to left,  rgb(3, 159, 165) 0%, #012929 100%);
+	    -webkit-background-clip: text;
+	    -webkit-text-fill-color: transparent;
+      font-family:'Great Vibes',cursive;
+    }
+    .h6{
+      margin: 0;
+    }
+  }
+  .camera{
+    color:rgb(139, 139, 139);
+  }
+  .icon{
+    margin-left: auto;
+    a{
+      color: #000000;
+      font-size: 14px;
+      padding: 0 5px;
+      transition: .3s ease;
+      &:hover{
+        color: #fff2cc;
+      }
+    }
+  }
+  .chat{
+    font-size: 20px;
+    color:rgb(139, 139, 139);
+  }
+}
+.limit-video{
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  .pic{
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-image: linear-gradient(to right, rgb(113, 78, 176) 0%, rgb(249, 145, 189) 100%);
+    border-image-slice: 1;
+    padding: 2px;
+  }
+}
+
+.user-post{
+  .user-photo{
+    width: 35px;
+    height: 35px;
+  }
+  .btn{
+    padding: 0;
+  }
+  .post-pic{
+    height: 300px;
+  }
+    .post-position{
+      font-weight: 300;
+      font-size: 12px;
+    }
+  }
+
+  .container .wrap{
+    max-width: 740px;
+    margin: auto;
+  }
+img{
+  object-fit: cover;
+}
+
+.chat-path{
+  position: relative;
+  .message-dot{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    position: absolute;
+    left: 15px;
+    right: 0;
+    margin: auto;
+    background-color: rgb(197, 64, 64);
+  }
+}

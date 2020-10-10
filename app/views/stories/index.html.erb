@@ -1,0 +1,34 @@
+<h1><%= @user.nick_name %>限時動態總覽</h1>
+
+<%= link_to '回到首頁', root_path %>
+
+<table>
+  <tr>
+    <th>
+      限時動態
+    </th>
+    <th>
+      Create Time
+    </th>
+    <th>
+      刪除
+    </th>
+  </tr>
+
+  <% @stories.each do |story| %>
+  <tr>
+    <td>
+      <%= link_to user_story_path(story.user, story) do %>
+        <%= image_tag story.picture.url %>
+      <% end %>
+      <%# 把圖片做成超連結 %>
+    </td>
+    <td>
+      <%= time_ago_in_words(story.created_at) %>
+     </td>
+    <td>
+      <%= link_to '刪除', user_story_path(story.user, story), method: 'DELETE', data:{ confirm: '你確定刪除嗎？' } %>
+     </td>
+  </tr>
+  <% end %>
+</table>

@@ -1,0 +1,112 @@
+<h4 class="user-show-title"><%= @user.nick_name %></h4>
+<div class="post-load-page">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <!-----user 資訊------------------>
+        <div class="profile-info d-flex align-items-center flex-wrap">
+          <div class="profile-photo w-25">
+            <%= image_tag @user.avatar.url, class: 'rounded-circle w-100' if @user.avatar.present? %>
+            <div class="profile-user-name text-center"><strong><%= @user.nick_name %></strong></div>
+          </div>
+
+          <!--貼文數------>
+          <div class="posts-count text-center flex-grow-1">
+            <div class="num font-weight-bold">
+              <%= link_to user_posts_path(@user), class: 'text-black' do %>
+              <div><%= @user.posts_count %></div>
+              <div class="post">Posts</div>
+              <% end %>
+            </div>
+          </div>
+
+          <!---粉絲數---->
+          <div class="followers-count text-center flex-grow-1">
+            <div class="num font-weight-bold">
+              <%= link_to follow_user_path(@user, fans: "fans"), class: 'text-black' do %>
+              <div><%= @user.fans_count %></div>
+              <div class="follower">Followers</div>
+              <% end %>
+            </div>
+          </div>
+
+          <!---追蹤數---------->
+          <div class="following-count text-center flex-grow-1">
+            <div class="num font-weight-bold">
+              <%= link_to follow_user_path(@user, followings: "followings"), class: 'text-black' do %>
+              <div><%= @user.followings_count %></div>
+              <div class="following">Following</div>
+              <% end %>
+            </div>
+          </div>
+
+          <!----介紹資訊----------->
+          <div class="profile-intro py-2 w-100 ml-3">
+            <!-- <div class="profile-user-name"><strong><%= @user.nick_name %></strong></div> -->
+            <div class="profile-user-infro">
+              <%= simple_format(@user.description) %>
+            </div>
+          </div>
+        </div>
+
+        <!----追蹤/傳訊息/編輯----------->
+        <div class="user-item-<%= @user.id %>">
+          <%= render "user_btn", user: @user  %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-bottom py-2"></div>
+
+  <div >
+    <nav class="py-3">
+      <div class="nav nav-tabs d-flex w-100 posts-nav" id="nav-tab" role="tablist">
+        <a class="nav-link flex-grow-1 text-center my-posts-btn active" id="nav-home-tab" data-toggle="tab"
+          href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
+          <i class="fas fa-border-all"></i>
+        </a>
+        <a class="nav-link flex-grow-1 text-center tag-posts-btn" id="nav-tag-tab" data-toggle="tab" href="#nav-tag"
+          role="tab" aria-controls="nav-tag" aria-selected="false">
+          <i class="far fa-id-badge"></i>
+        </a>
+      </div>
+    </nav>
+
+    <div class="tab-content post-load-target" id="nav-tabContent">
+      <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <% if @my_posts != [] %>
+          <div class="form-row post-img">
+            <%= render partial: "/posts/post_img", collection: @my_posts, as: :post %>
+            <% if @my_posts.length >= 36 %>
+              <%= render partial: "/shared/loading" %>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="default d-flex flex-column align-items-center my-5">
+            <%= image_tag("/no_post.png", class: "w-100") %>
+            <div class="welcome h3 text-black-50">還沒有貼文喔！</div>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="tab-pane fade show" id="nav-tag" role="tabpanel" aria-labelledby="nav-tag-tab">
+        <% if @taged_posts != [] %>
+          <div class="form-row tag-img">
+            <%= render partial: "/posts/post_img", collection: @taged_posts, as: :post %>
+            <% if @taged_posts.length >= 36 %>
+              <%= render partial: "/shared/loading" %>
+            <% end %>
+          </div>
+        <% else %>
+          <div class="default d-flex flex-column align-items-center my-5">
+            <%= image_tag("/no_tag.png", class: "w-100") %>
+            <div class="welcome h3 text-black-50">有你在的照片或影片</div>
+            <div class="text h6 text-black-50">會顯示你被標註的照片或影片</div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+</div>

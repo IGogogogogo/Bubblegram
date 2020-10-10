@@ -1,0 +1,10 @@
+<div class= "me">
+  <div class= "pic_name">
+    <div class = "avatar">
+      <%= image_tag message.user.avatar.url, class: "user-avatar rounded-circle", width: "50px" if message.user.avatar.present? %>
+    </div>
+  </div>
+  <div class="pic">
+    <%= image_tag message.image_url if message.image_url.present?%>
+  </div>
+</div>

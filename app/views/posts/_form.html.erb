@@ -1,0 +1,50 @@
+<% if post.errors.any? %>
+<ul>
+  <% post.errors.full_messages.each do |msg| %>
+  <li style="color: red;"><small><%= msg %></small></li>
+  <% end %>
+</ul>
+<% end %>
+
+<%= form_with(model: post, url: url, class: "form", local: true) do |form| %>
+
+<!-- Slider main container -->
+<div class="swiper-container m-auto" style="width:100%; max-width:500px; max-height: 400px;">
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper" style=" display: flex; align-items: center;">
+    <!-- Slides -->
+    <% post.images.each do |image| %>
+    <div class="swiper-slide">
+      <%= image_tag image.url, width: "100%", draggable: false if post.images.present? %>
+    </div>
+    <% end %>
+  </div>
+  <!-- If we need pagination -->
+  <div class="swiper-pagination"></div>
+</div>
+
+<% if post.images.empty? %>
+<div class="form-group add-photo">
+  <div class="upload-btn">
+    <i class="fas fa-upload fa-4x"></i>
+    <p>上傳照片</p>
+  </div>
+  <%= form.file_field :images, multiple: true, class: "form-control" %>
+</div>
+<% end %>
+
+<div class="form-group post-content">
+  <%= form.text_area :content, class: "form-control" ,rows: "4" %>
+  <div class="underline"></div>
+  <%= form.label :content, '文章內文' %>
+</div>
+
+<div class="form-group post-tags">
+  <%= form.label :taged_user_ids, '標註人名' %>
+  <select name="post[taged_user_ids][]" multiple="multiple" class="form-control taged_users" id="post_taged_user_ids">
+    <%= options_for_select(users, taged_id) %>
+  </select>
+</div>
+
+<%= form.submit '確認', class:'post-submit' %>
+<% end %>

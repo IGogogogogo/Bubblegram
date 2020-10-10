@@ -1,0 +1,12 @@
+<div class="post-comment">
+  <div class="comment-context">
+    <%= image_tag comment.user.avatar.url %>
+    <span style="font-weight: 600;"><%= comment.user.nick_name %></span>
+
+    <%= simple_format(comment.content) %>
+
+    <small class="time" style="">
+      - <%= time_ago_in_words comment.created_at %>
+    </small>
+  </div>
+</div>

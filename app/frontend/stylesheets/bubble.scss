@@ -1,0 +1,40 @@
+.bubble{
+  // background: #f3f3df;
+  background-image: url("../../../public/istockphoto-534721193-612x612.jpg");
+  background-size: cover;
+  background-position: center;
+  opacity:.25;
+  position:fixed;
+  border-radius:100%;
+}
+#index-logo{
+  position:absolute;
+  top:50%;
+  left: 50%;
+  width: 75vw;
+  max-width: 380px;
+  transform: translate(-50%, -50%);
+}
+.color{
+  width:30px;
+  height:30px;
+  display:inline-block;
+  border-radius:50%;
+  margin:12px -6px 0 12px;
+  border:2px solid #fff;
+  cursor:pointer;
+}
+#home{
+  width:100%;
+  height:75vh;
+  padding:0;
+  margin:0;
+  overflow:hidden;
+}
+.login-form{
+  top: 65%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 100;
+  padding: 0 50px;
+}

@@ -1,0 +1,23 @@
+<%if message == unread_message %>
+  <div id="unread-line">-------以下是未讀訊息-------</div>
+<% end %>
+
+<div class= "message" data-message-id="<%= message.id %>">
+  <div class="<%= message.user_id == current_user.id ? 'me' : 'other'%>">
+    <div class= "pic-name">
+      <div class = "avatar">
+        <%= image_tag message.user.avatar.url, class: "user-avatar" if message.user.avatar.present? %>
+      </div>
+    </div>
+
+    <% if message.image.url.present? %>
+      <div class= "pic">
+        <%= image_tag message.image_url if message.image_url.present?%>
+      </div>
+    <% else %>
+      <div class= "content">
+        <%= simple_format(message.content) %>
+      </div>
+    <% end %>
+  </div>
+</div>
