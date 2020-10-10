@@ -23,6 +23,7 @@ document.addEventListener("turbolinks:load", () => {
       url: url,
       type: "get",
       success: function(data) {
+        // console.log(data)
         document.querySelector(".story-pic").innerHTML = ""
         storiesSection.dataset.userName = data.stories.user_name
         storiesSection.dataset.prevUser = data.stories.prev_user
@@ -88,7 +89,7 @@ document.addEventListener("turbolinks:load", () => {
     img.style.height = "100vh"
 
     newStoryItem.appendChild(img)
-    newStoryItem.appendChild(testInfo(newStoryItem))          //////////test 資料 以後拿掉
+    // newStoryItem.appendChild(testInfo(newStoryItem))          //////////test 資料 以後拿掉
     newStoryItem.id = `story-id-${story.id}`
     return newStoryItem
   }
@@ -97,14 +98,22 @@ document.addEventListener("turbolinks:load", () => {
   function createDots() {
     const dots = document.querySelector(".owl-dots")
     dots.style.position = "absolute"
-    dots.style.top = "20%"
+    dots.style.top = "5px"
     dots.style.width = "100%"
     dots.style.display = "flex"
+    dots.style.zIndex = "7"
 
+    // if (window.innerWidth > 770) {   /////rwd問題：寬度變化時，css抓不到owl元素，重新整理後才能改變白線 css
+    //   console.log("423")
+    //   dots.style.top = "63px"
+    //   dots.style.height = "30px"
+    //   dots.style.backgroundColor = "#262626"
+    //   dots.style.alignItems = "center"
+    // }
     const dotsArray = Array.from(document.querySelectorAll(".owl-dot"))
     for(let i = 0; i< dotsArray.length; i++) {
       dotsArray[i].style.flexGrow = "1"
-      dotsArray[i].style.height = "3px"
+      dotsArray[i].style.height = "2px"
       dotsArray[i].style.backgroundColor = "#aaa"
       dotsArray[i].style.margin = "0 2px"
     }
@@ -115,7 +124,7 @@ document.addEventListener("turbolinks:load", () => {
    ///輪播事件////////////////////////////////////////
   function addCarouselChangeEvent() {
     $('.owl-carousel').on('changed.owl.carousel', function() {
-      console.log("changed")
+      // console.log("changed")
       changeActiveDot()
 
       setTimeout(() => {  //////用setTimeout 才找得到 active item
@@ -263,13 +272,13 @@ document.addEventListener("turbolinks:load", () => {
 
 
   //////測試資訊
-  function testInfo(newStoryItem) {
-    const info = document.createElement("div")    //////////
+  // function testInfo(newStoryItem) {
+  //   const info = document.createElement("div")    //////////
 
-    info.innerHTML += `<p>#index: ${newStoryItem.dataset.storyIndex}</p>`
-    info.innerHTML += `<p>#id: ${newStoryItem.dataset.storyId}</p>`
-    info.innerHTML += `<p>#storyTime: ${newStoryItem.dataset.storyTime}</p>`
-    info.style = "position: absolute;top: 40%;font-size: 50px;background-color: #000;"
-    return info
-  }
+  //   info.innerHTML += `<p>#index: ${newStoryItem.dataset.storyIndex}</p>`
+  //   info.innerHTML += `<p>#id: ${newStoryItem.dataset.storyId}</p>`
+  //   info.innerHTML += `<p>#storyTime: ${newStoryItem.dataset.storyTime}</p>`
+  //   info.style = "position: absolute;top: 40%;font-size: 50px;background-color: #000;"
+  //   return info
+  // }
 })
