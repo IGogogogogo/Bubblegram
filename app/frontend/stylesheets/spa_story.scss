@@ -1,7 +1,3 @@
-// .stories, .stories > *{
-//   outline: blue solid 1px;
-// }
-
 .stories {
   height: 100vh;
   width: 100%;
@@ -12,9 +8,9 @@
     position: absolute;
     top: 0;
     z-index: 3;
+    background: linear-gradient(180deg, #777 0%, transparent);
     max-width: 500px;
     width: 100%;
-    background: linear-gradient(180deg, #eee 0%, transparent);
     color: #fff;
     padding-top: 50% 50%;
 
@@ -139,12 +135,21 @@
       background: #262626;
 
       .member-title{
-        height: 100px;
+        // height: 100px;
 
         .member-pic{
           width: 40px;
         }
       }
+
+      // .owl-dots {
+      //   top: 63px;
+      //   width: 100%;
+      //   height: 30px;
+      //   background-color: #262626;
+      //   display: flex;
+      //   align-items: center;
+      // }
     }
 
     .dots{

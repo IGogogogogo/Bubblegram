@@ -5,7 +5,7 @@ let controller
 let stream
 // let publisher 想實作觀看人數
 let roomId
-let videoDiv 
+let videoDiv
 export default class extends Controller {
   connect() {
     controller = this
@@ -17,6 +17,11 @@ export default class extends Controller {
     roomId = this.data.get('roomId')
     console.log(roomId);
     this.initializeSession()
+    let backLink =  document.querySelector(".back-link")
+
+    backLink.addEventListener("click",()=>{
+      backLink.style.display = "none"
+    })
   }
 
   disconnect() {
@@ -75,7 +80,8 @@ window.addEventListener('beforeunload', function (e) {
       method:"post"
     })
   });
-  
+
+
 // 之後要實作 觀看人數
 // let subCounts = (stream) => new Promise((resolve, reject) => {
 //   // counts 是一個array

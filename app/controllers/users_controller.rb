@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :find_user, only: [:show, :fans, :followings, :edit, :update]
+  before_action :find_user, only: [:show, :fans, :followings, :edit, :update, :follow]
   # before_action :only_owner, only: [:edit, :update]
 
   def show
@@ -8,6 +8,13 @@ class UsersController < ApplicationController
     @taged_posts = @user.taged_posts.order("created_at DESC").limit(per_count)
     @has_more_my_posts = (@my_posts.count >= per_count)
     @has_more_tag_posts = (@taged_posts.length >= per_count)
+  end
+
+  def follow
+    @followings = params[:followings]
+    @fans = params[:fans]
+    @user_fans = @user.fans
+    @user_followings = @user.followings
   end
 
   def fans

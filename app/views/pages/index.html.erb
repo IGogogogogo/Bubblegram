@@ -1,8 +1,6 @@
 <%= render "shared/navbar" %>
-<div class="post-load-page" style="overflow: auto; height: 100vh;">
+<div class="post-load-page" style="overflow: auto;">
   <div class="container-fluid container-md">
-
-
     <!-- Main post  -->
     <div class="row justify-content-center">
       <div class="col-12 px-0 pb-3 following-posts post-load-target">
@@ -15,16 +13,15 @@
 
         <% if @posts !=[] %>
           <%= render partial: "/posts/post", collection: @posts, as: :post %>
+          <% if @posts.count >= 20 %>
+            <%= render partial: "/shared/loading" %>
+          <% end %>
         <% else %>
-         <div class="default d-flex flex-column align-items-center position-relative" style="bottom: -30%">
+          <div class="default d-flex flex-column align-items-center position-relative" style="bottom: -30%">
             <div class="welcome h3 text-black-50">歡迎使用 Bubblegram !</div>
             <%= image_tag("/no_follow.png", class: "w-100") %>
             <div class="text h6 text-black-50">追蹤其他人後，可以在這裡看到他們照片與影片！</div>
           </div>
-        <% end %>
-
-        <% if @has_more_posts %>
-          <%= render "/shared/loading" %>
         <% end %>
       </div>
     </div>

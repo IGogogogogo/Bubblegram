@@ -1,7 +1,7 @@
 <div class="wrap">
   <h4 class="user-signup-title">註冊</h4>
 
-  <%= form_with(model: resource, as: resource_name, url: registration_path(resource_name), local: true) do |f| %>
+  <%= form_with(model: resource, as: resource_name, url: registration_path(resource_name), local: true, class:"user-sign-up") do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field-sign-up">

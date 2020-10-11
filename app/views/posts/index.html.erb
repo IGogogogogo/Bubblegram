@@ -1,13 +1,21 @@
-<h4 class="post-index-title">你的貼文</h4>
-<div class="post-load-page" style="overflow-y: auto; overflow-x: hidden; height: 100vh;">
-  <div class=" row justify-content-center">
-    <div class="col-12 col-md-12">
-
-      <div class="user-posts post-load-target">
-        <%= render partial: "/posts/post", collection: @posts, as: :post %>
-        <% if @has_more_posts %>
-        <%= render "/shared/loading" %>
-        <% end %>
+<h4 class="post-index-title"><%= @user.nick_name %>的貼文</h4>
+<div class="post-load-page" style="overflow: auto;">
+  <div class="container-fluid container-md">
+    <div class=" row justify-content-center">
+      <div class="col-12 col-md-12 px-0 pb-3">
+        <div class="user-posts post-load-target">
+          <% if @posts != [] %>
+            <%= render partial: "/posts/post", collection: @posts, as: :post %>
+            <% if @posts.count >= 20 %>
+              <%= render partial: "/shared/loading" %>
+            <% end %>
+          <% else %>
+            <div class="default d-flex flex-column align-items-center my-5">
+              <%= image_tag("/no_post.png", class: "w-100") %>
+              <div class="welcome h3 text-black-50">還沒有貼文喔！</div>
+            </div>
+          <% end %>
+        </div>
       </div>
-    </div>
+  </div>
 </div>

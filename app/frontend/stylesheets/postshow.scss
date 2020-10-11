@@ -1,0 +1,23 @@
+.post-comment{
+  .comment-context{
+    img{
+      width: 30px;
+      border-radius: 50%;
+    }
+    span{
+      font-weight: 600;
+    }
+    p{
+      padding-left: 35px;
+      padding-right: 45px;
+      word-break: break-word;
+      margin: 0;
+    }
+  }
+  .time{
+    font-size: 12px;
+    margin-left: 35px;
+    margin-bottom: 20px;
+    display: block;
+  }
+}

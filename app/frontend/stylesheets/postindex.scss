@@ -41,7 +41,11 @@
   background: #7fcfd6 !important;
   color: #fff !important;
 }
-a{
+.user-story + .user-story{
+  margin-left: 25px;
+}
+
+.post-tag, a{
   color: rgb(139, 139, 139);
 }
 .text-black{
