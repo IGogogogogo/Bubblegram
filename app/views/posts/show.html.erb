@@ -39,7 +39,7 @@
 
       <%= form_with(model: @comment, url: post_comments_path(@post), class:"comment-form", remote: true) do |form| %>
         <div class="d-flex w-100 comment">
-          <%= form.text_area :content, placeholder: "輸入留言", autocomplete: "off", style: "height:33px", class: 'flex-grow-1', autocomplete: "off"  %>
+          <%= form.text_field :content, placeholder: "輸入留言", autocomplete: "off", style: "height:33px", class: 'flex-grow-1', autocomplete: "off"  %>
           <div class="underline"></div>
             <%= form.submit "留言", id: 'comment_submit' %>
           </div>
