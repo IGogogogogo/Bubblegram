@@ -9,31 +9,7 @@
   </div>
 
   <div class="post-content px-2">
-    <div class="icon-group d-flex align-items-center">
-      <span data-controller="heart" data-heart-id="<%= post.id %>">
-        <button id="thumb" class="like btn " data-action="click->heart#favourite" data-turbolinks="false">
-          <% if post.favorited_by?(current_user) %>
-          <i class="fas fa-heart" data-target="heart.like"></i>
-          <% else %>
-          <i class="far fa-heart" data-target="heart.like"></i>
-          <% end %>
-        </button>
-      </span>
-
-      <div class="comment btn pl-3">
-        <%= link_to post_path(post), style: "color: #000;" do %>
-          <i class="far fa-comment"></i>
-        <% end %>
-      </div>
-
-      <div class="share g-btn pl-3">
-        <%# <i class="far fa-share-square"></i> %>
-      </div>
-
-      <div class="collect g-btn ml-auto">
-        <%# <i class="far fa-flag"></i> %>
-      </div>
-    </div>
+    <%= render partial: "/posts/post_icon", locals: { post: post } %>
 
     <div class="user-post-content">
       <div class="thumb-up ">
