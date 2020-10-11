@@ -32,6 +32,8 @@ document.addEventListener("turbolinks:load", () => {
       return "my_posts"
     } else if (randPosts) {
       return "rand_img"
+    } else if (!myBtn || !tagBtn){
+      return
     }else if (myBtn.classList.contains("active")) {
       return "post_img"
     } else if (tagBtn.classList.contains("active")) {
