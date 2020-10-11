@@ -13,7 +13,7 @@
 
         <% if @posts !=[] %>
           <%= render partial: "/posts/post", collection: @posts, as: :post %>
-          <% if @posts.count >= 20 %>
+          <% if @has_more_posts %>
             <%= render partial: "/shared/loading" %>
           <% end %>
         <% else %>

@@ -79,7 +79,7 @@
         <% if @my_posts != [] %>
           <div class="form-row post-img">
             <%= render partial: "/posts/post_img", collection: @my_posts, as: :post %>
-            <% if @my_posts.length >= 36 %>
+            <% if @has_more_my_posts %>
               <%= render partial: "/shared/loading" %>
             <% end %>
           </div>
@@ -95,7 +95,7 @@
         <% if @taged_posts != [] %>
           <div class="form-row tag-img">
             <%= render partial: "/posts/post_img", collection: @taged_posts, as: :post %>
-            <% if @taged_posts.length >= 36 %>
+            <% if @has_more_tag_posts %>
               <%= render partial: "/shared/loading" %>
             <% end %>
           </div>
