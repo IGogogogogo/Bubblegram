@@ -73,6 +73,27 @@ document.addEventListener("turbolinks:load", () => {
     memberImg.src = stories.user_avatar
     memberName.textContent = stories.user_name
     storyTime.textContent = stories.main[0].time
+
+    //  判斷使用者本人有new頁面
+    // /users/:user_id/stories/new
+    // const userId = stories.user_id
+    // const urlNew = `/users/${userId}/stories/new`
+    // const storyNew = document.querySelector(".member-pic a")
+    // if (storyNew === stories.is_self){
+    // storyNew.classList.add("add-story") && storyNew.setAttribute("herf",urlNew)}else{
+
+    // }
+
+
+
+    // Rails.ajax({
+    //   url: url,
+    //   type: "",
+    //   success: function(){
+    //     console.log("success:", url)
+    //   }
+    // })
+
   }
 
   /////建立限動元素
@@ -96,12 +117,14 @@ document.addEventListener("turbolinks:load", () => {
 
   //////建立上方動態白線
   function createDots() {
+
     const dots = document.querySelector(".owl-dots")
-    dots.style.position = "absolute"
-    dots.style.top = "5px"
-    dots.style.width = "100%"
-    dots.style.display = "flex"
-    dots.style.zIndex = "7"
+    dots.classList.add("time-dots")
+    // dots.style.position = "absolute"
+    // dots.style.top = "5px"
+    // dots.style.width = "100%"
+    // dots.style.display = "flex"
+    // dots.style.zIndex = "7"
 
     // if (window.innerWidth > 770) {   /////rwd問題：寬度變化時，css抓不到owl元素，重新整理後才能改變白線 css
     //   console.log("423")
@@ -110,15 +133,17 @@ document.addEventListener("turbolinks:load", () => {
     //   dots.style.backgroundColor = "#262626"
     //   dots.style.alignItems = "center"
     // }
+
     const dotsArray = Array.from(document.querySelectorAll(".owl-dot"))
     for(let i = 0; i< dotsArray.length; i++) {
-      dotsArray[i].style.flexGrow = "1"
-      dotsArray[i].style.height = "2px"
-      dotsArray[i].style.backgroundColor = "#aaa"
-      dotsArray[i].style.margin = "0 2px"
+      dotsArray[i].classList.add("time-dot")
+      // dotsArray[i].style.flexGrow = "1"
+      // dotsArray[i].style.height = "2px"
+      // dotsArray[i].style.backgroundColor = "red"
+      // dotsArray[i].style.margin = "0 2px"
     }
 
-    dotsArray[0].style.backgroundColor = "#fff"
+    dotsArray[0].classList.add("time-active")
   }
 
    ///輪播事件////////////////////////////////////////
@@ -170,9 +195,9 @@ document.addEventListener("turbolinks:load", () => {
   function changeActiveDot() {
     const dotsArray = Array.from(document.querySelectorAll(".owl-dot"))
     dotsArray.forEach((dot) => {
-      dot.style.backgroundColor = "#aaa"
+      dot.style.backgroundColor = "rgba(255, 255, 255, 0.6)"
     })
-    document.querySelector(".owl-dot.active").style.backgroundColor = "#fff"
+    document.querySelector(".owl-dot.active").style.backgroundColor = "rgba(255, 255, 255, 1)"
   }
 
   ////改變現動時間
