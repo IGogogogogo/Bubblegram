@@ -62,7 +62,7 @@ document.addEventListener("turbolinks:load", () => {
     addCarouselChangeEvent()
     createHeaderBtn()
     document.querySelector(".owl-prev").addEventListener("click", toPrevUserLastStory)
-    // document.querySelector(".owl-next").addEventListener("click", toNextUserStories)
+    document.querySelector(".owl-next").addEventListener("click", toNextUserStories)
   }
 
   /////加入 使用者資料和現動時間
@@ -241,6 +241,8 @@ document.addEventListener("turbolinks:load", () => {
 
     if(isOwner) {
       btnDot.style.display = "block"   // 顯示點點點
+    } else {
+      btnDot.style.display = "none"
     }
 
     btnDot.addEventListener("click", function(){
