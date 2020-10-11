@@ -95,6 +95,7 @@ document.addEventListener("turbolinks:load", () => {
           postLoadTarget.innerHTML += postsEl
           postLoadTarget.appendChild(newLoadingEl)
         }
+        startCarousel()
       },
       error: function(errors) {
         console.log(errors)
@@ -115,5 +116,21 @@ document.addEventListener("turbolinks:load", () => {
     }
 
     postLoadPage.addEventListener("scroll", loadPosts)
+  }
+
+
+  function startCarousel() {
+    //////判斷執行過套件的元素不要重複執行
+    $('.owl-carousel:not(.owl-carousel-loaded)').addClass('owl-carousel-loaded').owlCarousel({
+      loop: false,
+      margin: 0,
+      nav: false,
+      animateOut: 'fadeOut',
+      responsive:{
+        0:{
+            items:1
+        }
+      }
+    })
   }
 })
