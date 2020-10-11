@@ -23,13 +23,21 @@ consumer.subscriptions.create({channel: "UserOnlineChannel"}, {
       if(chatUser.length === 0)return //避免在其他頁有錯誤訊息
       chatUser[0].querySelector(".chat-user-pic .dot").classList.add("online-dot")  //給他綠點
       if(chatUser[0].querySelector(".chat-user-info .unread-messages"))return
-      chatUser[0].querySelector(".chat-user-info .online-text").classList.remove("off-line") //以及上線中
+      if(chatUser[0].querySelector(".chat-user-info .online-text") === null){
+        chatUser[0].querySelector(".chat-user-info").appendChild(onlineTextDiv())//以及上線中
+      }
+      chatUser[0].querySelector(".chat-user-info .online-text").classList.remove("off-line")
     }else{
       if(chatUser.length === 0)return
       chatUser[0].querySelector(".chat-user-pic .dot").classList.remove("online-dot")
       chatUser[0].querySelector(".chat-user-info .online-text").classList.add("off-line")
     }
-
+    function onlineTextDiv(){
+      let onlineDiv = document.createElement("div")
+      onlineDiv.className = "online-text"
+      onlineDiv.textContent = "目前在線上"
+      return onlineDiv
+    }
     // Called when there's incoming data on the websocket for this channel
   }
 });

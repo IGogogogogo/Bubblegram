@@ -34,9 +34,9 @@
                   </div>
                 <% end %>
                 <% if chat.opposed_user(current_user).is_online? %>
-                <div class = "online-text <%= "off-line" if chat.any_unread_messages?(current_user)%>">
-                  目前在線上
-                </div>
+                  <div class = "online-text <%= "off-line" if chat.any_unread_messages?(current_user)%>">
+                    目前在線上
+                  </div>
                 <% end %>
               </div>
               <div class="notice-dot <%= "message-notice-dot" if chat.any_unread_messages?(current_user)%>"></div>
