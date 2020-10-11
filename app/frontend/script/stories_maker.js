@@ -170,11 +170,13 @@ document.addEventListener("turbolinks:load", () => {
   }
 
   function carouselStart() {        ////owl carousel 輪播功能
+    // document.querySelector(".owl-carousel").classList.remove(".owl-nav")
+
     $('.stories .owl-carousel').owlCarousel({
       center: true,
       loop: false,
       margin: 0,
-      nav: true,
+      nav: false,
       touchDrag: true,
       autoplay: true,
       autoplayTimeout: carouselTime,

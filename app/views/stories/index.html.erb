@@ -11,7 +11,13 @@
 
     <div class="member-title">
       <div class="user-avatar">
+        <% if @user == current_user %>
+          <%= link_to new_user_story_path(current_user),class:'add-story' do %>
+            <%= image_tag @user.avatar.url %>
+          <% end %>
+        <% else %>
           <%= image_tag @user.avatar.url %>
+        <% end %>
       </div>
 
       <div class="user-name">
