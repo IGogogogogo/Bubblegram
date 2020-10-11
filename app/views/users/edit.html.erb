@@ -1,45 +1,47 @@
-<div class="wrap">
-  <h4 class="user-edit-title">用戶編輯</h4>
+<%= render partial: "shared/title_with_prev", locals: { title: "用戶編輯", css: "" } %>
 
+<div class="wrap">
   <% if @user.errors.any? %>
-  <ul>
-    <% @user.errors.full_messages.each do |msg| %>
-    <li style="color: red;">
-      <small>
-        <%= msg %>
-      </small>
-    </li>
-    <% end %>
-  </ul>
+    <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li style="color: red;">
+          <small>
+            <%= msg %>
+          </small>
+        </li>
+      <% end %>
+    </ul>
   <% end %>
+
   <div id="user-edit-pic">
     <%= image_tag @user.avatar.url, id: 'user-preview' if @user.avatar %>
   </div>
+
   <%= form_with(model: @user, local: true) do |f| %>
-  <div class="user-edit-group">
-    <%= f.file_field :avatar, autocomplete: "off" %>
-    <div class="underline"></div>
-    <%= f.label "avatar" %>
-  </div>
+    <div class="user-edit-group">
+      <%= f.file_field :avatar, autocomplete: "off" %>
+      <div class="underline"></div>
+      <%= f.label "avatar" %>
+    </div>
 
-  <div class="user-edit-group">
-    <%= f.text_field "nick_name", autocomplete: "off" %>
-    <div class="underline"></div>
-    <%= f.label "暱稱" %>
-  </div>
+    <div class="user-edit-group">
+      <%= f.text_field "nick_name", autocomplete: "off" %>
+      <div class="underline"></div>
+      <%= f.label "暱稱" %>
+    </div>
 
-  <div class="user-edit-group">
-    <%= f.text_field "email", autocomplete: "off" %>
-    <div class="underline"></div>
-    <%= f.label "信箱" %>
-  </div>
+    <div class="user-edit-group">
+      <%= f.text_field "email", autocomplete: "off" %>
+      <div class="underline"></div>
+      <%= f.label "信箱" %>
+    </div>
 
-  <div class="user-edit-group textarea-wrap">
-    <%= f.text_area "description", autocomplete: "off" ,rows: "4"  %>
-    <div class="underline"></div>
-    <%= f.label "描述",class:"desc-label" %>
-  </div>
+    <div class="user-edit-group textarea-wrap">
+      <%= f.text_area "description", autocomplete: "off" ,rows: "4"  %>
+      <div class="underline"></div>
+      <%= f.label "描述",class:"desc-label" %>
+    </div>
 
-  <%= f.submit "更新個人資料", id: 'user_edit_btn' %>
+    <%= f.submit "更新個人資料", id: 'user_edit_btn' %>
   <% end %>
 </div>

@@ -1,15 +1,20 @@
-<div class="user-header section">
+<%# <div class="user-header section">
   <div class="user-name">
     <%= current_user.nick_name %>
-  </div>
+<div class="user-header">
+  <%= render partial: "shared/title_with_prev", locals: { title: current_user.nick_name, css: "user-name" } %>
 </div>
-<div class = "char-search-bar section">
-  <div class="chat-search-container">
-    <%= render partial: "searches/chat_form" %>
-    <div class = "search-chat-area">
+
+
+
+<div class="wrap">
+  <div class = "char-search-bar section">
+    <div class="chat-search-container">
+      <%= render partial: "searches/chat_form" %>
+      <div class = "search-chat-area">
+      </div>
     </div>
   </div>
-</div>
 
   <div class = "chat-user-list section serach-section" data-user="<%= current_user.id%>">
     <div class="chat-user-container">
@@ -41,3 +46,4 @@
       <% end %>
     </div>
   </div>
+</div>

@@ -1,4 +1,5 @@
-<h4 class="post-index-title"><%= @user.nick_name %>的貼文</h4>
+<%= render partial: "shared/title_with_prev", locals: { title: "#{@user.nick_name}的貼文", css: "" } %>
+
 <div class="post-load-page" style="overflow: auto;">
   <div class="container-fluid container-md">
     <div class=" row justify-content-center">
