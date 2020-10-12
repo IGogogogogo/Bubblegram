@@ -2,11 +2,7 @@ class CommentsController < ApplicationController
   def create
     @post = Post.find(params[:post_id])
     @comment = @post.comments.new(comment_params)
-    if @comment.save
-      redirect_to post_path(@post), notice: "create comment success"
-    else
-      redirect_to post_path(@post), notice: "create comment false"
-    end
+    @comment.save
   end
 
   private
