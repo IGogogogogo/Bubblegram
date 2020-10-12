@@ -3,7 +3,7 @@ import Swal from "sweetalert2"
 
 document.addEventListener("turbolinks:load", () => {
   // console.log("123")
-  const carouselTime = 3000 ////限動輪播時間
+  const carouselTime = 4000 ////限動輪播時間
   const storiesSection = document.querySelector(".stories")
 
   if(!storiesSection) return
@@ -36,7 +36,8 @@ document.addEventListener("turbolinks:load", () => {
 
         if (index == "last") {    ////如果是請求上一個使用者限動會跳到他最後的現動
           index = data.stories.main.length - 1
-          $('.owl-carousel').trigger("to.owl.carousel", [index, 1])
+          $('.owl-carousel').trigger("to.owl.carousel", [index, 1])////跳到index限時動態
+          storiesSection.dataset.storyIndex = index
         }
       },
       error: function(errors) {
@@ -66,7 +67,6 @@ document.addEventListener("turbolinks:load", () => {
 
     if(Number(storiesSection.dataset.storyIndex)+ 1 == Number(storiesSection.dataset.storiesCount)){
       setTimeout( () => {     ///////輪播時間結束會跳下個使用者限時動態
-        console.log("123")
         toNextUserStories()
       }, carouselTime)
     }
@@ -107,27 +107,10 @@ document.addEventListener("turbolinks:load", () => {
 
     const dots = document.querySelector(".owl-dots")
     dots.classList.add("time-dots")
-    // dots.style.position = "absolute"
-    // dots.style.top = "5px"
-    // dots.style.width = "100%"
-    // dots.style.display = "flex"
-    // dots.style.zIndex = "7"
-
-    // if (window.innerWidth > 770) {   /////rwd問題：寬度變化時，css抓不到owl元素，重新整理後才能改變白線 css
-    //   console.log("423")
-    //   dots.style.top = "63px"
-    //   dots.style.height = "30px"
-    //   dots.style.backgroundColor = "#262626"
-    //   dots.style.alignItems = "center"
-    // }
 
     const dotsArray = Array.from(document.querySelectorAll(".owl-dot"))
     for(let i = 0; i< dotsArray.length; i++) {
       dotsArray[i].classList.add("time-dot")
-      // dotsArray[i].style.flexGrow = "1"
-      // dotsArray[i].style.height = "2px"
-      // dotsArray[i].style.backgroundColor = "red"
-      // dotsArray[i].style.margin = "0 2px"
     }
 
     dotsArray[0].classList.add("time-active")
@@ -261,14 +244,12 @@ document.addEventListener("turbolinks:load", () => {
   function delStory(modalFun, e) {
     e.preventDefault()
     modalFun.style.display = "none"
-    console.log("del")
 
     const storyId = storiesSection.dataset.storyId
     const storyIndex = storiesSection.dataset.storyIndex
     const userName = storiesSection.dataset.userName
 
     const url = `/users/${userName}/stories/${storyId}`
-    console.log(url)
 
     Swal.fire({
       title: '你確定要刪除嗎？',
@@ -280,7 +261,6 @@ document.addEventListener("turbolinks:load", () => {
       cancelButtonText: '取消'
     }).then((result) => {
       if (result.isConfirmed) {
-        console.log(result)
         //前端畫面刪除
         $(".owl-carousel").trigger('remove.owl.carousel', [storyIndex]).trigger('refresh.owl.carousel');
 
