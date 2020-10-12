@@ -1,1 +1,3 @@
-document.querySelector(".user-item-<%= @user.id %> .btn-follow").innerHTML = '<%= j render(partial: "/users/user_follow", locals: {user: @user}) %>'
+document.querySelectorAll(".user-item-<%= @user.id %> .btn-follow").forEach((btn)=>{
+  btn.innerHTML = '<%= j render(partial: "/users/user_follow", locals: {user: @user}) %>'
+})

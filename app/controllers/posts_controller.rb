@@ -2,9 +2,10 @@ class PostsController < ApplicationController
   before_action :find_post, only: [:show, :edit, :update, :destroy, :favourite]
 
   def index
-    per_count = 20
+    per_count = 10
     @user = User.find(params[:user_id])
     @posts = @user.posts.includes(:thumbs_up_users).order("created_at DESC").limit(per_count)
+    @has_more_posts = @posts.count >= per_count
   end
 
   def show
@@ -16,13 +17,13 @@ class PostsController < ApplicationController
   def load_posts     #依照kaminari page & type 讀取新貼文
     @user = User.find(params[:user_id]) if params[:user_id]
     @partial = "/posts/post"
-    per_count = 20
+    per_count = 10
 
     if params[:type] == "following_posts"
       users = User.viewable_users(current_user)
-      @posts = Post.viewable_posts(users).includes(:user).order("created_at DESC").page(params[:page]).per(per_count)
+      @posts = Post.viewable_posts(users).includes(:user, :thumbs_up_users).order("created_at DESC").page(params[:page]).per(per_count)
     elsif params[:type] == "my_posts"
-      @posts = @user.posts.order("created_at DESC").page(params[:page]).per(per_count)
+      @posts = @user.posts.includes(:thumbs_up_users).order("created_at DESC").page(params[:page]).per(per_count)
     end
 
     respond_to do |format|
@@ -86,7 +87,7 @@ class PostsController < ApplicationController
   def update
     @post.assign_attributes(post_params)
     authorize @post
-    @post.taged_users = User.where(id: params[:post][:taged_users])
+
     if @post.save
       redirect_to post_path(@post), notice: '文章更新成功'
     else
@@ -119,7 +120,7 @@ class PostsController < ApplicationController
   end
 
   def find_tag_users
-    @users = User.all.map{ |u| ["@#{u.nick_name}", u.id] }
+    @users = current_user.followings.map{ |u| ["@#{u.nick_name}", u.id] }
     @taged_id = @post.taged_users.map{ |u| u.id }
   end
 

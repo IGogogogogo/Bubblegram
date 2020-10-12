@@ -20,6 +20,7 @@ import "./user_pic_upload"
 import "./validation"
 import "./sign_up"
 import "./reset_container.js"
+import "./prev_and_reload_page"
 
 import Swiper, { Pagination } from 'swiper';
 import gsap from "gsap"

@@ -1,10 +1,11 @@
 <%= render "form" %>
 
 <div class="post-load-page">
+  <h4>精選貼文</h4>
   <div class="overflow-hidden">
     <div class="form-row post-load-target rand-posts">
       <%= render partial: "/posts/post_img", collection: @posts, as: :post %>
-      <%= render partial: "/shared/loading" %>
+        <%= render partial: "/shared/loading" %>
     </div>
   </div>
 </div>

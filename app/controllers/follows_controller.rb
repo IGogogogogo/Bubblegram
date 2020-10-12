@@ -3,10 +3,12 @@ class FollowsController < ApplicationController
 
   def create
     @user.fans << current_user          #把自己加入對方的粉絲中
+    FollowJob.perform_later(current_user, current_user.followings.count)
   end
 
   def destroy
     @user.fans.destroy(current_user)    #把自己從對方的粉絲中刪除
+    FollowJob.perform_later(current_user, current_user.followings.count)
   end
 
   private
