@@ -31,8 +31,14 @@ class StoriesController < ApplicationController
   end
 
   def load_stories
-    @user_name = params[:user]
-    @user = User.find(params[:user])
+    if params[:user]
+      @user_name = params[:user]
+      @user = User.find(params[:user])
+    else
+      @user_name = current_user.nick_name
+      @user = current_user
+    end
+
     @current_user = current_user
     #找到追蹤中且有限動的使用者，依照建立時間排序
     @viewable_users = [current_user].concat(current_user.followings.select{|u| u.stories.stories_oneday.count > 0}.sort_by(&:created_at).reverse).map(&:nick_name)
@@ -65,7 +71,7 @@ class StoriesController < ApplicationController
     @story = current_user.stories.new(story_params)
     authorize @story
     if @story.save
-      redirect_to user_stories_path, notice: "限時動態新增成功"
+      redirect_to stories_path, notice: "限時動態新增成功"
     else
       render :new
     end

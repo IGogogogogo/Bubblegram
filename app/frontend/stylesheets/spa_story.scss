@@ -151,7 +151,7 @@
         // background-color: red;
         background-color: rgba(255, 255, 255, 0.6);
         flex-grow: 1;
-        height: 2px;
+        height: 3px;
         width: 100%;
         margin: 5px 3px;
         border-radius: 2px;
@@ -220,7 +220,7 @@
       background: #262626;
 
       .member-title{
-        // height: 100px;
+        height: 6vh;
 
         .member-pic{
           width: 40px;
@@ -229,15 +229,16 @@
       }
     }
 
-    .dots{
-      position: absolute;
-      left: 0;
-      bottom: 7px;
-    }
+    // .dots{
+    //   position: absolute;
+    //   left: 0;
+    //   bottom: 7px;
+    // }
 
     .owl-carousel {
       .time-dots{
-        top: 72px;
+        position: absolute;
+        top: 9vh;
       }
     }
   }
