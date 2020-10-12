@@ -60,7 +60,7 @@ document.addEventListener("turbolinks:load", () => {
     carouselStart()
     createDots()
     addCarouselChangeEvent()
-    createHeaderBtn()
+    createHeaderBtn(stories)
     document.querySelector(".owl-prev").addEventListener("click", toPrevUserLastStory)
     document.querySelector(".owl-next").addEventListener("click", toNextUserStories)
   }
@@ -73,20 +73,6 @@ document.addEventListener("turbolinks:load", () => {
     memberImg.src = stories.user_avatar
     memberName.textContent = stories.user_name
     storyTime.textContent = stories.main[0].time
-
-    //  判斷使用者本人有new頁面
-    const userName = stories.user_name
-    const urlNew = `/users/${userName}/stories/new`
-    console.log(urlNew)
-    const storyNew = document.querySelector(".member-pic a")
-    // console.log(stories.is_self)
-    if (stories.is_self === true ){
-      console.log("uuuu")
-      storyNew.setAttribute("href", urlNew)
-      storyNew.classList.add("add-story")
-    }
-
-
   }
 
   /////建立限動元素
@@ -225,17 +211,32 @@ document.addEventListener("turbolinks:load", () => {
     })
   }
 
-  //////建立功能按鈕
-  function createHeaderBtn() {
+  //////建立功能按鈕 +  判斷使用者本人有new頁面
+  function createHeaderBtn(stories) {
     const btnDot = document.querySelector('.btn-dot')
     const modalFun = document.querySelector('.modal-fun')
     const modalDel = document.querySelector('.modal-del')
+    const storyNew = document.querySelector(".member-pic a")
+    ////判斷使用者本人有
     const isOwner = storiesSection.dataset.userName == storiesSection.dataset.currentUser
 
+
+
     if(isOwner) {
-      btnDot.style.display = "block"   // 顯示點點點
+      // 顯示點點點
+      btnDot.style.display = "block"
+
+      // 加入story new連結
+      const userName = stories.user_name
+      const urlNew = `/users/${userName}/stories/new`
+      console.log(urlNew)
+      console.log("uuuu")
+      storyNew.setAttribute("href", urlNew)
+      storyNew.classList.add("add-story")
     } else {
       btnDot.style.display = "none"
+      storyNew.setAttribute("href", `/users/${userName}`)
+      storyNew.classList.remove("add-story")
     }
 
     btnDot.addEventListener("click", function(){
