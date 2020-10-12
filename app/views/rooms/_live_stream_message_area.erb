@@ -9,7 +9,7 @@
       <label for="submit" name="text-submit"><i class="far fa-paper-plane"></i></label>
       <%= f.submit "傳送" ,id: "submit", class:"disappear", disabled: true %>
     <% end %>
-   <%= form_with(model: @message, url: messages_path(room_id: @room)) do |f| %>
+   <%= form_with(url: heart_messages_path(room_id: @room)) do |f| %>
       <%= f.text_field :content, type: "hidden", value: "heart"%>
       <label for="heart-submit" name="heart-submit"><i class="fas fa-heart"></i></label>
       <%= f.submit "傳送" ,id: "heart-submit", class:"disappear"%>

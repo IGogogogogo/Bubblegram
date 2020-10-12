@@ -27,6 +27,11 @@ class MessagesController < ApplicationController
     end
   end
 
+  def heart
+    live_stream_room = Room.find(params[:room_id])
+    SendHeartJob.perform_later(live_stream_room.id, params[:content])
+  end
+
 private
   def params_message
     params.require(:message).permit(:content, :image).merge(user: current_user)

@@ -69,17 +69,17 @@ export default class extends Controller {
   }
 }
 
-// window.addEventListener('beforeunload', function (e) {
-//   videoDiv = document.querySelector("#pub-video")
-//   if(!videoDiv)return
-//   e.preventDefault
-//     let token = document.querySelector("meta[name=csrf-token]").content
-//     axios.defaults.headers.common['X-CSRF-Token']= token
-//     axios({
-//       url:`/rooms/${roomId}/destroy_room`,
-//       method:"post"
-//     })
-//   });
+window.addEventListener('beforeunload', function (e) {
+  videoDiv = document.querySelector("#pub-video")
+  if(!videoDiv)return
+  e.preventDefault
+    let token = document.querySelector("meta[name=csrf-token]").content
+    axios.defaults.headers.common['X-CSRF-Token']= token
+    axios({
+      url:`/rooms/${roomId}/destroy_room`,
+      method:"post"
+    })
+  });
 
 
 // 之後要實作 觀看人數

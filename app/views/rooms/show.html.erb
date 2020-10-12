@@ -13,7 +13,7 @@
 </div>
 <%= render partial: "rooms/live_stream_message_area", locals: {messages: @messages, message: @message, room: @room } %>
 <%= link_to root_path, data: {turbolinks: false}, class: 'back-link' do %>
-     <i class="fas fa-sign-out-alt"></i>
+     <i class="fas fa-angle-left"></i>
 <% end %>
 <template id="message-template">
    <div class = "message">
