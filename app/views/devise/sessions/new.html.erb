@@ -1,6 +1,13 @@
+<% if alert %>
+<div class="alert alert-info alert-dismissible fade show w-100" role="alert" id="login-alert">
+<%= alert %>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<% end %>
 
 <div id="home">
-<p class="alert" style="color: red;"><%= alert %></p>
   <div id='index-logo'>
     <%= image_tag("/text_logo.svg",class: "w-100") %>
   </div>
@@ -9,7 +16,7 @@
 
   <%= form_with(model: resource, as: resource_name, url: session_path(resource_name), local: true, html: { novalidate: true, class: 'needs-validation' }) do |f| %>
 
-  <div class="form-group position-relative mb-2">
+  <div class="form-group position-relative mb-2 d-flex flex-wrap align-items-center justify-content-between">
     <label for="user_email" class="email-label">
       <i class="fas fa-envelope"></i>
     </label>
@@ -19,12 +26,9 @@
     </div>
   </div>
 
-  <div class="form-group position-relative mb-4">
+  <div class="form-group position-relative mb-4 d-flex flex-wrap align-items-center justify-content-between">
     <label for="user_password" class="password-label"><i class="fas fa-unlock-alt"></i></label>
-    <%= f.password_field :password, autocomplete: "current-password", class: 'form-control rounded-pill pl-3', required: true, placeholder: '請輸入密碼' %>
-     <div class="invalid-feedback">
-        請輸入正確的密碼
-    </div>
+    <%= f.password_field :password, autocomplete: "current-password", class: 'form-control rounded-pill pl-3 w-75', required: true, placeholder: '請輸入密碼' %>
   </div>
 
   <div class="actions">

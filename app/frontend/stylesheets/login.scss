@@ -5,12 +5,19 @@
 }
 .password-label,
 .email-label{
-  margin: 0 0 0 15px;
-  font-size: 22px;
+  font-size: 40px;
   color: rgb(127, 207, 214);
   // rgb(92, 187, 195)
 }
-
+#user_email,
+#user_password{
+width: 85% !important;
+}
+#login-alert{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 .btn-login{
   background: rgb(127, 207, 214);
   color: #ffffff;
