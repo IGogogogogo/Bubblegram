@@ -1,10 +1,26 @@
-<div class="user-story">
-  <%= link_to user[:path], data: {turbolinks: false} do %>
-  <div class="user-video">
-    <%= image_tag user[:user].avatar.url, class: 'img-fluid rounded-circle' if user[:user].avatar.present? %>
+<% if  user[:user].exist_room? %> 
+  <!-- 有直播 render 有直播中的div-->
+  <div class="user-story">
+    <%= link_to user[:path], data: {turbolinks: false} do %>
+    <div class="user-video">
+      <%= image_tag user[:user].avatar.url, class: 'img-fluid rounded-circle' if user[:user].avatar.present? %>
+      <div class="streaming-text">直播中</div>
+    </div>
+    <div class="user-name text-black">
+      <small><%= user[:user].nick_name %></small>
+    </div>
+    <% end %>
   </div>
-  <div class="user-name text-black">
-    <small><%= user[:user].nick_name %></small>
+<% else  %>
+  <!--  render story-->
+  <div class="user-story">
+    <%= link_to user[:path], data: {turbolinks: false} do %>
+    <div class="user-video">
+      <%= image_tag user[:user].avatar.url, class: 'img-fluid rounded-circle' if user[:user].avatar.present? %>
+    </div>
+    <div class="user-name text-black">
+      <small><%= user[:user].nick_name %></small>
+    </div>
+    <% end %>
   </div>
-  <% end %>
-</div>
+<% end %>
