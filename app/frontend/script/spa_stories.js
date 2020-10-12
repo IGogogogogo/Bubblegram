@@ -75,24 +75,17 @@ document.addEventListener("turbolinks:load", () => {
     storyTime.textContent = stories.main[0].time
 
     //  判斷使用者本人有new頁面
-    // /users/:user_id/stories/new
-    // const userId = stories.user_id
-    // const urlNew = `/users/${userId}/stories/new`
-    // const storyNew = document.querySelector(".member-pic a")
-    // if (storyNew === stories.is_self){
-    // storyNew.classList.add("add-story") && storyNew.setAttribute("herf",urlNew)}else{
+    const userName = stories.user_name
+    const urlNew = `/users/${userName}/stories/new`
+    console.log(urlNew)
+    const storyNew = document.querySelector(".member-pic a")
+    // console.log(stories.is_self)
+    if (stories.is_self === true ){
+      console.log("uuuu")
+      storyNew.setAttribute("href", urlNew)
+      storyNew.classList.add("add-story")
+    }
 
-    // }
-
-
-
-    // Rails.ajax({
-    //   url: url,
-    //   type: "",
-    //   success: function(){
-    //     console.log("success:", url)
-    //   }
-    // })
 
   }
 
