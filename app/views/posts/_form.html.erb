@@ -40,7 +40,7 @@
   <%= form.label :content, '文章內文' %>
 </div>
 
-<div class="form-group post-tags" data-user-name="<%= current_user.nick_name %>"  data-legal-users="<%= @legal_users %>">
+<div class="form-group post-tags">
   <%= form.label :taged_user_ids, '標註人名' %>
   <select name="post[taged_user_ids][]" multiple="multiple" class="form-control taged_users" id="post_taged_user_ids">
     <%= options_for_select(users, taged_id) %>

@@ -121,7 +121,6 @@ class PostsController < ApplicationController
 
   def find_tag_users
     @users = current_user.followings.map{ |u| ["@#{u.nick_name}", u.id] }
-    @legal_users = current_user.followings.map{ |u| "@#{u.nick_name}" }
     @taged_id = @post.taged_users.map{ |u| u.id }
   end
 
