@@ -19,8 +19,8 @@ class PagesController < ApplicationController
       ].concat(
         # 若following_users 有直播，轉到直播的show，若沒有，則到限時動態
         @stories_user.map do |user|
-          { user: user, path: user.exist_room? ? room_path(id: user.room.slug) : stories_path(user: user.nick_name) }
-        end
+          { user: user, path: user.exist_room? ? room_path(id: user.room.slug) :  stories_path(user: user.nick_name) }
+        end.sort{|a,b| a[:path].match?('stories') and !b[:path].match?('stories') ? 1 : 0}
       )
 
     end
