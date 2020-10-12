@@ -107,15 +107,13 @@
       button {
         background-color: rgba(255, 255, 255, 0.6);
         color: black;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         width: 25px;
         height: 25px;
+        text-align: center;
+        line-height: 25px;
         border-radius: 50%;
         font-size: 35px;
         outline: none;
-
         span{
           position: relative;
           top: -3px;

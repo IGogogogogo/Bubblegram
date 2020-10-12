@@ -3,7 +3,7 @@ import Swal from "sweetalert2"
 
 document.addEventListener("turbolinks:load", () => {
   // console.log("123")
-  const carouselTime = 4000 ////限動輪播時間
+  const carouselTime = 5000 ////限動輪播時間
   const storiesSection = document.querySelector(".stories")
 
   if(!storiesSection) return
