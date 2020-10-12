@@ -1,8 +1,6 @@
 document.addEventListener("turbolinks:load", () => {
-  const dot = document.querySelector(".owl-dot")
-  if(dot){ return }         ///處理輪播點重複出現問題
-
-  $('.owl-carousel').owlCarousel({
+  ///////加入class用來判斷以執行過的輪播屬性
+  $('.owl-carousel:not(.owl-carousel-loaded)').addClass('owl-carousel-loaded').owlCarousel({
     loop: false,
     margin: 0,
     nav: false,
