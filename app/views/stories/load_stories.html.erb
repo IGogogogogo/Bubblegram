@@ -1,4 +1,4 @@
-<section class="stories w-100 m-auto"
+<section class="stories"
   data-current-user="<%= @current_user.nick_name %>"
   data-user-name="<%= @user_name %>"
   data-prev-user=""
@@ -6,24 +6,24 @@
   data-story-index="0"
   data-story-id=""
 >
-  <header class="member  w-100 py-2 px-2">
-    <div class="member-title d-flex align-items-center">
+  <header class="member py-2 px-2">
+    <div class="member-title">
       <div class="member-pic">
         <a>
-          <img src="" class="rounded-circle w-100">
+          <img src="">
         </a>
       </div>
 
-      <div class="member-name ml-2 mr-2">
+      <div class="member-name">
         <span>User Name</span>
       </div>
 
       <!--時間---->
-      <div class="story-time create_time">
+      <div class="story-time">
         <span>Story Time</span>
       </div>
 
-      <div class="header-btn ml-auto d-flex">
+      <div class="header-btn">
         <!-----選單--->
         <button class="btn-dot" style="display: none;">
           <i class="fas fa-ellipsis-h"></i>

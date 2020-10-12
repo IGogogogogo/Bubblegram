@@ -5,7 +5,7 @@ document.addEventListener("turbolinks:load", () => {
   $('.owl-carousel').owlCarousel({
     loop: false,
     margin: 0,
-    nav: true,
+    nav: false,
     animateOut: 'fadeOut',
     responsive:{
       0:{

@@ -14,24 +14,6 @@
     color: #fff;
     padding-top: 50% 50%;
 
-    // .dots{
-    //   display: flex;
-    //   width: 100%;
-    //   background-color: transparent;
-
-    //   .dot{
-    //     background-color: rgba(255, 255, 255, 0.6);
-    //     height: 2px;
-    //     width: 100%;
-    //     margin: 5px 3px;
-    //     border-radius: 2px;
-    //   }
-
-    //   .active{
-    //     background-color:rgba(255, 255, 255, 1);
-    //   }
-    // }
-
     .member-title{
       display: flex;
       align-items: center;
@@ -65,8 +47,8 @@
         }
       }
 
-      .user-name{
-        margin: 0 5px;
+      .member-name{
+        margin: 0 10px;
       }
 
       .story-time{
@@ -75,6 +57,7 @@
     }
 
     .header-btn {
+      display: flex;
       margin-left: auto;
 
       .btn-dot {
@@ -148,7 +131,6 @@
       z-index: 7;
 
       .time-dot{
-        // background-color: red;
         background-color: rgba(255, 255, 255, 0.6);
         flex-grow: 1;
         height: 3px;
@@ -162,7 +144,6 @@
       }
     }
   }
-
 
   .modal-fun{
     background-color: rgba(127, 207, 214, .6);
@@ -228,12 +209,6 @@
         }
       }
     }
-
-    // .dots{
-    //   position: absolute;
-    //   left: 0;
-    //   bottom: 7px;
-    // }
 
     .owl-carousel {
       .time-dots{

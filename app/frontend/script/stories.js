@@ -63,6 +63,14 @@ document.addEventListener("turbolinks:load", () => {
     createHeaderBtn(stories)
     document.querySelector(".owl-prev").addEventListener("click", toPrevUserLastStory)
     document.querySelector(".owl-next").addEventListener("click", toNextUserStories)
+
+    if(Number(storiesSection.dataset.storyIndex)+ 1 == Number(storiesSection.dataset.storiesCount)){
+      setTimeout( () => {     ///////輪播時間結束會跳下個使用者限時動態
+        console.log("123")
+        toNextUserStories()
+      }, carouselTime)
+    }
+
   }
 
   /////加入 使用者資料和現動時間
@@ -127,22 +135,23 @@ document.addEventListener("turbolinks:load", () => {
 
    ///輪播事件////////////////////////////////////////
   function addCarouselChangeEvent() {
-    $('.owl-carousel').on('changed.owl.carousel', function() {
-      // console.log("changed")
+    $('.owl-carousel').on('translated.owl.carousel', function() { ////owl carousel 輪播結束事件
+      // console.log("translated")
       changeActiveDot()
 
-      setTimeout(() => {  //////用setTimeout 才找得到 active item
-        const storyActive = storiesSection.querySelector(".owl-item.active div")
+      const storyActive = storiesSection.querySelector(".owl-item.active div")
 
-        storiesSection.dataset.storyIndex = storyActive.dataset.storyIndex   ////設定index 用於判斷要不要請求另一個使用者限動
-        storiesSection.dataset.storyId = storyActive.dataset.storyId   //////設定story id 用於刪除路徑
-        changeStoryTime(storyActive.dataset)
-        const isLastStory = Number(storyActive.dataset.storyIndex) + 1 == Number(storiesSection.dataset.storiesCount)
+      storiesSection.dataset.storyIndex = storyActive.dataset.storyIndex   ////設定index 用於判斷要不要請求另一個使用者限動
+      storiesSection.dataset.storyId = storyActive.dataset.storyId   //////設定story id 用於刪除路徑
+      changeStoryTime(storyActive.dataset)
+      const isLastStory = Number(storyActive.dataset.storyIndex) + 1 == Number(storiesSection.dataset.storiesCount)
 
-        if(isLastStory){
-          document.querySelector(".owl-next").addEventListener("click", toNextUserStories)
-        }
-      }, 0)
+      if(isLastStory){
+        document.querySelector(".owl-next").addEventListener("click", toNextUserStories)
+        setTimeout( () => {
+          toNextUserStories()
+        }, carouselTime)
+      }
     })
   }
 
@@ -219,8 +228,6 @@ document.addEventListener("turbolinks:load", () => {
     const storyNew = document.querySelector(".member-pic a")
     ////判斷使用者本人有
     const isOwner = storiesSection.dataset.userName == storiesSection.dataset.currentUser
-
-
 
     if(isOwner) {
       // 顯示點點點
