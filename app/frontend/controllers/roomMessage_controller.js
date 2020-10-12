@@ -42,7 +42,7 @@ export default class extends Controller {
               let heart = document.createElement('div')
               // console.log(video.offsetHeight)
               heart.className = 'heart'
-              heart.style.bottom = -50 + "px"
+              heart.style.bottom = 0 + "px"
               heart.style.opacity = "1"
               // heart.style.animation = "heart-rising 3s"
               video.appendChild(heart)

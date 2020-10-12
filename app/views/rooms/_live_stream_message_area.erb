@@ -2,7 +2,8 @@
   <div class="message-text-area">
     <%# <%= render partial: "messages/live_stream_message", collection: @messages, as: :message %>
   </div>
-  <div class="searchbar">
+</div>
+  <div class="live-stream-form-group">
     <%= form_with(model: @message, url: messages_path(room_id: @room)) do |f| %>
       <%= f.text_field :content, placeholder: "發送訊息........", autocomplete: "off"%>
       <label for="submit" name="text-submit"><i class="far fa-paper-plane"></i></label>
@@ -14,4 +15,3 @@
       <%= f.submit "傳送" ,id: "heart-submit", class:"disappear"%>
     <% end %>
   </div>
-</div>

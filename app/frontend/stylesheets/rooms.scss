@@ -27,7 +27,7 @@
   .heart {
     position: absolute;
     bottom: -100px;
-    right: 50px;
+    right: 25px;
     opacity: 0;
     background-color: pink;
     height: 20px;
@@ -90,7 +90,7 @@
   width: 60%;
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: 50px;
   padding-left: 5px;
   z-index: 12;
 
@@ -151,10 +151,6 @@
             font-size:12px;
           }
         }
-
-        .text-content{
-
-        }
       }
     }
   }
@@ -162,66 +158,92 @@
     display: none;
   }
 
-  .searchbar{
-    margin-top: 5px;
-
-    form:first-child{
-      position: relative;
-      display: flex;
-      align-items: center;
-      border:1px solid rgb(78, 78, 78);
-      border-radius: 10px;
-      background-color: white;
-      width: 100%;
-
-      input[type="text"]{
-        flex-grow: 1;
-        padding:5px 0 5px 10px;
-        background-color: transparent;
-        border: 0px;
-        color: black;
-      }
-
-      input[type="text"]::placeholder{
-        color:black;
-      }
-
-      input[type="text"]:focus{
-        outline:none;
-        background-color: transparent;
-      }
-
-      label[name='text-submit']{
-        cursor: pointer;
-        font-size: 25px;
-        color: black;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 10px;
-        margin: auto;
-      }
-      input[type="submit"]{
-        margin-left: auto;
-        display: none;
-      }
-    }
-    form:last-child{
-      label[name='heart-submit']{
-        cursor: pointer;
-        font-size: 25px;
-        color: pink;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 30px;
-        margin: auto;
-      }
-      #heart-submit{
-        margin-left: auto;
-        display: none;
-      }
-    }
-
-  }
 }
+    .live-stream-form-group{
+      margin-top: 5px;
+      display: flex;
+      // background-color: #fff;
+      // border:1px solid rgb(78, 78, 78);
+      border-radius: 10px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 12;
+      padding: 0 15px 0 0;
+
+      form:first-child{
+        position: relative;
+        display: flex;
+        align-items: center;
+        border:1px solid rgb(78, 78, 78);
+        border-radius: 10px;
+        background-color: white;
+        margin-right: 15px;
+        flex-grow: 1;
+
+
+        input[type="text"]{
+          flex-grow: 1;
+          padding:5px 40px 5px 10px;
+          background-color: transparent;
+          border: 0px;
+          color: black;
+        }
+
+        input[type="text"]::placeholder{
+          color:black;
+        }
+
+        input[type="text"]:focus{
+          outline:none;
+          background-color: transparent;
+        }
+
+        label[name='text-submit']{
+          cursor: pointer;
+          font-size: 25px;
+          color: black;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 10px;
+          margin: auto;
+        }
+        input[type="submit"]{
+          margin-left: auto;
+          display: none;
+        }
+      }
+
+      form:last-child{
+        background: radial-gradient(circle at 100px 100px, rgb(248, 21, 21), rgb(247, 148, 148));
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        position: relative;
+
+        label[name='heart-submit']{
+          cursor: pointer;
+          font-size: 25px;
+          color: white;
+          text-align: center;
+          position: absolute;
+          top: 0;
+          left:0;
+          bottom: 0;
+          right: 0;
+          // right: 30px;
+          margin: auto;
+
+          .fa-heart{
+            vertical-align: middle;
+          }
+        }
+        #heart-submit{
+          // margin-left: auto;
+          display: none;
+        }
+      }
+
+    }
