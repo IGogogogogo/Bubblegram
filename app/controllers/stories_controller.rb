@@ -85,7 +85,7 @@ class StoriesController < ApplicationController
     if(stories_count == 0)
       redirect_to root_path, notice: "已經沒有限時動態"
     else
-      redirect_to user_stories_path, notice: "限時動態刪除成功"
+      redirect_to stories_path, notice: "限時動態刪除成功"
     end
   end
 

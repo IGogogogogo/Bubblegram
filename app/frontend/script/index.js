@@ -6,9 +6,7 @@ import "select2/dist/css/select2.css"
 import "../stylesheets/application"
 import "@fortawesome/fontawesome-free/js/all";
 
-// import "./stories.js"
-import "./spa_stories.js"
-// import "./stories_maker"
+import "./stories.js"
 import "owl.carousel"
 import "./search.js"
 import "./preview_photo"

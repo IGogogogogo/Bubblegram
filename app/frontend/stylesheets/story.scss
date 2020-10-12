@@ -1,124 +1,167 @@
 .stories {
-//   width: 100%;
-//   height: 100vh;
-//   max-width: 500px;
-//   margin: auto;
-//   display: flex;
-//   flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
 
-//   .member{
-//     display:flex;
-//     align-items: center;
-//     background: linear-gradient(180deg, #eee 0%, transparent);
-//     color: #fff;
-//     position: absolute;
-//     z-index: 1;
-//     width: 100%;
-//     max-width: 500px;
-//     padding: 5px;
+  .member {
+    position: absolute;
+    top: 0;
+    z-index: 3;
+    // background: linear-gradient(180deg, #777 0%, transparent);
+    max-width: 500px;
+    width: 100%;
+    color: #fff;
+    padding-top: 50% 50%;
 
-//     .member-pic{
-//       width: 50px;
-//       height: 50px;
-//       border-radius: 100%;
-//       padding: 5px;
+    // .dots{
+    //   display: flex;
+    //   width: 100%;
+    //   background-color: transparent;
 
-//       .add-story{
-//         position: relative;
+    //   .dot{
+    //     background-color: rgba(255, 255, 255, 0.6);
+    //     height: 2px;
+    //     width: 100%;
+    //     margin: 5px 3px;
+    //     border-radius: 2px;
+    //   }
 
-//         &:after{
-//           height: 15px;
-//           width: 15px;
-//           position: absolute;
-//           content: "+";
-//           color: white;
-//           background-color: rgb(127, 207, 214);
-//           left: 70%;
-//           top: 70%;
-//           border-radius: 50%;
-//           text-align: center;
-//           line-height: 13px;
-//         }
-//       }
-//     }
+    //   .active{
+    //     background-color:rgba(255, 255, 255, 1);
+    //   }
+    // }
 
-//     // .create_time{
-//     //   color: rgb(255, 255, 255, 0.6);
-//     // }
+    .member-title{
+      display: flex;
+      align-items: center;
+      padding: 5px;
 
-//     .header-btn{
-//       display: inline-block;
-//       margin-left: auto;
-//       background-color: transparent;
-//       color: rgb(127, 207, 214);
-//       border-color: transparent;
-//       padding: 10px;
-//       font-size: 22px;
-//       outline: none !important;
-//     }
+      .member-pic{
+        width: 50px;
+        padding: 7px;
 
-//     .goroot{
-//       right: 10px;
-//       font-size: x-large;
-//       background-color: transparent;
-//       border: none;
-//       color: whitesmoke;
-//       outline: none !important;
-//     }
-//   }
+        img{
+          width: 100%;
+          border-radius: 100%;
+        }
 
-//   .story-pic{
-//     height: 100%;
+        .add-story{
+          position: relative;
 
-//     .story-img{
-//       height: 100vh;
+          &:after{
+            height: 15px;
+            width: 15px;
+            position: absolute;
+            content: "+";
+            color: white;
+            background-color: rgb(127, 207, 214);
+            left: 70%;
+            top: 80%;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 13px;
+          }
+        }
+      }
 
-//       img {
-//         width: 100%;
-//         height: 100%;
-//         object-fit: cover;
-//       }
-//     }
-//   }
+      .user-name{
+        margin: 0 5px;
+      }
 
-//   .carousel-item img{
-//     height: 100%;
-//   }
+      .story-time{
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
 
-//   .carousel-indicators{
-//    bottom: initial;
-//   }
+    .header-btn {
+      margin-left: auto;
 
-//   .control {
-//     background-color: #000;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     width: 30px;
-//     height: 30px;
-//     border-radius: 50%;
-//   }
+      .btn-dot {
+        display: inline-block;
+        margin-left: auto;
+        background-color: transparent;
+        color: rgb(127, 207, 214);
+        border-color: transparent;
+        padding: 10px;
+        font-size: 22px;
+        outline: none;
+      }
 
+      .btn-home {
+        font-size: x-large;
+        background-color: transparent;
+        border: none;
+        color: whitesmoke;
+        outline: none;
+        position: relative;
+      }
+    }
+  }
 
-//   // .modal-fun.open{
-//   //   display: block;
-//   // }
+  .story-pic img{
+    height: 100vh;
+  }
 
+  .owl-carousel {
+    .owl-stage {
+      overflow: hidden;
+      height: 100vh;
+      .owl-item {
+        width: 100%;
+      }
+    }
 
+    .owl-nav{
+      position: absolute;
+      top: 70px;
+      width: 100%;
+      height: 90%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-//   /* RWD */
-//   @media screen and (min-width: 768px) {
-//     .member{
-//       position: static;
-//       background: #262626;
-//     }
+      button {
+        background-color: rgba(255, 255, 255, 0.6);
+        color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        font-size: 35px;
+        outline: none;
 
-//     .carousel-indicators{
-//       bottom: initial;
-//       top: -22px;
-//     }
-//   }
+        span{
+          position: relative;
+          top: -3px;
+        }
+      }
+    }
 
+    .time-dots{
+      position: absolute;
+      top: 5px;
+      width: 100%;
+      display: flex;
+      z-index: 7;
+
+      .time-dot{
+        // background-color: red;
+        background-color: rgba(255, 255, 255, 0.6);
+        flex-grow: 1;
+        height: 3px;
+        width: 100%;
+        margin: 5px 3px;
+        border-radius: 2px;
+      }
+
+      .time-active{
+        background-color:rgba(255, 255, 255, 1);
+      }
+    }
+  }
 
 
   .modal-fun{
@@ -129,7 +172,7 @@
     width: 100%;
     height: 100%;
     display: none;
-    z-index: 1;
+    z-index: 4;
 
     .modal-card{
       position: absolute;
@@ -149,6 +192,7 @@
         width: 100%;
         text-align: center;
       }
+
       .modal-del a{
         width: 100%;
         display: block;
@@ -163,6 +207,38 @@
         padding: 10px;
         text-decoration: none;
         color: black;
+      }
+    }
+  }
+}
+
+/* RWD */
+@media screen and (min-width: 768px) {
+  .stories{
+    .member{
+      position: absolute;
+      background: #262626;
+
+      .member-title{
+        height: 6vh;
+
+        .member-pic{
+          width: 40px;
+          padding: 0px;
+        }
+      }
+    }
+
+    // .dots{
+    //   position: absolute;
+    //   left: 0;
+    //   bottom: 7px;
+    // }
+
+    .owl-carousel {
+      .time-dots{
+        position: absolute;
+        top: 9vh;
       }
     }
   }
