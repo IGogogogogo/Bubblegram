@@ -69,11 +69,11 @@
 }
 .back-link{
   font-size: 36px;
-  color:rgb(139, 139, 139);
+  color:rgb(219, 215, 215);
   position: absolute;
-  right: 0;
+  left: 15px;
   z-index: 12;
-  bottom: 40px;
+  top: 40px;
 }
 // subscriber scss
 .OT_subscriber{
@@ -217,7 +217,7 @@
       }
 
       form:last-child{
-        background: radial-gradient(circle at 100px 100px, rgb(248, 21, 21), rgb(247, 148, 148));
+        background: radial-gradient(circle at 100px 100px, rgb(248, 4, 4), rgb(243, 148, 148));
         width: 40px;
         height: 40px;
         border-radius: 100%;
