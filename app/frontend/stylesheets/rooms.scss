@@ -24,7 +24,39 @@
     margin: auto;
     // z-index: 11;
   }
+  .heart {
+    position: absolute;
+    bottom: -100px;
+    right: 25px;
+    opacity: 0;
+    background-color: pink;
+    height: 20px;
+    width: 20px;
+    transform: rotate(-45deg);
+    z-index: 20;
 
+    &::after {
+      background-color: pink;
+      content: "";
+      border-radius: 50%;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 0px;
+      left: 10px;
+    }
+    &::before {
+      content: '';
+      background-color: pink;
+      border-radius: 50%;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: -10px;
+      left: 0px;
+    }
+
+  }
 }
 
 
@@ -37,11 +69,11 @@
 }
 .back-link{
   font-size: 36px;
-  color:rgb(139, 139, 139);
+  color:rgb(219, 215, 215);
   position: absolute;
-  right: 0;
+  left: 15px;
   z-index: 12;
-  bottom: 40px;
+  top: 40px;
 }
 // subscriber scss
 .OT_subscriber{
@@ -58,7 +90,7 @@
   width: 60%;
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: 50px;
   padding-left: 5px;
   z-index: 12;
 
@@ -119,10 +151,6 @@
             font-size:12px;
           }
         }
-
-        .text-content{
-
-        }
       }
     }
   }
@@ -130,52 +158,92 @@
     display: none;
   }
 
-  .searchbar{
-    margin-top: 5px;
-
-    form{
-      position: relative;
+}
+    .live-stream-form-group{
+      margin-top: 5px;
       display: flex;
-      align-items: center;
-      border:1px solid rgb(78, 78, 78);
+      // background-color: #fff;
+      // border:1px solid rgb(78, 78, 78);
       border-radius: 10px;
-      background-color: white;
-      width: 100%;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 12;
+      padding: 0 15px 0 0;
 
-      input[type="text"]{
+      form:first-child{
+        position: relative;
+        display: flex;
+        align-items: center;
+        border:1px solid rgb(78, 78, 78);
+        border-radius: 10px;
+        background-color: white;
+        margin-right: 15px;
         flex-grow: 1;
-        padding:5px 0 5px 10px;
-        background-color: transparent;
-        border: 0px;
-        color: black;
+
+
+        input[type="text"]{
+          flex-grow: 1;
+          padding:5px 40px 5px 10px;
+          background-color: transparent;
+          border: 0px;
+          color: black;
+        }
+
+        input[type="text"]::placeholder{
+          color:black;
+        }
+
+        input[type="text"]:focus{
+          outline:none;
+          background-color: transparent;
+        }
+
+        label[name='text-submit']{
+          cursor: pointer;
+          font-size: 25px;
+          color: black;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          right: 10px;
+          margin: auto;
+        }
+        input[type="submit"]{
+          margin-left: auto;
+          display: none;
+        }
       }
 
-      input[type="text"]::placeholder{
-        color:black;
-      }
+      form:last-child{
+        background: radial-gradient(circle at 100px 100px, rgb(248, 4, 4), rgb(243, 148, 148));
+        width: 40px;
+        height: 40px;
+        border-radius: 100%;
+        position: relative;
 
-      input[type="text"]:focus{
-        outline:none;
-        background-color: transparent;
-      }
+        label[name='heart-submit']{
+          cursor: pointer;
+          font-size: 25px;
+          color: white;
+          text-align: center;
+          position: absolute;
+          top: 0;
+          left:0;
+          bottom: 0;
+          right: 0;
+          // right: 30px;
+          margin: auto;
 
-      label[for='submit']{
-        cursor: pointer;
-        font-size: 25px;
-        color: black;
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        right: 10px;
-        margin: auto;
-
-      }
-      input[type="submit"]{
-        margin-left: auto;
-        display: none;
+          .fa-heart{
+            vertical-align: middle;
+          }
+        }
+        #heart-submit{
+          // margin-left: auto;
+          display: none;
+        }
       }
 
     }
-
-  }
-}

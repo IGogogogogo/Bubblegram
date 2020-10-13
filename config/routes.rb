@@ -29,7 +29,11 @@ Rails.application.routes.draw do
 
   get :load_rand_img, to: 'posts#load_rand_img'  #用在載入新貼文 search index
 
-  resources :messages, only: [:create]
+  resources :messages, only: [:create] do
+    collection do
+      post :heart
+    end
+  end
 
   # 產生show create destory 與 play 路徑
   resources :rooms, only: [:show, :destory, :create, :destroy] do
