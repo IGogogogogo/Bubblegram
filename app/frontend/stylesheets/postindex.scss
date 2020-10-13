@@ -6,6 +6,10 @@
   padding: 0;
   cursor: pointer;
 }
+.post-load-page .owl-carousel,
+.post-show .owl-carousel{
+  justify-content: flex-start !important;
+}
 .user-video{
   position: relative;
   border: 3px solid #7fcfd6;
