@@ -123,8 +123,8 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:content, :body, {taged_user_ids: []}, {images: []} )
     check_taged_users(params[:post][:taged_user_ids]) if params[:post][:taged_user_ids]
+    params.require(:post).permit(:content, :body, {taged_user_ids: []}, {images: []} )
   end
 
   def check_taged_users(taged_users) #檢查 tag 有沒有不存在的 user
