@@ -24,6 +24,9 @@ document.addEventListener("turbolinks:load", () => {
       type: "get",
       success: function(data) {
         // console.log(data)
+        if(data.stories.main.length == 0 ){ //沒有限時動態資料時回首頁
+          location.pathname = "/"
+        }
         document.querySelector(".story-pic").innerHTML = ""
         storiesSection.dataset.userName = data.stories.user_name
         storiesSection.dataset.prevUser = data.stories.prev_user
