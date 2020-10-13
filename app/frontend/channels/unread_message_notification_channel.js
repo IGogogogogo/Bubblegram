@@ -13,8 +13,9 @@ document.addEventListener("turbolinks:load",()=>{
 
   let unreadMessagesDiv= document.createElement("div")
   unreadMessagesDiv.classList.add("unread-messages")
-  let currentUserId = document.querySelector(".chat-path").dataset.user
-
+  let currentUser = document.querySelector(".chat-path")
+  if(!currentUser)return
+  let currentUserId = currentUser.dataset.user
 
   consumer.subscriptions.create("UnreadMessageNotificationChannel", {
     connected() {
@@ -48,7 +49,10 @@ document.addEventListener("turbolinks:load",()=>{
 
 
       if (!!chatUser[0]){ // 如果有人傳新訊息把目前上線的div換成新訊息的div
-         chatUser[0].querySelector(".chat-user-info .online-text").classList.add("off-line")
+          let onlineText = chatUser[0].querySelector(".chat-user-info .online-text")
+         if(onlineText){
+           onlineText.classList.add("off-line")
+         }
          chatUser[0].querySelector(".chat-user-info").append(unreadMessagesDiv)
         }
 
