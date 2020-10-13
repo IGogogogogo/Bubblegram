@@ -8,9 +8,9 @@ document.addEventListener("turbolinks:load", () => {
   let tagPage = 1
   let myPage = 1
 
-  if(!postLoadPage) return
+  if (!postLoadPage) return
 
-  window.onscroll = function() {
+  window.onscroll = function () {
     if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {   ////滑動到畫面底部
       loadPosts()            ////載入更多post
     }
@@ -32,7 +32,7 @@ document.addEventListener("turbolinks:load", () => {
       return "my_posts"
     } else if (randPosts) {
       return "rand_img"
-    }else if (myBtn.classList.contains("active")) {
+    } else if (myBtn.classList.contains("active")) {
       return "post_img"
     } else if (tagBtn.classList.contains("active")) {
       return "tag_img"
@@ -50,7 +50,7 @@ document.addEventListener("turbolinks:load", () => {
   }
 
   function loadPosts() {                           //請求載入更多post
-      // console.log("loadPosts.........................")
+    // console.log("loadPosts.........................")
     page += 1
     let type = getType()
     let url = getUrl(type) + `?page=${page}&type=${type}`
@@ -63,7 +63,7 @@ document.addEventListener("turbolinks:load", () => {
     Rails.ajax({
       url: url,
       type: "get",
-      success: function(data) {
+      success: function (data) {
         const postsEl = data.querySelector("body").innerHTML
         const postLoadTarget = document.querySelector(".post-load-target")
         const oldLoadingEls = document.querySelectorAll(".loading")
@@ -96,7 +96,7 @@ document.addEventListener("turbolinks:load", () => {
           postLoadTarget.appendChild(newLoadingEl)
         }
       },
-      error: function(errors) {
+      error: function (errors) {
         console.log(errors)
       }
     })
