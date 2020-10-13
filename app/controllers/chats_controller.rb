@@ -32,7 +32,7 @@ class ChatsController < ApplicationController
 
 
     if !any_new_messages? #如果沒有任何新訊息了，廣播到unreand_message_channel.js 去更新狀態
-      ActionCable.server.broadcast "unread_message_notification_channel", {read_message: true, message: {user_id: @sender}}
+      ActionCable.server.broadcast "unread_message_notification_channel", {read_message: true,current_user: current_user, message: {user_id: @sender}}
     end
   end
 

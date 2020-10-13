@@ -11,7 +11,7 @@ class MessagesController < ApplicationController
       @opposed_user = chat_room.opposed_user(current_user).id
       @chat_message = chat_room.messages.create(params_message)
 
-      SendMessageJob.perform_later(@chat_message, new_message_counts)
+      SendMessageJob.perform_later(@chat_message, new_message_counts, @opposed_user)
 
       # if !is_online_channel_connect?  #判斷對方使用者有沒有在線上
       #   puts "------------------我是判斷使用者有沒有在線上--------------------"
