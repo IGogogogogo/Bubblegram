@@ -4,7 +4,9 @@ import "bootstrap"
 import "select2"
 import "select2/dist/css/select2.css"
 import "../stylesheets/application"
-import "@fortawesome/fontawesome-free/js/all"
+import "@fortawesome/fontawesome-free/js/all";
+
+import "./stories.js"
 import "owl.carousel"
 import "./search.js"
 import "./preview_photo"
