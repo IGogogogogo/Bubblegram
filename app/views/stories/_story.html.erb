@@ -11,13 +11,13 @@
     </div>
     <% end %>
   </div>
-
-<% elsif user[:user].exist_story?  %>
-  <!--  render story-->
-  <div class="user-story">
+ <!-- current_user 限時動態做判斷 看是否需要"+"-->
+<% elsif user[:path].match('new')%>
+    <div class="user-story">
     <%= link_to user[:path] do %>
     <div class="user-video">
       <%= image_tag user[:user].avatar.url, class: 'img-fluid rounded-circle' if user[:user].avatar.present? %>
+      <div class="new-story"><i class="fas fa-plus-circle"></i></div>
     </div>
     <div class="user-name text-black">
       <small><%= user[:user].nick_name %></small>
@@ -25,13 +25,12 @@
     <% end %>
   </div>
 
-  <% else  %>
- <!-- current_user 限時動態做判斷 看是否需要"+"-->
+<% else %>
+  <!--  render story-->
   <div class="user-story">
     <%= link_to user[:path] do %>
     <div class="user-video">
       <%= image_tag user[:user].avatar.url, class: 'img-fluid rounded-circle' if user[:user].avatar.present? %>
-      <div class="new-story"><i class="fas fa-plus-circle"></i></div>
     </div>
     <div class="user-name text-black">
       <small><%= user[:user].nick_name %></small>
