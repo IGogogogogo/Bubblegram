@@ -1,9 +1,10 @@
+<p class="alert" style="display:none;"><%= alert %></p>
 <% if post.errors.any? %>
-<ul>
-  <% post.errors.full_messages.each do |msg| %>
-  <li style="color: red;"><small><%= msg %></small></li>
-  <% end %>
-</ul>
+  <ul>
+    <% post.errors.full_messages.each do |msg| %>
+      <li style="color: red;"><small><%= msg %></small></li>
+    <% end %>
+  </ul>
 <% end %>
 
 <%= form_with(model: post, url: url, class: "form", local: true) do |form| %>
