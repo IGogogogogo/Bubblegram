@@ -130,7 +130,7 @@ class PostsController < ApplicationController
   def check_taged_users(taged_users) #檢查 tag 有沒有不存在的 user
     taged_users.each do |user_id|
       if User.find_by(id: user_id).nil?
-        flash[:alert] = "#找不到符合的使用者"
+        flash[:alert] = "#找不到符合的使用者"  #用來給前端 js 新增錯誤訊息
         return
       end
     end

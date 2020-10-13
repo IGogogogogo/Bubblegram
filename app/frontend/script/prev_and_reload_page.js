@@ -3,7 +3,7 @@ document.addEventListener("turbolinks:load", () => {
 
   window.onpopstate = function() {    /////按瀏覽器上一頁/下一頁時重新整理頁面
     location.reload()
-  };
+  }
 
   if (!prevBtn) return
   prevBtn.addEventListener("click", () => {
