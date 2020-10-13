@@ -3,7 +3,8 @@ import consumer from "../channels/consumer"
 
 export default class extends Controller {
   connect() {
-    console.log("js count")
+    // console.log("js count")
+    let countsArea = document.querySelector(".visits .counts")
     let liveStreamVisitsController = this
     this.subscription = consumer.subscriptions.create(
       {
@@ -19,7 +20,9 @@ export default class extends Controller {
           // Called when the subscription has been terminated by the server
         },
         received(data) {
-          // console.log(data
+          // console.log(data.counts)
+
+          countsArea.textContent = data.counts
 
         }
       }
