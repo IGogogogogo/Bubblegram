@@ -11,9 +11,12 @@
 </div>
 <%= render partial: "rooms/live_stream_message_area", locals: {messages: @messages, message: @message, room: @room } %>
 
-<div data-controller = "liveStreamVisits"
+<div class = "visits"
+     data-controller = "liveStreamVisits"
      data-liveStreamVisits-id="<%= @room.id %>"
 >
+<i class="far fa-eye"></i>
+<span class = "counts"></span>
 </div>
 
 <%= link_to root_path, data: {turbolinks: false}, class: 'back-link' do %>

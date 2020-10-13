@@ -27,7 +27,7 @@ export default class extends Controller {
   disconnect() {
     if (this.session) {
       this.session.disconnect()
-      console.log('pub disconnect');
+      // console.log('pub disconnect');
     }
   }
 
@@ -80,19 +80,3 @@ window.addEventListener('beforeunload', function (e) {
       method:"post"
     })
   });
-
-
-// 之後要實作 觀看人數
-// let subCounts = (stream) => new Promise((resolve, reject) => {
-//   // counts 是一個array
-//   // setInterval(() => {
-//     console.log(stream);
-//     let subscribers= controller.session.getSubscribersForStream(stream)
-//     console.log(subscribers)
-//   // }, 500);
-// })
-
-// window.getCounts = function() {
-//   let subscribers = controller.session.getSubscribersForStream(stream)
-//   console.log(subscribers)
-// }
