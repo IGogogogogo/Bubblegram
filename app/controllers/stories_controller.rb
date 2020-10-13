@@ -15,8 +15,8 @@ class StoriesController < ApplicationController
 
     @current_user = current_user
     #找到追蹤中且有限動的使用者，依照建立時間排序
-    @viewable_users = [current_user].concat(current_user.followings.select{|u| u.stories.stories_oneday.count > 0}.sort_by(&:created_at).reverse).map(&:nick_name)
-    @stories = @user.stories.stories_oneday.order("created_at DESC")
+    @viewable_users = [current_user].concat(current_user.followings.select{|u| u.exist_story?}.sort_by(&:created_at).reverse).map(&:nick_name)
+    @stories = @user.stories.order("created_at DESC")
     @stories_count = @stories.count
 
     @user_index = @viewable_users.index(@user_name)
