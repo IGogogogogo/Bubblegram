@@ -16,8 +16,7 @@
 <%# form_with表單預設為Ajax，若要更改設定則需輸入local: true %>
 <%= form_with(model: @story, url: user_stories_path, local: true) do |form| %>
   <div>
-    <%= form.label :picture,
-    'picture' %>
+    <%= form.label :picture, 'picture' %>
     <%= form.file_field :picture %>
   </div>
 

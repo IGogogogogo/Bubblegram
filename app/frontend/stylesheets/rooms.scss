@@ -84,6 +84,19 @@
 //   left: 0;
 //   z-index: 11;
 }
+.visits{
+position: absolute;
+width: 40px;
+line-height: 25px;
+top: 40px;
+right: 0;
+left: 0;
+margin: auto;
+background: rgba(0, 0, 0,0.5);
+color:white;
+text-align: center;
+z-index: 12;
+}
 
 .room-message{
   // outline:1px solid red;

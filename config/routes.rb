@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :edit, :update] do
     resource :follows, only: [:create, :destroy]
-    resources :stories, only: [:index, :show, :new, :create, :destroy ]
+    resources :stories, only: [:index, :new, :create, :destroy ]
 
     resources :posts, shallow: true do
       member do
@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get :stories, to: 'stories#load_stories'
   get :load_rand_img, to: 'posts#load_rand_img'  #用在載入新貼文 search index
 
   resources :messages, only: [:create] do

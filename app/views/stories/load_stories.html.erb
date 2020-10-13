@@ -1,0 +1,57 @@
+<section class="stories"
+  data-current-user="<%= @current_user.nick_name %>"
+  data-user-name="<%= @user_name %>"
+  data-prev-user=""
+  data-next-user=""
+  data-story-index="0"
+  data-story-id=""
+>
+  <header class="member py-2 px-2">
+    <div class="member-title">
+      <div class="member-pic">
+        <a>
+          <img src="">
+        </a>
+      </div>
+
+      <div class="member-name">
+        <span>User Name</span>
+      </div>
+
+      <!--時間---->
+      <div class="story-time">
+        <span>Story Time</span>
+      </div>
+
+      <div class="header-btn">
+        <!-----選單--->
+        <button class="btn-dot" style="display: none;">
+          <i class="fas fa-ellipsis-h"></i>
+        </button>
+
+        <!---回首頁------->
+        <button class="btn-home">
+          <%= link_to root_path do %>
+            <i class="fas fa-times"></i>
+          <% end %>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <div class="story-pic">
+    <!-- 以下輪播 -->
+  </div>
+
+  <div class="modal-fun">
+    <div class="modal-card">
+      <div class="modal-del">
+        <a href="#">刪除</a>
+      </div>
+      <div  class="modal-cancel">
+        <a href="#" >取消</a>
+      </div>
+    </div>
+  </div>
+</section>

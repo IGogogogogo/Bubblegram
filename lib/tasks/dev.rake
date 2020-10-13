@@ -88,16 +88,15 @@ namespace :dev do
 
   task fake_stories: :environment do
     print "\n正在建立使用者 story 資料"
-    Story.destroy_all
+    # Story.destroy_all
 
-    User.all.each do |user|
-      rand(2..5).times do
-        num = rand(1000)
-        user.stories.create!(
-          remote_picture_url: "https://picsum.photos/500/500/?random=#{num}",
-        )
-        print "."
-      end
+    10.times do
+      num = rand(1000)
+      Story.create!(
+        user: User.all.sample(1).first,
+        remote_picture_url: "https://picsum.photos/500/500/?random=#{num}",
+      )
+      print "."
     end
 
     puts "\n成功建立 #{Story.count} 筆 使用者story資料！"

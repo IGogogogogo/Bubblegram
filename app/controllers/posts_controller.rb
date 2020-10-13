@@ -16,24 +16,23 @@ class PostsController < ApplicationController
 
   def load_posts     #依照kaminari page & type 讀取新貼文
     @user = User.find(params[:user_id]) if params[:user_id]
-    @partial = "/posts/post"
-    per_count = 10
 
     if params[:type] == "following_posts"
+      per_count = 5
       users = User.viewable_users(current_user)
       @posts = Post.viewable_posts(users).includes(:user, :thumbs_up_users).order("created_at DESC").page(params[:page]).per(per_count)
     elsif params[:type] == "my_posts"
+      per_count = 10
       @posts = @user.posts.includes(:thumbs_up_users).order("created_at DESC").page(params[:page]).per(per_count)
     end
 
     respond_to do |format|
-      format.html  { render partial: @partial, collection: @posts, as: :post}
+      format.html  { render partial: "/posts/post", collection: @posts, as: :post}
     end
   end
 
   def load_img
     @user = User.find(params[:user_id])
-    @partial = "/posts/post_img"
     per_count = 36
 
     if params[:type] == "post_img"
@@ -43,17 +42,16 @@ class PostsController < ApplicationController
     end
 
     respond_to do |format|
-      format.html  { render partial: @partial, collection: @posts, as: :post}
+      format.html  { render partial: "/posts/post_img", collection: @posts, as: :post}
     end
   end
 
   def load_rand_img
     per_count = 36
-    @partial = "/posts/post_img"
     @posts = Post.order("favourites_count DESC").page(params[:page]).per(per_count)
 
     respond_to do |format|
-      format.html  { render partial: @partial, collection: @posts, as: :post}
+      format.html  { render partial: "/posts/post_img", collection: @posts, as: :post}
     end
   end
 
@@ -126,5 +124,15 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:content, :body, {taged_user_ids: []}, {images: []} )
+    check_taged_users(params[:post][:taged_user_ids]) if params[:post][:taged_user_ids]
+  end
+
+  def check_taged_users(taged_users) #檢查 tag 有沒有不存在的 user
+    taged_users.each do |user_id|
+      if User.find_by(id: user_id).nil?
+        flash[:alert] = "#找不到符合的使用者"
+        return
+      end
+    end
   end
 end

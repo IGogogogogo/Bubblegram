@@ -34,11 +34,11 @@ class Post < ApplicationRecord
   def limit_images_count
     # LIMIT_COUNT = 5
     if self.images.count > 5
-      errors.add(:base, "Can't upload more than 5 images")
+      errors.add(:base, "一次最多上傳5張圖片")
     end
   end
 
-  def post_firendly_params
+  def post_firendly_params   #post 網址 params id 使用 SHA1 跟時間產生
     Digest::SHA1.hexdigest([Time.now, rand].join).to_i(base=16)%10**20
   end
 end

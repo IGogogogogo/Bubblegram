@@ -27,7 +27,7 @@ export default class extends Controller {
   disconnect() {
     if (this.session) {
       this.session.disconnect()
-      console.log('pub disconnect');
+      // console.log('pub disconnect');
     }
   }
 
@@ -43,7 +43,6 @@ export default class extends Controller {
       height: '100%',
       facingMode :"user",
       fitMode: "contain",
-      mirror:false,
       name: this.data.get("name"),
     }, this.handleError.bind(this))
     // 連線
@@ -68,8 +67,8 @@ export default class extends Controller {
     }
   }
 }
-
-window.addEventListener('beforeunload', function (e) {
+// 因為 ios safari 不支援 'beforeunload' event
+window.addEventListener('pagehide', function (e) {
   videoDiv = document.querySelector("#pub-video")
   if(!videoDiv)return
   e.preventDefault
@@ -80,19 +79,3 @@ window.addEventListener('beforeunload', function (e) {
       method:"post"
     })
   });
-
-
-// 之後要實作 觀看人數
-// let subCounts = (stream) => new Promise((resolve, reject) => {
-//   // counts 是一個array
-//   // setInterval(() => {
-//     console.log(stream);
-//     let subscribers= controller.session.getSubscribersForStream(stream)
-//     console.log(subscribers)
-//   // }, 500);
-// })
-
-// window.getCounts = function() {
-//   let subscribers = controller.session.getSubscribersForStream(stream)
-//   console.log(subscribers)
-// }

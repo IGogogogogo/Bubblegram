@@ -7,6 +7,7 @@
   cursor: pointer;
 }
 .user-video{
+  position: relative;
   border: 3px solid #7fcfd6;
   padding: 3px;
   border-radius: 100%;
@@ -17,7 +18,34 @@
     text-overflow : ellipsis;
     white-space : nowrap;
   }
+  .streaming-text{
+    display: inline-block;
+    width: 75%;
+    font-size: 12px;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    background-color: #7fcfd6;
+    position: absolute;
+    bottom: -10px;
+    border-radius: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .new-story{
+    width: 20px;
+    height: 20px;
+    background: #ffffff;
+    color:#7fcfd6;
+    font-size: 20px;
+    line-height: 17px;
+    text-align: center;
+    border-radius: 56%;
+    position: absolute;
+    right: -5px;
+    bottom: -2px;
+  }
 }
+
 .user-info .option i,
 .user-post-content i {
   font-size: 20px;
@@ -30,6 +58,7 @@
   font-size: 25px;
 }
 .index-nav{
+  font-size: 20px;
   border-top: 2px solid #ccc;
   position: fixed;
   bottom: 0;
@@ -39,6 +68,7 @@
   background: #fff;
   z-index: 10;
   .nav-link{
+    height: 100%;
     color:rgb(139, 139, 139)
   }
 }

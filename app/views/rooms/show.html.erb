@@ -12,6 +12,15 @@
      <div class="text-center h3 text-black-50" >直播已經結束囉！</div>
 </div>
 <%= render partial: "rooms/live_stream_message_area", locals: {messages: @messages, message: @message, room: @room } %>
+
+<div class = "visits"
+     data-controller = "liveStreamVisits"
+     data-liveStreamVisits-id="<%= @room.id %>"
+>
+<i class="far fa-eye"></i>
+<span class = "counts"></span>
+</div>
+
 <%= link_to root_path, data: {turbolinks: false}, class: 'back-link' do %>
      <i class="fas fa-angle-left"></i>
 <% end %>
