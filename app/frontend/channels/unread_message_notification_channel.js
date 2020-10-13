@@ -48,22 +48,28 @@ document.addEventListener("turbolinks:load",()=>{
 
       // console.log(data.opposed_user)
       // console.log(Number(currentUserId))
-
-      if (!!chatUser[0] && data.opposed_user === Number(currentUserId)){ // 如果有人傳新訊息把目前上線的div換成新訊息的div
+      if(data.opposed_user === Number(currentUserId)){ //確認傳訊息給的對象是接收的人
         this.perform("chat_message_notice",{message: data.message, current_user: currentUserId})
-        let newMessages
+      }
+
+      if (!!chatUser[0] && data.opposed_user === Number(currentUserId)){ //判斷chat index有沒傳這則訊息的人 並且傳的對方確定是接收方
+        // 如果有人傳新訊息把目前上線的div換成新訊息的div
+        let newMessages = chatUser[0].querySelector(".chat-user-info .unread-messages")
         let onlineText = chatUser[0].querySelector(".chat-user-info .online-text")
          if(onlineText){
            onlineText.classList.add("off-line")
          }
-         chatUser[0].querySelector(".chat-user-info").append(unreadMessagesDiv)
-         newMessages = chatUser[0].querySelector(".chat-user-info .unread-messages")
+         if(!newMessages){
+           chatUser[0].querySelector(".chat-user-info").append(unreadMessagesDiv)
+           newMessages = chatUser[0].querySelector(".chat-user-info .unread-messages")
+         }
          // 找有沒有新訊息的字
          chatUser[0].querySelector(".notice-dot").classList.add("message-notice-dot")
          newMessages.textContent = `您有${data.new_message_counts += 1}則新訊息`
       }
 
-        if(!!data.read_message && data.current_user === Number(currentUserId)){// 判斷有無讀取訊息
+        if(!!data.read_message && data.current_user === Number(currentUserId)){
+          // 判斷有無讀取訊息且讀訊息的人確定是進入聊天室的使用者
           if(chatUser.length === 0)return //避免其他頁面出現錯誤訊息
           let unreadMessageText = chatUser[0].querySelector(".chat-user-info .unread-messages")
           chatUser[0].querySelector(".notice-dot").classList.remove("message-notice-dot")

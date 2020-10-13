@@ -23,6 +23,9 @@ class ApplicationController < ActionController::Base
   def has_any_chatroom_new_message?
     any_new_message_chatroom = redis.lrange("#{current_user.id}_chat_notice",0,-1)
     any_new_message_chatroom.delete("")
+    if any_new_message_chatroom.length == 0
+      redis.del("#{current_user.id}_chat_notice")
+    end
     any_new_message_chatroom.length
   end
   protected
