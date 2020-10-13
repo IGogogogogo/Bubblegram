@@ -10,7 +10,9 @@ document.addEventListener("turbolinks:load", () => {
     document.querySelector("#comment_content").scrollIntoView()
   })
 
-  document.querySelector("form").addEventListener("submit", ()=> {
-    window.location.reload()   /////重新整理頁面後才會看到自己新增的留言
-  })
+  ///// 成功建立留言時會有 notice 資料，有資料內容跳到最下面
+  const notice = document.querySelector(".notice")
+  if(notice.textContent != "") {
+    document.querySelector("#comment_content").scrollIntoView()
+  }
 })
