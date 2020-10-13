@@ -1,10 +1,10 @@
 <p class="alert" style="display:none;"><%= alert %></p>
 <% if post.errors.any? %>
-  <ul>
-    <% post.errors.full_messages.each do |msg| %>
-      <li style="color: red;"><small><%= msg %></small></li>
-    <% end %>
-  </ul>
+<ul>
+  <% post.errors.full_messages.each do |msg| %>
+  <li style="color: red;"><small><%= msg %></small></li>
+  <% end %>
+</ul>
 <% end %>
 
 <%= form_with(model: post, url: url, class: "form", local: true) do |form| %>
@@ -23,6 +23,7 @@
   <!-- If we need pagination -->
   <div class="swiper-pagination"></div>
 </div>
+<small class="photo-alert text-danger" style="display: none;">照片會經過裁切可能與預覽不符，請見諒</small>
 
 <% if post.images.empty? %>
 <div class="form-group add-photo">
