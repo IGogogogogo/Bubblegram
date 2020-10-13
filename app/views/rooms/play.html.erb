@@ -12,6 +12,11 @@
 </div>
 <%= render partial: "rooms/live_stream_message_area", locals: {messages: @messages, message: @message, room: @room } %>
 
+<div data-controller = "liveStreamVisits"
+     data-liveStreamVisits-id="<%= @room.id%>"
+>
+</div>
+
 <%= link_to destroy_room_room_path, method: 'post',data: {turbolinks: false}, class: 'back-link' do %>
 	<i class="fas fa-angle-left"></i>
 <% end %>
