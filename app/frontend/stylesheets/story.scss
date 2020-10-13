@@ -191,7 +191,15 @@
     }
   }
 }
-
+input[type="submit"].limit_submit{
+  background: #7fcfd6;
+  border: none;
+  color: #fff;
+  border-radius: 10px;
+  width: 100%;
+  height: 50px;
+  margin-bottom: 20px;
+}
 /* RWD */
 @media screen and (min-width: 768px) {
   .stories{
