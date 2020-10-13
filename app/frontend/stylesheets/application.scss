@@ -130,3 +130,19 @@ img{
     background-color: rgb(197, 64, 64);
   }
 }
+
+.post-load-page, .post-show{
+  .owl-carousel {
+    display: flex !important;
+    flex-direction: row;
+    justify-content: center;
+    .owl-dots {
+      position: absolute;
+      bottom: -41px;
+    }
+  }
+}
+
+.owl-dot.active span{
+  background-color: #7fcfd6 !important;
+}
