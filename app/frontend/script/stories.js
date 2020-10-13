@@ -8,6 +8,7 @@ document.addEventListener("turbolinks:load", () => {
 
   if(!storiesSection) return
   const userName = storiesSection.dataset.userName
+  var autoToNextUser   ////自訂輪播結束時 setTimeout 用來切換下個使用者
 
   cssSetting()
   requestStories(userName)
@@ -32,13 +33,13 @@ document.addEventListener("turbolinks:load", () => {
         storiesSection.dataset.storyId = data.stories.main[0].id
         storiesSection.dataset.storyIndex = index
 
-        renderStories(data.stories)
-
         if (index == "last") {    ////如果是請求上一個使用者限動會跳到他最後的現動
           index = data.stories.main.length - 1
-          $('.owl-carousel').trigger("to.owl.carousel", [index, 1])////跳到index限時動態
           storiesSection.dataset.storyIndex = index
         }
+
+        renderStories(data.stories) ////限時動態 render 結束跳到index位置的限時動態
+        $('.owl-carousel').trigger("to.owl.carousel", [index, 1])
       },
       error: function(errors) {
         console.log(errors)
@@ -48,6 +49,7 @@ document.addEventListener("turbolinks:load", () => {
 
   ////加入元素與事件（建立現動+白線+啟動輪播套件+輪播事件）
   function renderStories(stories){
+    // console.log("render")
     const storyPic = document.querySelector(".story-pic")
     const owlCarousel = document.createElement("div")
     owlCarousel.classList = "owl-carousel"
@@ -65,12 +67,11 @@ document.addEventListener("turbolinks:load", () => {
     document.querySelector(".owl-prev").addEventListener("click", toPrevUserLastStory)
     document.querySelector(".owl-next").addEventListener("click", toNextUserStories)
 
-    if(Number(storiesSection.dataset.storyIndex)+ 1 == Number(storiesSection.dataset.storiesCount)){
-      setTimeout( () => {     ///////輪播時間結束會跳下個使用者限時動態
-        toNextUserStories()
-      }, carouselTime)
+    const isLastStory = Number(storiesSection.dataset.storyIndex) + 1 == Number(storiesSection.dataset.storiesCount)
+    if(isLastStory){
+      ///////輪播時間結束會跳下個使用者限時動態
+      autoToNextUser = setTimeout( () => { toNextUserStories() }, carouselTime)
     }
-
   }
 
   /////加入 使用者資料和現動時間
@@ -120,6 +121,7 @@ document.addEventListener("turbolinks:load", () => {
   function addCarouselChangeEvent() {
     $('.owl-carousel').on('translated.owl.carousel', function() { ////owl carousel 輪播結束事件
       // console.log("translated")
+      clearTimeout(autoToNextUser)   ///移除setTime，避免在最後一個限動以外的地方跳到下個使用者
       changeActiveDot()
 
       const storyActive = storiesSection.querySelector(".owl-item.active div")
@@ -130,10 +132,9 @@ document.addEventListener("turbolinks:load", () => {
       const isLastStory = Number(storyActive.dataset.storyIndex) + 1 == Number(storiesSection.dataset.storiesCount)
 
       if(isLastStory){
+        ///在使用者最後一個限動時點擊下一步或輪播時間結束都會跳到下個使用者限動
         document.querySelector(".owl-next").addEventListener("click", toNextUserStories)
-        setTimeout( () => {
-          toNextUserStories()
-        }, carouselTime)
+        autoToNextUser = setTimeout( () => { toNextUserStories() }, carouselTime)
       }
     })
   }
@@ -219,8 +220,6 @@ document.addEventListener("turbolinks:load", () => {
       // 加入story new連結
       const userName = stories.user_name
       const urlNew = `/users/${userName}/stories/new`
-      console.log(urlNew)
-      console.log("uuuu")
       storyNew.setAttribute("href", urlNew)
       storyNew.classList.add("add-story")
     } else {
@@ -230,6 +229,7 @@ document.addEventListener("turbolinks:load", () => {
     }
 
     btnDot.addEventListener("click", function(){
+      clearTimeout(autoToNextUser)
       $('.stories .owl-carousel').trigger('stop.owl.autoplay')
 
       if(modalFun.style.display != "block"){
@@ -269,7 +269,7 @@ document.addEventListener("turbolinks:load", () => {
           url: url,
           type: "DELETE",
           success: function(){
-            console.log("success:", url)
+            // console.log("success:", url)
           }
         })
       } else {
