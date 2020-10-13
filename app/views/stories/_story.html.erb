@@ -15,7 +15,7 @@
 <% elsif user[:user].exist_story?  %>
   <!--  render story-->
   <div class="user-story">
-    <%= link_to user[:path], data: {turbolinks: false} do %>
+    <%= link_to user[:path] do %>
     <div class="user-video">
       <%= image_tag user[:user].avatar.url, class: 'img-fluid rounded-circle' if user[:user].avatar.present? %>
     </div>
@@ -28,7 +28,7 @@
   <% else  %> 
  <!-- current_user 限時動態做判斷 看是否需要"+"-->
   <div class="user-story">
-    <%= link_to user[:path], data: {turbolinks: false} do %>
+    <%= link_to user[:path] do %>
     <div class="user-video">
       <%= image_tag user[:user].avatar.url, class: 'img-fluid rounded-circle' if user[:user].avatar.present? %>
       <div class="new-story"><i class="fas fa-plus-circle"></i></div>
