@@ -5,14 +5,19 @@
 }
 .password-label,
 .email-label{
-  top: 50%;
-  left: 15px;
-  transform: translateY(-50%);
-  font-size: 22px;
+  font-size: 40px;
   color: rgb(127, 207, 214);
   // rgb(92, 187, 195)
 }
-
+#user_email,
+#user_password{
+width: 85% !important;
+}
+#login-alert{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 .btn-login{
   background: rgb(127, 207, 214);
   color: #ffffff;
@@ -33,6 +38,7 @@
   height: 51px;
   line-height: 51px;
   padding: 0;
+  border-radius: 50px;
 }
 .fb-btn:hover{
   background-color: #395692;
@@ -44,4 +50,7 @@
   background-color: #f2594e;
   color: #ffffff;
   border-color:#f2594e ;
+}
+.invalid-feedback{
+  text-align: center;
 }

@@ -8,7 +8,7 @@ document.addEventListener("turbolinks:load", () => {
   let tagPage = 1
   let myPage = 1
 
-  if(!postLoadPage) return
+  if (!postLoadPage) return
 
   window.addEventListener("scroll", loadPosts)
 
@@ -28,9 +28,9 @@ document.addEventListener("turbolinks:load", () => {
       return "my_posts"
     } else if (randPosts) {
       return "rand_img"
-    } else if (!myBtn || !tagBtn){
+    } else if (!myBtn || !tagBtn) {
       return
-    }else if (myBtn.classList.contains("active")) {
+    } else if (myBtn.classList.contains("active")) {
       return "post_img"
     } else if (tagBtn.classList.contains("active")) {
       return "tag_img"
@@ -49,7 +49,7 @@ document.addEventListener("turbolinks:load", () => {
 
   function loadPosts() {
     // console.log("onscroll...........")
-    if(window.innerHeight + window.pageYOffset + 1 >= document.body.offsetHeight) {  ////滑動到畫面底部
+    if (window.innerHeight + window.pageYOffset + 1 >= document.body.offsetHeight) {  ////滑動到畫面底部
       // console.log("loadPosts.........................")  //請求載入更多post
       page += 1
       let type = getType()
@@ -63,7 +63,7 @@ document.addEventListener("turbolinks:load", () => {
       Rails.ajax({
         url: url,
         type: "get",
-        success: function(data) {
+        success: function (data) {
           const postsEl = data.querySelector("body").innerHTML
           const postLoadTarget = document.querySelector(".post-load-target")
           const oldLoadingEls = document.querySelectorAll(".loading")
@@ -97,7 +97,7 @@ document.addEventListener("turbolinks:load", () => {
           }
           startCarousel()
         },
-        error: function(errors) {
+        error: function (errors) {
           console.log(errors)
         }
       })
@@ -127,9 +127,9 @@ document.addEventListener("turbolinks:load", () => {
       margin: 0,
       nav: false,
       animateOut: 'fadeOut',
-      responsive:{
-        0:{
-            items:1
+      responsive: {
+        0: {
+          items: 1
         }
       }
     })
