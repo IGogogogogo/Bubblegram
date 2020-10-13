@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def index
-    per_count = 10
+    per_count = 5
     @following_users = current_user.followings.includes(:room, :stories).order("created_at DESC")
     viewable_users = User.viewable_users(current_user)
     @results = build_results
