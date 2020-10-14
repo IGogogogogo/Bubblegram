@@ -1,4 +1,4 @@
-<%= render partial: "shared/title_with_prev", locals: { title: @user.nick_name, css: "" } %>
+<%= render partial: "shared/title_with_prev", locals: { title: @user.nick_name } %>
 
 <div class="fans-following-search-container">
   <nav class="py-3" data-controller = "following" data-following-id = "<%= @user.id %>">
