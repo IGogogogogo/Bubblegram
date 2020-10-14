@@ -23,7 +23,7 @@ class MessagesController < ApplicationController
       redis.rpush("#{@chat_message.chatroom_id}_#{@chat_message.user_id}_new_message", @chat_message.to_json) #將訊息存為新訊息
       end
       # @message.save
-      # redirect_to chat_path(chat_room)
+      redirect_to chat_path(chat_room)
     end
   end
 
