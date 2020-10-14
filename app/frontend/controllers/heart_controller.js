@@ -10,13 +10,14 @@
 import { Controller } from "stimulus"
 import Rails from "@rails/ujs";
 
+let timeId
 export default class extends Controller {
   static targets = ["like"]
 
   favourite() {
     // console.log(this.heartTarget)
     let post_id = this.data.get('id')
-    let strongNum = this.data.element.parentElement.parentElement.querySelector('.thumb-up strong')
+    let strongNum = this.data.element.querySelector(".thumb-up strong")
     let thumbNum = strongNum.textContent
 
     Rails.ajax({
@@ -24,7 +25,7 @@ export default class extends Controller {
       type: "POST",
       data: "",
       success: (result) => {
-        console.log(result)
+        // console.log(result)
         if (result["status"] == true) {
           this.likeTarget.classList.remove("far")
           this.likeTarget.classList.add("fas")
@@ -39,7 +40,46 @@ export default class extends Controller {
         console.log(err)
       },
     })
+  }
+  like(){
+    if(timeId){
+      clearTimeout(timeId);
+      timeId = undefined
+      this.doubleFavorite()
+
+    }else{
+      timeId = setTimeout(() => {
+      timeId = undefined
+        console.log("single")
+      }, 250);
+    }
+  }
+  doubleFavorite(){
+    let post_id = this.data.get('id')
+    let strongNum = this.data.element.querySelector(".thumb-up strong")
+    let thumbNum = strongNum.textContent
+    let heart = this.data.element.querySelector(".post-pic .heart")
+    let heartPrefix = this.likeTarget.dataset.prefix
 
 
+
+      if (heartPrefix === "fas") {
+        heart.style.animation = "enlarge 2s"
+        heart.addEventListener("animationend",()=>{
+          heart.style.animation = ""
+        })
+      }else {
+        heart.style.animation = "enlarge 2s"
+        heart.addEventListener("animationend",()=>{
+          heart.style.animation = ""
+        })
+        this.likeTarget.classList.remove("far")
+        this.likeTarget.classList.add("fas")
+        strongNum.textContent = `${parseInt(thumbNum) + 1} 個讚`
+        Rails.ajax({
+          url: `/posts/${post_id}/favourite.json`,
+          type: "POST",
+        })
+      }
   }
 }

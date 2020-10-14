@@ -99,7 +99,58 @@ a{
 .text-gray{
   color: #aaa;
 }
+.post-pic{
+  position: relative;
+  .heart {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right:0;
+    left: 0;
+    opacity: 1;
+    margin: auto;
+    background-color: white;
+    height: 20px;
+    width: 20px;
+    transform: rotate(-45deg) scale(0);
+    z-index: 20;
 
+    &::after {
+      background-color: white;
+      content: "";
+      border-radius: 50%;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 0px;
+      left: 10px;
+    }
+    &::before {
+      content: '';
+      background-color: white;
+      border-radius: 50%;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: -10px;
+      left: 0px;
+    }
+    @keyframes enlarge {
+      0%{
+        transform: rotate(-45deg) scale(0);
+      }
+
+      50%{transform: rotate(-45deg) scale(3);}
+      60%{
+        transform: rotate(-45deg) scale(3);
+      }
+      100%{
+        transform: rotate(-45deg) scale(0);
+      }
+
+    }
+  }
+}
 @media (max-width: 999px){
   .col-12{
     padding: 0;
