@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :find_user, only: [:show, :fans, :followings, :edit, :update, :follow]
+  skip_before_action :authenticate_user!, only: [:guest] 
+  
   # before_action :only_owner, only: [:edit, :update]
 
   def show
@@ -37,6 +39,15 @@ class UsersController < ApplicationController
       render :edit
     end
   end
+
+  def guest
+    num = rand(100000).to_s + ("a".."z").to_a.sample
+    guest = User.create(nick_name: "guest#{num}", email: "guest#{num}@gmail.com", password: "123456")
+    # byebug
+    sign_in(guest)
+    redirect_to root_path
+  end
+
 
   private
 
