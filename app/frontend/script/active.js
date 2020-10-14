@@ -6,6 +6,7 @@ window.addEventListener('turbolinks:load', function () {
   let profileBtn = document.querySelectorAll('.footer-btn')[4]
   let btnBg = document.getElementById('btn-bg')
 
+
   if (!homeBtn) return
 
   if (location.href === homeBtn.href) {
@@ -17,8 +18,16 @@ window.addEventListener('turbolinks:load', function () {
   } else if (location.href === profileBtn.href) {
     profileBtn.classList.add('active')
   }
-
-  addBtn.addEventListener('click', function (event) {
+  // 選到黑色透明背景取消並收合按鈕
+  btnBg.addEventListener('click', () => {
+    if (btnBg.classList.contains('open')) {
+      let checkBox = document.getElementById('spread-btn')
+      checkBox.checked = false
+      btnBg.classList.remove('open')
+    }
+  })
+  // 自動開關按鈕背景以及 nav 新增按鈕閃爍功能
+  addBtn.addEventListener('click', function () {
     btnBg.classList.toggle('open')
     addBtn.classList.add('active')
     setTimeout(function () {

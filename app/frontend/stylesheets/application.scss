@@ -4,6 +4,11 @@
   opacity: 0;
   pointer-events: none;
 }
+//取消 btn 點擊之後的效果
+.btn:focus{
+  outline: none !important;
+  box-shadow: none !important;
+}
 #btn-bg{
   position: fixed;
   top: 0;
