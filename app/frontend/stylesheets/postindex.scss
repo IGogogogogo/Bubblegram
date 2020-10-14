@@ -1,4 +1,6 @@
-
+a{
+  text-decoration: none !important;
+}
 .border-gray{
   border-color: #ccc !important;
 }
@@ -16,11 +18,7 @@
   border-radius: 100%;
   width: 60px;
   height: 60px;
-  > div{
-    overflow : hidden;
-    text-overflow : ellipsis;
-    white-space : nowrap;
-  }
+
   .streaming-text{
     display: inline-block;
     width: 75%;
@@ -48,7 +46,11 @@
     bottom: -2px;
   }
 }
-
+.user-name{
+    overflow : hidden;
+    text-overflow : ellipsis;
+    white-space : nowrap;
+  }
 .user-info .option i,
 .user-post-content i {
   font-size: 20px;
@@ -79,8 +81,13 @@
   background: #7fcfd6 !important;
   color: #fff !important;
 }
-.user-story + .user-story{
-  margin-left: 25px;
+.user-story{
+  > a{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .post-tag, a{
@@ -115,9 +122,6 @@
   .limit-video{
     padding: 10px 0;
     margin-bottom: 10px;
-    .user-story:nth-child(5) ~ .user-story{
-      display: none;
-    }
   }
   .col-12{
     padding-left: 7px;
