@@ -113,6 +113,7 @@ a{
     height: 20px;
     width: 20px;
     transform: rotate(-45deg) scale(0);
+    transition: linear;
     z-index: 20;
 
     &::after {
@@ -140,14 +141,16 @@ a{
         transform: rotate(-45deg) scale(0);
       }
 
-      50%{transform: rotate(-45deg) scale(3);}
-      60%{
+      30%{
         transform: rotate(-45deg) scale(3);
       }
+      50%{
+        transform: rotate(-45deg) scale(3);
+      }
+
       100%{
         transform: rotate(-45deg) scale(0);
       }
-
     }
   }
 }

@@ -64,12 +64,12 @@ export default class extends Controller {
 
 
       if (heartPrefix === "fas") {
-        heart.style.animation = "enlarge 2s"
+        heart.style.animation = "enlarge 1.5s"
         heart.addEventListener("animationend",()=>{
           heart.style.animation = ""
         })
       }else {
-        heart.style.animation = "enlarge 2s"
+        heart.style.animation = "enlarge 1.5s"
         heart.addEventListener("animationend",()=>{
           heart.style.animation = ""
         })
