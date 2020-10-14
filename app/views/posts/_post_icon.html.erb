@@ -1,5 +1,5 @@
 <div class="icon-group d-flex align-items-center">
-  <span data-controller="heart" data-heart-id="<%= post.id %>">
+  <span>
     <button id="thumb" class="like btn pl-0" data-action="click->heart#favourite" data-turbolinks="false">
       <% if post.favorited_by?(current_user) %>
       <i class="fas fa-heart" data-target="heart.like"></i>
