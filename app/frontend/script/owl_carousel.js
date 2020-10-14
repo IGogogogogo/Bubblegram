@@ -24,6 +24,15 @@ document.addEventListener("turbolinks:load", () => {
       0: {
         items: 5
       },
+      700: {
+        items: 6
+      },
+      800: {
+        items: 10
+      },
+      900: {
+        items: 10
+      },
       1000: {
         items: 10
       }
