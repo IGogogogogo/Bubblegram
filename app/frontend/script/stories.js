@@ -250,11 +250,13 @@ document.addEventListener("turbolinks:load", () => {
 
     const storyId = storiesSection.dataset.storyId
     const storyIndex = storiesSection.dataset.storyIndex
+
     const userName = storiesSection.dataset.userName
     const url = `/users/${userName}/stories/${storyId}`
 
     //前端畫面刪除
     $(".owl-carousel").trigger('remove.owl.carousel', [storyIndex]).trigger('refresh.owl.carousel');
+
 
     // 資料庫刪除
     Rails.ajax({
@@ -264,6 +266,11 @@ document.addEventListener("turbolinks:load", () => {
         // console.log("success:", url)
       }
     })
+
+    ////沒有限時動態時回首頁
+    if(!document.querySelector(".owl-item")) {
+      location.pathname = "/"
+    }
 
     // Swal.fire({
     //   title: '你確定要刪除嗎？',
