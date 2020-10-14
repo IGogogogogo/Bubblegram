@@ -251,34 +251,45 @@ document.addEventListener("turbolinks:load", () => {
     const storyId = storiesSection.dataset.storyId
     const storyIndex = storiesSection.dataset.storyIndex
     const userName = storiesSection.dataset.userName
-
     const url = `/users/${userName}/stories/${storyId}`
 
-    Swal.fire({
-      title: '你確定要刪除嗎？',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: '刪除',
-      cancelButtonText: '取消'
-    }).then((result) => {
-      if (result.isConfirmed) {
-        //前端畫面刪除
-        $(".owl-carousel").trigger('remove.owl.carousel', [storyIndex]).trigger('refresh.owl.carousel');
+    //前端畫面刪除
+    $(".owl-carousel").trigger('remove.owl.carousel', [storyIndex]).trigger('refresh.owl.carousel');
 
-        // 資料庫刪除
-        Rails.ajax({
-          url: url,
-          type: "DELETE",
-          success: function(){
-            console.log("success:", url)
-          }
-        })
-      } else {
-        $('.stories .owl-carousel').trigger('play.owl.autoplay')
+    // 資料庫刪除
+    Rails.ajax({
+      url: url,
+      type: "DELETE",
+      success: function(){
+        // console.log("success:", url)
       }
     })
+
+    // Swal.fire({
+    //   title: '你確定要刪除嗎？',
+    //   icon: 'warning',
+    //   showCancelButton: true,
+    //   confirmButtonColor: '#d33',
+    //   cancelButtonColor: '#3085d6',
+    //   confirmButtonText: '刪除',
+    //   cancelButtonText: '取消'
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     //前端畫面刪除
+    //     $(".owl-carousel").trigger('remove.owl.carousel', [storyIndex]).trigger('refresh.owl.carousel');
+
+    //     // 資料庫刪除
+    //     Rails.ajax({
+    //       url: url,
+    //       type: "DELETE",
+    //       success: function(){
+    //         console.log("success:", url)
+    //       }
+    //     })
+    //   } else {
+    //     $('.stories .owl-carousel').trigger('play.owl.autoplay')
+    //   }
+    // })
   }
 
 
