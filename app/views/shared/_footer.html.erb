@@ -1,5 +1,6 @@
 <div class="col-12 col-md-8">
   <% if user_signed_in? %>
+  <div id="btn-bg"></div>
   <nav class="index-nav">
     <div class="nav nav-tabs w-100 text-center" id="nav-tab" role="tablist">
       <%= link_to root_path, class: "nav-link flex-grow-1 footer-btn" do %>
@@ -10,12 +11,26 @@
       <i class="fas fa-search"></i>
       <% end %>
 
-      <%= link_to new_user_post_path(current_user), class: "nav-link flex-grow-1 footer-btn" do %>
-      <i class="fas fa-plus-square"></i>
+      <input type="checkbox" id="spread-btn" style="position: absolute">
+      <label for="spread-btn" class="nav-link flex-grow-1 footer-btn mb-0">
+        <i class="fas fa-plus-square"></i>
+      </label>
+
+      <%= link_to new_user_post_path(current_user), class: "bubble-btn btn-1" do %>
+      <i class="fas fa-image"></i>
       <% end %>
 
+      <%= link_to rooms_path ,class: "camera bubble-btn btn-2", data: {turbolinks: false}, method: 'post' do %>
+      <i class="fas fa-video"></i>
+      <% end %>
+      <%= link_to new_user_story_path(current_user.nick_name), class: 'bubble-btn btn-3' do %>
+      <i class="fas fa-history"></i>
+      <% end %>
+
+
+
       <%= link_to chats_path, class: "chat-path nav-link flex-grow-1 footer-btn", data:{user: current_user.id} do %>
-      <div class = "<%= "message-dot" if has_any_chatroom_new_message? > 0 %>"></div>
+      <div class="<%= "message-dot" if has_any_chatroom_new_message? > 0 %>"></div>
       <i class="far fa-comment-alt"></i>
       <% end %>
 
