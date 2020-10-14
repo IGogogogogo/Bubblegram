@@ -78,12 +78,20 @@
         color: whitesmoke;
         outline: none;
         position: relative;
+
+        > a:hover{
+          color: rgb(127, 207, 214);
+        }
       }
     }
   }
 
-  .story-pic img{
-    height: 100vh;
+  .story-pic{
+    text-align: center;
+
+    img{
+      height: 100vh;
+    }
   }
 
   .owl-carousel {
