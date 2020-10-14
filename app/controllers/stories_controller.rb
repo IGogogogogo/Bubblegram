@@ -52,7 +52,7 @@ class StoriesController < ApplicationController
   def destroy
     authorize @story
     @story.destroy
-    stories_count = current_user.stories.stories_oneday.count
+    stories_count = current_user.stories.count
 
     if(stories_count == 0)
       redirect_to root_path, notice: "已經沒有限時動態"
