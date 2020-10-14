@@ -8,7 +8,7 @@ post_count = 10
 namespace :dev do
   task fake_users: :environment do
     print "\n正在建立使用者資料"
-    User.destroy_all
+    # User.destroy_all
 
     uri = URI("https://uifaces.co/api?limit=#{user_count}")
     req = Net::HTTP::Get.new(uri)
@@ -41,7 +41,7 @@ namespace :dev do
 
   task fake_follows: :environment do
     print "\n正在建立使用者追蹤資料"
-    Follow.destroy_all
+    # Follow.destroy_all
 
     User.all.each do |user|
       number = rand(2..5)

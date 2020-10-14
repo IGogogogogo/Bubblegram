@@ -1,6 +1,6 @@
 document.addEventListener("turbolinks:load", () => {
-  ///////加入class用來判斷以執行過的輪播屬性
-  $('.post-pic-carousel.owl-carousel:not(.owl-carousel-loaded)').addClass('owl-carousel-loaded').owlCarousel({
+  ///貼文的輪播////
+  $('.post-pic-carousel.owl-carousel').owlCarousel({
     loop: false,
     margin: 0,
     nav: false,
@@ -10,10 +10,9 @@ document.addEventListener("turbolinks:load", () => {
         items: 1
       }
     }
-  });
+  })
 
-
-
+  ///////限時動態連結的輪播
   $('.limit-video-carousel').owlCarousel({
     loop: false,
     margin: 0,

@@ -121,8 +121,8 @@ document.addEventListener("turbolinks:load", () => {
 
 
   function startCarousel() {
-    //////判斷執行過套件的元素不要重複執行
-    $('.owl-carousel:not(.owl-carousel-loaded)').addClass('owl-carousel-loaded').owlCarousel({
+    //////執行輪播套件
+    $('.post-pic-carousel.owl-carousel').owlCarousel({
       loop: false,
       margin: 0,
       nav: false,
