@@ -13,10 +13,11 @@ class MessagesController < ApplicationController
 
       SendMessageJob.perform_later(@chat_message, new_message_counts, @opposed_user)
 
-      # if !is_online_channel_connect?  #判斷對方使用者有沒有在線上
-      #   puts "------------------我是判斷使用者有沒有在線上--------------------"
+      if !is_online_channel_connect?  #判斷對方使用者有沒有在線上
+        # puts "------------------我是判斷使用者有沒有在線上--------------------"
+        redis.rpush("#{@opposed_user}_chat_notice", @chat_message.chatroom_id)
       #  redis.rpush("#{@chat_message.chatroom_id}_#{@chat_message.user_id}_new_message", @chat_message.to_json) #下線將訊息存為新訊息
-      # end
+      end
 
       if !is_unread_channel_connect? && is_online_channel_connect? #如果對方使用者在線上且通知channel斷線（代表正在換頁）
         # puts "------------------我是判斷使用者在線上通知有沒有斷線--------------------"
