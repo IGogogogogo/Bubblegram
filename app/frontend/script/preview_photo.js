@@ -2,7 +2,7 @@ window.addEventListener('turbolinks:load', function () {
 
   let postImagesInput = document.getElementById('post_images')
   let storyInput = document.getElementById('story_picture')
-  console.log(storyInput)
+
   if (!postImagesInput && !storyInput) return
 
 
