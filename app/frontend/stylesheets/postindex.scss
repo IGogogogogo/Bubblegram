@@ -46,11 +46,12 @@ a{
     bottom: -2px;
   }
 }
-.user-name{
+.user-name-limit{
+    width: 50px;
     overflow : hidden;
     text-overflow : ellipsis;
     white-space : nowrap;
-  }
+}
 .user-info .option i,
 .user-post-content i {
   font-size: 20px;
@@ -113,6 +114,7 @@ a{
     height: 20px;
     width: 20px;
     transform: rotate(-45deg) scale(0);
+    transition: linear;
     z-index: 20;
 
     &::after {
@@ -140,14 +142,16 @@ a{
         transform: rotate(-45deg) scale(0);
       }
 
-      50%{transform: rotate(-45deg) scale(3);}
-      60%{
+      30%{
         transform: rotate(-45deg) scale(3);
       }
+      50%{
+        transform: rotate(-45deg) scale(3);
+      }
+
       100%{
         transform: rotate(-45deg) scale(0);
       }
-
     }
   }
 }

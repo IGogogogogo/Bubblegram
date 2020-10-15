@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     end
 
     collection do
+      get :guest
       get :load_posts, to: 'posts#load_posts'     #用在載入新貼文 page index & posts index
       get :load_img, to: 'posts#load_img'         #用在載入新貼文 user show
     end

@@ -1,9 +1,9 @@
-<div data-controller="heart" data-heart-id="<%= post.id %>" class="col-12 border border-gray mb-5 px-0 pb-2">
+<div data-controller="heart" data-heart-id="<%= post.id %>" class="col-12 border border-gray mb-3 px-0 pb-2">
   <!---post user and btn---------------------->
   <%= render partial: "/posts/post_user", locals: { post: post } %>
   <!---IMAGES---------------->
   <div data-action="click->heart#like" class="post-pic w-100 h-100">
-  <div class ="heart"></div>
+    <div class ="heart"></div>
     <div class="post-pic-carousel owl-carousel owl-theme">
       <%= render partial: "/posts/carousel_img", collection: post.images, as: :image, locals: {images: post.images} %>
     </div>

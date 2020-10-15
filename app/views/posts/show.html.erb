@@ -1,10 +1,13 @@
 <p class="notice" style="display:none;"><%= notice %></p>
 
 <div class="wrap">
-  <div class="post-show">
+  <div data-controller="heart" data-heart-id="<%= @post.id %>" class="post-show">
     <%= render "post_user", post: @post %>
-    <div class="post-pic-carousel owl-carousel owl-theme">
-      <%= render partial: "/posts/carousel_img", collection: @post.images, as: :image if @post.images %>
+    <div data-action="click->heart#like" class = "post-pic w-100 h-100">
+      <div class= "heart"></div>
+      <div class="post-pic-carousel owl-carousel owl-theme">
+        <%= render partial: "/posts/carousel_img", collection: @post.images, as: :image if @post.images %>
+      </div>
     </div>
 
     <div class="post-text px-2 pb-2">
