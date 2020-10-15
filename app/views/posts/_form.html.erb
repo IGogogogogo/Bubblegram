@@ -38,9 +38,6 @@
 
 <div class="form-group post-content">
   <%= form.text_area :content, class: "form-control" ,rows: "4" %>
-  <% if post.errors.messages[:content] != [] %>
-    <span class="form-error-message"><%= post.errors.messages[:content][0] %></span>
-  <% end %>
   <div class="underline"></div>
   <%= form.label :content, '文章內文' %>
 </div>

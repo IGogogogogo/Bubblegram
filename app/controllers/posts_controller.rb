@@ -64,15 +64,19 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = current_user.posts.new(post_params)
-    authorize @post
-
-    if @post.save
-      redirect_to root_path, notice: '文章新增成功'
+    if valid_tag?
+      @post = current_user.posts.new(post_params)
+      authorize @post
+      if @post.save
+        redirect_to root_path, notice: '文章新增成功'
+      else
+        find_tag_users
+        @url = user_posts_path(user_id: current_user.id)
+        flash.now[:alert] = "圖片不能為空"
+        render :new
+      end
     else
-      find_tag_users
-      @url = user_posts_path(current_user)
-      render :new
+      redirect_to new_user_post_path(user_id: current_user.slug)
     end
   end
 
@@ -83,12 +87,12 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post.assign_attributes(post_params)
-    authorize @post
-
-    if @post.save
+    if valid_tag?
+      @post.assign_attributes(post_params)
+      @post.save
       redirect_to post_path(@post), notice: '文章更新成功'
     else
+      @post.update(untag_params)
       @url = post_path
       find_tag_users
       render :edit
@@ -110,29 +114,36 @@ class PostsController < ApplicationController
     end
   end
 
-
   private
 
   def find_post
     @post = Post.find(params[:id])
   end
 
-  def find_tag_users
+  def find_tag_users  #post 表單 user tag 欄位用的資料
     @users = current_user.followings.map{ |u| ["@#{u.nick_name}", u.id] }
     @taged_id = @post.taged_users.map{ |u| u.id }
   end
 
   def post_params
-    check_taged_users(params[:post][:taged_user_ids]) if params[:post][:taged_user_ids]
     params.require(:post).permit(:content, :body, {taged_user_ids: []}, {images: []} )
   end
 
-  def check_taged_users(taged_users) #檢查 tag 有沒有不存在的 user
-    taged_users.each do |user_id|
+  def untag_params  #找不到 tag user 時移除 tag 的 params，只存其他欄位
+    params.require(:post).permit(:content, :body, {images: []})
+  end
+
+  def valid_tag? #檢查 tag 有沒有不存在的 user
+    user_ids =  params[:post][:taged_user_ids]
+    return true if !user_ids
+
+    user_ids.each do |user_id|
       if User.find_by(id: user_id).nil?
-        flash[:alert] = "#找不到符合的使用者"  #用來給前端 js 新增錯誤訊息
-        return
+        flash[:tag] = "找不到符合的使用者"  #用來給前端 js 新增錯誤訊息
+        return false
       end
     end
+
+    return true
   end
 end

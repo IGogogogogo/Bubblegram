@@ -1,16 +1,15 @@
 <%= render partial: "shared/title_with_prev", locals: { title: "限時動態" } %>
 
-<div class="wrap">
-  <% if @story.errors.any? %>
-  <ul>
-    <% @story.errors.full_messages.each do |msg| %>
-    <li>
-      <%= msg %>
-    </li>
-    <% end %>
-  </ul>
-  <% end %>
+<% if alert %>
+  <div class="alert alert-danger alert-dismissible fade show w-100" role="alert">
+    <%= alert %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+<% end %>
 
+<div class="wrap">
   <div id="story-pic">
     <img alt="" id="story-preview">
     <small class="story-alert text-danger" style="display: none;">照片會經過裁切可能與預覽不符，請見諒</small>

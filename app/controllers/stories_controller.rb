@@ -45,6 +45,7 @@ class StoriesController < ApplicationController
     if @story.save
       redirect_to stories_path, notice: "限時動態新增成功"
     else
+      flash.now[:alert] = "圖片不能為空"
       render :new
     end
   end
