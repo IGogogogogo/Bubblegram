@@ -22,6 +22,11 @@ class UnreadMessageNotificationChannel < ApplicationCable::Channel
     redis.rpush("#{data["current_user"]}_chat_notice",data['message']['chatroom_id'])
   end
 
+  def has_any_new_message_room(data)
+    chat_room = Chat.between(data["sender"], data["recipient"])
+    chat_room.touch_all
+  end
+
   private
   def redis
     @redis = Redis.new unless @redis

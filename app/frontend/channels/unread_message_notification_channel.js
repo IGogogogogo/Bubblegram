@@ -71,7 +71,7 @@ document.addEventListener("turbolinks:load",()=>{
          clone = document.importNode(chatUser[0].parentNode, true)
          chatContainer.insertAdjacentElement('afterbegin', clone)
          chatUser[0].parentNode.remove()
-
+         this.perform("has_any_new_message_room",{sender: data.message.user_id, recipient: Number(currentUserId)})
       }
 
         if(!!data.read_message && data.current_user === Number(currentUserId)){
