@@ -139,7 +139,7 @@ class User < ApplicationRecord
   def nick_name_format
     if !self.nick_name.match?(/\A[\w\u4E00-\u9FFF]{1,12}\z/)
       #正規表達式, \A\z代表字串開頭結尾, []是字串要符合的格式, \w 是英文大小寫+數字+底線, \u4E00-\u9FFF是中文 UTF-8 代號, {1,12}代表1到12字
-      errors.add(:base, "暱稱格式不符")
+      errors.add(:nick_name, "暱稱只能填入12字以內中文或英數字")
     end
   end
 end
