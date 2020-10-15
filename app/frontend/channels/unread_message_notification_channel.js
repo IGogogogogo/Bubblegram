@@ -54,6 +54,8 @@ document.addEventListener("turbolinks:load",()=>{
 
       if (!!chatUser[0] && data.opposed_user === Number(currentUserId)){ //判斷chat index有沒傳這則訊息的人 並且傳的對方確定是接收方
         // 如果有人傳新訊息把目前上線的div換成新訊息的div
+        let clone
+        let chatContainer = document.querySelector(".chat-user-container")
         let newMessages = chatUser[0].querySelector(".chat-user-info .unread-messages")
         let onlineText = chatUser[0].querySelector(".chat-user-info .online-text")
          if(onlineText){
@@ -66,6 +68,10 @@ document.addEventListener("turbolinks:load",()=>{
          // 找有沒有新訊息的字
          chatUser[0].querySelector(".notice-dot").classList.add("message-notice-dot")
          newMessages.textContent = `您有${data.new_message_counts += 1}則新訊息`
+         clone = document.importNode(chatUser[0].parentNode, true)
+         chatContainer.insertAdjacentElement('afterbegin', clone)
+         chatUser[0].parentNode.remove()
+
       }
 
         if(!!data.read_message && data.current_user === Number(currentUserId)){
