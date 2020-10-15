@@ -1,10 +1,11 @@
-<p class="alert" style="display:none;"><%= alert %></p>
-<% if post.errors.any? %>
-<ul>
-  <% post.errors.full_messages.each do |msg| %>
-  <li style="color: red;"><small><%= msg %></small></li>
-  <% end %>
-</ul>
+<p class="tag" style="display:none;"><%= flash[:tag] %></p>
+<% if alert %>
+  <div class="alert alert-danger alert-dismissible fade show w-100" role="alert">
+    <%= alert %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 <% end %>
 
 <%= form_with(model: post, url: url, class: "form", local: true) do |form| %>
@@ -37,6 +38,9 @@
 
 <div class="form-group post-content">
   <%= form.text_area :content, class: "form-control" ,rows: "4" %>
+  <% if post.errors.messages[:content] != [] %>
+    <span class="form-error-message"><%= post.errors.messages[:content][0] %></span>
+  <% end %>
   <div class="underline"></div>
   <%= form.label :content, '文章內文' %>
 </div>
