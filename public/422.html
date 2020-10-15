@@ -24,9 +24,9 @@
       display: block;
     }
     .error-container{
-      max-width: 740px;
+      width: 100%;
       margin: auto;
-      padding: 0 100px;
+      padding: 0 10px;
       height: 325px;
       box-sizing: border-box;
       position: absolute;
@@ -35,6 +35,12 @@
       right: 0;
       left: 0;
       margin: auto;
+    }
+    @media screen and (min-width: 760px){
+      .error-container{
+        max-width: 740px;
+        padding: 0 100px;
+      }
     }
     .error-content{
       background-color: rgba(250,250 ,250, 0.7);
