@@ -4,6 +4,6 @@
     <span class="user-name"><%= user.nick_name %></span>
   <% end %>
   <span class="btn-follow">
-    <%= render "/users/user_follow", user: user %>
+    <%= render "/users/user_follow", user: user unless user == current_user%>
   </span>
 </div>

@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   before_action :find_user, only: [:show, :fans, :followings, :edit, :update, :follow]
-  skip_before_action :authenticate_user!, only: [:guest] 
-  
+  skip_before_action :authenticate_user!, only: [:guest]
+
   # before_action :only_owner, only: [:edit, :update]
 
   def show
@@ -15,8 +15,10 @@ class UsersController < ApplicationController
   def follow
     @followings = params[:followings]
     @fans = params[:fans]
-    @user_fans = @user.fans
-    @user_followings = @user.followings
+    user_fans = @user.fans.where.not(id: current_user).includes(:fans)[0..-1]
+    @user_fans= user_fans.unshift(current_user)
+    user_followings = @user.followings.where.not(id: current_user).includes(:fans)[0..-1]
+    @user_followings = user_followings.unshift(current_user)
   end
 
   def fans
