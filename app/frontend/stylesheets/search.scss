@@ -41,3 +41,29 @@
     margin-top: 15px;
   }
 }
+.search-page-photo{
+  margin-left:-5px ;
+  .photo-container + .photo-container{
+    padding-left: 5px;
+    padding-bottom: 5px;
+  }
+
+  .photo-container{
+    float: left;
+    &:first-child{
+      padding-left: 5px;
+      padding-bottom: 5px;
+    }
+    &:nth-child(24n + 2),
+    &:nth-child(24n + 12){
+      max-width: 66.66%;
+    }
+    &:nth-child(24n+3),
+    &:nth-child(24n+13),
+    &:nth-child(24n+17),
+    &:nth-child(24n+19)
+    {
+      margin-top: -29.2% ;
+    }
+  }
+}
