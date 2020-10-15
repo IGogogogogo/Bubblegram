@@ -11,12 +11,12 @@
   </div>
 
   <div class="field-sign-up">
-    <%= f.email_field :email, autocomplete: "off"%>
+    <%= f.email_field :email, autocomplete: "off", id: 'user-signup-email'%>
     <div class="underline"></div>
     <%= f.label :email, '信箱' %>
   </div>
   <div class="field-sign-up">
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", id: 'user-signup-email' %>
     <div class="underline"></div>
     <%= f.label :password, '密碼' %>
   </div>

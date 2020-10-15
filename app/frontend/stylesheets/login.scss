@@ -13,6 +13,7 @@
 #user_password{
 width: 85% !important;
 }
+
 #login-alert{
   position: absolute;
   top: 0;
@@ -53,4 +54,11 @@ width: 85% !important;
 }
 .invalid-feedback{
   text-align: center;
+}
+
+@media (min-width: 1000px){
+  #user_email,
+  #user_password{
+    width: 90% !important;
+  }
 }
