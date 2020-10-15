@@ -137,11 +137,9 @@ class PostsController < ApplicationController
     user_ids =  params[:post][:taged_user_ids]
     return true if !user_ids
 
-    user_ids.each do |user_id|
-      if User.find_by(id: user_id).nil?
-        flash[:tag] = "找不到符合的使用者"  #用來給前端 js 新增錯誤訊息
-        return false
-      end
+    if User.where(id: user_ids).count != user_ids.length
+      flash[:tag] = "找不到符合的使用者"  #用來給前端 js 新增錯誤訊息
+      return false
     end
 
     return true
