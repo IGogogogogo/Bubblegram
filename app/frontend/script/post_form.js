@@ -1,6 +1,6 @@
 document.addEventListener("turbolinks:load", () => {
   const postFormTag = document.querySelector("form .post-tags")
-  const alertMessage = document.querySelector(".alert")
+  const tagMessage = document.querySelector(".tag")
 
   if(!postFormTag) return
   ////select2 表單多選套件
@@ -9,12 +9,13 @@ document.addEventListener("turbolinks:load", () => {
     tokenSeparators: [',', ' '],
   })
 
-  if(alertMessage.textContent != ""){   ////controller 有flash alert時會有alert內容
+  if(tagMessage.textContent != ""){   ////controller 有 flash tag 時會有內容
     const tagLabel = postFormTag.querySelector("label").textContent
     const errorMessageEl = document.createElement("small")
-    errorMessageEl.textContent = alertMessage.textContent
+    errorMessageEl.textContent = tagMessage.textContent
     errorMessageEl.classList = "text-danger"
     postFormTag.querySelector("label").appendChild(errorMessageEl)
+    postFormTag.querySelector("label").classList = "d-flex justify-content-between"
     postFormTag.addEventListener("click", () => { ///移除錯誤訊息
       postFormTag.querySelector("label").textContent = tagLabel
     })
