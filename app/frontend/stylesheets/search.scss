@@ -43,27 +43,25 @@
 }
 .search-page-photo{
   margin-left:-5px ;
+
   .photo-container + .photo-container{
-    padding-left: 5px;
-    padding-bottom: 5px;
+    padding-left: 4px !important;
+    padding-bottom: 4px !important;
   }
 
   .photo-container{
     float: left;
     &:first-child{
-      padding-left: 5px;
-      padding-bottom: 5px;
+      padding-left: 4px !important;
+      padding-bottom: 4px !important;
     }
     &:nth-child(24n + 2),
     &:nth-child(24n + 12){
-      max-width: 66.66%;
+      max-width: 66.666666%;
     }
     &:nth-child(24n+3),
-    &:nth-child(24n+13),
-    &:nth-child(24n+17),
-    &:nth-child(24n+19)
-    {
-      margin-top: -29.2% ;
+    &:nth-child(24n+13){
+      margin-top: -29.4% ;
     }
   }
 }
