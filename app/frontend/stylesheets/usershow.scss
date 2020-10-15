@@ -5,7 +5,12 @@
   max-width: 740px;
   margin: auto;
 }
-
+.edit-profile{
+  > a{
+    height: 52px;
+    line-height: 38px;
+  }
+}
 
 @media (max-width:415px){
   .post-load-page{
