@@ -9,9 +9,11 @@
   color: rgb(127, 207, 214);
   // rgb(92, 187, 195)
 }
-#user_email,
-#user_password{
-width: 85% !important;
+.login-form{
+  #user_email,
+  #user_password{
+  width: 85% !important;
+  }
 }
 
 #login-alert{

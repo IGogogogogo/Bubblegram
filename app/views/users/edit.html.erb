@@ -1,18 +1,6 @@
 <%= render partial: "shared/title_with_prev", locals: { title: "用戶編輯" } %>
 
 <div class="wrap">
-  <% if @user.errors.any? %>
-    <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li style="color: red;">
-          <small>
-            <%= msg %>
-          </small>
-        </li>
-      <% end %>
-    </ul>
-  <% end %>
-
   <div id="user-edit-pic">
     <%= image_tag @user.avatar.url, id: 'user-preview' if @user.avatar %>
   </div>
@@ -20,24 +8,36 @@
   <%= form_with(model: @user, local: true) do |f| %>
     <div class="user-edit-group">
       <%= f.file_field :avatar, autocomplete: "off" %>
+      <% if @user.errors.messages[:nick_name] != [] %>
+        <span class="form-error-message"><%= @user.errors.messages[:avatar][0] %></span>
+      <% end %>
       <div class="underline"></div>
       <%= f.label "avatar" %>
     </div>
 
     <div class="user-edit-group">
       <%= f.text_field "nick_name", autocomplete: "off" %>
+      <% if @user.errors.messages[:nick_name] != [] %>
+        <span class="form-error-message"><%= @user.errors.messages[:nick_name][0] %></span>
+      <% end %>
       <div class="underline"></div>
       <%= f.label "暱稱" %>
     </div>
 
     <div class="user-edit-group">
       <%= f.text_field "email", autocomplete: "off" %>
+      <% if @user.errors.messages[:nick_name] != [] %>
+        <span class="form-error-message"><%= @user.errors.messages[:email][0] %></span>
+      <% end %>
       <div class="underline"></div>
       <%= f.label "信箱" %>
     </div>
 
     <div class="user-edit-group textarea-wrap">
       <%= f.text_area "description", autocomplete: "off" ,rows: "4"  %>
+      <% if @user.errors.messages[:nick_name] != [] %>
+        <span class="form-error-message"><%= @user.errors.messages[:description][0] %></span>
+      <% end %>
       <div class="underline"></div>
       <%= f.label "描述",class:"desc-label" %>
     </div>

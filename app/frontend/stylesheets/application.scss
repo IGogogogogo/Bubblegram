@@ -192,3 +192,10 @@ img{
 .owl-dot.active span{
   background-color: #7fcfd6 !important;
 }
+
+.form-error-message {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  color: red;
+}
