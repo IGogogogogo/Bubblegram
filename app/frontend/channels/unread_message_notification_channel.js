@@ -67,7 +67,7 @@ document.addEventListener("turbolinks:load",()=>{
          }
          // 找有沒有新訊息的字
          chatUser[0].querySelector(".notice-dot").classList.add("message-notice-dot")
-         newMessages.textContent = `您有${data.new_message_counts += 1}則新訊息`
+         newMessages.textContent = `您有新訊息`
          clone = document.importNode(chatUser[0].parentNode, true)
          chatContainer.insertAdjacentElement('afterbegin', clone)
          chatUser[0].parentNode.remove()
