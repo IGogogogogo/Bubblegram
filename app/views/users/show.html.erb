@@ -16,7 +16,7 @@
             <div class="num font-weight-bold">
               <%= link_to user_posts_path(@user), class: 'text-black' do %>
               <div><%= @user.posts_count %></div>
-              <div class="post">Posts</div>
+              <div class="post">貼文</div>
               <% end %>
             </div>
           </div>
@@ -26,7 +26,7 @@
             <div class="num font-weight-bold">
               <%= link_to follow_user_path(@user, fans: "fans"), class: 'text-black' do %>
               <div><%= @user.fans_count %></div>
-              <div class="follower">Followers</div>
+              <div class="follower">粉絲</div>
               <% end %>
             </div>
           </div>
@@ -36,7 +36,7 @@
             <div class="num font-weight-bold">
               <%= link_to follow_user_path(@user, followings: "followings"), class: 'text-black' do %>
               <div><%= @user.followings_count %></div>
-              <div class="following">Following</div>
+              <div class="following">追蹤中</div>
               <% end %>
             </div>
           </div>

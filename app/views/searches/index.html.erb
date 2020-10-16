@@ -1,7 +1,8 @@
+<div>
+  <%= render partial: "shared/title_with_prev", locals: { title: "精選貼文" } %>
+</div>
 <%= render "form" %>
-
 <div class="post-load-page">
-  <h4>精選貼文</h4>
   <div class="overflow-hidden">
     <div class="post-load-target rand-posts search-page-photo">
       <%= render partial: "/posts/post_img", collection: @posts, as: :post %>
