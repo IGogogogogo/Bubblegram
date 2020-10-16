@@ -29,16 +29,16 @@ document.addEventListener("turbolinks:load",()=>{
     },
 
     received(data) {
-      if(!data.read_message && (data.message.user_id == Number(currentUserId))){
-
-        //比對user是不是傳送訊息的user
-        this.perform("new_message",{message: data.message, current_user: currentUserId})
-      }
       let chatChannle = this.consumer.subscriptions.subscriptions.filter(sub=> JSON.parse(sub.identifier).channel === "ChatChannel") //找有沒有在chatchannel
 
 
       if(chatChannle.length === 1)return //有的話代表正在聊天室中，不發通知
       // console.log(data.read_message)
+          if(!data.read_message && (data.opposed_user == Number(currentUserId))){
+
+            //比對user是不是傳送訊息的user
+            this.perform("new_message",{message: data.message, current_user: currentUserId})
+          }
 
       let chatUsers = Array.from(document.querySelectorAll(".chat-user")) //選取訊息盒的所有聊天的人
       // console.log(data)
