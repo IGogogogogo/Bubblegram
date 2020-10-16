@@ -25,7 +25,7 @@
                 <%= chat.opposed_user(current_user).nick_name %>
                 <% if chat.any_unread_messages?(current_user) %>
                   <div class="unread-messages">
-                    您有<%= chat.unread_messages(current_user) %>則新訊息
+                    您有新訊息
                   </div>
                 <% end %>
                 <% if chat.opposed_user(current_user).is_online? %>

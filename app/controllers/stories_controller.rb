@@ -45,6 +45,7 @@ class StoriesController < ApplicationController
     if @story.save
       redirect_to stories_path, notice: "限時動態新增成功"
     else
+      flash.now[:alert] = "圖片不能為空"
       render :new
     end
   end
@@ -52,7 +53,7 @@ class StoriesController < ApplicationController
   def destroy
     authorize @story
     @story.destroy
-    stories_count = current_user.stories.stories_oneday.count
+    stories_count = current_user.stories.count
 
     if(stories_count == 0)
       redirect_to root_path, notice: "已經沒有限時動態"

@@ -2,21 +2,29 @@
   <h4 class="user-signup-title">註冊</h4>
 
   <%= form_with(model: resource, as: resource_name, url: registration_path(resource_name), local: true, class:"user-sign-up") do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field-sign-up">
     <%= f.text_field :nick_name, autocomplete: "off" %>
+    <% if resource.errors.messages[:nick_name] != [] %>
+      <span class="form-error-message"><%= resource.errors.messages[:nick_name][0] %></span>
+    <% end %>
     <div class="underline"></div>
     <%= f.label :nick_name, '暱稱' %>
   </div>
 
   <div class="field-sign-up">
-    <%= f.email_field :email, autocomplete: "off"%>
+    <%= f.email_field :email, autocomplete: "off", id: 'user-signup-email' %>
+    <% if resource.errors.messages[:email] != [] %>
+      <span class="form-error-message"><%= resource.errors.messages[:email][0] %></span>
+    <% end %>
     <div class="underline"></div>
     <%= f.label :email, '信箱' %>
   </div>
   <div class="field-sign-up">
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.password_field :password, autocomplete: "off", id: 'user-signup-email' %>
+    <% if resource.errors.messages[:password] != [] %>
+      <span class="form-error-message"><%= resource.errors.messages[:password][0] %></span>
+    <% end %>
     <div class="underline"></div>
     <%= f.label :password, '密碼' %>
   </div>

@@ -29,16 +29,16 @@ document.addEventListener("turbolinks:load",()=>{
     },
 
     received(data) {
-      if(!data.read_message && (data.message.user_id == Number(currentUserId))){
-
-        //比對user是不是傳送訊息的user
-        this.perform("new_message",{message: data.message, current_user: currentUserId})
-      }
       let chatChannle = this.consumer.subscriptions.subscriptions.filter(sub=> JSON.parse(sub.identifier).channel === "ChatChannel") //找有沒有在chatchannel
 
 
       if(chatChannle.length === 1)return //有的話代表正在聊天室中，不發通知
       // console.log(data.read_message)
+          if(!data.read_message && (data.opposed_user == Number(currentUserId))){
+
+            //比對user是不是傳送訊息的user
+            this.perform("new_message",{message: data.message, current_user: currentUserId})
+          }
 
       let chatUsers = Array.from(document.querySelectorAll(".chat-user")) //選取訊息盒的所有聊天的人
       // console.log(data)
@@ -54,6 +54,8 @@ document.addEventListener("turbolinks:load",()=>{
 
       if (!!chatUser[0] && data.opposed_user === Number(currentUserId)){ //判斷chat index有沒傳這則訊息的人 並且傳的對方確定是接收方
         // 如果有人傳新訊息把目前上線的div換成新訊息的div
+        let clone
+        let chatContainer = document.querySelector(".chat-user-container")
         let newMessages = chatUser[0].querySelector(".chat-user-info .unread-messages")
         let onlineText = chatUser[0].querySelector(".chat-user-info .online-text")
          if(onlineText){
@@ -65,7 +67,11 @@ document.addEventListener("turbolinks:load",()=>{
          }
          // 找有沒有新訊息的字
          chatUser[0].querySelector(".notice-dot").classList.add("message-notice-dot")
-         newMessages.textContent = `您有${data.new_message_counts += 1}則新訊息`
+         newMessages.textContent = `您有新訊息`
+         clone = document.importNode(chatUser[0].parentNode, true)
+         chatContainer.insertAdjacentElement('afterbegin', clone)
+         chatUser[0].parentNode.remove()
+         this.perform("has_any_new_message_room",{sender: data.message.user_id, recipient: Number(currentUserId)})
       }
 
         if(!!data.read_message && data.current_user === Number(currentUserId)){

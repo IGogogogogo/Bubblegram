@@ -137,9 +137,9 @@ class User < ApplicationRecord
   end
 
   def nick_name_format
-    if !self.nick_name.match?(/\A[\w\u4E00-\u9FFF]{1,12}\z/)
-      #正規表達式, \A\z代表字串開頭結尾, []是字串要符合的格式, \w 是英文大小寫+數字+底線, \u4E00-\u9FFF是中文 UTF-8 代號, {1,12}代表1到12字
-      errors.add(:base, "暱稱格式不符")
+    if self.nick_name.match(/\A[\w\u4E00-\u9FFF]\z/) == nil
+      #正規表達式, \A\z代表字串開頭結尾, []是字串要符合的格式, \w 是英文大小寫+數字+底線, \u4E00-\u9FFF是中文 UTF-8 代號
+      self.nick_name = self.nick_name.gsub(/[^\w\u4E00-\u9FFF]/,'_')
     end
   end
 end

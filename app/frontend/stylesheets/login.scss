@@ -9,10 +9,13 @@
   color: rgb(127, 207, 214);
   // rgb(92, 187, 195)
 }
-#user_email,
-#user_password{
-width: 85% !important;
+.login-form{
+  #user_email,
+  #user_password{
+  width: 85% !important;
+  }
 }
+
 #login-alert{
   position: absolute;
   top: 0;
@@ -53,4 +56,11 @@ width: 85% !important;
 }
 .invalid-feedback{
   text-align: center;
+}
+
+@media (min-width: 1000px){
+  #user_email,
+  #user_password{
+    width: 90% !important;
+  }
 }
