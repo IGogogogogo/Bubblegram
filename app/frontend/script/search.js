@@ -10,9 +10,9 @@ document.addEventListener("turbolinks:load", () => {
   const followForm = document.querySelector(".followings-search-container .search-form")
   const followFormInput = document.querySelector(".followings-search-container .search-form input")
   if (!searchForm) return
-  if (postLoadPage) {
-    document.querySelector(".container").style.paddingTop = "20px"
-  }
+  // if (postLoadPage) {
+  //   document.querySelector(".container").style.paddingTop = "20px"
+  // }
   // console.log(searchForm)
   // console.log(followForm)
   // console.log(followingsArea)
