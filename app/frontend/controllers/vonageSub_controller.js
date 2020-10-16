@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 
 export default class extends Controller {
   connect() {
-    console.log('sub connect');
+    // console.log('sub connect');
     // 定義apiKey、sessionId、token
     this.apiKey = this.data.get("key")
     this.sessionId = this.data.get("sessionId")
@@ -13,7 +13,7 @@ export default class extends Controller {
 
 
   disconnect() {
-    console.log('sub disconnect');
+    // console.log('sub disconnect');
     if (this.session) { this.session.disconnect() }
     document.querySelector('.end-notice').classList.remove('d-none')
     document.querySelector('.end-notice').classList.add('d-flex')
