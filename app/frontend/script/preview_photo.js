@@ -1,4 +1,13 @@
 window.addEventListener('turbolinks:load', function () {
+  new Swiper('.swiper-container', {
+    // Optional parameters
+    direction: 'horizontal',
+    observer: true,
+    // If we need pagination
+    pagination: {
+      el: '.swiper-pagination',
+    },
+  })
 
   let postImagesInput = document.getElementById('post_images')
   let storyInput = document.getElementById('story_picture')
@@ -73,13 +82,5 @@ window.addEventListener('turbolinks:load', function () {
       }
     }
   }
-  var mySwiper = new Swiper('.swiper-container', {
-    // Optional parameters
-    direction: 'horizontal',
-    observer: true,
-    // If we need pagination
-    pagination: {
-      el: '.swiper-pagination',
-    },
-  })
+
 })
