@@ -11,10 +11,11 @@ class MessagesController < ApplicationController
       @opposed_user = chat_room.opposed_user(current_user).id
       @chat_message = chat_room.messages.create(params_message)
 
-      SendMessageJob.perform_later(@chat_message, new_message_counts)
+      SendMessageJob.perform_later(@chat_message, new_message_counts, @opposed_user)
 
       if !is_online_channel_connect?  #判斷對方使用者有沒有在線上
         # puts "------------------我是判斷使用者有沒有在線上--------------------"
+        redis.rpush("#{@opposed_user}_chat_notice", @chat_message.chatroom_id)
        redis.rpush("#{@chat_message.chatroom_id}_#{@chat_message.user_id}_new_message", @chat_message.to_json) #下線將訊息存為新訊息
       end
 
@@ -23,8 +24,13 @@ class MessagesController < ApplicationController
       redis.rpush("#{@chat_message.chatroom_id}_#{@chat_message.user_id}_new_message", @chat_message.to_json) #將訊息存為新訊息
       end
       # @message.save
-      # redirect_to chat_path(chat_room)
+      redirect_to chat_path(chat_room)
     end
+  end
+
+  def heart
+    live_stream_room = Room.find(params[:room_id])
+    SendHeartJob.perform_later(live_stream_room.id, params[:content])
   end
 
 private

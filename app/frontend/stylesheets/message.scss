@@ -6,19 +6,19 @@
     max-width: 720px;
     height: 100%;
     // position: relative;
-    border-top: 1px solid #ccc;
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
+    border-top: .5px solid #dbdada;
+    border-left: .5px solid #dbdada;
+    border-right: .5px solid #dbdada;
 
     .message_text_header{
       box-sizing: border-box;
       padding: 10px;
-      border-bottom: 1px solid #ccc;
+      border-bottom: .5px solid #dbdada;
     }
     .message_text_area{
       height: calc(100% - 130px);
       overflow: auto;
-      padding: 0 20px 20px 20px;
+      padding: 20px;
       box-sizing: border-box;
 
       #unread-line{
@@ -110,7 +110,7 @@
       max-width: 690px;
       min-height: 50px;
       display: flex;
-      border: 1px solid #ccc;
+      border: .5px solid #dbdada;
       border-radius: 20px;
       box-sizing: border-box;
       padding: 5px 10px;
@@ -181,6 +181,6 @@
     height: calc(100vh - 50px);
   }
   .message_container{
-    border-bottom: 1px solid #ccc;
+    border-bottom: .5px solid #dbdada;
   }
 }

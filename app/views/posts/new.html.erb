@@ -1,4 +1,5 @@
-<h4 class="new-post-title">新貼文</h4>
+<%= render partial: "shared/title_with_prev", locals: { title: "新貼文" } %>
+
 <div class="wrap">
   <%= render "form", post: @post, url: @url, users: @users, taged_id: @taged_id %>
 </div>

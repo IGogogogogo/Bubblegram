@@ -4,63 +4,122 @@
   <title>We're sorry, but something went wrong (500)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
-  }
+    *{
+      margin: 0;
+      padding: 0;
+    }
+    body{
+      background-color: rgb(247, 247, 247);
+    }
+    header{
+      background-color: #fff;
+      border-bottom: 0.5px solid #ccc;
+      padding: 5px 0;
+    }
+    .pic{
+      line-height: 52px;
+    }
+    .pic img{
+      margin: auto;
+      display: block;
+    }
+    .error-container{
+      width: 100%;
+      margin: auto;
+      padding: 0 10px;
+      height: 325px;
+      box-sizing: border-box;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      margin: auto;
+    }
+    @media screen and (min-width: 760px){
+      .error-container{
+        max-width: 740px;
+        padding: 0 100px;
+      }
+    }
+    .error-content{
+      background-color: rgba(250,250 ,250, 0.7);
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
-  }
-
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
-
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
-  }
-
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
-  }
+    }
+    .error-content h2{
+      color: rgb(131, 128, 128);
+      letter-spacing: 5px;
+      font-size: 70px;
+    }
+    .error-content p{
+      font-size: 24px;
+    }
+    .error-content a{
+      text-decoration: none;
+      color:white;
+      font-size: 20px;
+      background-color: #7fcfd6;
+      max-width: 100px;
+      padding: 10px;
+      border-radius: 5px;
+      display: block;
+      cursor: pointer;
+    }
+    .item{
+        margin:10px;
+    }
+    .bubble{
+      background-image: url("./istockphoto-534721193-612x612.jpg");
+      background-size: cover;
+      background-position: center;
+      opacity:.5;
+      position:fixed;
+      border-radius:100%;
+      z-index: -1;
+    }
   </style>
 </head>
 
 <body class="rails-default-error-page">
   <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <div>
-      <h1>We're sorry, but something went wrong.</h1>
+  <header>
+    <nav>
+      <div class="pic">
+        <img src="./text_logo.svg" alt="logo">
+      </div>
+    </nav>
+  </header>
+
+
+    <div class="error-container">
+      <div class="error-content">
+        <h2 class="item">500</h2>
+        <p class="item">Sorry, something went wrong. Try to refresh this page or click the button below.</p>
+        <a href="https://bubble-gram.com" class="item">Go back</a>
+      </div>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
+
+  <script>
+    const body = document.querySelector("body")
+    for (let i = 0; i < 25; i++) {
+    let bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    let size = Math.random() * 40 + Math.random() * 100 + 'px';  // 取得亂數決定泡泡大小
+    bubble.style.width = size;
+    bubble.style.height = size;
+    bubble.style.bottom = Math.random() * 1000 + 'px';  // 亂數決定泡泡在不同的 bottom 位置產生
+    bubble.style.left = Math.random() * body.offsetWidth + 'px';  // 亂數決定泡泡在不同的方向
+    body.appendChild(bubble);
+  }
+  </script>
+
 </body>
 </html>

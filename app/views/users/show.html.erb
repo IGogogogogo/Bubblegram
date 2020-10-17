@@ -1,4 +1,5 @@
-<h4 class="user-show-title"><%= @user.nick_name %></h4>
+<%= render partial: "shared/title_with_prev", locals: { title: @user.nick_name } %>
+
 <div class="post-load-page">
   <div class="container-fluid">
     <div class="row">
@@ -15,7 +16,7 @@
             <div class="num font-weight-bold">
               <%= link_to user_posts_path(@user), class: 'text-black' do %>
               <div><%= @user.posts_count %></div>
-              <div class="post">Posts</div>
+              <div class="post">貼文</div>
               <% end %>
             </div>
           </div>
@@ -25,7 +26,7 @@
             <div class="num font-weight-bold">
               <%= link_to follow_user_path(@user, fans: "fans"), class: 'text-black' do %>
               <div><%= @user.fans_count %></div>
-              <div class="follower">Followers</div>
+              <div class="follower">粉絲</div>
               <% end %>
             </div>
           </div>
@@ -35,7 +36,7 @@
             <div class="num font-weight-bold">
               <%= link_to follow_user_path(@user, followings: "followings"), class: 'text-black' do %>
               <div><%= @user.followings_count %></div>
-              <div class="following">Following</div>
+              <div class="following">追蹤中</div>
               <% end %>
             </div>
           </div>
@@ -57,10 +58,8 @@
     </div>
   </div>
 
-  <div class="border-bottom py-2"></div>
-
   <div >
-    <nav class="py-3">
+    <nav class="pb-3">
       <div class="nav nav-tabs d-flex w-100 posts-nav" id="nav-tab" role="tablist">
         <a class="nav-link flex-grow-1 text-center my-posts-btn active" id="nav-home-tab" data-toggle="tab"
           href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">
@@ -78,7 +77,7 @@
         <% if @my_posts != [] %>
           <div class="form-row post-img">
             <%= render partial: "/posts/post_img", collection: @my_posts, as: :post %>
-            <% if @my_posts.length >= 36 %>
+            <% if @has_more_my_posts %>
               <%= render partial: "/shared/loading" %>
             <% end %>
           </div>
@@ -94,7 +93,7 @@
         <% if @taged_posts != [] %>
           <div class="form-row tag-img">
             <%= render partial: "/posts/post_img", collection: @taged_posts, as: :post %>
-            <% if @taged_posts.length >= 36 %>
+            <% if @has_more_tag_posts %>
               <%= render partial: "/shared/loading" %>
             <% end %>
           </div>

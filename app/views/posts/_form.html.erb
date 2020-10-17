@@ -1,17 +1,19 @@
-<% if post.errors.any? %>
-<ul>
-  <% post.errors.full_messages.each do |msg| %>
-  <li style="color: red;"><small><%= msg %></small></li>
-  <% end %>
-</ul>
+<p class="tag" style="display:none;"><%= flash[:tag] %></p>
+<% if alert %>
+  <div class="alert alert-danger alert-dismissible fade show w-100" role="alert">
+    <%= alert %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
 <% end %>
 
 <%= form_with(model: post, url: url, class: "form", local: true) do |form| %>
 
 <!-- Slider main container -->
-<div class="swiper-container m-auto" style="width:100%; max-width:500px; max-height: 400px;">
+<div class="swiper-container m-auto">
   <!-- Additional required wrapper -->
-  <div class="swiper-wrapper" style=" display: flex; align-items: center;">
+  <div class="swiper-wrapper">
     <!-- Slides -->
     <% post.images.each do |image| %>
     <div class="swiper-slide">
@@ -22,6 +24,7 @@
   <!-- If we need pagination -->
   <div class="swiper-pagination"></div>
 </div>
+<small class="photo-alert text-danger" style="display: none;">照片會經過裁切可能與預覽不符，請見諒</small>
 
 <% if post.images.empty? %>
 <div class="form-group add-photo">

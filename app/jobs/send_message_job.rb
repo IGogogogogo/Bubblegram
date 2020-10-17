@@ -1,7 +1,7 @@
 class SendMessageJob < ApplicationJob
   queue_as :default
 
-  def perform(message, new_message_counts)
+  def perform(message, new_message_counts, opposed_user)
     # Do something later
     my_message = ApplicationController.render(
       partial: "messages/my_message",
@@ -35,7 +35,8 @@ class SendMessageJob < ApplicationJob
       "unread_message_notification_channel",
       {
         message: message,
-        new_message_counts: new_message_counts
+        new_message_counts: new_message_counts,
+        opposed_user: opposed_user
       }
     )
 

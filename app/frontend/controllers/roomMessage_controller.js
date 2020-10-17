@@ -21,7 +21,7 @@ export default class extends Controller {
       },
       {
         connected() {
-          console.log("connected to live_stream_room" + roomMessageController.data.get("id"))
+          // console.log("connected to live_stream_room" + roomMessageController.data.get("id"))
           setTimeout(() => {
             // console.log(message_text_area.scrollHeight)
             messageTextArea.scrollTo(0, messageTextArea.scrollHeight) //捲軸移動到最底部
@@ -31,8 +31,34 @@ export default class extends Controller {
         disconnected() {
           // Called when the subscription has been terminated by the server
         },
-        received(data) {
-          // console.log(data)
+        async received(data) {
+
+
+          if(data.message.content === "heart"){
+            await createHeart()
+            return
+            function createHeart(){
+              let video = document.querySelector(".video")
+              let heart = document.createElement('div')
+              // console.log(video.offsetHeight)
+              heart.className = 'heart'
+              heart.style.bottom = 0 + "px"
+              heart.style.opacity = "1"
+              // heart.style.animation = "heart-rising 3s"
+              video.appendChild(heart)
+              Animate(heart)
+
+              function Animate(){
+                $(heart).animate({
+                  bottom: "+=" + 500 + "px",
+                  opacity: 0
+                }, 2000,()=>{
+                  document.querySelector(".heart").remove()
+                })
+              }
+            }
+          }
+
           let message = renderTemplate(data)
           messageTextArea.append(message)
           let currentUser = Number(roomMessageController.data.get("user"))
@@ -65,10 +91,10 @@ export default class extends Controller {
       }
       );
 
-      console.log(textContent)
-      console.log(textSubmit)
+      // console.log(textContent)
+      // console.log(textSubmit)
       textContent.addEventListener("keyup",(e)=>{
-        console.log(e)
+        // console.log(e)
         if(textContent.value.split(" ").join("") !== ""){
           textSubmit.removeAttribute("disabled", false)
         }else{

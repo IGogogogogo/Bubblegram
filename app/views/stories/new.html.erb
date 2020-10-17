@@ -1,27 +1,34 @@
-<h1>新增限時動態</h1>
+<%= render partial: "shared/title_with_prev", locals: { title: "限時動態" } %>
 
-<%= link_to '回到首頁', root_path %>
-
-
-<% if @story.errors.any? %>
-  <ul>
-    <% @story.errors.full_messages.each do |msg| %>
-    <li>
-      <%= msg %>
-    </li>
-    <% end %>
-  </ul>
-<% end %>
-
-<%# form_with表單預設為Ajax，若要更改設定則需輸入local: true %>
-<%= form_with(model: @story, url: user_stories_path, local: true) do |form| %>
-  <div>
-    <%= form.label :picture,
-    'picture' %>
-    <%= form.file_field :picture %>
-  </div>
-
-  <div>
-    <%= form.submit '新增限時動態' %>
+<% if alert %>
+  <div class="alert alert-danger alert-dismissible fade show w-100" role="alert">
+    <%= alert %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
 <% end %>
+
+<div class="wrap">
+  <div id="story-pic">
+    <img alt="" id="story-preview">
+    <small class="story-alert text-danger" style="display: none;">照片會經過裁切可能與預覽不符，請見諒</small>
+  </div>
+
+  <%# form_with表單預設為Ajax，若要更改設定則需輸入local: true %>
+  <%= form_with(model: @story, url: user_stories_path, local: true) do |form| %>
+
+  <div class="form-group add-photo">
+    <div class="upload-btn">
+      <i class="fas fa-upload fa-4x"></i>
+      <p>上傳限時動態</p>
+    </div>
+    <%= form.file_field :picture, class: "form-control" %>
+  </div>
+
+
+  <div>
+    <%= form.submit '新增限時動態', class: 'limit_submit' %>
+  </div>
+  <% end %>
+</div>

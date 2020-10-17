@@ -4,7 +4,9 @@ import "bootstrap"
 import "select2"
 import "select2/dist/css/select2.css"
 import "../stylesheets/application"
-import "@fortawesome/fontawesome-free/js/all"
+import "@fortawesome/fontawesome-free/js/all";
+
+import "./stories.js"
 import "owl.carousel"
 import "./search.js"
 import "./preview_photo"
@@ -17,8 +19,10 @@ import "./active"
 import "./footer_ disappear"
 import "./upload"
 import "./user_pic_upload"
-import "./sign_up"
+import "./validation"
 import "./reset_container.js"
+import "./post_comment"
+import "./prev_and_reload_page"
 
 import Swiper, { Pagination } from 'swiper';
 import gsap from "gsap"

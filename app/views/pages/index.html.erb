@@ -8,12 +8,14 @@
         <!-- limit video story-->
         <div
           class="limit-video d-flex justify-content-start align-items-center text-center border-bottom border-gray mb-3 px-3">
-          <%= render partial: "/stories/story", collection: @results, as: :user %>
+          <div class="limit-video-carousel owl-carousel owl-theme">
+            <%= render partial: "/stories/story", collection: @results, as: :user %>
+          </div>
         </div>
 
         <% if @posts !=[] %>
           <%= render partial: "/posts/post", collection: @posts, as: :post %>
-          <% if @posts.count >= 20 %>
+          <% if @has_more_posts %>
             <%= render partial: "/shared/loading" %>
           <% end %>
         <% else %>

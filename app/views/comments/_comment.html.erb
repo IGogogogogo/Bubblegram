@@ -1,12 +1,8 @@
-<div class="post-comment">
-  <div class="comment-context">
-    <%= image_tag comment.user.avatar.url %>
-    <span style="font-weight: 600;"><%= comment.user.nick_name %></span>
-
-    <%= simple_format(comment.content) %>
-
-    <small class="time" style="">
-      - <%= time_ago_in_words comment.created_at %>
-    </small>
-  </div>
+<div>
+  <%= image_tag comment.user.avatar.url, style: 'width: 30px; border-radius: 50%;' %>
+  <span class="mx-2" style="font-weight: 600;"><%= comment.user.nick_name %></span>
+  <%= comment.content %>
 </div>
+<small class="d-block mb-2" style="font-size: 12px; margin-left: 35px;">
+  - <%= time_ago_in_words comment.created_at %>
+</small>

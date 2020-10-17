@@ -1,6 +1,7 @@
 <div class="wrap">
   <%= form_with(url: search_searches_path, method: :get, class: "search-form") do |f| %>
-  <%= f.text_field :keyword, class: 'search-input' ,placeholder: "請輸入暱稱或電子信箱", autocomplete: "off"%>
+    <%= f.text_field :keyword, class: 'search-input' ,placeholder: "搜尋使用者", autocomplete: "off"%>
+    <span><i class="fas fa-search"></i></span>
   <% end %>
 
   <div class="search-result w-100 ">

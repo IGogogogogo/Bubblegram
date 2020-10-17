@@ -8,13 +8,9 @@ document.addEventListener("turbolinks:load", () => {
   let tagPage = 1
   let myPage = 1
 
-  if(!postLoadPage) return
+  if (!postLoadPage) return
 
-  window.onscroll = function() {
-    if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {   ////滑動到畫面底部
-      loadPosts()            ////載入更多post
-    }
-  }
+  window.addEventListener("scroll", loadPosts)
 
   if (postNav) { postNav.addEventListener("click", (e) => switchPosts(e)) }  //user show 個人/tag貼文切換
 
@@ -32,7 +28,9 @@ document.addEventListener("turbolinks:load", () => {
       return "my_posts"
     } else if (randPosts) {
       return "rand_img"
-    }else if (myBtn.classList.contains("active")) {
+    } else if (!myBtn || !tagBtn) {
+      return
+    } else if (myBtn.classList.contains("active")) {
       return "post_img"
     } else if (tagBtn.classList.contains("active")) {
       return "tag_img"
@@ -49,57 +47,61 @@ document.addEventListener("turbolinks:load", () => {
     }
   }
 
-  function loadPosts() {                           //請求載入更多post
-      // console.log("loadPosts.........................")
-    page += 1
-    let type = getType()
-    let url = getUrl(type) + `?page=${page}&type=${type}`
+  function loadPosts() {
+    // console.log("onscroll...........")
+    if (window.innerHeight + window.pageYOffset + 1 >= document.body.offsetHeight) {  ////滑動到畫面底部
+      // console.log("loadPosts.........................")  //請求載入更多post
+      page += 1
+      let type = getType()
+      let url = getUrl(type) + `?page=${page}&type=${type}`
 
-    if (document.location.pathname.split("users/")[1]) {   //從目前網址取得params user id
-      const user_id = document.location.pathname.split("users/")[1].split("/")[0]
-      url += `&user_id=${user_id}`
-    }
-
-    Rails.ajax({
-      url: url,
-      type: "get",
-      success: function(data) {
-        const postsEl = data.querySelector("body").innerHTML
-        const postLoadTarget = document.querySelector(".post-load-target")
-        const oldLoadingEls = document.querySelectorAll(".loading")
-        const newLoadingEl = document.createElement("div")
-        const loadImg = document.createElement("img")
-        loadImg.src = "/loading.gif"
-        loadImg.classList = "w-100"
-        newLoadingEl.classList = "loading"
-        newLoadingEl.style = "padding: 0 40%;"
-        newLoadingEl.appendChild(loadImg)
-
-        if (oldLoadingEls) {
-          Array.from(oldLoadingEls).forEach(el => {
-            el.remove()
-          });
-        }
-        if (!postsEl || postsEl == "") {   //沒有新資料時移除事件監聽
-          postLoadPage.removeEventListener("scroll", loadPosts)
-          return
-        }
-
-        if (type == "post_img") {
-          postImg.innerHTML += postsEl
-          postImg.appendChild(newLoadingEl)
-        } else if (type == "tag_img") {
-          tagImg.innerHTML += postsEl
-          tagImg.appendChild(newLoadingEl)
-        } else {
-          postLoadTarget.innerHTML += postsEl
-          postLoadTarget.appendChild(newLoadingEl)
-        }
-      },
-      error: function(errors) {
-        console.log(errors)
+      if (document.location.pathname.split("users/")[1]) {   //從目前網址取得params user id
+        const user_id = document.location.pathname.split("users/")[1].split("/")[0]
+        url += `&user_id=${user_id}`
       }
-    })
+
+      Rails.ajax({
+        url: url,
+        type: "get",
+        success: function (data) {
+          const postsEl = data.querySelector("body").innerHTML
+          const postLoadTarget = document.querySelector(".post-load-target")
+          const oldLoadingEls = document.querySelectorAll(".loading")
+          const newLoadingEl = document.createElement("div")
+          const loadImg = document.createElement("img")
+          loadImg.src = "/loading.gif"
+          loadImg.classList = "w-100"
+          newLoadingEl.classList = "loading"
+          newLoadingEl.style = "padding: 0 40%;"
+          newLoadingEl.appendChild(loadImg)
+
+          if (oldLoadingEls) {
+            Array.from(oldLoadingEls).forEach(el => {
+              el.remove()
+            });
+          }
+          if (!postsEl || postsEl == "") {   //沒有新資料時移除事件監聽
+            window.removeEventListener("scroll", loadPosts)
+            return
+          }
+
+          if (type == "post_img") {
+            postImg.innerHTML += postsEl
+            postImg.appendChild(newLoadingEl)
+          } else if (type == "tag_img") {
+            tagImg.innerHTML += postsEl
+            tagImg.appendChild(newLoadingEl)
+          } else {
+            postLoadTarget.innerHTML += postsEl
+            postLoadTarget.appendChild(newLoadingEl)
+          }
+          startCarousel()
+        },
+        error: function (errors) {
+          console.log(errors)
+        }
+      })
+    }
   }
 
   const switchPosts = (e) => {                  //showPosts: 切換我的貼文/我被標記的貼文
@@ -114,6 +116,22 @@ document.addEventListener("turbolinks:load", () => {
       page = tagPage
     }
 
-    postLoadPage.addEventListener("scroll", loadPosts)
+    window.addEventListener("scroll", loadPosts)  ////切換頁面時重新加入捲軸事件
+  }
+
+
+  function startCarousel() {
+    //////執行輪播套件
+    $('.post-pic-carousel.owl-carousel').owlCarousel({
+      loop: false,
+      margin: 0,
+      nav: false,
+      animateOut: 'fadeOut',
+      responsive: {
+        0: {
+          items: 1
+        }
+      }
+    })
   }
 })
