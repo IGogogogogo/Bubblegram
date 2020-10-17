@@ -5,7 +5,7 @@ document.addEventListener("turbolinks:load", () => {
   const carouselTime = 5000 ////限動輪播時間
   const storiesSection = document.querySelector(".stories")
 
-  if(!storiesSection) return
+  if (!storiesSection) return
   const userName = storiesSection.dataset.userName
   let autoToNextUser   ////自訂輪播結束時 setTimeout 用來切換下個使用者
 
@@ -13,18 +13,18 @@ document.addEventListener("turbolinks:load", () => {
   requestStories(userName)
 
   ////請求個人現動json
-  function requestStories(name, index=0) {
-    if(name == "null") {
-      document.location.pathname ="/"
+  function requestStories(name, index = 0) {
+    if (name == "null") {
+      document.location.pathname = "/"
     }
     const url = `/stories.json?user=${name}`
 
     Rails.ajax({
       url: url,
       type: "get",
-      success: function(data) {
+      success: function (data) {
         // console.log(data)
-        if(data.stories.main.length == 0 ){ //沒有限時動態資料時回首頁
+        if (data.stories.main.length == 0) { //沒有限時動態資料時回首頁
           location.pathname = "/"
         }
         document.querySelector(".story-pic").innerHTML = ""
@@ -44,20 +44,19 @@ document.addEventListener("turbolinks:load", () => {
         $('.owl-carousel').trigger("to.owl.carousel", [index, 1])
         // console.log("index: " + index)
       },
-      error: function(errors) {
+      error: function (errors) {
         console.log(errors)
       }
     })
   }
 
   ////加入元素與事件（建立現動+白線+啟動輪播套件+輪播事件）
-  function renderStories(stories){
-    // console.log("render")
+  function renderStories(stories) {
     const storyPic = document.querySelector(".story-pic")
     const owlCarousel = document.createElement("div")
     owlCarousel.classList = "owl-carousel"
 
-    for(let i=0; i<stories.main.length; i++) {
+    for (let i = 0; i < stories.main.length; i++) {
       const newStoryItem = createStoryItem(stories.main[i], i)
       owlCarousel.appendChild(newStoryItem)
     }
@@ -70,16 +69,16 @@ document.addEventListener("turbolinks:load", () => {
     document.querySelector(".owl-prev").addEventListener("click", toPrevUserLastStory)
 
     const isLastStory = Number(storiesSection.dataset.storyIndex) + 1 == Number(storiesSection.dataset.storiesCount)
-    if(isLastStory){
+    if (isLastStory) {
       // console.log("is last story")
       document.querySelector(".owl-next").addEventListener("click", toNextUserStories)
       ///////輪播時間結束會跳下個使用者限時動態
-      autoToNextUser = setTimeout( () => { toNextUserStories() }, carouselTime)
+      autoToNextUser = setTimeout(() => { toNextUserStories() }, carouselTime)
     }
   }
 
   /////加入 使用者資料和現動時間
-  function addUserInfoAndStoryTime(stories){
+  function addUserInfoAndStoryTime(stories) {
     const memberImg = document.querySelector(".member-pic img")
     const memberName = document.querySelector(".member-name span")
     const storyTime = document.querySelector(".story-time span")
@@ -113,17 +112,16 @@ document.addEventListener("turbolinks:load", () => {
     dots.classList.add("time-dots")
 
     const dotsArray = Array.from(document.querySelectorAll(".owl-dot"))
-    for(let i = 0; i< dotsArray.length; i++) {
+    for (let i = 0; i < dotsArray.length; i++) {
       dotsArray[i].classList.add("time-dot")
     }
 
     dotsArray[0].classList.add("time-active")
   }
 
-   ///輪播事件////////////////////////////////////////
+  ///輪播事件////////////////////////////////////////
   function addCarouselChangeEvent() {
-    $('.owl-carousel').on('translated.owl.carousel', function() { ////owl carousel 輪播結束事件
-      // direction ||= 'right'
+    $('.owl-carousel').on('translated.owl.carousel', function () { ////owl carousel 輪播結束事件
       // console.log("translated")
       clearTimeout(autoToNextUser)   ///移除setTime，避免在最後一個限動以外的地方跳到下個使用者
       document.querySelector(".owl-next").removeEventListener("click", toNextUserStories)
@@ -136,11 +134,11 @@ document.addEventListener("turbolinks:load", () => {
       changeStoryTime(storyActive.dataset)
       const isLastStory = Number(storyActive.dataset.storyIndex) + 1 == Number(storiesSection.dataset.storiesCount)
 
-      if(isLastStory){
+      if (isLastStory) {
         // console.log("is last story")
         ///在使用者最後一個限動時點擊下一步或輪播時間結束都會跳到下個使用者限動
         document.querySelector(".owl-next").addEventListener("click", toNextUserStories)
-        autoToNextUser = setTimeout( () => { toNextUserStories() }, carouselTime)
+        autoToNextUser = setTimeout(() => { toNextUserStories() }, carouselTime)
       }
     })
   }
@@ -151,8 +149,7 @@ document.addEventListener("turbolinks:load", () => {
     const storyActive = storiesSection.querySelector(".owl-item.active div")
     const isLastStory = Number(storyActive.dataset.storyIndex) + 1 == Number(storiesSection.dataset.storiesCount)
 
-    if (isLastStory){
-      // console.log("toNextUserStories")
+    if (isLastStory) {
       const nextUser = storiesSection.dataset.nextUser
       requestStories(nextUser)
     }
@@ -180,7 +177,7 @@ document.addEventListener("turbolinks:load", () => {
   }
 
   ////改變現動時間
-  function changeStoryTime({storyTime}) {
+  function changeStoryTime({ storyTime }) {
     const timeItem = document.querySelector(".story-time span")
     timeItem.textContent = storyTime
   }
@@ -203,9 +200,9 @@ document.addEventListener("turbolinks:load", () => {
       touchDrag: true,
       autoplay: true,
       autoplayTimeout: carouselTime,
-      responsive:{
-        0:{
-            items:1
+      responsive: {
+        0: {
+          items: 1
         }
       }
     })
@@ -220,7 +217,7 @@ document.addEventListener("turbolinks:load", () => {
     ////判斷使用者本人有
     const isOwner = storiesSection.dataset.userName == storiesSection.dataset.currentUser
 
-    if(isOwner) {
+    if (isOwner) {
       // 顯示點點點
       btnDot.style.display = "block"
 
@@ -235,11 +232,11 @@ document.addEventListener("turbolinks:load", () => {
       storyNew.classList.remove("add-story")
     }
 
-    btnDot.addEventListener("click", function(){
+    btnDot.addEventListener("click", function () {
       clearTimeout(autoToNextUser)
       $('.stories .owl-carousel').trigger('stop.owl.autoplay')
 
-      if(modalFun.style.display != "block"){
+      if (modalFun.style.display != "block") {
         modalFun.style.display = "block"      // 打開功能區塊
       }
     })
@@ -266,13 +263,13 @@ document.addEventListener("turbolinks:load", () => {
     Rails.ajax({
       url: url,
       type: "DELETE",
-      success: function(){
+      success: function () {
         // console.log("success:", url)
       }
     })
 
     ////沒有限時動態時回首頁
-    if(!document.querySelector(".owl-item")) {
+    if (!document.querySelector(".owl-item")) {
       location.pathname = "/"
     }
 
