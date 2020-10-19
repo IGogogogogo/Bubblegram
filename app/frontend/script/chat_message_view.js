@@ -53,7 +53,7 @@ document.addEventListener("turbolinks:load",()=>{
     let clone = document.importNode(temp.content, true)
     // console.log(clone)
     let headPhoto = document.createElement("img")
-    headPhoto.src = message.user.avatar.url
+    headPhoto.src = message.user.avatar_url
     headPhoto.classList = ["user-avatar"]
     clone.querySelector(".avatar").appendChild(headPhoto)
     clone.querySelector(".user-name").textContent = message.user.nick_name

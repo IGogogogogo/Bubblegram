@@ -3,7 +3,7 @@
   <div class="user-story">
     <%= link_to user[:path], data: {turbolinks: false} do %>
     <div class="user-video">
-      <%= image_tag user[:user].avatar.url, class: 'img-fluid rounded-circle' if user[:user].avatar.present? %>
+      <%= image_tag user[:user].avatar_url, class: 'img-fluid rounded-circle' %>
       <div class="streaming-text">直播中</div>
     </div>
     <div class="user-name-limit text-black">
@@ -16,7 +16,7 @@
     <div class="user-story">
     <%= link_to user[:path] do %>
     <div class="user-video">
-      <%= image_tag user[:user].avatar.url, class: 'img-fluid rounded-circle' if user[:user].avatar.present? %>
+      <%= image_tag user[:user].avatar_url, class: 'img-fluid rounded-circle' %>
       <div class="new-story"><i class="fas fa-plus-circle"></i></div>
     </div>
     <div class="user-name-limit text-black">
@@ -30,7 +30,7 @@
   <div class="user-story">
     <%= link_to user[:path] do %>
     <div class="user-video">
-      <%= image_tag user[:user].avatar.url, class: 'img-fluid rounded-circle' if user[:user].avatar.present? %>
+      <%= image_tag user[:user].avatar_url, class: 'img-fluid rounded-circle' %>
     </div>
     <div class="user-name-limit text-black">
       <small><%= user[:user].nick_name %></small>

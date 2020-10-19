@@ -44,6 +44,10 @@ class User < ApplicationRecord
   # 建立user與直播房的關聯
   has_one :room, dependent: :destroy
 
+  def avatar_url
+    avatar.url ? avatar.url : "/blank_avatar.png"
+  end
+
   def already_followed?(current_user) # 檢查自己是否已經追蹤對方
     fans.include?(current_user)
   end

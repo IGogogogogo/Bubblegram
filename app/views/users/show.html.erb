@@ -7,7 +7,7 @@
         <!-----user 資訊------------------>
         <div class="profile-info d-flex align-items-center flex-wrap">
           <div class="profile-photo w-25">
-            <%= image_tag @user.avatar.url, class: 'rounded-circle w-100' if @user.avatar.present? %>
+            <%= image_tag @user.avatar_url, class: 'rounded-circle w-100' %>
             <div class="profile-user-name text-center"><strong><%= @user.nick_name %></strong></div>
           </div>
 

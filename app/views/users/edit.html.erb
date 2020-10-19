@@ -2,7 +2,7 @@
 
 <div class="wrap">
   <div id="user-edit-pic">
-    <%= image_tag @user.avatar.url, id: 'user-preview' if @user.avatar %>
+    <%= image_tag @user.avatar_url, id: 'user-preview' %>
   </div>
 
   <%= form_with(model: @user, local: true) do |f| %>
