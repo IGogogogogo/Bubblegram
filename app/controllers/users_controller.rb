@@ -22,10 +22,13 @@ class UsersController < ApplicationController
   end
 
   def fans
+    # 還是需要用 kaminari gem 做分頁功能喔
+    # 如果粉絲變多就不能一次撈所有 fans
     @users = @user.fans
   end
 
   def followings
+    # 同上
     @users = @user.followings
   end
 
@@ -45,7 +48,6 @@ class UsersController < ApplicationController
   def guest
     num = rand(100000).to_s + ("a".."z").to_a.sample
     guest = User.create(nick_name: "guest#{num}", email: "guest#{num}@gmail.com", password: "123456")
-    # byebug
     sign_in(guest)
     redirect_to root_path
   end

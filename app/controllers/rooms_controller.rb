@@ -3,8 +3,9 @@ class RoomsController < ApplicationController
   before_action :find_room, only: %i[show play destroy destroy_room]
 
   def show
-    opentok = OpenTok::OpenTok.new(ENV['vonage_api_key'], ENV['vonage_secret'])
-    @token ||= opentok.generate_token(@room.vonage_session_id)
+    # opentok = OpenTok::OpenTok.new(ENV['vonage_api_key'], ENV['vonage_secret'])
+    # @token ||= opentok.generate_token(@room.vonage_session_id)
+    @token = OpenTokService.new.generate_token(@room.vonage_session_id)
     @message = Message.new
     @messages = @room.messages.includes(:user)
   end
@@ -19,8 +20,11 @@ class RoomsController < ApplicationController
   def play
     # 先判斷目前使用者是否為直播房間創建者
     if current_user = @room.user
-      opentok = OpenTok::OpenTok.new(ENV['vonage_api_key'], ENV['vonage_secret'])
-      @token ||= opentok.generate_token(@room.vonage_session_id)
+      # opentok = OpenTok::OpenTok.new(ENV['vonage_api_key'], ENV['vonage_secret'])
+      # @token ||= opentok.generate_token(@room.vonage_session_id)
+
+      # 假設 API 越來越複雜，拆成 Service Object 會更好處理
+      @token = OpenTokService.new.generate_token(@room.vonage_session_id)
     else
       redirect_to root_path
     end

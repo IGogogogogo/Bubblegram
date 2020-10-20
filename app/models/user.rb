@@ -115,7 +115,7 @@ class User < ApplicationRecord
   end
 
   def add_defult_following          #新使用者會追蹤官方帳號和預設使用者
-    default_users = ["bubblegram", "Yuan_yu", "泇吟", "Jerry19920702", "gavin0723", "will_magic"]
+    default_users = YAML.load_file('vendor/data/default_users.yml')
     default_users.each do |user_name|
       user = User.find_by(slug: user_name.downcase)  #用friendly id 找到使用者再追蹤
       self.followings << user if user && self != user

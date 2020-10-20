@@ -29,10 +29,10 @@ class Chat < ApplicationRecord
   end
 
   def any_unread_messages?(user) #有無任何新訊息
-    Redis.new.lrange("#{self.id}_#{self.opposed_user(user).id}_new_message",0,-1).present?
+    @any_unread_messages ||= Redis.new.lrange("#{self.id}_#{self.opposed_user(user).id}_new_message",0,-1).present?
   end
 
   def unread_messages(user)#有幾則新訊息
-    Redis.new.lrange("#{self.id}_#{self.opposed_user(user).id}_new_message",0,-1).length
+    @unread_messages ||= Redis.new.lrange("#{self.id}_#{self.opposed_user(user).id}_new_message",0,-1).length
   end
 end

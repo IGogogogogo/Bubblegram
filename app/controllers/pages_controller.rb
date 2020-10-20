@@ -1,11 +1,13 @@
 class PagesController < ApplicationController
+  PER_COUNT = 5
+
   def index
-    per_count = 5
-    @following_users = current_user.followings.includes(:room, :stories).order("created_at DESC")
+    PER_COUNT = 5
+    @following_users = current_user.followings.includes(:room, :stories).order(created_at: :desc)
     viewable_users = User.viewable_users(current_user)
     @results = build_results
-    @posts = Post.includes(:user, :thumbs_up_users).viewable_posts(viewable_users).order("created_at DESC").limit(per_count)
-    @has_more_posts = @posts.count >= per_count
+    @posts = Post.includes(:user, :thumbs_up_users).viewable_posts(viewable_users).order("created_at DESC").limit(PER_COUNT)
+    @has_more_posts = @posts.count >= PER_COUNT
   end
 
   private
