@@ -2,6 +2,8 @@ class MessagesController < ApplicationController
   def create
     live_stream_room = Room.find(params[:room_id]) if params[:room_id]
     chat_room = Chat.find(params[:chat_id]) if params[:chat_id]
+
+    # 建議可以 live_stream_room, chat_room 拆成不同 action 甚至不同 controller
     if live_stream_room
       @live_stream_message = live_stream_room.messages.create(params_message)
       @user = User.find(@live_stream_message.user_id)
@@ -21,7 +23,7 @@ class MessagesController < ApplicationController
 
       if !is_unread_channel_connect? && is_online_channel_connect? #如果對方使用者在線上且通知channel斷線（代表正在換頁）
         # puts "------------------我是判斷使用者在線上通知有沒有斷線--------------------"
-      redis.rpush("#{@chat_message.chatroom_id}_#{@chat_message.user_id}_new_message", @chat_message.to_json) #將訊息存為新訊息
+        redis.rpush("#{@chat_message.chatroom_id}_#{@chat_message.user_id}_new_message", @chat_message.to_json) #將訊息存為新訊息
       end
       # @message.save
       redirect_to chat_path(chat_room)

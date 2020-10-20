@@ -20,6 +20,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # 問號結尾的方法通常會是要回傳 boolean 但這邊似乎是回傳數字
   def has_any_chatroom_new_message?
     any_new_message_chatroom = redis.lrange("#{current_user.id}_chat_notice",0,-1)
     any_new_message_chatroom.delete("")
@@ -35,8 +36,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redis
-    @redis =  Redis.new unless @redis
-    @redis
+    @redis||= Redis.new
   end
 
   private

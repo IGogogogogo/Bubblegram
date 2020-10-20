@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :find_post, only: [:show, :edit, :update, :destroy, :favourite]
+  before_action :only: [:show, :edit, :update, :destroy, :favourite]
 
   def index
     per_count = 10
@@ -117,6 +117,7 @@ class PostsController < ApplicationController
   private
 
   def find_post
+    # 所有使用者都可以看所有文章嗎？
     @post = Post.find(params[:id])
   end
 
@@ -135,6 +136,8 @@ class PostsController < ApplicationController
 
   def valid_tag? #檢查 tag 有沒有不存在的 user
     user_ids =  params[:post][:taged_user_ids]
+
+    # !user_ids 寫法不太好，因為，可能改成 user_ids.blank?
     return true if !user_ids
 
     if User.where(id: user_ids).count != user_ids.length

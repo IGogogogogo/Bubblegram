@@ -22,3 +22,7 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+這邊要記得更新一下
+可以寫專案使用的 Rails Ruby PostgreSQL 等等的版本
+專案開啟需要的指令流程初始資料等等

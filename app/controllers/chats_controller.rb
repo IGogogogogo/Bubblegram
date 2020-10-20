@@ -16,20 +16,19 @@ class ChatsController < ApplicationController
     @chat = Chat.find(params[:id])
     check_member
     @message = Message.new
+
+    # 看起來最多保留 100 則訊息，是這樣嗎XD
     @messages = @chat.messages.includes(:user).order(id: :desc).limit(100).reverse
     @messages_json = @chat.messages.includes(:user).page(params[:page]).order(id: :desc)
     @sender = @chat.opposed_user(current_user).id
 
-
     if any_new_messages?
-      first_unreand_message = JSON.parse(redis.lrange("#{@chat.id}_#{@sender}_new_message",0,-1)[0])
+      first_unreand_message = JSON.parse(redis.lrange("#{@chat.id}_#{@sender}_new_message", 0, -1)[0])
       @unread_message = Message.find(first_unreand_message["id"])  #找未讀訊息的第一則
     end
 
     redis.del("#{@chat.id}_#{@sender}_new_message")    #一進入到聊天室，把未讀訊息刪除
     redis.lrem("#{current_user.id}_chat_notice",0,"#{@chat.id}")
-
-
 
     if !any_new_messages? #如果沒有任何新訊息了，廣播到unreand_message_channel.js 去更新狀態
       ActionCable.server.broadcast "unread_message_notification_channel", {read_message: true,current_user: current_user, message: {user_id: @sender}}

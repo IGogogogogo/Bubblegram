@@ -18,8 +18,10 @@ class Post < ApplicationRecord
   has_many :favourites, dependent: :destroy
   has_many :thumbs_up_users, through: :favourites, source: :user
 
-  scope :my_following_users, -> (followings) { where user_id: followings}  #找出所有追蹤中的使用者
-  scope :viewable_posts, -> (users) { where(user_id: users) }   #自己可以看到誰的貼文
+  scope :my_following_users, -> (user_ids) { where(user_id: user_ids) }  #找出所有追蹤中的使用者
+
+  # 通常這種功能會從 user 出發去找 user 可以看到哪些 post
+  scope :viewable_posts, -> (user_ids) { where(user_id: user_ids) }   #自己可以看到誰的貼文
 
   def has_comment?
     comments_count > 0

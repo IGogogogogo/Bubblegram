@@ -6,6 +6,8 @@ class SearchesController < ApplicationController
 
   def search
     #keyword 存在的話搜尋 user 包含 keyword 的 nick_name
+
+    # 沒有 params[:keyword] 的時候 @users 就會變是 nil 喔
     if params[:keyword].present?
       @users = User.includes(:fans).not_self(current_user).with_keyword(params[:keyword]).limit(10)
     end
