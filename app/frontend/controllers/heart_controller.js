@@ -50,7 +50,7 @@ export default class extends Controller {
     }else{
       timeId = setTimeout(() => {
       timeId = undefined
-        console.log("single")
+        // console.log("single")
       }, 250);
     }
   }

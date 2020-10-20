@@ -4,7 +4,7 @@ import consumer from "./consumer"
 
 consumer.subscriptions.create({channel: "UserOnlineChannel"}, {
   connected() {
-    console.log('user_online is connecting...')
+    // console.log('user_online is connecting...')
     // Called when the subscription is ready for use on the server
   },
 

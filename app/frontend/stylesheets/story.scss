@@ -115,10 +115,11 @@
       button {
         background-color: rgba(255, 255, 255, 0.6);
         color: black;
-        width: 25px;
-        height: 25px;
+        width: 100px;
+        height: 100%;
         text-align: center;
         line-height: 25px;
+        opacity: 0;
         border-radius: 50%;
         font-size: 35px;
         outline: none;

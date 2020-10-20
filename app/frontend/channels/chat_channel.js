@@ -21,13 +21,13 @@ document.addEventListener('turbolinks:load',()=>{
 
   consumer.subscriptions.create({channel:"ChatChannel", chat_id: chat_id}, {
     connected() {
-      console.log('connecting'+ chat_id)
+      // console.log('connecting'+ chat_id)
 
       // Called when the subscription is ready for use on the server
     },
 
     disconnected() {
-      console.log("disconneted....")
+      // console.log("disconneted....")
       // Called when the subscription has been terminated by the server
     },
 

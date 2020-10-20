@@ -19,12 +19,12 @@ document.addEventListener("turbolinks:load",()=>{
 
   consumer.subscriptions.create("UnreadMessageNotificationChannel", {
     connected() {
-      console.log("unread_message........")
+      // console.log("unread_message........")
       // Called when the subscription is ready for use on the server
     },
 
     disconnected() {
-      console.log("disconnected")
+      // console.log("disconnected")
       // Called when the subscription has been terminated by the server
     },
 

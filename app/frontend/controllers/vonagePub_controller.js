@@ -63,7 +63,7 @@ export default class extends Controller {
 
   handleError(error) {
     if (error) {
-      console.error(error.message);
+      // console.error(error.message);
     }
   }
 }
