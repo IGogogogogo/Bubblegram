@@ -1,5 +1,3 @@
-# README
-
 # Bubblegram
 ![](https://i.imgur.com/opckvca.png)
 
@@ -79,6 +77,7 @@
 2. 新增限時動態
 選擇一張照片後可以新增限時動態
 
+**限時動態DEMO照：**
 ![](https://i.imgur.com/Dzre36K.png)
 
 
@@ -178,25 +177,23 @@ https://uifaces.co/api-key
 ## 開發團隊
 
 ### 元瑀
-- GitHub: [gn2481](https://github.com/gn2481)
-- E-mail: gn2481@gmail.com
+GitHub: [gn2481](https://github.com/gn2481)
+E-mail: gn2481@gmail.com
 
 ### 紹軒
-- GitHub: [dsfwoo](https://github.com/dsfwoo)
-- E-mail: jerry19920702@gmail.com
+GitHub: [dsfwoo](https://github.com/dsfwoo)
+E-mail: jerry19920702@gmail.com
 
 ### 泇吟
-- GitHub: [chiayinin](https://github.com/chiayinin)
-- E-mail: chiayinin@gmail.com
-- Resume: https://www.cakeresume.com/flax_gorge
+GitHub: [chiayinin](https://github.com/chiayinin)
+E-mail: chiayinin@gmail.com
+Resume: https://www.cakeresume.com/flax_gorge
 
 ### 岳峰
-- GitHub: [besquevans](https://github.com/besquevans)
-- E-mail: du20783@gmail.com
-- Resume: https://www.cakeresume.com/du20783
+GitHub: [besquevans](https://github.com/besquevans)
+E-mail: du20783@gmail.com
+Resume: https://www.cakeresume.com/du20783
 
 ### 彥緯
-- GitHub: [wye139629](https://github.com/wye139629)
-- E-mail: wye139629@gmail.com
-
-
+GitHub: [wye139629](https://github.com/wye139629)
+E-mail: wye139629@gmail.com
