@@ -34,6 +34,13 @@
   line-height: 50px;
   text-align: center;
 }
+.github-link a{
+  color: #aaa;
+
+  &:hover{
+    color: #7fcfd6;
+  }
+}
 #spread-btn:checked ~ .btn-1{
   opacity: 1;
   top: -250%;

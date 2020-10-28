@@ -2,7 +2,7 @@
   <div class="message_container">
     <div class = "message_text_header chat-user">
       <div class = "chat-user-pic">
-        <%= image_tag @chat.opposed_user(current_user).avatar.url, class: "user-avatar", width: "50px", style: "border-radius: 50%" if @chat.opposed_user(current_user).avatar.present? %>
+        <%= image_tag @chat.opposed_user(current_user).avatar_url, class: "user-avatar", width: "50px", style: "border-radius: 50%" %>
         <div class = "dot <%= "online-dot" if @chat.opposed_user(current_user).is_online? %>"></div>
       </div>
       <div class = "chat-user-info">

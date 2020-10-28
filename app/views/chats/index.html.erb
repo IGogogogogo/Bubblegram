@@ -18,7 +18,7 @@
           <%= link_to chat_path(chat) do %>
             <div class = "chat-user" data-chat-user = "<%= chat.opposed_user(current_user).id%>">
               <div class = "chat-user-pic">
-                <%= image_tag chat.opposed_user(current_user).avatar.url, class: "user-avatar" if chat.opposed_user(current_user).avatar.present? %>
+                <%= image_tag chat.opposed_user(current_user).avatar_url, class: "user-avatar" %>
                 <div class = "dot <%= "online-dot" if chat.opposed_user(current_user).is_online? %>"></div>
               </div>
               <div class = "chat-user-info" data-messages-count = "<%= chat.unread_messages(current_user)  %>">

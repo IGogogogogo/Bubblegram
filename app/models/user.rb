@@ -11,8 +11,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i[facebook google_oauth2]
 
   mount_uploader :avatar, AvatarUploader      #carrierwave
-  after_create :add_blank_avatar              #預設使用者大頭照
-  after_create :add_defult_following          #預設追蹤官方帳號
+  before_create :add_defult_following          #預設追蹤官方帳號
   after_create :send_welcome_message          #傳送歡迎訊息
 
   has_many :posts, dependent: :destroy
@@ -44,6 +43,10 @@ class User < ApplicationRecord
 
   # 建立user與直播房的關聯
   has_one :room, dependent: :destroy
+
+  def avatar_url
+    avatar.url ? avatar.url : "/blank_avatar.png"
+  end
 
   def already_followed?(current_user) # 檢查自己是否已經追蹤對方
     fans.include?(current_user)
@@ -108,18 +111,10 @@ class User < ApplicationRecord
 
   private
 
-  def add_blank_avatar              #預設使用者大頭照
-    image_path = "./public/blank_avatar.png"
-    self.avatar = File.open(image_path)
-    self.save!
-  end
 
   def add_defult_following          #新使用者會追蹤官方帳號和預設使用者
-    default_users = ["bubblegram", "Yuan_yu", "泇吟", "Jerry19920702", "gavin0723", "will_magic"]
-    default_users.each do |user_name|
-      user = User.find_by(slug: user_name.downcase)  #用friendly id 找到使用者再追蹤
-      self.followings << user if user && self != user
-    end
+    default_users = ["Bubblegram", "Yuan_yu", "泇吟", "Jerry19920702", "gavin0723", "will_magic"]
+    self.followings = User.where(slug: default_users.map(&:downcase))
   end
 
   def send_welcome_message          #傳送歡迎訊息

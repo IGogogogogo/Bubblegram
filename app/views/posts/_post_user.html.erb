@@ -2,7 +2,7 @@
   <!--User info---------------->
   <div class="user-info d-flex align-items-center p-2">
     <div class="user-photo">
-      <%= image_tag post.user.avatar.url, class: "rounded-circle img-fluid" if post.user.avatar.present? %>
+      <%= image_tag post.user.avatar_url, class: "rounded-circle img-fluid" %>
     </div>
 
     <div class="user-name ml-2">

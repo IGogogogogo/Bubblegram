@@ -3,7 +3,7 @@ json.stories do
   json.current_user @result[:current_user].nick_name
   json.viewable_users @result[:viewable_users]
   json.user_name @result[:user].nick_name
-  json.user_avatar @result[:user].avatar.url
+  json.user_avatar @result[:user].avatar_url
   json.is_self @result[:user] == current_user
   json.prev_user @result[:prev_user]
   json.next_user @result[:next_user]

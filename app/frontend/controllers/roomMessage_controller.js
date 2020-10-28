@@ -82,7 +82,7 @@ export default class extends Controller {
           function renderTemplate(message){
             let clone = document.importNode(temp.
             content,true)
-              clone.querySelector(".user-avatar img").src = message.user.avatar.url
+              clone.querySelector(".user-avatar img").src = message.user.avatar_url
               clone.querySelector(".name").textContent = message.user.nick_name
               clone.querySelector(".text-content").textContent = message.message.content
               return clone
