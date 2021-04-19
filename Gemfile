@@ -34,6 +34,8 @@ gem 'omniauth-facebook', '~> 7.0'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
 gem 'redis'
 
+gem 'mimemagic', '~> 0.3.10'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'figaro', '~> 1.0'
