@@ -1,7 +1,7 @@
 # Bubblegram
 ![](https://i.imgur.com/opckvca.png)
 
-**Demo: https://bubble-gram.com**
+**Demo: https://bubblegram.herokuapp.com/**
 
 ---
 
@@ -18,8 +18,7 @@
 ## 使用技術
 - 前端：HTML、CSS、JavaScript、jQuery、Stimulus js、Bootstrap
 - 後端：Ruby on Rails
-- 專案部署：AWS EC2、Passenger、Nginx、gcp
-
+- 專案部署：AWS EC2、Passenger、Nginx、gcp、heroku(目前使用)
 
 ## User Story
 
@@ -157,6 +156,7 @@ https://uifaces.co/api-key
 * AWS EC2
 * Nginx 
 * Passenger
+* heroku
 
 **資料庫 / 雲端存取服務**：
 * PostgreSQL 
